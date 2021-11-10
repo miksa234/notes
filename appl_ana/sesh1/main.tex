@@ -1,0 +1,342 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mlmodern}
+
+%\usepackage{ngerman}	% Sprachanpassung Deutsch
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, top=15mm}
+
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{yhmath}
+\usepackage{tikz}
+\usetikzlibrary{patterns,decorations.pathmorphing,positioning}
+\usetikzlibrary{calc,decorations.markings}
+
+%\usepackage[backend=biber, sorting=none]{biblatex}
+%\addbibresource{uni.bib}
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\tikzstyle{titlered} =
+    [draw=black, thick, fill=white,%
+        text=black, rectangle,
+        right, minimum height=.7cm]
+
+
+\usepackage[colorlinks=true,naturalnames=true,plainpages=false,pdfpagelabels=true]{hyperref}
+\usepackage[parfill]{parskip}
+\usepackage{lipsum}
+
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\pagestyle{myheadings}
+
+\markright{Popovic\hfill Applied Analysis\hfill}
+
+
+\title{University of Vienna\\ Faculty of Mathematics\\
+\vspace{1cm}Applied Analysis Problems
+}
+\author{Milutin Popovic}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Sheet 1}
+
+\subsection{Fall from high}
+We consider a free fall ($\dot{x}(t=0)=0$) of an object with mass $20\
+\text{kg}$ from a height
+$x(0) = h = 20\; \text{km}$, such that the gravitational force depends on the hight $x(t)$ in
+the following way
+\begin{align}\label{eq: free fall}
+    \ddot{x} = -g\frac{R^2}{(x(t) + R)^2},
+\end{align}
+where $R$ is the radius of the earth $R \approx 6000\; \text{km}$ and $g
+\approx 9.91\ \frac{m}{s^2}$ is the gravitational acceleration on the surface
+of the earth. For this problem there are two possible non-dimensionalisations,
+but first let us rewrite the variables in terms of non-dimensional variables
+and some dimensional constants, a priori let
+\begin{align}
+    t &= t_c \tau \;\;\; \text{and}\\
+    x &= x_c \xi.
+\end{align}
+With the above ansatz we get the following second derivative in
+time
+\begin{align}
+        \frac{d^2}{dt^2} &= \frac{1}{t_c^2}\frac{d^2}{d\tau^2} \\
+        \Rightarrow \frac{d^2x}{dt^2} &= \frac{x_c}{t_c^2}
+        \frac{d^2\xi}{d\tau^2},
+\end{align}
+and thus the initial conditions can be rewritten as
+\begin{align}
+    \xi(0) = \frac{h}{x_c},\\
+    \dot{\xi} = 0.
+\end{align}
+Now we can rewrite the equation of the free fall in \ref{eq: free fall} in
+terms of $\xi(\tau)$ as
+\begin{align}
+   \frac{x_c}{gt_c^2} \ddot{\xi} = -\frac{1}{(\frac{x_c}{R}\xi +1)^2}.
+\end{align}
+Thereby we have three dimensional constants constants $\Pi_1, \Pi_2, \Pi_3$,
+as follows
+\begin{align}
+    \Pi_1 = \frac{x_c}{R}, \;\;\;\; \Pi_2 = \frac{h}{x_c}, \;\;\;\;
+    \Pi_3 = \frac{x_c}{gt_c^2}.
+\end{align}
+
+The first scaling is done by reducing $\Pi_1$ and $\Pi_3$ to 1, by setting
+\begin{align}
+        x_c = R, \;\;\;\; t_c = \sqrt{\frac{R}{g}},
+\end{align}
+refolmulating the initial problem in equation \ref{eq: free fall} to
+\begin{align}
+    &\ddot{\xi} = -\frac{1}{(\xi + 1)^2},\;\;\;\;
+    \text{with} \nonumber\\
+    &\xi(0) = \frac{h}{R}, \;\;\;\; \dot{\xi}(0) = 0.
+\end{align}
+Reducing the problem, meaining letting $R \rightarrow \infty$ makes the first
+initial condition $\xi(0) \rightarrow 0$. We can conclude that this scaling
+is bad since it changes the initial condition in the reduced problem.
+
+The second scaling option reduces $\Pi_2$ and $\Pi_3$ to 1, by setting
+\begin{align}
+        x_c = h, \;\;\;\; t_c = \sqrt{\frac{h}{g}},
+\end{align}
+refolmulating the initial problem in equation \ref{eq: free fall} to
+\begin{align}
+    &\ddot{\xi} = -\frac{1}{(\frac{h}{R}\xi + 1)^2},\;\;\;\;
+    \text{with} \nonumber\\
+    &\xi(0) = 1, \;\;\;\; \dot{\xi}(0) = 0.
+\end{align}
+By letting $R \rightarrow \infty$ we get the following reduced problem
+\begin{align}\label{eq: free fall reduced}
+    \ddot{\xi} = -1.
+\end{align}
+Integrating and solving for $\xi(\tau = \frac{T}{t_c}) = 0$ for when the
+object hits the ground we get a familliar solution
+\begin{align}
+    T = \sqrt{\frac{2h}{g}}
+\end{align}
+Now in the reduced problem the time untill the object hits the ground is
+shorter since the acceleration is constant, but in the original one the
+acceleration increases as the object comes closer to earth.
+Additionally we can calculate the velocity at impact we need to integrate the
+reduced problem \ref{eq: free fall reduced} once and put in the initial
+condition
+\begin{align}
+    \dot{\xi}(\tau = \frac{T}{t_c}) &= -\tau = -\sqrt{2} \\
+    \text{and} \;\;\; \dot{x} &= \frac{x_c}{t_c}\dot{\xi} =
+    \sqrt{gh}\; \dot{\xi}\\
+    \Rightarrow \dot{x}(T) &= -\sqrt{2gh}
+\end{align}
+The vectical throw allows for different scaling because the initial
+conditions are different, and thus the solution too $x(0) = 0$ and
+$\dot{x}(0) = v$.
+
+\subsection{Scaling The Van der Pol equation}
+The Van der Pol equation is a perturbation of the oscillation equation
+\begin{align}\label{eq: vanderpol}
+    LC\frac{d^2I}{dt^2} + (-g_1C +3g_3CI^2)\frac{dI}{dt} = -I
+\end{align}
+with initial conditions
+\begin{align}\label{eq: van initial}
+    I(0) = I_0,\;\;\;\; \dot{I}(0) = 0.
+\end{align}
+where $I(t)$ is the current at a time $t$, $C$ is the capacity, $L$ is the
+inductivity and $g_1, g_3$ are some parameters. The units of all the
+parameters are
+\begin{align}
+    [LC] &= s^2\\
+    [g_1C] &= s\\
+    [g_3C] &= sA^{-2}
+\end{align}
+The oscillation equation is
+\begin{align}
+    CL\ddot{I} + I = 0.
+\end{align}
+Solvable by the exponential ansatz of $I = Ae^{\lambda t}$, where $\lambda=
+\pm i \sqrt{\frac{1}{LC}}$, thereby
+\begin{align}
+    I(t) = A_1 e^{i\sqrt{\frac{1}{LC}}t} + A_2 e^{-i\sqrt{\frac{1}{LC}}t}.
+\end{align}
+With the initial conditions in equation \ref{eq: van initial} we get $A_1 =
+A_2$ and thus the solution to the oscillation equation is
+\begin{align}
+    I(t) = I_0\cos(\frac{t}{\sqrt{LC}})
+\end{align}
+Now that we know the reduced problem and the solution to it, we may work with
+the Van-Der-Pol equation \ref{eq: vanderpol}, by determining all possible
+non-dimensionalisations. Let us begin by setting
+\begin{align}
+    I(t) = I_c\psi,\\
+    t = t_c \tau,
+\end{align}
+where $I_c$ and $t_c$ have the dimension of $I(t)$ and $t$ accordingly and
+$\psi(\tau)$ and $\tau$ are dimensionless
+The first and second derivative in time is
+\begin{align}
+    \frac{d}{dt} &= \frac{1}{t_c}\frac{d}{d\tau}\\
+    \frac{d^2}{dt^2} &= \frac{1}{t_c^2}\frac{d^2}{d\tau^2}.
+\end{align}
+We can rewrite the Van-Der-Pol equation in terms of $\psi$ and $\tau$
+\begin{align}
+    &\frac{LC}{t_c^2}\ddot{\psi} - \frac{g_1C}{t_c}\dot{\psi}
+    \frac{3g_3CI_c}{t_c}\dot{\psi}\psi = -\psi\\
+    &\psi(0) = \frac{I_0}{I_c} \;\;\;\; \dot{\psi}(0) = 0
+\end{align}
+There are a total of four constants that we can eliminate
+\begin{align}
+    \Pi_1 &= \frac{I_0}{I_c},\;\;\;\;
+    \Pi_2 = \frac{LC}{t_c^2},\nonumber\\
+    \Pi_3 &= \frac{-g_1C}{t_c},\;\;\;\;\;
+    \Pi_4 = \frac{3g_3CI_C}{t_c}.
+\end{align}
+The first scaling is
+\begin{align}
+    I_c = I_0,\;\;\; t_c=\frac{1}{\sqrt{LC}}.
+\end{align}
+Thereby we get the following problem
+\begin{align}
+    &\ddot{\psi}
+    -\sqrt{\frac{C}{L}}g_1\dot{\psi}+\sqrt{\frac{C}{L}}3g_3I_0\dot{\psi}\psi
+    = -\psi\\
+    &\psi(0) = 1 \;\;\;\; \dot{\psi}(0) = 0
+\end{align}
+
+
+The second scaling is
+\begin{align}
+    I_c = I_0,\;\;\; t_c=g_1C.
+\end{align}
+Thereby we get the following problem
+\begin{align}
+    &\frac{L}{g_1^2C}\ddot{\psi}
+    -\dot{\psi}+\frac{3g_3}{g_1}\dot{\psi}\psi
+    = -\psi\\
+    &\psi(0) = 1 \;\;\;\; \dot{\psi}(0) = 0
+\end{align}
+
+The third scaling is
+\begin{align}
+    I_c = I_0,\;\;\; t_c=g_3CI_0.
+\end{align}
+Thereby we get the following problem
+\begin{align}
+    &\frac{L}{g_3^2CI_0^2}\ddot{\psi}
+    -\frac{g_1}{g_3I_0}\dot{\psi}+3\dot{\psi}\psi
+    = -\psi\\
+    &\psi(0) = 1 \;\;\;\; \dot{\psi}(0) = 0
+\end{align}
+\subsection{Scale the Schrödinger Equation}
+The well known Schrödinger equation that describes quantum physics of one
+particle can be written as
+\begin{align}
+    &i\hbar \partial_t\psi = -\frac{\hbar}{2m}\Delta \psi + V\psi \nonumber\\
+    &\psi(t=0) =\psi_0
+\end{align}
+where $\hbar$ is the Planks constant, $\psi=\psi(x, t)$ the wave function,
+$m$ the mass and $V = V(x)$ the potential in which the wave function is. The
+dimensions are
+\begin{align}
+    [\hbar] = Js, \;\;\;\; V = J,  \;\;\;\; [\psi]= m^{-d/2}
+\end{align}
+for the special dimension $d$. The standard scaling ansatz is
+\begin{align}
+    &\psi = \psi_c \phi \\
+    &t = t_c \tau \;\;\;\; x = x_c \xi,
+\end{align}
+by that we get the following derivatives in time and in space
+\begin{align}
+    \partial_{x_i} &=\frac{1}{x_{(i)c}} \partial_{\psi_i} \\
+    \partial^2_{x_i} &=\frac{1}{x_{(i)c}^2} \partial_{\psi_i}^2\\
+    \partial_{t} &=\frac{1}{t_c} \partial_{\psi_i} \\
+\end{align}
+for $i = 1, 2, 3$, or depending on the dimension we are dealing with.
+
+Let us consider $x\in \mathbb{R}^3$ and $V = 0$ to scale the equation. First
+we now have
+\begin{align}
+    i \partial_t\psi = -\frac{\hbar}{2m}\Delta \psi
+\end{align}
+with the initial condition $\phi(0) = \frac{\psi_0}{\psi_c}$. With our scaling the equation turns out to be
+\begin{align}
+    \frac{i\hbar t_c}{2m}\frac{1}{||\vec{x}_c||^2}\Delta_{\vec{\xi}}\ \phi =
+    \partial_\tau\ \phi.
+\end{align}
+The constants we get are
+\begin{align}
+    \Pi_1 = \frac{t_c\hbar}{2m}\frac{1}{||\vec{x}_c||^2}, \;\;\;\; \Pi_2 =
+    \frac{\psi_0}{\psi_c}.
+\end{align}
+
+The simple choice of
+\begin{align}
+    \frac{1}{||\vec{x}_c||^2} = 1, \;\;\;\; \psi_c = \psi_0, \;\;\;\; t_c =
+    \frac{2m}{\hbar}||\vec{x}_c||^2,
+\end{align}
+simplifies the Schrodinger equation without the potential to
+\begin{align}
+    i\Delta_{\vec{\xi}}\ \phi = \partial_\tau \phi,
+\end{align}
+with the initial condition $\phi(\tau=0) = 1$.
+
+Now consider $V = 0$, $x\in[0, L]$ and $t \in [0, T]$, the Schrodinger
+equation is the same only with one spacial dimension as above, we can set
+\begin{align}
+    \psi_c = \psi_0, \;\;\;\; x_c =L, \;\;\;\; t_c = \frac{2mL^2}{\hbar}.
+\end{align}
+Thus we get
+\begin{align}
+    i\partial_{\xi}^2 \phi = \partial_\tau \phi,
+\end{align}
+with the initial condition $\phi(\tau=0) = 1$.
+
+As a last example let us consider the quantum harmonic oscillator, that is
+$V(x) = m\omega^2 x^2$ for $x\in \mathbb{R}$, where $\omega$ is the
+frequency, the equation is the following
+\begin{align}
+    i \hbar \partial_t \psi = -\frac{\hbar^2}{2m}\partial^2_x \psi
+    m\omega^2x^2 \psi.
+\end{align}
+By inserting the scaling
+\begin{align}
+    i\partial_\tau \phi = -\frac{t_c\hbar}{2mx_c^2}\partial_\xi^2 \phi
+    \frac{t_cm\omega^2x_c^2}{\hbar} \xi^2 \phi
+\end{align}
+The dimensional constants are
+\begin{align}
+    \Pi_1 = \frac{t_0\hbar}{mx_c^2},\;\;\;\;\Pi_2 =
+    \frac{m\omega^2x_c^2t_c}{\hbar},\;\;\;\; \Pi_3 = \frac{\psi_0}{\psi_c}.
+\end{align}
+The choice of scaling is
+\begin{align}
+    \psi_c = \psi_0, \;\;\;\; t_c = \frac{1}{\omega}, \;\;\;\; x_c =
+    \sqrt{\frac{\hbar}{m\omega}}.
+\end{align}
+Thereby getting the following problem
+\begin{align}
+    i\partial_\tau \phi = -\frac{1}{2} \partial_\xi^2 \phi +\xi^2 \phi
+\end{align}
+with $\phi(\tau = 0) = 1$.
+
+
+
+%\printbibliography
+\end{document}

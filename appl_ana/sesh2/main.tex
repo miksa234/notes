@@ -1,0 +1,303 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mlmodern}
+
+%\usepackage{ngerman}	% Sprachanpassung Deutsch
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, top=15mm}
+
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{yhmath}
+\usepackage{tikz}
+\usetikzlibrary{patterns,decorations.pathmorphing,positioning}
+\usetikzlibrary{calc,decorations.markings}
+
+%\usepackage[backend=biber, sorting=none]{biblatex}
+%\addbibresource{uni.bib}
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\tikzstyle{titlered} =
+    [draw=black, thick, fill=white,%
+        text=black, rectangle,
+        right, minimum height=.7cm]
+
+
+\usepackage[colorlinks=true,naturalnames=true,plainpages=false,pdfpagelabels=true]{hyperref}
+\usepackage[parfill]{parskip}
+\usepackage{lipsum}
+
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\newcommand{\eps}{\varepsilon}
+\pagestyle{myheadings}
+
+\markright{Popović\hfill Applied Analysis\hfill}
+
+
+
+\title{Applied Analysis Problems}
+\author{Milutin Popović}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Sheet 2}
+\subsection{Problem 4}
+We consider a quadratic equation with two ways to perturb it by $\eps =
+0.001$ \begin{align}
+    x^2 + 2\eps x -1 = 0, \label{eq: (1)}\\
+    \nonumber \\
+    \eps x^2 + 2x - 1 = 0.\label{eq: (2)}
+\end{align}
+Equation \ref{eq: (2)} is singular, because the reduced problem ($\eps
+\rightarrow 0$) has only one solution while the at $x = \frac{1}{2}$. While
+the reduced problem in \ref{eq: (1)} has two solutions for $x = \pm 1$, which
+is the regular case. Let us thereby calculate the asymptotic expansion of the
+regular case up to $O(\eps^2)$, we take the ansatz for the asymptotic
+expansion
+\begin{align}\label{eq: p4 ansatz}
+    x_\eps = x_0 + \eps x_1 + \eps^2 x_2 + O(\eps^3).
+\end{align}
+By substituting $x_\eps$ into \ref{eq: (1)} and factoring out the orders of
+$\eps$ we get
+\begin{align}
+    \eps^0 (x_0^2 - 1) + \eps^1(2x_0 + 2x_0x_1) + \eps^2(x_1^2+2x_2x_0
+    2x_1) = O(\eps^3)
+\end{align}
+By solving the equations in order of $\eps$, for the coefficients
+$x_0$, $x_1$ and $x_2$ we get
+\begin{align}
+    x_0 = \pm 1, \;\;\;\; x_1 = -1, \;\;\;\; x_2 = \pm \frac{1}{2}.
+\end{align}
+By substituting into the equation \ref{eq: p4 ansatz} we get
+\begin{align}
+    x_\eps = \pm 1 - \eps \pm \frac{1}{2} \eps + O(\eps^3).
+\end{align}
+For $\eps = 0.001$ we get
+\begin{align}
+    x_\eps = -1.00150 + O(\eps^3)\\
+    x_\eps = -1.00100 + O(\eps^2).
+\end{align}
+\subsection{Problem 5}
+Consider the following equations
+\begin{align}
+    \label{eq: p5 1}\eps y' + y = x \;\;\;\;\;\; y(0) = 1\\
+    \label{eq: p5 2}\eps y' + y = x \;\;\;\;\;\; y(0) = 0\\
+    \nonumber\\
+    \label{eq: p5 3}\eps y' + y = x \;\;\;\;\;\; y(0) = \eps\\
+    \label{eq: p5 4}\eps^2 y' + y = x \;\;\;\;\;\; y(0) = \eps\\
+    \nonumber\\
+    \label{eq: p5 5}y' + \eps y = x \;\;\;\;\;\; y(0) = 1\\
+    \label{eq: p5 6}y' + y = \eps x \;\;\;\;\;\; y(0) = 1\\
+\end{align}
+We will go through the equations and elaborate on if the perturbation is
+regular or singular, if regular we will compute the asymptotic expansion up
+to second order.
+Let us begin with equation \ref{eq: p5 1}. By the first look, the reduced
+problem does not agree with the boundary condition
+\begin{align}
+    y_0 = x \;\;\;\;\; y_0(0) = 1,
+\end{align}
+is a contradiction in $y_0(0) = 0 \neq 1$, thereby equation \ref{eq: p5 1} is
+\textbf{singularly perturbed}.
+
+The reduced problem of equation \ref{eq: p5 2} on the other hand agrees with
+the boundary condition, since
+\begin{align}
+    y_0 = x \;\;\;\;\; y_0(0) = 0.
+\end{align}
+But by doing the ansatz for the asymptotic expansion
+\begin{align}
+    y_\eps(x) = y_0 + \eps y_1 + \eps^2 y_2 + O(\eps^3),
+\end{align}
+plugging in into \ref{eq: p5 2} and separating coefficients in terms of
+$\eps$, we get
+\begin{align}
+    \eps^0 (y_0 -x) + \eps^1(y_0' + y_1) + \eps^2(y_1' + y_2) = O(\eps^3)
+\end{align}
+The solutions to these equations are
+\begin{align}
+    y_0 = x, \;\;\;\; y_1 = 1, \;\;\;\; y_2 = 0,
+\end{align}
+which is a contradiction to the boundary condition of $y_1(0) = 1 \neq 0$.
+Thereby we can conclude that equation \ref{eq: p5 2} is \textbf{singularly
+perturbed}.
+
+Next up is equation \ref{eq: p5 3}, where by the asymptotic expansion the
+first order coefficient of $\eps$, $y_2$, has the boundary condition $y_2(0)
+= 0$. But by applying the ansatz of the asymptotic expansion and plugging
+into the equation we get
+\begin{align}
+    \eps^2(y_0 - x) + \eps^1 (y_0' + y_1) + \eps^2(y_1' + y_2) = O(\eps^3).
+\end{align}
+Solving these equations we get
+\begin{align}
+    y_0 = 0, \;\;\;\; y_1 = 1 \;\;\;\; y_2 = 0 ,
+\end{align}
+which is a contradiction $y_1(0) = 1 \neq 0 $, thus the equation \ref{eq: p5
+3} is \textbf{singularly perturbed}.
+
+The next equation \ref{eq: p5 4} is also singularly perturbed, we
+can see this by plugging the asymptotic expansion into the equation
+\begin{align}
+ \eps^0 ( y_0 - x) + \eps^1(y_1) + \eps^2(y_0' + y_2) = O(\eps^3),
+\end{align}
+solving for the coefficients we get
+\begin{align}
+    y_0 = x, \;\;\;\; y_1 = 0, \;\;\;\;\; y_2 = -1,
+\end{align}
+which is contradiction by the boundary condition $y_2(0) = -1 \neq 0$,
+thereby \ref{eq: p5 4} is \textbf{singularly perturbed}.
+
+Equation \ref{eq: p5 5} on the first sight does not indicate for any
+contradictions, we may plug the ansatz of the asymptotic expansion into the
+equation and see what happens
+\begin{align}
+    \eps^0(y_0 -x) + \eps^1(y_1' + y_0) + \eps^2(y_2' +y_1) = O(\eps^2),
+\end{align}
+with the initial conditions $y_0(0) = 1$, $y_1(0) = y_2(0) = 0$.
+\begin{align}
+    y_0 = \frac{x^2}{2} + 1, \;\;\;\;
+    y_1 = -\frac{x^3}{6} + x, \;\;\;\;
+    y_2 = \frac{x^4}{24} + \frac{x^2}{2}.
+\end{align}
+Finally we get
+\begin{align}
+    y_\eps(x) = (\frac{x^2}{2}+1) + \eps(-\frac{x^3}{6} -x)
+    +\eps^2(\frac{x^4}{24} + \frac{x^2}{2}) + O(\eps^3).
+\end{align}
+Thereby we can conclude that \ref{eq: p5 5} is \textbf{regularly perturbed}.
+
+The last equation \ref{eq: p5 6} is also regular, let us do the asymptotic
+expansion of the equation and order the equation in orders of $\eps$.
+\begin{align}
+    \eps^0(y_0' + y_0) + \eps^1(y_1' + y_1 -x) + \eps^2(y_2 + y_2) =
+    O(\eps^3).
+\end{align}
+by solving these differential equations with the boundary conditions $y_0(0)
+= 1$, $y_1(0) = y_2(0) = 0$ we get
+\begin{align}
+    y_0 =  e^{-x} \;\;\;\; y_1 = (x-1) + e^{-x} \;\;\;\; y_2 = 0.
+\end{align}
+The equation we get
+\begin{align}
+    y_\eps(x) = e^{-x} + \eps(x-1 +e^{-x}) + O(\eps^3).
+\end{align}
+Thereby we can conclude that the last equation \ref{eq: p5 6} is
+\textbf{regularly perturbed}.
+\subsection{Problem 6}
+In this section we will calculate the asymptotic expansion of a regularly
+perturbed equation in two ways, by doing the regular expansion ansatz and by
+substituting and expanding in terms of $\eps$. The ordinary differential
+equation we are dealing with is
+\begin{align}
+    y' = -y + \eps y^2 \;\;\;\;\; y(0) = 1,
+\end{align}
+where $t > 0$ and $0 < \eps \ll 1$. The standard expansion ansatz is
+\begin{align}
+y_\eps(x) = y_0 + \eps y_1 + \eps^2 y_2 + O(\eps^3).
+\end{align}
+The ODE then expands to
+\begin{align}
+    \eps^0(y_0' + y_0) + \eps(y_1' + y_1 - y_0^2) + \eps^2(y_2' + y_2 -
+    2y_0y_1) = O(\eps^3).
+\end{align}
+Equations in order of $\eps$ and $\eps^2$ are non homogeneous ODE's, a little
+bit of a hassle to solve but, still easy by first solving the non homogeneous
+part, getting a constant dependent on $x$ we can plug the solution into the
+non homogeneous equation and calculate for the constant (...). The solution to
+these three coefficients with the boundary conditions $y_0(0) = 1$, $y_1(0) =
+y_2(0) = 1$ we get
+\begin{align}
+    y_0 = e^{-x}, \;\;\;\; y_1 = -e^{-2x} + e^{-x}, \;\;\;\; y_2 = e^{-3x} -
+    2e^{-2x} + e^{-x}.
+\end{align}
+The expansion of $y$ is then
+\begin{align}
+    y_\eps (x) = e^{-x} + \eps(-e^{-2x} + e^{-x}) + \eps^2(e^{-3x} - 2e^{-2x}
++ e^{-x}) + O(\eps^3).  \end{align}
+
+The second ansatz, considers the substitution $z = \frac{1}{y}$, by
+calculating the first derivative and substituting the original problem we
+get
+\begin{align}
+    z' &= \frac{-y'}{y^2} = \frac{y-\eps y^2}{y^2} = \frac{1}{y} - \eps = z -
+    \eps. \\
+    z(0) &= \frac{1}{y(0)} = 1.
+\end{align}
+The solution is
+\begin{align}
+    z(x) = \eps + (1-\eps) e^x.
+\end{align}
+By substituting this into $y = \frac{1}{z}$ and expanding we get
+\begin{align}
+    y(x) &= \frac{1}{\eps+(1-\eps)e^x} = e^{-x} \frac{1}{1 - (1- e^{-x})\eps}
+    \\
+         &= e^{-x} \sum_{n\geq 0} \eps^n(1-e^{-x})^n.
+\end{align}
+which is the geometric series.
+\subsection{Problem 7}
+The last problem consists of a perturbation of a partial differential
+equation (heat equation).
+\begin{align}
+    &\partial_t u(x, t) + \partial_x^2 u(x,t) - \eps u(x, t)^2 = 0
+    &x\in (0, 1),\; t>0,\\
+    &u(x, 0) = \tilde{u}_0(x)  &x\in(0, 1), \\
+    &u(0, t) = u(1, t) = 0 & t>0.
+\end{align}
+The problem is regular because the reduced solution is the regular heat
+equation in the one special dimension on $x\in (0, 1)$, we know this is
+solvable. By doing the expansion ansatz we can derive the first equations
+for the first three terms, the ansatz is always the same
+\begin{align}
+    u_\eps = u_0 + \eps u_1 + \eps^2 u_2 + O(\eps^3).
+\end{align}
+Plugging this into the perturbed problem problem and factoring out the terms
+in the order of $\eps$ we get
+\begin{align}
+    &\eps^0 (\partial_t u_0 + \partial_x^2 u_0) + \\
+    &\eps^1 (\partial_t u_1 + \partial_x^2 u_1 - u_0^2) +\\
+    &\eps^2 (\partial_t u_2 + \partial_x^2 u_2 - 2u_1u_0)  = O(\eps^3)
+\end{align}
+
+We can solve the reduced problem with the initial condition $\tilde{u}_0 =
+\sin(\pi x)$ by separation of variables. Setting $u(x, t) = \xi(x) \tau(t)$
+and substituting into the equation we get two ordinary differential equation
+\begin{align}
+    \underbrace{\frac{\xi_{xx}}{\xi}}_{=k}
+    \underbrace{\frac{\tau_t}{\tau}}_{=-k} =  0
+\end{align}
+for some $k$. Solving these two by the exponential ansatz.
+\begin{align}
+    \xi(x) &= A_1 e^{\sqrt{k} x} +A_2 e^{-\sqrt{k} x},\\
+    \tau(t) &= A_3 e^{-kt}.
+\end{align}
+With the initial condition we get the conditions that
+\begin{align}
+    A_1A_3 &= -A_2 A_3,\\
+    k &= \pi^2
+\end{align}
+we choose $A_1 = A_3 = 1$ , $A_2 = -1$. We get the following solution to the
+PDE
+\begin{align}
+    u(x, t) = \xi(x)\tau(t) = \sin(\pi x) e^{-\pi^2 t}.
+\end{align}
+
+%\printbibliography
+\end{document}
