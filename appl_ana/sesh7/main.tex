@@ -1,0 +1,191 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mlmodern}
+
+%\usepackage{ngerman}	% Sprachanpassung Deutsch
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, top=15mm}
+
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{yhmath}
+\usepackage{tikz}
+\usetikzlibrary{patterns,decorations.pathmorphing,positioning}
+\usetikzlibrary{calc,decorations.markings}
+
+%\usepackage[backend=biber, sorting=none]{biblatex}
+%\addbibresource{uni.bib}
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\tikzstyle{titlered} =
+    [draw=black, thick, fill=white,%
+        text=black, rectangle,
+        right, minimum height=.7cm]
+
+
+\usepackage[colorlinks=true,naturalnames=true,plainpages=false,pdfpagelabels=true]{hyperref}
+\usepackage[parfill]{parskip}
+\usepackage{lipsum}
+
+\usepackage[OT2,T1]{fontenc}
+\DeclareSymbolFont{cyrletters}{OT2}{wncyr}{m}{n}
+\DeclareMathSymbol{\Sha}{\mathalpha}{cyrletters}{"58}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\pagestyle{myheadings}
+
+\markright{Popović\hfill Applied Analysis\hfill}
+
+
+\title{University of Vienna\\ Faculty of Mathematics\\
+\vspace{1cm}Applied Analysis Problems
+}
+\author{Milutin Popovic}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Sheet 7}
+\subsection{Dirac Comb}
+The Dirac train or Dirac comb on defined in the following way
+\begin{align}
+    \Sha_m[n] =
+    \begin{cases}
+        1\;\;\;\;\;\; n = 0, \pm m, \pm 2m,\dots\\
+        0\;\;\;\;\;\; \text{else}
+    \end{cases}
+\end{align}
+The discrete Fourier transform of the Dirac comb in $\mathbb{C}^N$ is
+\begin{align}
+    \widehat{\Sha_m[n]}
+    &=\frac{1}{N}\sum_{n=0}^{N-1} \Sha_m[n] e^{-2\pi i \frac{k}{N}n}=\\
+    &=\frac{1}{N}\sum_{n=0}^{N-1}
+        \left(
+            m\sum_{l\in\mathbb{Z}} \delta(n-lm)
+            \right)
+            e^{-2\pi i \frac{k}{N}n}=\\
+    &=\frac{m}{N}\sum_{l\in\mathbb{Z}} e^{-2\pi i \frac{k}{N}lm}=
+    \;\;\;\;\;\;\;\;\;\;\;\;\; (m = \frac{N}{m'})\\
+    &= \frac{1}{m'} \sum_{l\in\mathbb{Z}} e^{-2\pi i \frac{k}{m'}l} =\\
+    &= \frac{1}{m}\Sha_{\frac{N}{m}}[k]
+\end{align}
+\subsection{Schwartz Space}
+The Schwartz space $\mathcal{S}(\mathbb{R}^d)$, for $d \in \mathbb{N}$ is
+defined as
+\begin{align}
+    &\mathcal{S} :=
+\bigg\{
+    f\in\mathcal{C}^\infty(\mathbb{R}^d):
+    \forall\alpha,\beta\in\mathbb{N}^d\;\; \lVert f \rVert_{\alpha,\beta}
+    < \infty
+\bigg\},\\
+&\lVert f \rVert_{\alpha, \beta} :=
+\sup_{x\in\mathbb{R}^d}\left|x^\alpha (D^\beta f) (x) \right|.
+\end{align}
+Our aim is to show that if $f\in\mathcal{S}(\mathbb{R})$ then $\hat{f} \in
+\mathcal{S}(\mathbb{R})$. The condition is obviously
+\begin{align}
+    &\lVert \hat{f} \rVert_{\alpha, \beta} =
+    \sup_{\xi\in\mathbb{R}}\left|\xi^\alpha (D^\beta \hat{f}) (\xi)
+    \right|<\infty,
+\end{align}
+for all $\alpha, \beta \in \mathbb{N}$.
+We can start with what we know about the Fourier transform
+\begin{align}
+    \xi^\alpha \hat{f}(\xi) &= \mathcal{F}\left(\frac{1}{(2\pi
+    i)^\alpha}(D^{\alpha}f)(x)\right)\\
+            D^{\beta}\hat{f}(\xi) &= \mathcal{F}\left(
+        (-2\pi i x)^\beta f(x)
+    \right).
+\end{align}
+Combining the two relations above we get
+\begin{align}
+    \xi^\alpha (D^\beta \hat{f})(\xi) =
+    \mathcal{F}\left(\frac{(-2\pi i x)^\beta}{(2\pi
+    i)^\alpha}x^\beta(D^{\alpha}f)(x)\right)=: \mathcal{F}(g(x))\\
+\end{align}
+If we call this function $g$, then $g\in\mathcal{S}(\mathbb{R})$ and
+$g\in L^1(\mathbb{R})$. Applying the Riemann-Lebesgue Lemma we get
+\begin{align}
+    \hat{g}(\xi) = \int_\mathbb{R} g(x) e^{-2\pi i x \xi}\ dx \longrightarrow 0
+    \;\;\;  \text{as $|\xi| \rightarrow \infty$ }
+\end{align}
+Thereby $\hat{g} \in \mathcal{S}(\mathbb{R})$ and thus $\hat{f} \in
+\mathcal{S}(\mathbb{R})$.
+\subsection{Tempered Distributions}
+Tempered distributions are the elements of
+\begin{align}
+    \mathcal{S}'(\mathbb{R}^d) :=
+    \bigg\{
+        L: \mathcal{S}(\mathbb{R}^d) \rightarrow \mathbb{C} | \text{$L$ is
+        linear and continuous}
+    \bigg\}.
+\end{align}
+Consider $\xi$ as a tempered distribution, buy acting on $\varphi \in
+\mathcal{S}(\mathbb{R})$ we have
+\begin{align}
+    \xi(\phi) = \int_\xi \xi \varphi(\xi)\ d\xi.
+\end{align}
+The Fourier transform of $\xi$ is
+\begin{align}
+    \hat{\xi}(\varphi)
+    &=\xi(\hat{\varphi})
+    = \int_\mathbb{R} \xi \hat{\varphi}(\xi)\ d\xi=\\
+    &= \int_\mathbb{R}\xi \int_\mathbb{R} \varphi(x) e^{-2\pi i \xi x}\ dx\
+    d\xi=\\
+    &=\int_\mathbb{R}\int_\mathbb{R} \xi e^{-2\pi i \xi x}\ d\xi \varphi(x)\
+    dx=\\
+    &=\int_\mathbb{R} \frac{i}{2\pi}\frac{d}{dx}\int_\mathbb{R}e^{-2\pi i \xi
+x} \ d\xi \varphi(x)\ dx=\\
+    &= \int_\mathbb{R}i\frac{1}{2\pi} \frac{d}{dx}\left(2\pi \delta(x)\right)
+    \varphi(x)\ dx=\\
+    &= \int_\mathbb{R} i\delta'(x)\varphi(x)\ dx\\
+    &= i \delta'(\varphi).
+\end{align}
+\subsection{Fourier transform of the Dirac Comb}
+The general case of the Dirac Comb as a distribution is
+\begin{align}
+    \Sha_T = \sum_{n \in \mathbb{Z}} \delta_{nT}.
+\end{align}
+The Fourier transform of the $\Sha_T$ distribution for $\varphi \in
+\mathcal{S}(\mathbb{R})$ is
+\begin{align}
+    \widehat{\Sha_T}(\varphi)
+    &= \sum_{n\in\mathbb{Z}} \hat{\delta}_{nT}(\varphi)\\
+    &= \sum_{n\in\mathbb{Z}} \delta_{n\omega_0}(\varphi)\\
+    &=\Sha_{\omega_0}(\varphi).
+\end{align}
+The Fourier transform, transforms the period of the combs.
+\subsection{Shannon Sampling}
+The Fourier transform of $1_{[-\frac{a}{2}, \frac{a}{2}]}(x)$ is
+\begin{align}
+    \mathcal{F}\left(1_{[-\frac{a}{2}, \frac{a}{2}]}\right)(\xi)
+    &= \int_\mathbb{R} 1_{[-\frac{a}{2}, \frac{a}{2}]} e^{-2\pi i x \xi}\
+    dx\\
+    &= \int_{-\frac{a}{2}}^{\frac{a}{2}} e^{-2\pi i x\xi}\ dx\\
+    &= \frac{-1}{2\pi i \xi} e^{-2\pi i x
+        \xi}\bigg|_{-\frac{a}{2}}^{\frac{a}{2}}\\
+    &= \frac{1}{\pi \xi} \frac{1}{2i}\left(
+        e^{pi i a \xi} - e^{-\pi i a \xi}
+    \right)\\
+    &= \frac{\sin(\pi \xi a)}{\pi \xi}
+\end{align}
+
+%\printbibliography
+\end{document}

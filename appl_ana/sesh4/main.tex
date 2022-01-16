@@ -1,0 +1,193 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mlmodern}
+
+%\usepackage{ngerman}	% Sprachanpassung Deutsch
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, top=15mm}
+
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{yhmath}
+\usepackage{tikz}
+\usetikzlibrary{patterns,decorations.pathmorphing,positioning}
+\usetikzlibrary{calc,decorations.markings}
+
+%\usepackage[backend=biber, sorting=none]{biblatex}
+%\addbibresource{uni.bib}
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\tikzstyle{titlered} =
+    [draw=black, thick, fill=white,%
+        text=black, rectangle,
+        right, minimum height=.7cm]
+
+
+\usepackage[colorlinks=true,naturalnames=true,plainpages=false,pdfpagelabels=true]{hyperref}
+\usepackage[parfill]{parskip}
+\usepackage{lipsum}
+
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\pagestyle{myheadings}
+
+\markright{Popović\hfill Applied Analysis\hfill}
+
+
+\title{University of Vienna\\ Faculty of Mathematics\\
+\vspace{1cm}Applied Analysis Problems
+}
+\author{Milutin Popovic}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Sheet 4}
+
+\subsection{Fourier Series}
+The Fourier series of a $p$ periodic function $f$, integrable on
+$[-\frac{p}{2}, \frac{p}{2}]$ is
+\begin{align}
+    f(x) = \frac{a_0}{2} + \sum_{n=1}^\infty \left(a_n \cos(\frac{2\pi n x}{p})
+    b_n sin(\frac{2\pi n x}{p})\right).
+\end{align}
+The coefficients $a_n$ and $b_n$ are called the Fourier coefficients of $f$
+and are given by
+\begin{align}
+    a_n &= \frac{2}{p} \int_{-\frac{p}{2}}^{\frac{p}{2}} f(x) \sin(\frac{2\pi
+    n x}{p}) dx, \;\;\;\;\; n\geq 0 \\
+    b_n &= \frac{2}{p} \int_{-\frac{p}{2}}^{\frac{p}{2}} f(x) \cos(\frac{2\pi
+    n x}{p}) dx, \;\;\;\;\; n\geq 1
+\end{align}
+Let us compute the Fourier series of $f(t) = t$ for $t \in [-\frac{1}{2},
+\frac{1}{2}]$. The Fourier coefficients are
+\begin{align}
+    a_n &= 2\int_{-\frac{1}{2}}^{\frac{1}{2}} f(t) \cos(2\pi n t)\ dt = 0
+    \;\;\;\;\; \text{(odd: g(-t) = -g(t))},\\
+    \nonumber\\
+    b_n &= 2\int_{-\frac{1}{2}}^{\frac{1}{2}} f(t) \sin(2\pi n t)\ dt = \\
+        &= 2 \left(-\frac{1}{2\pi n} \cos(2\pi n
+        t)\bigg|_{-\frac{1}{2}}^{\frac{1}{2}}
+        \int_{\frac{1}{2}}^{\frac{1}{2}} \frac{1}{2 \pi n}\cos(2\pi n t)\ dt
+            \right) =\\
+        &= -\frac{1}{\pi n}\left( -\cos(\pi n) + \frac{1}{\pi n }\sin(\pi
+            n)\right) =
+        \frac{\sin(\pi n) - \pi n \cos(\pi n)}{(\pi n)^2}.
+\end{align}
+Thereby the Fourier series of $f(t) = t$ is
+\begin{align}
+    f(t) = \sum_{n=1}^\infty \left(\frac{\sin(\pi n) - \pi n \cos(\pi n)}{(\pi
+    n)^2}\right) \sin(2\pi n t) = t
+\end{align}
+\subsection{Truncation Error}
+The truncation error of the trigonometric polynomial $(Sf_N)$ of degree $N$ is
+\begin{align}
+    \sum_{|k| > N} |\hat{f}(k)|^2 = \lVert f - S_N\rVert_2^2 =
+    \int_{-\frac{1}{2}}^{\frac{1}{2}} |E_N(t)|^2 dt.
+\end{align}
+Computations for $N = 3, 9$ were done in python with a integration error of
+around $10^{-15}$, resulting in the overall truncation errors of
+\begin{align}
+    \sum_{|k| > 3} |\hat{f}(k)|^2 = 0.0053,\\
+    \sum_{|k| > 9} |\hat{f}(k)|^2 = 0.0143.
+\end{align}
+To achieve $\lVert E_N\rVert^2_2 < 0.1 \lVert f \rVert^2_2$, the number of
+coefficients needed are about $61$. This was done using a while loop and
+evaluating $\lVert E_N\rVert^2_2$ for $N$ until the above condition is met.
+
+\subsection{Orthonormal Bases}
+Here we will go through the most important properties of orthonormal bases.
+So let $\{b_n\}_{n\in \mathbb{N}}$ be an ONB of a vector space $\mathcal{H}$,
+then for every $x\in \mathcal{H}$ we may write
+\begin{align}
+    x = \sum_{b_n} \langle b_n, x\rangle b_n,
+\end{align}
+and
+\begin{align}
+    \lVert x \rVert^2 = \sum_{b_n} |\langle b_n, x\rangle|^2.
+\end{align}
+For any $x, y \in \mathcal{H}$ we can write the scalar product as
+\begin{align}
+    \langle x, y\rangle = \sum_{b_n} \langle b_n, x\rangle \langle b_n,
+    y\rangle,
+\end{align}
+Furthermore there exists a linear projection $\Phi\ : \mathcal{H}
+\rightarrow l^2(\{b_n\}_n)$ such that
+\begin{align}
+    \langle \Phi(x), \Phi(y)\rangle = \langle x, y \rangle\;\;\; \forall x, y
+    \in \mathcal{H}.
+\end{align}
+
+An example of an orthonormal basis, which spans $L^2([-\frac{p}{2},
+\frac{p}{2}])$ is $\mathcal{T}_p = \{e_n := \frac{e^{2\pi i
+\frac{n}{p}x}}{\sqrt{p}}\}_{n\in\mathbb{Z}}$. The $e_n$ are orthonormal in $L^2$ which
+can be easily seen by using the scalar product of $L^2$, so for $n, m \in
+\mathbb{Z}$
+\begin{align}
+    \langle e_n, e_m\rangle_{L^2([-\frac{p}{2}, \frac{p}{2})} &=
+    \frac{1}{p}\int_{[-\frac{p}{2}, \frac{p}{2}]}e_n \cdot \bar{e}_m \ dx=\\
+    &=\frac{1}{p}\int_{[-\frac{p}{2}, \frac{p}{2}]} e^{2\pi i \frac{(n-m)}{p} x} \ dx=\\
+    &=\frac{\sin(\pi (n-m))}{\pi(n-m)} =
+    \begin{cases}
+        0  \;\;\;\; n\neq m\\
+        1 \;\;\;\;  n=m
+    \end{cases}
+\end{align}
+\subsection{Dirichlet Kernel}
+The function
+\begin{align}
+    D_t(x) := \sum_{\lVert k \rVert_\infty \leq t} e_k(x), \;\;\;\;\; x\in
+    \mathbb{R}^d
+\end{align}
+is called the Dirichlet Kernel. For $0 < t \in \mathbb{N}$ we have
+\begin{align}
+    (S_tf)(x) = \int_{I^d} f(y) D_t(x-y) dy,
+\end{align}
+where $S_t$ represents the orthogonal projection onto the trigonometric
+polynomials $\Pi_t$ of degree $t$, by
+\begin{align}
+    &S_t:\ L^1(\mathbb{T}^d) \rightarrow \Pi_t \\
+    &f \mapsto \sum_{\lVert k \rVert \leq t} \langle f,
+    e_k\rangle_{L^2(\mathbb{T}^d)} e_k \;\;\;\;\; k \in \mathbb{Z}^d
+\end{align}
+And furthermore the Dirichlet Kernel satisfies
+\begin{align}
+    D_t(x) = \prod_{i=1}^d \frac{e_{t+1}(x_i) - e_{-t}(x_i)}{e_1(x_i) - 1}
+\end{align}
+We start off by applying the orthogonal projection into the trigonometric
+polynomials $S_t$ onto a function $f \in L(\mathbb{T}^d)$
+\begin{align}
+    (S_tf) &= \sum_{\lvert k\rVert_\infty \leq t} \int_{I^d} f(y) e^{-2\pi i
+    \langle k, y\rangle}\ dy\ e^{2\pi i\langle k, x\rangle} =\\
+    &= \int_{I^d}f(y) \sum_{\lvert k\rVert_\infty \leq t} e^{2\pi i \langle
+    k, (x- y)\rangle}\ dy =\\
+    &= (f * D_t) (x) = \int_{I^d} f(y) D_t(x - y)\ dy.
+\end{align}
+The Dirichlet kernel can be simply rewritten
+\begin{align}
+    \sum_{\lVert k \rVert_\infty \leq t} e^{2\pi i \langle k , x\rangle} &=
+    \prod_{i=1}^d \sum_{k_i = -t}^t e^{2\pi i k_i x_i} =\\
+    &= \prod_{i=1}^d e^{-2\pi i t x_i} \sum_{k_i = 0}^{2t} e^{2\pi i k_i
+        x_i}=;\;\;\;\; \text{(trigonometric series)}\\
+    &= \prod_{i=1}^d e^{-2\pi i t x_i} \frac{e^{2\pi i (2t +1}x_i -
+    1}{e^{2\pi i x_i} - 1} =\\
+    &= \prod_{i = 1} \frac{e_{t+1}(x_i) - e_{-t}(x_i)}{e_1(x_i) - 1}.
+\end{align}
+%\printbibliography
+\end{document}

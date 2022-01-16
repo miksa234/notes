@@ -1,0 +1,145 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mlmodern}
+
+%\usepackage{ngerman}	% Sprachanpassung Deutsch
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, top=15mm}
+
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{yhmath}
+\usepackage{tikz}
+\usetikzlibrary{patterns,decorations.pathmorphing,positioning}
+\usetikzlibrary{calc,decorations.markings}
+
+%\usepackage[backend=biber, sorting=none]{biblatex}
+%\addbibresource{uni.bib}
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\tikzstyle{titlered} =
+    [draw=black, thick, fill=white,%
+        text=black, rectangle,
+        right, minimum height=.7cm]
+
+
+\usepackage[colorlinks=true,naturalnames=true,plainpages=false,pdfpagelabels=true]{hyperref}
+\usepackage[parfill]{parskip}
+\usepackage{lipsum}
+
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\pagestyle{myheadings}
+
+\markright{Popović\hfill Applied Analysis\hfill}
+
+
+\title{University of Vienna\\ Faculty of Mathematics\\
+\vspace{1cm}Applied Analysis Problems
+}
+\author{Milutin Popovic}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Sheet 5}
+\subsection{Fourier Transform}
+In this section we prove the linearity of the Fourier Transform $\mathcal{F}$ on
+$L^1(\mathbb{R}^d)$. For $f, g \in L^1(\mathbb{R}^d)$ and $\lambda, \mu \in
+\mathbb{R}$ the linearity condition for $\mathcal{F}$ is the following
+\begin{align}
+    \mathcal{F}(\lambda f + \mu g) = \lambda \mathcal{F}(f) + \mu
+    \mathcal{F}(g).
+\end{align}
+We start by using the Fourier transform definition for $x, \xi \in \mathbb{R}^d$
+\begin{align}
+    \mathcal{F}(\lambda f + \mu g)(\xi) &= \int_{\mathbb{R}^d} (\lambda f(x)+
+    \mu g(x)) e^{-2\pi i \langle x, \xi\rangle}\ dx =\\
+    &= \int_{\mathbb{R}^d} \lambda f(x) e^{-2\pi i\langle x,\xi\rangle} + \mu
+    g(x) e^{-2\pi i\langle x,\xi\rangle}\ dx =\\
+    &= \int_{\mathbb{R}^d} \lambda f(x) e^{-2\pi i\langle x,\xi\rangle}\ dx+
+    \int_{\mathbb{R}^d} \mu
+    g(x) e^{-2\pi i\langle x,\xi\rangle}\ dx =\\
+    &= \lambda \int_{\mathbb{R}^d} f(x) e^{-2\pi i\langle x,\xi\rangle}\ dx+
+    \mu \int_{\mathbb{R}^d}
+    g(x) e^{-2\pi i\langle x,\xi\rangle}\ dx =\\
+    &= \lambda \mathcal{F}(f)(\xi) + \mu \mathcal{F}(g)(\xi)
+\end{align}
+\subsection{Identities of the Fourier transform}
+The following are three identities of the Fourier transform
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c |}
+\hline
+  & $g(x)$ & $\hat{g}(\xi)$ \\ \hline \hline
+(1) & $f(x-x_0)$ & $e^{-2\pi ix_0 \xi} \hat{f}(\xi)$ \\ \hline
+(2) & $e^{2\pi i \xi_0 x} f(x)$ & $f(\xi - \xi_0)$ \\ \hline
+(3) & $f(ax)$ & $\frac{1}{a} \hat{f}(\frac{\xi}{a})$\\ \hline
+\end{tabular}
+    \caption{Identities of the Fourier transform for $0 < a\in\mathbb{R},
+    \xi_0, x \in \mathbb{R}$}
+\end{table}
+We start with (1)
+\begin{align}
+    \widehat{f(x-x_0)}
+    &= \int_\mathbb{R} f(x-x_0) e^{-2\pi i x \xi}\ dx=
+    \;\;\;\;\;\; (y = x-x_0)\\
+    &= \int_\mathbb{R} f(y) e^{-2\pi i (y+x_0) \xi}\
+    dy=\\
+    &= e^{-2\pi i x_0 \xi} \int_\mathbb{R}f(y)e^{-2\pi i y
+    \xi}\ dy=\\
+    &= e^{-2\pi i x_0 \xi} \hat{f}(\xi).
+\end{align}
+For (2) we have
+\begin{align}
+    \widehat{e^{2\pi i x \xi_0} f(x)}
+    &= \int_\mathbb{R} e^{2\pi i x \xi_0} f(x) e^{-2\pi i x \xi}\ dx =\\
+    &= \int_\mathbb{R} f(x) e^{-2\pi i x (\xi -\xi_0)}\ dx=\\
+    &= \hat{f}(\xi - \xi_0).
+\end{align}
+For (3) we have
+\begin{align}
+    \widehat{f(ax)}
+    &= \int_\mathbb{R} f(ax) e^{-2\pi i \xi x}\ dx = \;\;\;\;\; (y=ax)\\
+    &= \int_\mathbb{R} \frac{1}{a}f(y) e^{-2\pi i \frac{\xi}{a} y}\ dy=\\
+    &= \frac{1}{a} \hat{f}(\frac{\xi}{a}).
+\end{align}
+\subsection{The Box-Function}
+Consider the following Box-Function
+\begin{align}
+    \Pi(x) :=
+    \begin{cases}
+        1\;\;\;\;\;\; -\frac{3}{2} < x < \frac{1}{2}\\
+        0\;\;\;\;\; \text{else}
+    \end{cases}
+\end{align}
+The Fourier transform of this function is
+\begin{align}
+    \widehat{\Pi(x)}
+    &= \int_\mathbb{R} \Pi(x) e^{-2\pi i x\xi}\ dx=\\
+    &= \int_{-\frac{3}{2}}^{\frac{1}{2}} e^{-2\pi i x \xi}\ dx
+    =\frac{-1}{2\pi i \xi} e^{-2\pi i x\xi}
+    \bigg|_{-\frac{3}{2}}^{\frac{1}{2}}=\\
+    &= \frac{1}{2\pi i \xi} \left(e^{3\pi i \xi} - e^{-\pi i \xi}\right)=\\
+    &= \frac{e^{\pi i \xi}\sin(2\pi\xi)}{\pi \xi}.
+\end{align}
+
+%\printbibliography
+\end{document}
