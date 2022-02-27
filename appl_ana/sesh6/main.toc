@@ -1,5 +1,0 @@
-\contentsline {section}{\numberline {1}Sheet 6}{1}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Fourier Transform of the convolution}{1}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}More Fourier Transforms}{2}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Finite discrete Fourier transform}{3}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Discrete Matrix Notation}{3}{subsection.1.4}%
