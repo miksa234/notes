@@ -46,7 +46,9 @@
 
 \pagestyle{myheadings}
 
-\markright{Popovic\hfill Applied Analysis\hfill}
+\newcommand{\eps}{\varepsilon}
+
+\markright{Popović\hfill Applied Analysis\hfill}
 
 
 \title{University of Vienna\\ Faculty of Mathematics\\
@@ -62,14 +64,13 @@
 
 \subsection{Fall from high}
 We consider a free fall ($\dot{x}(t=0)=0$) of an object with mass $20\
-\text{kg}$ from a height
-$x(0) = h = 20\; \text{km}$, such that the gravitational force depends on the hight $x(t)$ in
-the following way
+\text{kg}$ from a height $x(0) = h = 20\; \text{km}$, such that the
+gravitational force depends on the height $x(t)$ in the following way
 \begin{align}\label{eq: free fall}
-    \ddot{x} = -g\frac{R^2}{(x(t) + R)^2},
+    \ddot{x}(t) = -g\frac{R^2}{(x(t) + R)^2},
 \end{align}
 where $R$ is the radius of the earth $R \approx 6000\; \text{km}$ and $g
-\approx 9.91\ \frac{m}{s^2}$ is the gravitational acceleration on the surface
+\approx 9.81\ \frac{m}{s^2}$ is the gravitational acceleration on the surface
 of the earth. For this problem there are two possible non-dimensionalisations,
 but first let us rewrite the variables in terms of non-dimensional variables
 and some dimensional constants, a priori let
@@ -105,13 +106,13 @@ The first scaling is done by reducing $\Pi_1$ and $\Pi_3$ to 1, by setting
 \begin{align}
         x_c = R, \;\;\;\; t_c = \sqrt{\frac{R}{g}},
 \end{align}
-refolmulating the initial problem in equation \ref{eq: free fall} to
+reformulating the initial problem in equation \ref{eq: free fall} to
 \begin{align}
     &\ddot{\xi} = -\frac{1}{(\xi + 1)^2},\;\;\;\;
     \text{with} \nonumber\\
     &\xi(0) = \frac{h}{R}, \;\;\;\; \dot{\xi}(0) = 0.
 \end{align}
-Reducing the problem, meaining letting $R \rightarrow \infty$ makes the first
+Reducing the problem, meaning if $\frac{h}{R} \rightarrow 0$ makes the first
 initial condition $\xi(0) \rightarrow 0$. We can conclude that this scaling
 is bad since it changes the initial condition in the reduced problem.
 
@@ -119,7 +120,7 @@ The second scaling option reduces $\Pi_2$ and $\Pi_3$ to 1, by setting
 \begin{align}
         x_c = h, \;\;\;\; t_c = \sqrt{\frac{h}{g}},
 \end{align}
-refolmulating the initial problem in equation \ref{eq: free fall} to
+reformulating the initial problem in equation \ref{eq: free fall} to
 \begin{align}
     &\ddot{\xi} = -\frac{1}{(\frac{h}{R}\xi + 1)^2},\;\;\;\;
     \text{with} \nonumber\\
@@ -129,14 +130,21 @@ By letting $R \rightarrow \infty$ we get the following reduced problem
 \begin{align}\label{eq: free fall reduced}
     \ddot{\xi} = -1.
 \end{align}
-Integrating and solving for $\xi(\tau = \frac{T}{t_c}) = 0$ for when the
-object hits the ground we get a familliar solution
+Integrating and solving for $\xi(\tau = T\sqrt{\frac{g}{h}}) = 0$ for when the
+object hits the ground we get a familiar solution
 \begin{align}
     T = \sqrt{\frac{2h}{g}}
 \end{align}
-Now in the reduced problem the time untill the object hits the ground is
-shorter since the acceleration is constant, but in the original one the
-acceleration increases as the object comes closer to earth.
+Note that in the reduced problem the time until the object hits the ground is
+\textbf{(much) shorter} since the acceleration is at its maximum $\ddot{x}(t) =
+g$ for all $t$.  Yet in the original problem the acceleration (gravitation
+force) \textbf{increases} as the object comes \textbf{closer} to earth . For
+instance, if we let an object fall down from the height $h = R$ then its
+gravitational force (acceleration) at that height would be $\ddot{x}(0) =
+g/2$ and upon landing on earth the gravitational force $\ddot{x}(T) = g$,
+while in the reduced solution its gravitational force would be $\ddot{x}(t) =
+g$ for all $t$.
+
 Additionally we can calculate the velocity at impact we need to integrate the
 reduced problem \ref{eq: free fall reduced} once and put in the initial
 condition
@@ -144,11 +152,60 @@ condition
     \dot{\xi}(\tau = \frac{T}{t_c}) &= -\tau = -\sqrt{2} \\
     \text{and} \;\;\; \dot{x} &= \frac{x_c}{t_c}\dot{\xi} =
     \sqrt{gh}\; \dot{\xi}\\
-    \Rightarrow \dot{x}(T) &= -\sqrt{2gh}
+    \Rightarrow \dot{x}(T) &= -\sqrt{2gh},
 \end{align}
-The vectical throw allows for different scaling because the initial
-conditions are different, and thus the solution too $x(0) = 0$ and
-$\dot{x}(0) = v$.
+The result is exactly the same as we would get from energy conservation
+\begin{align}
+    \frac{m}{2}\dot{x}^2 = mgh \quad \Rightarrow \quad \dot{x} = \sqrt{2gh}.
+\end{align}
+The vertical throw allows for an additional scaling because the
+initial conditions are different, $x(0) = 0$ and $\dot{x}(0) = v$. Thus
+the solution too.
+
+To summarize, the assumptions that used for modeling and simplifying the
+equation are
+\begin{itemize}
+    \item no relativistic influence,
+    \item closed system, no outside influence (gravitation of the sun, air
+        resistance),
+    \item spherical symmetry of the earth (thereby center of mass can be
+        set in the middle of earth).
+\end{itemize}
+By looking at our assumptions a question arises:\textbf{Is it a good
+approximation to replace the attractive force of the earth by the attraction
+of the whole mass concentrated at the center?}.
+
+To answer this question more or less simply we look at the Poisson's equation
+for gravity,
+\begin{align}
+    \ddot{\vec{x}}(\vec{r}) = -\nabla \phi(\vec{r}) \\
+    \Delta \phi = 4\pi G\varrho(\vec{r}).
+\end{align}
+for a gravitational potential $\phi$ and the mass density of earth
+$\varrho$. We assume that \textbf{the earth can be approximated by a sphere}
+and then we integrate both sides along the sphere (and use the Gaussian law
+for integration)
+\begin{align}
+    \int_{S} \nabla \ddot{\vec{x}}\ dS =
+    \int_{\partial S}\ddot{\vec{x}}\ d\vec{s} = -4\pi
+    G \int_S\varrho(\vec{r})\ ds = -4\pi GM.
+\end{align}
+Obviously $\ddot{\vec{x}}$ and $d\vec{s}$ point in the same direction. We
+choose (rotate) the coordinate system such hat $\ddot{\vec{x}} =
+\ddot{x}\ \mathbf{\hat{n}}$ and $d\vec{s} = \mathbf{\hat{n}}\ ds$, thereby
+we get
+\begin{align}
+    &\ddot{x}\int_{\partial S} ds = 4\pi r^2 \ddot{x},\\
+    \Rightarrow &\ddot{x} = -\frac{GM}{r^2}.
+\end{align}
+The further derivation to get the exact equation of motion as in \ref{eq:
+free fall}, we have to keep in mind that $r = x + R$, because by our
+assumptions we are not in the sphere only outside or on the border $R$.
+Lastly by reformulating the constants $gR^2 = GM$ gets us to our equation of
+motion
+\begin{align}
+    \ddot{x}(t) = -g\frac{R^2}{(x(t) + R)^2}.
+\end{align}
 
 \subsection{Scaling The Van der Pol equation}
 The Van der Pol equation is a perturbation of the oscillation equation
@@ -190,74 +247,61 @@ non-dimensionalisations. Let us begin by setting
 \end{align}
 where $I_c$ and $t_c$ have the dimension of $I(t)$ and $t$ accordingly and
 $\psi(\tau)$ and $\tau$ are dimensionless
-The first and second derivative in time is
+The \textbf{first} and second derivative in time is
 \begin{align}
     \frac{d}{dt} &= \frac{1}{t_c}\frac{d}{d\tau}\\
     \frac{d^2}{dt^2} &= \frac{1}{t_c^2}\frac{d^2}{d\tau^2}.
 \end{align}
 We can rewrite the Van-Der-Pol equation in terms of $\psi$ and $\tau$
 \begin{align}
-    &\frac{LC}{t_c^2}\ddot{\psi} - \frac{g_1C}{t_c}\dot{\psi}
-    \frac{3g_3CI_c}{t_c}\dot{\psi}\psi = -\psi\\
+    &\frac{LC}{t_c^2}\ddot{\psi} - \left(\frac{3g_3I_c^2}{g_1}\psi^2 -
+    1\right)\frac{g_1C}{t_c}\dot{\psi}= -\psi\\
     &\psi(0) = \frac{I_0}{I_c} \;\;\;\; \dot{\psi}(0) = 0
 \end{align}
 There are a total of four constants that we can eliminate
 \begin{align}
-    \Pi_1 &= \frac{I_0}{I_c},\;\;\;\;
+    \Pi_1 &= \frac{I_0}{I_c}, \qquad
     \Pi_2 = \frac{LC}{t_c^2},\nonumber\\
-    \Pi_3 &= \frac{-g_1C}{t_c},\;\;\;\;\;
-    \Pi_4 = \frac{3g_3CI_C}{t_c}.
+    \Pi_3 &= \frac{3g_3I_c^2}{g_1}, \qquad
+    \Pi_4 = \frac{g_1C}{t_c}.
 \end{align}
-The first scaling is
+The \textbf{first} scaling is
 \begin{align}
-    I_c = I_0,\;\;\; t_c=\frac{1}{\sqrt{LC}}.
+    I_c = \sqrt{\frac{g_1}{3g_3}},\;\;\; t_c=\sqrt{LC}.
 \end{align}
 Thereby we get the following problem
 \begin{align}
-    &\ddot{\psi}
-    -\sqrt{\frac{C}{L}}g_1\dot{\psi}+\sqrt{\frac{C}{L}}3g_3I_0\dot{\psi}\psi
-    = -\psi\\
-    &\psi(0) = 1 \;\;\;\; \dot{\psi}(0) = 0
+    \ddot{\psi} + (\psi^2 - 1)\eps \dot{\psi} = -\psi, \qquad \psi(0) =
+    \sqrt{\frac{3g_3}{g_1}}I_0,
 \end{align}
+where $\eps = g_1\sqrt{\frac{C}{L}}$.
 
-
-The second scaling is
+The \textbf{second} scaling is
 \begin{align}
-    I_c = I_0,\;\;\; t_c=g_1C.
+    I_c = \sqrt{\frac{g_1}{3g_3}},\;\;\; t_c=g_1C.
 \end{align}
-Thereby we get the following problem
+Thereby we get the following
 \begin{align}
-    &\frac{L}{g_1^2C}\ddot{\psi}
-    -\dot{\psi}+\frac{3g_3}{g_1}\dot{\psi}\psi
-    = -\psi\\
-    &\psi(0) = 1 \;\;\;\; \dot{\psi}(0) = 0
+    \eps \psi'' +(\psi^2 +1)\psi' = -\psi, \qquad \psi(0) =
+    \sqrt{\frac{3g_3}{g_1}}I_0,
 \end{align}
-
-The third scaling is
-\begin{align}
-    I_c = I_0,\;\;\; t_c=g_3CI_0.
-\end{align}
-Thereby we get the following problem
-\begin{align}
-    &\frac{L}{g_3^2CI_0^2}\ddot{\psi}
-    -\frac{g_1}{g_3I_0}\dot{\psi}+3\dot{\psi}\psi
-    = -\psi\\
-    &\psi(0) = 1 \;\;\;\; \dot{\psi}(0) = 0
-\end{align}
+where $\eps = \frac{L}{g_1^2C}$. We could also consider scaling $I_c = I_0$
+with $t_c = \sqrt{LC}$ or $t_c = g_1C$ but they wouldn't develop significant
+model hierarchies like the above two scaling.
 \subsection{Scale the Schrödinger Equation}
-The well known Schrödinger equation that describes quantum physics of one
-particle can be written as
+The well known Schrödinger equation that describes quantum physics of the one
+particle system is
 \begin{align}
-    &i\hbar \partial_t\psi = -\frac{\hbar}{2m}\Delta \psi + V\psi \nonumber\\
+    &i\hbar \partial_t\psi = -\frac{\hbar^2}{2m}\Delta \psi + V\psi \nonumber\\
     &\psi(t=0) =\psi_0
 \end{align}
-where $\hbar$ is the Planks constant, $\psi=\psi(x, t)$ the wave function,
+where $\hbar$ is the reduced Plank constant, $\psi=\psi(x, t)$ the wave function,
 $m$ the mass and $V = V(x)$ the potential in which the wave function is. The
 dimensions are
 \begin{align}
-    [\hbar] = Js, \;\;\;\; V = J,  \;\;\;\; [\psi]= m^{-d/2}
+    [\hbar] = js, \;\;\;\; [V] = j,  \;\;\;\; [\psi]= m^{-d/2}
 \end{align}
-for the special dimension $d$. The standard scaling ansatz is
+where $d$ is the spacial dimension. The standard scaling ansatz is
 \begin{align}
     &\psi = \psi_c \phi \\
     &t = t_c \tau \;\;\;\; x = x_c \xi,
@@ -296,6 +340,7 @@ simplifies the Schrodinger equation without the potential to
     i\Delta_{\vec{\xi}}\ \phi = \partial_\tau \phi,
 \end{align}
 with the initial condition $\phi(\tau=0) = 1$.
+.
 
 Now consider $V = 0$, $x\in[0, L]$ and $t \in [0, T]$, the Schrodinger
 equation is the same only with one spacial dimension as above, we can set
@@ -306,19 +351,21 @@ Thus we get
 \begin{align}
     i\partial_{\xi}^2 \phi = \partial_\tau \phi,
 \end{align}
-with the initial condition $\phi(\tau=0) = 1$.
+with the initial condition $\phi(\tau=0) = 1$, where $\xi \in [0, 1]$ and
+$\tau \in [0, \frac{\hbar T}{2mL^2}]$.
+.
 
-As a last example let us consider the quantum harmonic oscillator, that is
-$V(x) = m\omega^2 x^2$ for $x\in \mathbb{R}$, where $\omega$ is the
-frequency, the equation is the following
+In the last example let us consider the quantum harmonic oscillator
+represented by the potential $V(x) = m\omega^2 x^2$ for $x\in \mathbb{R}$,
+where $\omega$ is the frequency. The equation is the following
 \begin{align}
     i \hbar \partial_t \psi = -\frac{\hbar^2}{2m}\partial^2_x \psi
-    m\omega^2x^2 \psi.
+    +m\omega^2x^2 \psi.
 \end{align}
-By inserting the scaling
+By inserting the standard scaling ansatz we get
 \begin{align}
     i\partial_\tau \phi = -\frac{t_c\hbar}{2mx_c^2}\partial_\xi^2 \phi
-    \frac{t_cm\omega^2x_c^2}{\hbar} \xi^2 \phi
+    +\frac{t_cm\omega^2x_c^2}{\hbar} \xi^2 \phi,
 \end{align}
 The dimensional constants are
 \begin{align}
@@ -335,8 +382,6 @@ Thereby getting the following problem
     i\partial_\tau \phi = -\frac{1}{2} \partial_\xi^2 \phi +\xi^2 \phi
 \end{align}
 with $\phi(\tau = 0) = 1$.
-
-
 
 %\printbibliography
 \end{document}

@@ -78,13 +78,13 @@ and are given by
 Let us compute the Fourier series of $f(t) = t$ for $t \in [-\frac{1}{2},
 \frac{1}{2}]$. The Fourier coefficients are
 \begin{align}
-    a_n &= 2\int_{-\frac{1}{2}}^{\frac{1}{2}} f(t) \cos(2\pi n t)\ dt = 0
+    a_n &= 2\int_{-\frac{1}{2}}^{\frac{1}{2}} t \cos(2\pi n t)\ dt = 0
     \;\;\;\;\; \text{(odd: g(-t) = -g(t))},\\
     \nonumber\\
-    b_n &= 2\int_{-\frac{1}{2}}^{\frac{1}{2}} f(t) \sin(2\pi n t)\ dt = \\
+    b_n &= 2\int_{-\frac{1}{2}}^{\frac{1}{2}} t \sin(2\pi n t)\ dt = \\
         &= 2 \left(-\frac{1}{2\pi n} \cos(2\pi n
         t)\bigg|_{-\frac{1}{2}}^{\frac{1}{2}}
-        \int_{\frac{1}{2}}^{\frac{1}{2}} \frac{1}{2 \pi n}\cos(2\pi n t)\ dt
+        +\int_{\frac{1}{2}}^{\frac{1}{2}} \frac{1}{2 \pi n}\cos(2\pi n t)\ dt
             \right) =\\
         &= -\frac{1}{\pi n}\left( -\cos(\pi n) + \frac{1}{\pi n }\sin(\pi
             n)\right) =
@@ -101,7 +101,7 @@ The truncation error of the trigonometric polynomial $(Sf_N)$ of degree $N$ is
     \sum_{|k| > N} |\hat{f}(k)|^2 = \lVert f - S_N\rVert_2^2 =
     \int_{-\frac{1}{2}}^{\frac{1}{2}} |E_N(t)|^2 dt.
 \end{align}
-Computations for $N = 3, 9$ were done in python with a integration error of
+Computations for $N = 3$ and $N = 9$ were done in python with a integration error of
 around $10^{-15}$, resulting in the overall truncation errors of
 \begin{align}
     \sum_{|k| > 3} |\hat{f}(k)|^2 = 0.0053,\\
@@ -136,12 +136,12 @@ Furthermore there exists a linear projection $\Phi\ : \mathcal{H}
 
 An example of an orthonormal basis, which spans $L^2([-\frac{p}{2},
 \frac{p}{2}])$ is $\mathcal{T}_p = \{e_n := \frac{e^{2\pi i
-\frac{n}{p}x}}{\sqrt{p}}\}_{n\in\mathbb{Z}}$. The $e_n$ are orthonormal in $L^2$ which
-can be easily seen by using the scalar product of $L^2$, so for $n, m \in
-\mathbb{Z}$
+\frac{n}{p}x}}{\sqrt{p}}\}_{n\in\mathbb{Z}}$. The $e_n$'s are orthonormal in
+$L^2$ which can be easily seen by using the scalar product of $L^2$, so for
+$n, m \in \mathbb{Z}$
 \begin{align}
     \langle e_n, e_m\rangle_{L^2([-\frac{p}{2}, \frac{p}{2})} &=
-    \frac{1}{p}\int_{[-\frac{p}{2}, \frac{p}{2}]}e_n \cdot \bar{e}_m \ dx=\\
+    \frac{1}{p}\int_{[-\frac{p}{2}, \frac{p}{2}]}e_n \cdot e_m^* \ dx=\\
     &=\frac{1}{p}\int_{[-\frac{p}{2}, \frac{p}{2}]} e^{2\pi i \frac{(n-m)}{p} x} \ dx=\\
     &=\frac{\sin(\pi (n-m))}{\pi(n-m)} =
     \begin{cases}
@@ -170,8 +170,9 @@ And furthermore the Dirichlet Kernel satisfies
 \begin{align}
     D_t(x) = \prod_{i=1}^d \frac{e_{t+1}(x_i) - e_{-t}(x_i)}{e_1(x_i) - 1}
 \end{align}
-We start off by applying the orthogonal projection into the trigonometric
-polynomials $S_t$ onto a function $f \in L(\mathbb{T}^d)$
+To show the convolution property, we start off by applying the orthogonal
+projection into the trigonometric polynomials $S_t$ onto a function $f \in
+L(\mathbb{T}^d)$
 \begin{align}
     (S_tf) &= \sum_{\lvert k\rVert_\infty \leq t} \int_{I^d} f(y) e^{-2\pi i
     \langle k, y\rangle}\ dy\ e^{2\pi i\langle k, x\rangle} =\\
@@ -179,15 +180,16 @@ polynomials $S_t$ onto a function $f \in L(\mathbb{T}^d)$
     k, (x- y)\rangle}\ dy =\\
     &= (f * D_t) (x) = \int_{I^d} f(y) D_t(x - y)\ dy.
 \end{align}
-The Dirichlet kernel can be simply rewritten
+To show the reformulation of the Dirichlet kernel, we need to simply
+calculate it directly
 \begin{align}
     \sum_{\lVert k \rVert_\infty \leq t} e^{2\pi i \langle k , x\rangle} &=
-    \prod_{i=1}^d \sum_{k_i = -t}^t e^{2\pi i k_i x_i} =\\
-    &= \prod_{i=1}^d e^{-2\pi i t x_i} \sum_{k_i = 0}^{2t} e^{2\pi i k_i
-        x_i}=;\;\;\;\; \text{(trigonometric series)}\\
-    &= \prod_{i=1}^d e^{-2\pi i t x_i} \frac{e^{2\pi i (2t +1}x_i -
-    1}{e^{2\pi i x_i} - 1} =\\
-    &= \prod_{i = 1} \frac{e_{t+1}(x_i) - e_{-t}(x_i)}{e_1(x_i) - 1}.
+    \prod_{j=1}^d \sum_{k_j = -t}^t e^{2\pi i k_j x_j} =\\
+    &= \prod_{j=1}^d e^{-2\pi i t x_j} \sum_{k_j = 0}^{2t} e^{2\pi i k_j
+        x_j}=;\;\;\;\; \text{(trigonometric series)}\\
+    &= \prod_{j=1}^d e^{-2\pi i t x_j} \frac{e^{2\pi i (2t + 1)x_j} -
+    1}{e^{2\pi i x_j} - 1} =\\
+    &= \prod_{j = 1} \frac{e_{t+1}(x_j) - e_{-t}(x_j)}{e_1(x_j) - 1}.
 \end{align}
 %\printbibliography
 \end{document}

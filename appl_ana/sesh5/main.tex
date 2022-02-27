@@ -93,7 +93,7 @@ The following are three identities of the Fourier transform
 (2) & $e^{2\pi i \xi_0 x} f(x)$ & $f(\xi - \xi_0)$ \\ \hline
 (3) & $f(ax)$ & $\frac{1}{a} \hat{f}(\frac{\xi}{a})$\\ \hline
 \end{tabular}
-    \caption{Identities of the Fourier transform for $0 < a\in\mathbb{R},
+    \caption{Identities of the Fourier transform for $a > 0,
     \xi_0, x \in \mathbb{R}$}
 \end{table}
 We start with (1)
@@ -117,9 +117,10 @@ For (2) we have
 For (3) we have
 \begin{align}
     \widehat{f(ax)}
-    &= \int_\mathbb{R} f(ax) e^{-2\pi i \xi x}\ dx = \;\;\;\;\; (y=ax)\\
+    &= \int_\mathbb{R} f(ax) e^{-2\pi i \xi x}\ dx = \qquad \text{sub:
+        $(y=ax)$}\\
     &= \int_\mathbb{R} \frac{1}{a}f(y) e^{-2\pi i \frac{\xi}{a} y}\ dy=\\
-    &= \frac{1}{a} \hat{f}(\frac{\xi}{a}).
+    &= \frac{1}{a} \hat{f}\left(\frac{\xi}{a}\right).
 \end{align}
 \subsection{The Box-Function}
 Consider the following Box-Function

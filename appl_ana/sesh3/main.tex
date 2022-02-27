@@ -1,0 +1,250 @@
+\documentclass[a4paper]{article}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mlmodern}
+
+%\usepackage{ngerman}	% Sprachanpassung Deutsch
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, top=15mm}
+
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{yhmath}
+\usepackage{tikz}
+\usetikzlibrary{patterns,decorations.pathmorphing,positioning}
+\usetikzlibrary{calc,decorations.markings}
+
+%\usepackage[backend=biber, sorting=none]{biblatex}
+%\addbibresource{uni.bib}
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\tikzstyle{titlered} =
+    [draw=black, thick, fill=white,%
+        text=black, rectangle,
+        right, minimum height=.7cm]
+
+
+\usepackage[colorlinks=true,naturalnames=true,plainpages=false,pdfpagelabels=true]{hyperref}
+\usepackage[parfill]{parskip}
+\usepackage{lipsum}
+
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\newcommand{\eps}{\varepsilon}
+\pagestyle{myheadings}
+
+\markright{Popović\hfill Applied Analysis\hfill}
+
+
+
+\title{Applied Analysis Problems}
+\author{Milutin Popović}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Sheet 3}
+\subsection{Problem 8}
+Let us look at functions $f: \mathcal{D} \mapsto \mathbb{R}$ that show
+boundary layer behavior at the following manifolds.
+
+The \textbf{first} for $\mathcal{D} = \mathbb{R}^2$ and $S = \{0\}$ we have a
+function e.g.
+\begin{align}
+    f_{\eps}(x, y) = e^{-\frac{x}{\eps}} + y,
+\end{align}
+with the reduced equation
+\begin{align}
+    \lim_{\eps \rightarrow 0} f_{\eps}(x, y) =
+    \begin{cases}
+        y \;\;\;\;\;\;\;\;\;\; x > 0\\
+        1+y \;\;\;\; x = 0\\
+    \end{cases}
+\end{align}
+
+The \textbf{second} example is $\mathcal{D} = \mathbb{R}^n$ and $S = \{|x| = 1\}$.
+\begin{align}
+    f_\eps(x_1,\dots,x_n) = \tanh\left(\frac{|x| - 1}{\eps} \right),
+\end{align}
+with the reduced equation
+\begin{align}
+    \lim_{\eps \rightarrow 0} f_{\eps}(x_1,\dots, x_n) =
+    \begin{cases}
+        -1 \;\;\;\; |x| < 0\\
+        1  \;\;\;\;\;\;\; |x| > 0\\
+    \end{cases}
+\end{align}
+
+The \textbf{third} example is $\mathcal{D} = \mathbb{R}^3$ and $S = \{x_1 =
+1\}$
+\begin{align}
+    f_\eps(x_1, x_2, x_3) = \tanh\left(\frac{x_1 - 1}{\eps}\right)+x_2x_3
+\end{align}
+with the reduced equation
+\begin{align}
+    \lim_{\eps \rightarrow 0} f_{\eps}(x_1,x_2,x_3) =
+    \begin{cases}
+        -1 + x_2x_3 \;\;\;\; x_1 < 0\\
+        1 + x_2x_3 \;\;\;\;\;\;\; x_1 > 0\\
+    \end{cases}
+\end{align}
+\subsection{Problem 9}
+Consider a linear BVP
+\begin{align}
+    Lu := -\eps u'' + b(x)u' + c(x)u = f(x),\\
+    u(0) = u(1) = 0,
+\end{align}
+for $0 < \eps \ll \eps_0$ and $b, c, f \in C([0,1])$ with the conditions
+\begin{align}
+    c(x) \geq 0, \qquad b(x) \geq \beta > 0 \qquad x\in[0, 1]
+\end{align}
+We are to show that for all $x\in[0, 1)$ the reduced solution $u_0$ of the
+above BVP satisfies
+\begin{align}
+    \lim_{\eps \rightarrow 0} u_\eps(x) = u_0(x)))),
+\end{align}
+where the reduced solution $u_0$ is the solution to the following
+differential equation
+\begin{align}
+    b(x)u' + c(x)u = f(x), \quad u(0) = 0.
+\end{align}
+The hint was given: Set
+\begin{align}
+    w_1(x) = e^{\beta x} \quad w_2(x) = e^{-\beta\frac{1-x}{\eps}},
+\end{align}
+such that $Lw_1 \geq \gamma > 0$ for some suitable $\gamma$ and $Lw_2 \geq
+0$. Then for
+\begin{align}
+    v = \pm (u_\eps - u_0), \qquad w = A\eps w_1 + B\eps w_2,
+\end{align}
+for some suitable $A, B$. The following comparison principal is applicable:
+IF
+\begin{align}
+    &Lv(x) \leq Lw(x) \quad \forall x \in (0, 1) \label{eq:cond1}\\
+    &v(0) \leq w(0)  \label{eq:cond2}\\
+    &v(1) \leq w(1) \label{eq:cond3}\\
+\end{align}
+then
+\begin{align}
+    \Longrightarrow v(x) \leq w(x) \quad \forall x\in(0, 1)
+\end{align}
+which holds for $u, v \in C^2((0, 1)) \cap C([0, 1])$. Thus a boundary layer
+is possible only at $x=1$. On the other hand, for $b(x) \leq \beta < 0$ it
+follows that the boundary layer is possible only at $x=0$.
+
+We shall go through the chronological order of the conditions\ref{eq:cond1},
+\ref{eq:cond2}, \ref{eq:cond3} and check them. So for \ref{eq:cond1}
+we have that
+\begin{align}
+    Lw(x) &= A\eps Lw_1(x) + B Lw_2(x) \\
+          &\geq A\eps Lw_1(x) = A\eps e^{\beta x} \left(-\eps \beta^2 -
+              b(x)\beta+c(x)\right)\\
+          &\geq A\eps \beta e^{\beta x} \left(1-\eps\right)\\
+          &\geq \eps A\beta^2 e^{\beta}(1-\eps) = \gamma > 0
+\end{align}
+And obviously
+\begin{align}
+    Lv(x) \leq 0 ,
+\end{align}
+by that we have that
+\begin{align}
+    Lv(x) \leq \gamma \leq  Lw(x).
+\end{align}
+For the condition \ref{eq:cond2} we have
+\begin{align}
+    w(0) &= A\eps w_1(0) Bw_2(0) = Be^{-\frac{\beta}{\eps}},\\
+    v(0) &= \pm\left(u_\eps(0) - u_0(0)\right) = 0.
+\end{align}
+By the simple choice $B \geq 0$ we satisfy the condition
+\begin{align}
+    v(0) \leq w(0).
+\end{align}
+Now for the last condition \ref{eq:cond3} we have
+\begin{align}
+    w(1) &= A\eps e^\beta + B \geq A\eps e^\beta,\\
+    v(1) &= \mp u_0(1) = 0.
+\end{align}
+And choose $A = \frac{\pm u(1)}{\eps} e^{-\beta}$, which satisfies the last
+condition
+\begin{align}
+    v(1) \leq w(1).
+\end{align}
+Thereby we have
+\begin{align}
+    &v(x) &\leq w(x)\\
+    &\Rightarrow \lim_{\eps \rightarrow 0} v(x) &\leq \lim_{\eps \rightarrow
+    0} w(x) = 0\\
+    &\Rightarrow \lim_{\eps \rightarrow 0} v(x) = 0
+\end{align}
+uniformly on $(0, 1)$.
+\subsection{Problem 10}
+Consider the following BVP
+\begin{align}
+    -\eps u'' + (1 + x)u' + u = 2, \qquad u(0) = u(1) - 0,
+\end{align}
+for $0 < \eps \ll 1$. \textbf{Where can this problem have a boundary layer?}
+To answer this question we need to look at the reduced problem
+\begin{align}
+    -(1+x)u' + u = 2.
+\end{align}
+The solution to the equation is
+\begin{align}
+    \bar{u}(x) = 2 + A(x+1).
+\end{align}
+According to the boundary conditions it is unclear what the value of the
+constant is, according to $\bar{u}(0)=0$ we get $A = -2$ or according to
+$\bar{u}(1)=0$ we get $A = -1$. Ultimately this means that there exists a
+boundary layer near $x=1$ or $x=0$. We choose $x=0$ and according to this the
+local variable $\xi = x\eps^{-\alpha}$ ($x = \xi \eps^{-\alpha}$). The
+derivatives of $u$ are calculated using the chain rule
+\begin{align}
+    \frac{du}{dx}&= \frac{du}{d\xi}\frac{d\xi}{dx} = \eps^{-\alpha} \dot{u}\\
+    \frac{d^2u}{dx^2}&= \eps^{-\alpha} \frac{d^2u}{d\xi^2}\frac{d\xi}{dx} =
+    \eps^{-2\alpha} \ddot{u}.
+\end{align}
+The BVP transforms as follows
+\begin{align}
+    -\eps^{1-\alpha}\ddot{u} - \dot{u} + \eps(u - \xi\dot{u} - 2) =
+    \begin{cases}
+        -\ddot{u} - \dot{u} = 0 \;\;\;\;\; \alpha=1\\
+        -\dot{u} = 0 \;\;\;\;\;\;\;\; 0<\alpha<1
+    \end{cases}
+\end{align}
+Choosing $\alpha = 1$ for a reasonable solution
+\begin{align}
+    \hat{u}(\xi) = Be^{-\xi},
+\end{align}
+which converges in the local limit (!). Thereby we have a asymptotic
+representation up to the degree of $\eps$
+\begin{align}
+    u_\eps(x) &= \bar{u}(x) + \hat{u}(\psi) + O(\eps)\\
+              &= 2 + A(1+x) + B e^{-\frac{x}{\eps}}  + O(\eps)
+\end{align}
+And by the boundary conditions
+\begin{align}
+    u_\eps(0) = 2+A+B=0, \qquad u_\eps(1) = 2+2A+B=0,
+\end{align}
+we get that the constants are
+\begin{align}
+    A = -4, \qquad B = 2.
+\end{align}
+The asymptotic representation is thereby
+\begin{align}
+    u_\eps(x) = 2 - 4(1+x) + 2 e^{-\frac{x}{\eps}}  + O(\eps)
+\end{align}
+%\printbibliography
+\end{document}

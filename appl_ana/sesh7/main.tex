@@ -71,18 +71,26 @@ The Dirac train or Dirac comb on defined in the following way
         0\;\;\;\;\;\; \text{else}
     \end{cases}
 \end{align}
+The dirac comb can be represented in a series of discrete dirac delta's
+\begin{align}
+    \Sha_m[n] = \sum_{l=-N}^N \delta[n - lm],
+\end{align}
+where $\delta[s] = 1$ if $s = 0$ else $0$, for $s \in \mathbb{Z}$.
 The discrete Fourier transform of the Dirac comb in $\mathbb{C}^N$ is
 \begin{align}
     \widehat{\Sha_m[n]}
     &=\frac{1}{N}\sum_{n=0}^{N-1} \Sha_m[n] e^{-2\pi i \frac{k}{N}n}=\\
     &=\frac{1}{N}\sum_{n=0}^{N-1}
         \left(
-            m\sum_{l\in\mathbb{Z}} \delta(n-lm)
+            \sum_{l=-N}^N \delta(n-lm)
             \right)
-            e^{-2\pi i \frac{k}{N}n}=\\
-    &=\frac{m}{N}\sum_{l\in\mathbb{Z}} e^{-2\pi i \frac{k}{N}lm}=
-    \;\;\;\;\;\;\;\;\;\;\;\;\; (m = \frac{N}{m'})\\
-    &= \frac{1}{m'} \sum_{l\in\mathbb{Z}} e^{-2\pi i \frac{k}{m'}l} =\\
+            e^{-2\pi i \frac{k}{N}n},
+\end{align}
+where the summation happens exactly $\frac{N}{m}$ times, then
+\begin{align}
+    &\frac{1}{m}\sum_{l=-N}^N e^{-2\pi i \frac{k}{N}lm}=\\
+    &= \frac{1}{m} \sum_{l=-N}^N \delta[k - l\cdot \frac{N}{m}]\qquad
+    \text{(Poisson's summation formula)} \\
     &= \frac{1}{m}\Sha_{\frac{N}{m}}[k]
 \end{align}
 \subsection{Schwartz Space}
@@ -146,17 +154,13 @@ The Fourier transform of $\xi$ is
 \begin{align}
     \hat{\xi}(\varphi)
     &=\xi(\hat{\varphi})
-    = \int_\mathbb{R} \xi \hat{\varphi}(\xi)\ d\xi=\\
-    &= \int_\mathbb{R}\xi \int_\mathbb{R} \varphi(x) e^{-2\pi i \xi x}\ dx\
-    d\xi=\\
-    &=\int_\mathbb{R}\int_\mathbb{R} \xi e^{-2\pi i \xi x}\ d\xi \varphi(x)\
-    dx=\\
-    &=\int_\mathbb{R} \frac{i}{2\pi}\frac{d}{dx}\int_\mathbb{R}e^{-2\pi i \xi
-x} \ d\xi \varphi(x)\ dx=\\
-    &= \int_\mathbb{R}i\frac{1}{2\pi} \frac{d}{dx}\left(2\pi \delta(x)\right)
-    \varphi(x)\ dx=\\
-    &= \int_\mathbb{R} i\delta'(x)\varphi(x)\ dx\\
-    &= i \delta'(\varphi).
+    = \int_\mathbb{R} \xi \hat{\varphi}(\xi)\ d\xi\\
+    &= \int_{\mathbb{R}^2}\xi \varphi(x) e^{2\pi i\xi x}\ dxd\xi\\
+    &= \int_{\mathbb{R}^2}\varphi(x) \xi e^{2\pi i \xi x}\ dxd\xi\\
+    &=\int_{\mathbb{R}^2}\varphi(x)\frac{i}{2\pi} \frac{\partial}{\partial x}
+     e^{2\pi i \xi x}\ dxd\xi =\\
+    &=\frac{i}{2\pi}\int_{\mathbb{R}^2}\varphi(x)\delta'(x)\ dx=\\
+    &=\frac{i}{2\pi} \delta'(\varphi).
 \end{align}
 \subsection{Fourier transform of the Dirac Comb}
 The general case of the Dirac Comb as a distribution is
