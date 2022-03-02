@@ -1,57 +1,4 @@
-\documentclass[a4paper]{article}
-
-
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{mlmodern}
-
-%\usepackage{ngerman}	% Sprachanpassung Deutsch
-
-\usepackage{graphicx}
-\usepackage{geometry}
-\geometry{a4paper, top=15mm}
-
-\usepackage{subcaption}
-\usepackage[shortlabels]{enumitem}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{mathtools}
-\usepackage{braket}
-\usepackage{bbm}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{yhmath}
-\usepackage{tikz}
-\usetikzlibrary{patterns,decorations.pathmorphing,positioning}
-\usetikzlibrary{calc,decorations.markings}
-
-%\usepackage[backend=biber, sorting=none]{biblatex}
-%\addbibresource{uni.bib}
-
-\usepackage[framemethod=TikZ]{mdframed}
-
-\tikzstyle{titlered} =
-    [draw=black, thick, fill=white,%
-        text=black, rectangle,
-        right, minimum height=.7cm]
-
-
-\usepackage[colorlinks=true,naturalnames=true,plainpages=false,pdfpagelabels=true]{hyperref}
-\usepackage[parfill]{parskip}
-\usepackage{lipsum}
-
-
-\usepackage{tcolorbox}
-\tcbuselibrary{skins,breakable}
-\newcommand{\eps}{\varepsilon}
-\pagestyle{myheadings}
-
-\markright{Popović\hfill Applied Analysis\hfill}
-
-
-
-\title{Applied Analysis Problems}
-\author{Milutin Popović}
+\include{preamble.tex}
 
 \begin{document}
 \maketitle
@@ -230,6 +177,7 @@ Choosing $\alpha = 1$ for a reasonable solution
 \end{align}
 which converges in the local limit (!). Thereby we have a asymptotic
 representation up to the degree of $\eps$
+
 \begin{align}
     u_\eps(x) &= \bar{u}(x) + \hat{u}(\psi) + O(\eps)\\
               &= 2 + A(1+x) + B e^{-\frac{x}{\eps}}  + O(\eps)
