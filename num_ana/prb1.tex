@@ -296,22 +296,39 @@ Indeed $H$ is an orthogonal matrix, it satisfies $H H^T = H^T H = \text{Id}$.
     \left( \text{Id} - \frac{2}{\langle v, v \rangle}vv^T\right)\\
           &= \text{Id}
 \end{align}
-Let us look at the projection of some $x \in \mathbb{R}^n$ onto $v$
+Let us look at the projection of some $x \in \mathbb{R}^n$ in the $v$
+direction is given by
 \begin{align}
-    x_v = x - \frac{\langle v,  x \rangle}{\langle v, v \rangle} v,
+   \frac{\langle v,  x \rangle}{\langle v, v \rangle} v,
 \end{align}
-to get the projective inversion onto $v$ we would have to subtract the vector
-$\frac{\langle v, x \rangle}{\langle v, v \rangle} v$ twice, graphically it would look like this
+The projection of $x$ in the orthogonal direction is
+\begin{align}
+    x - \frac{\langle v,  x \rangle}{\langle v, v \rangle} v,
+\end{align}
+A reflection of $x$ in $v$ has $-1$ times the projection onto $v$, that $x$
+has onto $v$, so the orthogonal projection of the reflection onto $v$ is the
+orthogonal projection of $x$ onto $v$, therefor the reflection in $v$ of $x$
+is
+\begin{align}
+   x - 2\frac{\langle v,  x \rangle}{\langle v, v \rangle} v,
+\end{align}
+if we wanted to reflect $x$ on the line spanned by $v$ we would have to
+subtract the vector $\frac{\langle v, x \rangle}{\langle v, v \rangle} v$
+twice, graphically it would look like this
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[
         xscale = 1.5,
-        yscale = 1.5
+        yscale = 1.5,
+        rotate = 30
         ]
         \draw[->] (0, 0) -- (1, 1) node[right] {$x$};
         \draw[->] (0, 0) -- (2, 0) node[right] {$v$};
-        \draw[dotted, very thick] (1, 1) -- (1, 0) node[below] {$x_v$};
-        \draw[->] (0, 0) -- (1, 0) node[below] {$x_v$}; \draw[->] (0, 0) -- (-1, 0) node[below] {$-x_v$}; \end{tikzpicture}
+        \draw[dotted, very thick] (1, 1) -- (1, 0);
+        \draw[dotted, very thick] (1, 0) -- (1, -1);
+        \draw[->] (0, 0) -- (1, 0) node[midway, below] {$x_v$};
+        \draw[->] (0, 0) -- (1, -1) node[below] {$Hx$};
+    \end{tikzpicture}
 \end{figure}
 The Household matrix acting on a vector $x$, $Hx$ is exactly the above case
 since vector multiplication is associative we have
@@ -327,7 +344,7 @@ norm is
 because the orthogonal matrix preserves distance, i.e. $\|Ax\|_2 = \|x\|_2$
 for all $x$. Also $A^{-1} =A^T$ is orthogonal as well
 \begin{align}
-    \|A\|_2 = \sup \frac{\|Ax\|_2}{\|x\|_2} = \sup \frac{\|x\|_2}{\|x\|_2} =
+    \|A\|_2 = \sup_{x\neq 0} \frac{\|Ax\|_2}{\|x\|_2} = \sup_{x \neq 0} \frac{\|x\|_2}{\|x\|_2} =
     1
 \end{align}
 %\printbibliography
