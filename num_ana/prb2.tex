@@ -161,6 +161,56 @@ Indeed the error of the Gauss-Siedel iteration converges to $0$ if $\rho(B_G)
 < 1$. Which is the case, because exactly then $\rho(B_G) = \rho(B_J)^2 < 1$.
 Where we can also conclude that the Gauss-Siedel method converges twines as
 fast as the Jacobi method for $2 \times 2$ matrices.
+\subsubsection{}
+Now let $r \in \mathbb{R}$ and
+\begin{align}
+    A_r =
+    \begin{pmatrix}
+        1 & r & r\\
+        r & 1 & r\\
+        r & r & 1\\
+    \end{pmatrix}
+\end{align}
+We can show that the Gauss-Siedel method for $A_r$ converges, provided that
+$t \in (-\frac{1}{2}, 1)$ and the Jacobi methods for $A_r$ does not converge
+for $r \in (\frac{1}{2}, 2)$. We start of with calculating the iteration
+matrices, then calculating their eigenvalues. Then $r$ is determined by
+$\rho(A) < 1$. For the Jacobi method we have
+\begin{align}
+    B_J = D^{-1}(E+F) =
+    \begin{pmatrix}
+        0 & -r & -r\\
+        -r & 0 & -r\\
+        -r & -r & 0\\
+    \end{pmatrix}.
+\end{align}
+Then the eigenvalues of the matrix are
+\begin{align}
+    \det(B_J - \lambda I) &= -\lambda^3 - 2r^4 +3r^3\lambda = 0\\
+    \lambda_1 &= r \qquad \lambda_2 = -2r
+\end{align}
+Then $\rho(A) < 1$ determines the range of $r$
+\begin{align}
+    |\lambda_max| = 2|r| < 1 \Rightarrow |r| < \frac{1}{2}
+\end{align}
+We conclude that for $r\in (\frac{1}{2} , 1)$ does not converge.
+Now for the Gauss-Siedel method
+\begin{align}
+    B_G = (D-E)^{-1}F =
+    \begin{pmatrix}
+        0 & -r & -r\\
+        0 & r^2 & r^2-r\\
+        0 & -r^3+r^2 & -r^3+2r^2\\
+    \end{pmatrix}.
+\end{align}
+then
+\begin{align}
+    \det\left(B_G - \lambda I \right)  &= -\lambda^3-r^3\lambda^2
+    3r^2\lambda^2 - r^3\lambda = 0\\
+    \Rightarrow \lambda_{1 / 2}&=
+    \frac{1}{2}\left(\pm\sqrt{r-4}(r-1)r^{\frac{3}{2}}-r^{3}+3r^{2}\right),
+\end{align}
+$\lambda < 1$ for $r \in \left( -\frac{1}{2}, 1\right)$.
 \subsection{Problem 3}
 Let $Q \in \mathbb{R}^{n \times n}$ be the Poisson matrix, the matrix of
 the finite difference method on a $n \times n$ grid,
@@ -175,6 +225,9 @@ the finite difference method on a $n \times n$ grid,
     \end{pmatrix}
 \end{align}
 \subsubsection{}
+(Can also be done with Gershorin disks)
+\newline
+
 The eigenvalues of $Q$ lie in the interval $[0 ,4]$. To show this let
 $(\lambda , v)$ be an eigen-pair of $Q$, they satisfy the equation
 \begin{align}
@@ -201,7 +254,6 @@ thereby we can conclude that $\lambda_k \in [0, 4] \;\; \forall k \in \{1,
 In this section we write a Python script that returns the matrix $Q$ given
 $n$ and for $b = (1, \ldots ,1)^T$ $n=20$ implements the Gauss-Siedel method
 for to solve $Qx = b$ for $x$.
-%\includepdf[pages=1, pagecommand={}, width=\textwidth]{./prog/prb2_p.pdf}
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.8\textwidth, clip, trim=0cm 5cm 0cm 10cm]{./prog/prb2_p.pdf}
@@ -219,6 +271,9 @@ Now let $P_n \in \mathbb{R}^{n\times n}$ be the matrix
     \end{pmatrix}
 \end{align}
 \subsubsection{}
+(Can also be done with Gershorin disks)
+\newline
+
 We can show that all the eigenvalues of $P_n$ are in $[0, 4]$ because $P_n$
 is the finite differenece/laplacian matrix for periodic boundary conditions
 and can be diagonalized by a DFT. So let $\left( \lambda, v \right)$ be the
