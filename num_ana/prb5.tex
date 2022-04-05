@@ -1,0 +1,238 @@
+\include{./preamble.tex}
+
+\begin{document}
+\maketitle
+\section{Sheet 5}
+\subsection{Problem 1}
+Let $A \in \mathbb{R}^{n \times n}$ be an SPD matrix with an additive
+decomposition $A = D + L + L^T$, where $D$ consists of the diagonal entries
+of $A$, $L$ and $L^T$ of the lower diagonal and upper-diagonal entries of $A$
+respectively. For $\omega \in(0,2)$ the SSOR preconditioner is defined as
+follows
+\begin{align}
+    C_\omega = \frac{1}{2-\omega}\left( \frac{1}{\omega} D+L\right)
+    \left( \frac{1}{\omega} D \right)^{-1}\left( \frac{1}{\omega}D + L^T
+    \right).
+\end{align}
+We can rewrite $C_\omega = KK^T$, where $K$ is an invertible lower-triangular
+matrix by a simple splitting of the diagonal entries $D =
+D^{\frac{1}{2}}D^{\frac{1}{2}}$. We get
+\begin{align}
+    C_\omega &= \frac{1}{2-\omega}\left( \frac{1}{\omega}D +L \right)\omega
+    D^{-1}\left( \frac{1}{\omega}D + L^T \right)  \\
+    &= \frac{1}{2-\omega}\left( D^{\frac{1}{2}} + \omega
+    LD^{-\frac{1}{2}}\left( D^{\frac{1}{2}}+\omega LD^{-\frac{1}{2}} \right)
+\right)^T = KK^T,
+\end{align}
+where
+\begin{align}
+    K := \frac{1}{\sqrt{1-\omega} }\left( D^{\frac{1}{2}} + \omega LD^{-
+    \frac{1}{2}} \right)
+\end{align}
+The Matrix $C_\omega$ is a good approximation for the inverse of $A$ because
+\begin{align}
+    H^{\text{SSOR}}_\omega = I - C^{-1}_\omega A\\
+    \rho(H^{\text{SSOR}}_\omega) < 1
+\end{align}
+for a right choice of $\omega$. Furthermore the general idea is that we
+multiply the system $Ax=b$ with a preconditioning matrix $P \in
+\text{GL}_n\left(\mathbb{R}\right)$ with inevitability, then we get the
+system
+\begin{align}
+    \underbrace{PA}_{\approx I}x&= Pb\\
+\end{align}
+The thing is that $\text{cond}_2(A) = v(n)$ bound by the curse of
+dimensionality and $\text{cond}_2 = s \ll v(n)$ not dependent and thereby $P$
+would be an optimal preconditioner.
+\subsection{Exercise 2}
+Let $m, n \in \mathbb{N}$, $I \in \mathbb{R}^{m\times m}$ the identity in
+$\mathbb{R}^{m\times m}$ and $Q$ be the banded matrix
+\begin{align}
+    Q =
+    \begin{pmatrix}
+        4  & - 1 &&  &   \\
+        -1 &  4& -1&  &   \\
+           &\ddots& \ddots & \ddots & \\
+           &   &   -1 & 4 & -1\\
+           &   &    & & 4 \\
+    \end{pmatrix}
+\end{align}
+The eigenvalues of the matrix $Q$ lie in $\sigma(A) \subset [4-2, 4+2]$ by
+the Gershorin disk theorem. Since no eigenvalue is $0$, then $Q$ is
+invertible.
+Now consider the matrix $A \in \mathbb{R}^{nm \times nm}$
+\begin{align}
+    Q =
+    \begin{pmatrix}
+        Q  & - I &  &  & \\
+        -I &  Q& -I&    & \\
+           &\ddots& \ddots & \ddots & \\
+           &     & -I & Q & -I\\
+           &     &  & & Q \\
+    \end{pmatrix}
+\end{align}
+We can consider the separation wrt. addition $A = D + L + L^T$ (Like in
+Exercise 1). The Jacobi-Method iteration matrix is $J = - D^{-1}(L + L^T)$,
+where $L$ is the lower triangular with \textbf{-1 or 0 entries}. Further more
+the Gershorin theorem states that $\sigma(A) < 1$. All in all the matrix $I -
+J$ is by the geometric(Neumann) series
+\begin{align}
+    (I-J)^{-1} = \sum_{n=0}^{\infty}J^k
+\end{align}
+and we have the identity
+\begin{align}
+    J = I - D^{-1} A \quad \Rightarrow \quad (I-J)^{-1} = DA^{-1}.
+\end{align}
+Thereby the sum transforms to
+\begin{align}
+    A^{-1} = D^{-1}\sum_{n=0}^{\infty} J^k.
+\end{align}
+The entries of $D$ are all $4$ and thereby non-negative, the matrix is also
+invertible. The matrix $L$ has only -1 or 0 entries which get compensated
+with the minus sing in $J = -D^{-1}(L +L^T) = D^{-1}(-L - L^T)$, thereby all
+entries of $J^k$ are positive for all $k$. Finally we arrive at the
+conclusion, that all entries of $A^{-1}$ are non-negative and $A$ is a
+$M$-matrix or `(inverse) monotone' matrix.
+\subsection{Exercise 3}
+Let $A \in \mathbb{R}^{n \times n}$ be an SPD matrix and $b \in
+\mathbb{R}^{n}$ be a right hand side of a linear system. Suppose we apply the
+CG method for solving $Ax = b$. The $k$-th iterate $x_k$ of the CG method
+then satisfies the $A$-norm optimality condition
+\begin{align}
+    \|x_k - x\|_A = \min_{y\in x_0 + B_k} \|y - x\|_A,
+\end{align}
+where
+\begin{align}
+    B_k = \text{span}\left\{ p_0,\ldots,p_{k-1} \right\} = \text{span}\left\{
+    r_0, Ar_0, \ldots,A^{k-1}r_0\right\}
+\end{align}
+is the Krylov space. The search directions $p_k$ form an $A$-orthogonal
+system.
+\newline
+Now if the spectrum of $A$, $\sigma(A) = [a, b] \subset (0, \infty)$ then
+for any polynomial $p \in \mathbb{P}_k^{0, 1}:= \left\{p \in \mathbb{P}: p(0)
+= 1\right\} $ we have that
+\begin{align}
+    \|x_k - x\|_A \le \left( \sup_{t\in[a,b]} \mid p(t) \mid \right)
+    \|x_0 - x\|_A.
+\end{align}
+To show this we have that for all $y \in x_0 + B_k$ the representation
+\begin{align}
+    y = \sum_{j=0}^{k-1} c_j A^j r_0 = x_0 + q_y(A)r_0
+\end{align}
+for suitable $c_j$'s and a polynomial $q_y \in \mathbb{P}_{k-1}$. Now
+\begin{align}
+    y - x &= x_0 + x - q_y(A) r_0 = x_0 - x + q_y(A) \left( b - Ax_0
+    \right)\\
+          &= x_0 - x + q_y(A) \left(Ax - Ax_0 \right)\\
+          &=\underbrace{\left(I - q_y(A)A \right)}_{=: p_y(A) \in
+          \mathbb{P}_k^{0, 1}} (x-x_0).
+\end{align}
+With this information we may consider the norm
+\begin{align}
+    \|x_k - x\|_A \leq \|p_y(A)(x- x_0)\|_A \qquad \forall y \in x_0+B_k.
+\end{align}
+Now we use the fact that $A$ is SPD thereby there is an orthogonal matrix $Q$
+diagonalizing $A = Q^T \Lambda Q$, with $\Lambda = \text{diag}(\lambda_1, \ldots,
+\lambda_n)$ consisting of eigenvalues of $A$, then
+\begin{align}
+    A^k = Q^T\Lambda Q \cdots Q^T \Lambda Q = Q^T \Lambda^k Q
+\end{align}
+With this we can transform the polynomial $p_y(A)$ and the geometric
+(Neumann) series
+\begin{align}
+    p_y(A) = \sum_{j=0}^{\infty} c_j A^j = Q^T \left(\sum_{j=0}^{\infty} c_j
+        \Lambda^j\right)
+\end{align}
+The norm becomes then
+\begin{align}
+    \|p(A) (x-x_0)\|^2_a
+    &= \langle Ap(A) (x-x_0), p(A)(x-x_0)\rangle =\\
+    &= \langle Q^T\Lambda Q Q^Tp(\Lambda)Q (x-x_0),
+    Q^Tp(\Lambda)Q(x-x_0)\rangle =\\
+    &= \langle Q^T\Lambda p(\Lambda)Q (x-x_0),
+    Q^Tp(\Lambda)Q(x-x_0)\rangle =\\
+    &= \langle \Lambda p(\Lambda)Q (x-x_0),
+    p(\Lambda)Q(x-x_0)\rangle =\\
+    &= \langle \Lambda^{\frac{1}{2}} p(\Lambda)Q (x-x_0),
+    \Lambda^{\frac{1}{2}} p(\Lambda)Q(x-x_0)\rangle =\\
+    &= \|\Lambda^{\frac{1}{2}}p(\Lambda)Q(x-x_0)\|_2\\
+    &= \|p(\Lambda)\Lambda^{\frac{1}{2}}Q(x-x_0)\|_2\\
+    &\leq \|p(\Lambda)\|_2 \|\Lambda^{\frac{1}{2}}Q(x-x_0)\|_2.
+\end{align}
+The Norm of the polynomial is the maximal eigenvalue thereby
+\begin{align}
+    \|p(\Lambda\|_2 = \max_{\lambda \in \sigma(A)}  \mid p(\lambda) \mid \leq
+    \sup_{t\in[a,b]}  \mid p(t)\mid,
+\end{align}
+we can do the supremum boundary because $\lambda \in [a, b]$. As for the
+second part
+\begin{align}
+    \|\Lambda^{\frac{1}{2}}Q(x-x_0)\|_2^2 &= (x-x_0)^T Q^T
+    \Lambda^{\frac{1}{2}}\Lambda^{\frac{1}{2}}Q(x-x_0)\\
+    &= (x-x_0)^T A (x-x_0) \\
+    &= \|x-x_0\|_A^2.
+\end{align}
+And finally we get the result
+\begin{align}
+    \|x_k - x\| \le \sup_{t\in[a,b]}  \mid p(t)  \mid \|x-x_0\|_A^2.
+\end{align}
+The last approximation can be done because $\sup_{t\in[a,b]} \mid p(t) \mid$
+holds for \textbf{all} $p \in \mathbb{P}_k^{0,1}$ thereby we can bound by an
+infimum over all the polynomials in $\mathbb{P}_k^{0,1}$ and we get
+\begin{align}
+    \sup_{t\in[a,b]}  \mid p(t)  \mid \le \inf_{p \in \mathbb{P}_k^{0,1}}
+    \|p\|_{C([0,1])}.
+\end{align}
+\subsubsection{Exercise 4}
+We can do subsequently the as in the last exercise wit the GMRES method. So
+we let $A \in \mathbb{R}^{n \times n}$ be an SPD and $b \in \mathbb{R}^{n}$
+be the right hand side of the linear system. The iterates of $x_k$  of the CG
+method satisfy the $A^{-1}$-norm optimality
+\begin{align}
+    \|Ax_k - b\|_{A^{-1}} = \min_{y\in x_0 + C_k} \|Ay - b\|_{A^{-1}},
+\end{align}
+with $C_k = \text{span}\left\{ p_0, Ap_0, \ldots , A^{k-1}p_0 \right\}$. The
+`generalized minimal residual', short GMRES method, instead, formally
+constructs a sequence of iterates $x_k^G$ by
+\begin{align}
+    \|Ax^G_2 - b \|_2 = \min_{y \in x_0 + C_k}\|Ay - b\|_2.
+\end{align}
+The GMRES method allows for an error inequality similar to the one observed
+in the CG method
+\begin{align}
+    \|Ax_k^G - b\|_2 \le \inf_{p \in \mathbb{P}_k^{0,1}} \|p(A)\|_2 \|Ax_0
+    -b\|_2.
+\end{align}
+To show this we start off by minimizing over a $z \in C_k$
+\begin{align}
+    \|Ax_k^G - b\|_2 = \min_{y\in x_k + C_k} \|Ay - b\|_2 = \min_{z \in
+    C_k}\|Az + Ax_0 -b\|_2.
+\end{align}
+Then for all $z \in C_k$, there exists a $\pi_k \in \mathbb{P}_{k-1}$ such that
+\begin{align}
+    z = \pi_k(A) p_0 = \pi_k(A) r_0,
+\end{align}
+Then the minimization can be bounded
+\begin{align}
+    \min_{z \in C_k} \|Az + Ax_0 - b\|_2 &=
+    \min_{\pi_k \in \mathbb{P}_k}\|A\pi_k(A)r_0 + Ax_0 -b\|_2\\
+        &\le \|A\pi_k(A) (b-Ax_0) + Ax_0 +b\|_2\\
+        &= \|(Ax_0 -b)\underbrace{(I-A\pi_k(A)}_{=:p \in
+        \mathbb{P}_k^{0,1}}\|_2\\
+        &= \|(Ax_0-b)p(A)\|\\
+        &\le \|p(A)\|_2 \|Ax_0 -b\|_2.
+\end{align}
+Following the same argumentation as in Exercise 3 we get for the norm of the
+polynomial
+\begin{align}
+    \|p(A)\|_2  &= \max_{\lambda \in \sigma(A)}  \mid p(\lambda) \mid\\
+    &\le \sup_{t\in [a,b]}  \mid p(t) \mid\\
+    &\le \inf_{p \in \mathbb{P}_k^{0,1}} \|p\|_{C\left([a,b]  \right) }.
+\end{align}
+
+
+
+\end{document}
+
+

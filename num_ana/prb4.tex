@@ -1,0 +1,77 @@
+\include{./preamble.tex}
+
+\begin{document}
+\maketitle
+\section{Sheet 4}
+\subsection{Problem 1}
+Consider a linear system of equations $Ax = b$, where
+\begin{align}
+    A =
+    \begin{pmatrix}
+        2 & -1 & 0 \\
+        -1 & 2 & -1\\
+        0 & -1 & 2
+    \end{pmatrix}, \qquad
+    b =
+    \begin{pmatrix}
+        4 \\ 0 \\ 0
+    \end{pmatrix},
+\end{align}
+we carry out iterations of the CG method by hand until we reach the
+solution with an initial guess $x_0 = \begin{pmatrix} 0 & 0 & 0
+\end{pmatrix}^T$. For the sake of completeness the CG method has the following
+iteration at the $k$-th step
+\begin{align}
+    \alpha_k &= \frac{r_k^Tr_k}{p_k^TAp_k}\\
+    x_{k+1} &=  x_k + \alpha_k p_k\\
+    r_{k+1} &= r_k - \alpha_k A p_k \\
+    \beta_{k} &= \frac{r_{k+1}^Tr_{k+1}}{r_{k}^T r_k}\\
+    p_{k+1} &= r_{k+1} + \beta_{k}p_k \\
+\end{align}
+For $k=0$ we have
+\begin{align}
+    r_0 &= b - Ax_0 = b,\\
+    p_0 &= r_0 = b = \begin{pmatrix} 4 & 0 & 0 \end{pmatrix}^T.
+\end{align}
+For k=1 we have
+\begin{align}
+    \alpha_0 &= \frac{1}{2}, \quad x_1=\begin{pmatrix} 2 \\ 0 \\0
+        \end{pmatrix}, \quad r_1 = \begin{pmatrix} 0 \\ 2 \\0
+    \end{pmatrix},\\
+    \beta_0 &= \frac{1}{4},\quad p_1 = \begin{pmatrix} 1\\2\\0
+    \end{pmatrix}.
+\end{align}
+For k=2 we have
+\begin{align}
+    \alpha_1 &= \frac{2}{3}, \quad x_2=\frac{1}{3}\begin{pmatrix} 8 \\ 4 \\0
+        \end{pmatrix}, \quad r_2 = \frac{1}{3}\begin{pmatrix} 0 \\ 0 \\4
+    \end{pmatrix},\\
+    \beta_1 &= \frac{4}{9},\quad p_2 = \frac{1}{9}\begin{pmatrix} 4\\8\\12
+    \end{pmatrix}.
+\end{align}
+For k=3 we have
+\begin{align}
+    \alpha_2 &= \frac{3}{4}, \quad x_3=\begin{pmatrix} 1 \\ 2 \\3
+        \end{pmatrix}, \quad r_3 = \begin{pmatrix} 0 \\ 0 \\0
+    \end{pmatrix},\\
+    \beta_2 &= 0,\quad p_3 = \begin{pmatrix} 0\\0\\0
+    \end{pmatrix}.
+\end{align}
+Since $r_3 = \textbf{0}$ we can stop here, and $x_3 = x$ is the unique
+solution. The Krylov space of $\mathcal{K}_k(A, b)$ is defined for $k=3$ as
+\begin{align}
+    \mathcal{K}_3(A,b) = \text{span}\left\{b, Ab, A^2b \right\} = \text{span} \left\{ \begin{pmatrix} 0\\0\\4 \end{pmatrix},
+             \begin{pmatrix} 8\\-4\\0 \end{pmatrix},
+         \begin{pmatrix}26\\-16\\4\end{pmatrix}\right\}
+\end{align}
+the rank of the span of $\mathcal{K}_k(A,b)$ is full thereby the
+$\dim(\mathcal{K}_k(A,b)) = 3$. Furthermore the residuals $r_0,\ldots,
+r_{k-1}$ form an orthogonal basis for $\mathcal{K}_k(A,b)$. This can be
+verified by checking that `key' elements in $\mathcal{K}_k(A, b)$ can be
+expressed as a linear combination of $r_0, r_1, r_2$.
+\begin{align}
+    b = 3\cdot r_2,\quad Ab = 2r_0-2r_1,\quad A^2b=6r_0-8r_1+3r_2.
+\end{align}
+\subsection{Exercise 3, 4}
+Not important see notes is not easy
+\end{document}
