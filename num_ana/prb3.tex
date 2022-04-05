@@ -1,0 +1,260 @@
+\include{preamble.tex}
+
+\usepackage[final]{pdfpages}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Sheet 3}
+\subsection{Problem 1}
+Take a linear system $Ax = b$, where $A \in \mathbb{R}^{n\times n}$ and $b
+\in \mathbb{R}^{n}$. We want to solve it using the Gradient decent method, an
+iteration
+\begin{align}
+    x^{k+1} = x^{k} + \alpha_k r^{k},
+\end{align}
+where $r^{k} = b - Ax^{k}$ and the residual $\alpha_k= \frac{(r^{k})^T
+r^k}{(r^k)^T Ar^k}$.
+\subsubsection{}
+We compute $x^1$ for
+\begin{align}
+    A =
+    \begin{pmatrix}
+        2 & -1 \\
+        -1 & 2
+    \end{pmatrix},
+    \qquad
+        b = \begin{pmatrix}1 \\ 1 \end{pmatrix},
+\end{align}
+with an initial guess $x^0 = 0$.
+\begin{align}
+    r^0 = \begin{pmatrix} 1 & 1 \end{pmatrix} \qquad
+    Ar^0 = \begin{pmatrix} 1 & 1 \end{pmatrix} \quad \Rightarrow \quad
+    \alpha_0 = 1.
+\end{align}
+Then for $x^1$ we have
+\begin{align}
+    x^1 = \begin{pmatrix} 0 \\ 0 \end{pmatrix}  + \begin{pmatrix}1 \\
+1 \end{pmatrix}  = b
+\end{align}
+\subsubsection{}
+Suppose the $k$-th error $e^k = x - x^k$ is an eigenvector of $A$ to the
+eigenvalue $\lambda$, then
+\begin{align}
+    A e^{k}=\lambda e^{k} = \lambda (x^{k}-x) = \lambda x^{k} - \lambda x.
+\end{align}
+For the next iteration step we need $r^{k}$ which is
+\begin{align}
+    r^{k} &= b - Ax^{k} + Ax - Ax = (b - Ax) - A(x^{k} - x) = -\lambda e^{k}\\
+    (r^k)^{T} r^k &= \lambda^2 (e^k)^{T}e^{k}\\
+    (r^k)^{T} A r^k &= \lambda^3 (e^k)^{T}e^{k}\\
+    \Rightarrow \alpha_k &= \frac{1}{\lambda}
+\end{align}
+Then the next step $x^{k+1}$ is
+\begin{align}
+    x^{k+1} = x^{k}+\alpha_k r^{k} = x^{k}-\frac{\lambda}{\lambda}e^{k} =
+    x^{k} - e^{k} = x^{k}-x^{k}+ x = x,
+\end{align}
+i.e. $x^{k+1}$ is then the solution.
+\subsection{Exercise 2}
+We show the norm equivalence of the vector norms $ \|\cdot\|_\infty$ and
+$\|\cdot\|_2$ and the optimality of the constants $C, C' > 0$and the
+optimality of the constants $C, C' > 0$
+\subsubsection{}
+We show
+\begin{align}
+    \|v\|_\infty = \max_i |v_i| \leq \sqrt{\sum_{i}^{} v_i^2}  \quad
+    \Rightarrow \quad C = 1.
+\end{align}
+Then
+\begin{align}
+    \|v\|_2 = \sqrt{\sum_i v_i^2} \le \sqrt{\sum_i \max_i |v_i|^2}  =
+    \sqrt{\sum_i  \|v\|^2_\infty} = \sqrt{n} \|v\|_\infty.
+\end{align}
+We get
+\begin{align}
+    \|v\|_\infty \le \|v\|_2 \le \sqrt{n} \|v\|_\infty.
+\end{align}
+For $u := \frac{v}{\|v\|_\infty} \; \Rightarrow \; \|v\|_\infty = 1$ we get
+\begin{align}
+    1 \le  \|u\|_2 \le \sqrt{n}
+\end{align}
+which states optimality of the constants.
+\subsection{Problem 3}
+Now we do the same as in Problem 2 but with matrix norms induced by vector
+norms, specifically for $\|\cdot\|_2$ and $\|\cdot\|_\infty$ matrix norms
+induced by vector norms.
+\subsubsection{}
+We know that
+\begin{align}
+    \|A\|_2 = \max_{v\neq 0} \frac{\|Ax\|_2}{\|x\|_2} \qquad \|A\|_2 &=
+    \rho(A^*A)\\
+    \|A\|_\infty = \max_{i,j}  |a_{ij}|
+\end{align}
+Together with the norm inequalities
+\begin{align}
+    \|Av\|_\infty &\le \|A\|_\infty \|v\|_\infty\\
+    \|A\|_2^2 = \rho(A^TA) \le \|A^TA\|_\infty\\
+    \Rightarrow \|\rho(A^TA)\|_\infty = \|A^TA x\|_\infty \le \|A^T
+    A\|_\infty \|x\|_\infty,
+\end{align}
+thereby
+\begin{align}
+    \|A^T A\|_\infty &= \max_{i,j} \left|(A^T A)_{ij})\right| = \max_{i,j}
+    \left| \sum_l A_{il} A_{lj} \right|  \\
+                    &=\max_{i,j} \sum_l \left| A_{il} A_{lj} \right| \leq n
+                    \|A\|_\infty^2\\
+                    \nonumber\\
+    \Rightarrow  \|A\|_2 &\leq \sqrt{n} \|A\|_\infty
+\end{align}
+\subsubsection{}
+Let $A \in \mathbb{C}^{n\times n}$, $b \in \mathbb{C}^n$ defined as
+\begin{align}
+    A =
+    \begin{pmatrix}
+        1 & \cdots  &  1 \\
+        0 & \cdots  &  0 \\
+        \vdots & \vdots  &\vdots   \\
+        0 & \cdots & 0
+        \end{pmatrix} \qquad b = \begin{pmatrix} 1 \\ \vdots \\ 1
+    \end{pmatrix}
+\end{align}
+Then $Ab = \begin{pmatrix} n & 0 & \cdots & 0 \end{pmatrix}^T$ and the
+$\|\cdot\|_2$ of $A$ is
+\begin{align}
+    \|A\|_2 = \max_{v\neq 0} \frac{\|Av\|_2}{\|v\|} = \frac{\|Ab\|_2}{\|b\|}
+    = \frac{n}{\sqrt{n}} = \sqrt{n}
+\end{align}
+\subsubsection{}
+Let $A$ be defined as above, we show that $\|A\|_\infty = \sqrt{n} \|A\|_2$,
+where $C = \sqrt{n} $ is optimal
+\begin{align}
+    \|A\|_\infty = \max_i \sum_j |A_{ij}| = n = \sqrt{n} \sqrt{n}  = \sqrt{n}
+     \|A\|_2,
+\end{align}
+thereby $C$ is optimal.
+\subsubsection{}
+We show that $\|A\|_2 \le \sqrt{n} \|A\|_\infty$ for all $A \in
+\mathbb{C}^{n\times n}$, and equality holds for $A$ whose columns are all
+zero, accept the first one filled with ones. We know the norms
+$\|\cdot\|_2$ and $\|\cdot\|_\infty$ are induced by vector norms which are
+consistent. Then for all $v \in \mathbb{C}^{n}$ we have
+\begin{align}
+    \|v\|_\infty &\le\sqrt{n} \|v\|_2\\
+    \Leftrightarrow \|A\|_\infty &\le \sqrt{n} \|A\|_2 \qquad\ \forall \ A
+    \in \mathbb{C}^{n\times n}.
+\end{align}
+\subsection{Problem 4}
+Let $\langle x, y \rangle$ be the standard Euclidean scalar product on
+$\mathbb{R}^n$ and $\|\cdot\|_2$ the Euclidean norm. Let $B\in
+\mathbb{R}^{n\times n}$ be an antisymmetric matrix, i.e. $B^T = -B$. And let
+$A:= I - B$
+\subsubsection{}
+We show that for all $x \in \mathbb{R}^{n}$ we have $\langle Bx, x\rangle =0$
+and $\langle Ax, x\rangle = \|x\|_2^2$.
+\begin{align}
+    \langle Bx, x\rangle = (Bx)^T x = x^T B^T x = -x^T B x\\
+    (-x^TBx)^T &= x^TBx\; \Rightarrow\; x^T Bx = jx^TBx\\
+    \Rightarrow 2x^T B x &= 2 \langle Bx, x\rangle = 0.
+\end{align}
+And the second statement follows from the previous equation
+\begin{align}
+    \langle Ax, x\rangle &= \rangle\left(I-B\right)x,x\rangle \\
+                         &=\langle x, x\rangle - \underbrace{\langle Bx,
+                         x\rangle}_{=0} = \langle x, x\rangle =
+    \|x\|_2^2
+\end{align}
+\subsubsection{}
+We show that $\|Ax\|_2^2 = \|x\|_2^2 + \|Bx\|_2^2$ and that $\|A\|_2 =
+\sqrt{1+\|B\|_2^2}$. We start with the vector norm
+\begin{align}
+    \|Ax\|^2_2
+    &= \|x - Bx\|_2^2 \\
+    &= \langle x -Bx, x-Bx\rangle \\
+    &= (x^T - x^T B^T)(x - Bx)\\
+    &= x^T x - x^T B^T x - x^T Bx + x^T B^T Bx\\
+    &= x^T x + x^TB^TBx = \|x\|_2^2 + \|Bx\|_2^2
+\end{align}
+where $i, j$ run from $1$ to $n$. Then the vector induced norm follows
+\begin{align}
+    \|A\|_2^2
+    &= \|I-B\|_2^2 = \sup_{x\neq 0} \frac{\|Ax\|_2^2}{\|x\|^2_2}\\
+    &= \sup_{x\neq 0} \frac{\|x\|^2_2 +\|Bx\|_2^2 }{\|x\|_2^2} = 1+
+    \sup_{x\neq 0}\frac{\|Bx\|_2^2}{\|x\|^2_2}= 1+\|B\|_2^2,
+\end{align}
+pulling the square root on both sides gives us the answer.
+\subsubsection{}
+We show that $A$ is invertible and the inverse matrix norm is given
+\begin{align}
+    \|A^{-1}\|^2 = \max_{x\neq}\frac{\|x\|^2}{\|Ax\|^2}
+\end{align}
+To show that $A$ is invertible we use the Rank-Nullity Theorem
+\begin{align}
+    n &=\text{rg}(A) + \dim\text{Im}(A)\\
+    \Rightarrow n - \dim\text{Im}(A) = rg(A).
+\end{align}
+If $A$ is invertible it has maximal rank that means $\dim \text{Im}(A) = 0$.
+Let's look what the image of A is
+\begin{align}
+    Ax = 0 \Rightarrow \|Ax\|_2^2 = \|x\|_2^2 + \|Bx\|_2^2 = 0
+\end{align}
+holds only for $x = 0$, thereby $\dim \text{Im}(A) = 0$ and the rank is
+maximal. Now let $A^{-1}y =x$ then
+\begin{align}
+    \frac{\|A^{-1}y\|_2}{\|y\|_2} &= \frac{\|x\|_2}{\|Ax\|_2}\\
+    \Rightarrow \|A^{-1}\|_2 &= \max_{x\neq 0} \frac{\|x\|_2}{\|Ax\|_2}.
+\end{align}
+\subsubsection{}
+Next we show that $\|A^{-1}\|_2 \le 1$.
+\begin{align}
+    \|A^{-1}\|_2 = \max_{x\neq 0} \frac{\|x\|_2}{\|Ax\|_2} =
+    \frac{1}{\sqrt{1+\|B\|_2^2}} \le 1
+\end{align}
+\subsection{Problem 5}
+We take $A$ and $B$ from last exercise.
+\subsubsection{}
+We show that for $k \in \{1,\ldots,m\}$ and $\mathcal{W} \subset
+\mathbb{R}^n$ with $\dim \mathcal{W} = k$ spanned by $w_1,\ldots,w_k \in
+\mathbb{R}^n$. We show that if $x \in \mathcal{W}$ is such that
+\begin{align}
+    \langle Ax, w\rangle = \langle b , w \rangle \qquad \forall w\in
+    \mathcal{W}.
+\end{align}
+then $\|x\|_2 \le \|b\|_2$. We can choose $b = x$ then
+\begin{align}
+    \langle Ax, x\rangle &= \|x\|_2^2 = \langle b, x\rangle \leq
+    \|b\|_2\|x\|_2.\\
+    \Rightarrow \|x\|_2 \le \|b\|_2
+\end{align}
+\subsubsection{}
+Next we show that for $x :=\sum_j c_j w_j$ and
+\begin{align}
+    \sum_j c_j \langle Aw_j, w_i\rangle = \langle b , w_i\rangle
+\end{align}
+for $i = 1, \ldots , k$, we have a unique solution for $x \in \mathcal{W}$.
+We do this by showing that every solution is the 0 solution $b=0$
+\begin{align}
+    \langle 0 , w\rangle = 0 = \langle Ax ,x \rangle = \|x\|_2^2.
+\end{align}
+\subsubsection{}
+Lastly for $x^* := A^{-1}b$ we show and inequality relation
+\begin{align}
+    \|x^* - x\|_2 \le \|A\|_2 \min_{x \in \mathcal{W}}\|x^* -w\|_2.
+\end{align}
+(We take the minimum $w = x$ and calculate)
+\begin{align}
+    \|x^* - x\|_2^2
+    &= \langle A(x^* -x), x^* - x\rangle\\
+    &= \langle A(x^* -x), x^* - x +w -w\rangle\\
+    &= \langle A(x^* -x), x^* - w\rangle + \langle A(x^* -x), w - x\rangle\\
+    &= \langle A(x^* -x), x^* - w\rangle +\underbrace{\langle A(x^* -x), w -
+    x\rangle}_{=0}\\
+    \le \|A\|_2 \|x^* - x\|_2\|x^* - w\|.
+\end{align}
+When we take the minimum and divide by $\|x^* - x\|_2$ we get
+\begin{align}
+    \|x^* - x\| \le \|A\|_2\min_{x\in\mathcal{W}} \|x^* - w\|_2.
+\end{align}
+
+%\printbibliography
+\end{document}
