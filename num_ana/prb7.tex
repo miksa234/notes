@@ -1,0 +1,175 @@
+\include{./preamble.tex}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Sheet 7}
+\subsection{Problem 1}
+For a matrix $A \in \mathbb{C}^{n\times n}$, define $B, C \in
+\mathbb{C}^{n\times n}$ in the following way
+\begin{align}
+    B = \frac{1}{2}(A + A^*), \quad C = \frac{1}{2i} (A - A^*).
+\end{align}
+The matrices $B$ and $C$ are Hermitian, which can be seen by directly
+calculating the adjoint.
+\begin{align}
+    B^* &= \frac{1}{2}(A+A^*)^* = \frac{1}{2}\left( A^* + (A^*)^*\right)\\
+        &= \frac{1}{2}(A^* + A) = \frac{1}{2}(A+A^*) = B,\\
+        \nonumber\\
+    C^* &= -\frac{1}{2i}(A-A^*)^* = -\frac{1}{2i}\left( A^* - (A^*)^*\right)\\
+        &= -\frac{1}{2i}(A^* - A) = \frac{1}{2}(A -A^*) = C.
+\end{align}
+Additionally we can bound the eigenvalues of $A$ by the minimum and maximum
+eigenvalues of $B$ and $C$ by rewriting $A$ as
+\begin{align}
+    A = (B + iC).
+\end{align}
+Now consider an arbitrary eigenpair of $A$, $(\lambda, v)$, such that $\|v\|
+= 1$, the eigenvalue equation reads
+\begin{align}
+    Av &= (B + iC)v = \lambda v\\
+        &= Bv + iCv\\
+    \Leftrightarrow & v^* B v + v^*(iC)v = \lambda.
+\end{align}
+The real and the imaginary part of $\lambda$ can be calculated by a simple
+identity
+\begin{align}
+    \text{Re}(\lambda)
+    &=  \frac{1}{2}(\lambda + \bar{\lambda}) \\
+    &= \frac{1}{2}(v^* B v + v^*(iC)v + v^*B^*v - v^* (i C)v)\\
+    &= \frac{1}{2} ( v^*Bv + v^*B^*v + v^* (iC)v - v^*(iC)v)\\
+    &= \frac{1}{2}(2v^* B v) = v^*Bv\\
+    \nonumber\\
+    \text{Im}(\lambda)
+    &=  \frac{1}{2i}(\lambda - \bar{\lambda}) \\
+    &= v^*Cv
+\end{align}
+Putting the results from above with the Reighley-Ritz Theorem, which states
+that for all $D \in \mathbb{C}^{n\times n}$ Hermitian $\forall x \in
+\mathbb{C}^{n}$, where $x\neq 0 $ we have a boundary from below and above by
+the minimum and maximum eigenvalue of $D$
+\begin{align}
+    \lambda_{\text{min}}(D) \le \frac{x^*Dx}{\|x\|^2} \le
+    \lambda_{\text{max}}(D)
+\end{align}
+Then we have
+\begin{align}
+    \Rightarrow  \begin{cases}
+        \text{Re}(\lambda) \in [ \lambda_{\text{min}}(B),
+        \lambda_{\text{max}}(B)]\\
+        \text{Im}(\lambda) \in [ \lambda_{\text{min}}(C),
+        \lambda_{\text{max}}(C)]\\
+    \end{cases}
+\end{align}
+\subsection{Problem 2}
+Given two Hermitian matrices $A, B \in \mathbb{C}^{n\times n}$, denote
+$\left\{ \lambda_j(A) \right\}_{j=1}^n $ and $\left\{ \lambda_j(A + B)
+\right\}_{j=1}^n$ the eigenvalues of $A$ and $A+B$ in increasing order. If
+$B$ is positive semi-definite then we have a bound
+\begin{align}
+    \lambda_k(A) \le \lambda_k(A+B) \qquad \forall k \in \left\{ 1, \ldots,n
+    \right\}.
+\end{align}
+By the Courant Fischer Theorem, let $\mathcal{V}_k$ be the set of all $k$
+dimensional subsets of $\mathbb{C}^{n\times n}$ we have
+\begin{align}
+    \lambda_k(A)
+    &= \min_{v \in \mathcal{V}_k} \max_{v\in \mathbb{C}^{n \times
+    n},\; \|v\|=1} \langle v, Av\rangle .
+\end{align}
+And if $B$ is positive  semi-definite we have
+\begin{align}
+    x^* B x \ge 0 \qquad \forall x \in \mathbb{C}^{n}.
+\end{align}
+Since $A$ and $B$ are hermitian, then $A+B$ are hermitian too and we can
+write
+\begin{align}
+    \lambda_k(A)
+    &= \min_{v \in \mathcal{V}_k} \max_{v\in \mathbb{C}^{n \times
+    n},\; \|v\|=1} \langle v, Av\rangle \\
+    &\ge \min_{v \in \mathcal{V}_k} \max_{v\in \mathbb{C}^{n \times
+    n},\; \|v\|=1} \langle v, Av\rangle = \lambda_k(A)
+\end{align}
+\subsection{Problem 3}
+Let $A \in \mathbb{C}^{n\times n}$ be diagonalizable by $X = (x_1,\ldots,x_n)
+\in \mathbb{C}^{n \times n}$ the matrix of right-eigenvectors $x_j \in
+\mathbb{C}^{n}$ of A. For all $\varepsilon> 0 $, let $\nu$ be the eigenvalues
+of $A+\varepsilon A$, then there exists and eigenvalue $\lambda$ of $A$ with
+\begin{align}
+    \frac{|\lambda - \nu|}{|\lambda|} \le K_p(X)\varepsilon
+\end{align}
+Let us rewrite
+\begin{align}
+    A + \varepsilon A = (1+\varepsilon) A,
+\end{align}
+then the eigenvalue $\nu \in \lambda(A+\varepsilon A)$ can be written as an
+eigenvalue of $A$ with
+\begin{align}
+    \frac{\nu}{1+\varepsilon} \in \lambda (A).
+\end{align}
+Then the bound reads
+\begin{align}
+    \frac{|\lambda - \nu|}{|\lambda|}
+    &= \frac{|\frac{\nu}{1+\varepsilon} - \nu|}{|\frac{\nu}{1+\varepsilon}|}\\
+    &= \frac{|\nu - (1+\varepsilon)\nu|}{|\nu|}\\
+    &= \varepsilon \le \varepsilon K_p(X),
+\end{align}
+since $K_p(X) \ge 1$ for all $X$ that diagonalize $A$, if $A$ is invertible
+!.
+\subsection{Exercise 4}
+Given some $\mu \in \mathbb{R}$ the shifted QR-algorithm is defined as: Let
+$Q_0$ be orthogonal, such that $T_0 =  Q_0^T A Q_0$ is upper Hessenberg form.
+For $k \in \mathbb{N}$ determine a sequence of the matrices $T_k$ by
+\begin{itemize}
+    \item Determine $Q_k$ and $R_k$, s.t. $Q_k R_k = T_{k-1} - \mu I$, as a
+        QR-decomposition of $T_{k-1} - \mu I$
+    \item Let $T_k = R_k Q_k + \mu I$
+\end{itemize}
+The sequence of these matrices $T_k$ is infact similar to $A$, in the
+following way
+\begin{align}
+    T_{k+1}
+    &= R_k Q_k + \mu I \\
+    &= Q_k^T ( T_k - \mu I) Q_k + \mu I\\
+    &= Q_k^T T_k Q_k - \mu I + \mu I\\
+    &= Q_k^T T_k Q_k\\
+    &= Q_k^T \cdots Q_1^T T_0 Q_1 \cdots Q_k\\
+    &= \underbrace{Q_k^T \cdots Q_0^T}_{=Q^T} A \underbrace{Q_0 \cdots Q_k}_{= Q}
+\end{align}
+Furthermore if $A$ is an unreduced Hessenberg matrix and $\mu$ an eigenvalue
+of $A$. Then let $QR = A-\mu I$ be the QR-decomposition of $A-\mu I $, define
+\begin{align}
+  \overline{A} = RQ  + \mu I,
+\end{align}
+then
+\begin{align}
+    \overline{A}_{n,n} = \mu \quad \& \quad \overline{A}_{n-1, n} = 0
+\end{align}
+To start, if $A$ is an irreducible Hessenber then
+\begin{align}
+    A_{i+1, i} \neq 0 \qquad \forall i \in \left\{ 1, \ldots , n-1 \right\}.
+\end{align}
+Then $A-\mu I$ is singular since $\mu$ is Eigenvalue of $A$, $\det(A-\mu I)
+=0 $ is an eigenvalue equation. And additionally $0$ is an eigenvalue of $A -
+\mu I$, then
+\begin{align}
+     &\Rightarrow \overline{A} = RQ + \mu I.
+\end{align}
+Where $A-\mu I$ is singular and the first  $n-1$ columns are linearly
+independent, since $R = Q^T(A-\mu I)$. Then the first $n-1$ columns of $R$
+are linearly independent and because $R$ is also singular perserved by
+rotation of $Q^T$ the last row needs to be $0$, i.e. $R_{n, \cdot} = 0^T$,
+then
+\begin{align}
+    &R_{n,n-1} = 0,\qquad (RQ)_{n, n-1} = 0,\\
+    &R_{n,n} = 0,\qquad (RQ)_{n, n} = 0.\\
+\end{align}
+By this we conlude
+\begin{align}
+    \overline{A}_{n,n} &= (RQ)_{n,n}+\mu = \mu\\
+    \overline{A}_{n, n-1} &= (RQ)_{n,n-1} = 0
+\end{align}
+
+\end{document}
+
+
