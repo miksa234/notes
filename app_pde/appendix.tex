@@ -1,0 +1,60 @@
+\appendix
+\section{Appendix: Mathematical Preliminaries}
+\subsection{Leibniz Rule of Integration}
+\label{appendix:leibniz}
+The Leibniz integral rule for differentiation under the integral sign
+initiates with an integral
+\begin{align}
+    \mathcal{I}(t, x) = \int_{a(t)}^{b(t)} f(t, x) dx = \mathcal{I}(t, a(t,
+    a(t), b(t))).
+\end{align}
+And upon differentiation w.r.t. $t$, utilizes the chain rule on $a(t)$ and
+$b(t)$ respectively, by
+\begin{align}
+    \frac{d\mathcal{I}}{dt} =
+    \frac{\partial \mathcal{I}}{\partial t}+
+    \frac{\partial \mathcal{I}}{\partial a}\frac{\partial a}{\partial t}+
+    \frac{\partial \mathcal{I}}{\partial b}\frac{\partial b}{\partial t}.
+\end{align}
+Which in integral representation reads
+\begin{align}
+    \frac{d\mathcal{I}}{dt} = \int_{a(t)}^{b(t)}\frac{\partial f(t,
+    x)}{\partial t} dx + f(t, b(t)) \frac{\partial b(t)}{\partial t}
+    - f(t, a(t)) \frac{\partial a(t)}{\partial t}
+\end{align}
+
+\subsection{Gaussian Integration Law}
+\label{appendix:gauss integration}
+This should explain the Gaussian integration law
+
+\subsection{Identity for Vorticity}
+We start off with the standard material derivative
+\begin{align}
+    \frac{D\mathbf{u}}{Dt} = \frac{\partial \mathbf{u}}{\partial t}
+    (\mathbf{u}\nabla)\mathbf{u}.
+\end{align}
+We will use Einstein's Summation Convention, where we sum over indices that
+both appear at as the bottom as the top index, to rewrite the second part of
+the material derivative $(\mathbf{u}\nabla)\mathbf{u}$ into
+\begin{align}
+    (\mathbf{u}\times (\nabla \times \mathbf{u}))_k
+    &= \varepsilon^{ijk}u_j(\nabla \times  \mathbf{u})_k \\
+    &= \varepsilon^{ijk}u_j\varepsilon_{klm}\partial^l u^m\\
+    &=(\delta^i_l\delta^j_m-\delta^i_m\delta^j_l)u_j\partial^l u^m\\
+    &=u_m\partial^i u^m - u_l \partial^l u^i.\label{eq:identity split}
+\end{align}
+Now the first part in equation \ref{eq:identity split} can be rewritten into
+\begin{align}
+    u_m\partial^i u^m =\partial^i (\frac{1}{2}u_mu^m) .
+\end{align}
+Thus we get
+\begin{align}
+    (\mathbf{u}\times (\nabla \times \mathbf{u}))_k
+    = \frac{1}{2}\partial^i(u_m u^m) + u_l \partial^l u^i,
+\end{align}
+which is
+\begin{align}
+    (\mathbf{u}\nabla)\mathbf{u} = \nabla(\frac{1}{2}\mathbf{u}\mathbf{u}) -
+    \left(\mathbf{u}\times (\nabla \times  \mathbf{u})\right)
+\end{align}
+
