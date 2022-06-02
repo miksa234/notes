@@ -1,9 +1,0 @@
-# Fdb version 3
-["pdflatex"] 1654182317 "basics_fluids.tex" "build/basics_fluids.pdf" "basics_fluids" 1654182317
-  "/usr/share/texmf-dist/web2c/texmf.cnf" 1650183167 39911 2da6c67557ec033436fe5418a70a8a61 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1651438073 2927654 3f7af88e1ee3d51ccbadf8c78ab72cd0 ""
-  "basics_fluids.tex" 1654182317 8465 bd1640439c529d941af566bcd76f5cf5 ""
-  "build/basics_fluids.aux" 1654182169 1605 a94757da58a038b01ba24af5ad5a1f08 ""
-  (generated)
-  "build/basics_fluids.log"
-  "build/basics_fluids.pdf"

@@ -138,31 +138,31 @@ be zero, and thereby
 following that the divergence of the velocity field is zero, in this case
 $\mathbf{u}$ is called \textbf{solenoidal}.
 \subsection{Euler's Equation of Motion}
-%Additional consideration we undertake is the assumption of an
-%\textbf{inviscid} fluid, that is we set viscosity to zero. Otherwise we would
-%get a viscous contribution under the integral which results in the
-%Navier-Stokes equation. In this regard we apply Newton's second law to our
-%fluid in terms of infinitesimal pieces $\delta V$ of the fluid. The
-%acceleration divides into two terms, a \textbf{body force} given by gravity
-%of earth in the $z$ coordinate $\mathbf{F} = (0, 0, -g)$ and a
-%\textbf{local/short-rage force} described by the stress tensor in the fluid.
-%In the inviscid case we the local force retains the pressure $P$, producing a
-%normal force, with respect to the surface, acting onto any infinitesimal
-%element in the fluid. The integral formulation of the force would be
-%\begin{align}
-%    \int_V \rho \mathbf{F}\ dV - \int_S P\mathbf{n}\ dV.
-%\end{align}
-%Now applying the Gaussian rule of integration on the second integral over the
-%surface, the resluting force in per unit volume is
-%\begin{align}
-%    \int_V \left(\rho \mathbf{F} - \nabla P\right)\ dV.
-%\end{align}
-%The acceleration of the fluid particles is given by $\frac{D\mathbf{u}}{Dt}$,
-%and thus the total force per unit volume on the other hand is
-%\begin{align}
-%    \int_V \rho \frac{D\mathbf{u}}{Dt}\ dV =
-%    \int_V \left(\rho \mathbf{F} - \nabla P\right)\ dV
-%\end{align}
+Additional consideration we undertake is the assumption of an
+\textbf{inviscid} fluid, that is we set viscosity to zero. Otherwise we would
+get a viscous contribution under the integral which results in the
+Navier-Stokes equation. In this regard we apply Newton's second law to our
+fluid in terms of infinitesimal pieces $\delta V$ of the fluid. The
+acceleration divides into two terms, a \textbf{body force} given by gravity
+of earth in the $z$ coordinate $\mathbf{F} = (0, 0, -g)$ and a
+\textbf{local/short-rage force} described by the stress tensor in the fluid.
+In the inviscid case we the local force retains the pressure $P$, producing a
+normal force, with respect to the surface, acting onto any infinitesimal
+element in the fluid. The integral formulation of the force would be
+\begin{align}
+    \int_V \rho \mathbf{F}\ dV - \int_S P\mathbf{n}\ dV.
+\end{align}
+Now applying the Gaussian rule of integration on the second integral over the
+surface, the resluting force in per unit volume is
+\begin{align}
+    \int_V \left(\rho \mathbf{F} - \nabla P\right)\ dV.
+\end{align}
+The acceleration of the fluid particles is given by $\frac{D\mathbf{u}}{Dt}$,
+and thus the total force per unit volume on the other hand is
+\begin{align}
+    \int_V \rho \frac{D\mathbf{u}}{Dt}\ dV =
+    \int_V \left(\rho \mathbf{F} - \nabla P\right)\ dV
+\end{align}
 
 
 
