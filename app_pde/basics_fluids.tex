@@ -1,5 +1,8 @@
 \include{./preamble.tex}
 
+\usepackage{amsmath}
+\numberwithin{equation}{section}
+
 \begin{document}
 
 \maketitle
@@ -266,7 +269,288 @@ The function $f(\mathbf{x}, t)$ can be removed by gauge transformation of
 $\phi \rightarrow \phi + \int f(\mathbf{x}, t)\ dt$, never the less this is
 not further discussed and left to the reader in the reference.
 \subsection{Boundary Conditions for water waves}
-Surface, Bottom, Pressure
+The boundary conditions for water-wave problems vary, generally on the
+simplification we undertake. At the surface, called the free surface as in
+free from the velocity conditions, we have the atmospheric stress on the
+fluid. The stress component would again have a viscid component, this however
+is only relevant when modeling surface wind, in this review we model the
+fluid as unaffectedly and within reason as inviscid. The atmosphere employs
+only a pressure on the surface, this pressure is taken to be the atmospheric
+pressure, dependent on time and point in space. Thereby  any surface tension
+effects can also include a scenario at a curved surface (e.g. wave), giving
+rise to the pressure difference across the surface. A more precise
+description would use Thermodynamics to derive boundary conditions coupling
+water surface and the air above it, yet the density component of air
+compared to that of water makes our ansatz viable. The described conditions
+are called the \textbf{dynamic conditions}
+
+An additional condition revolves around the fluid particles on the moving
+surface, called the \textbf{kinematic condition}. This condition bounds
+the vertical velocity component on the surface.
+
+The logical step now is to define boundary conditions on the bod of the
+fluid, i.e. the bottom. If the viscid case bottom is impermeable, we a no
+slip condition to all fluid particles $\mathbf{u}_\text{bottom}= 0$. If we
+assume that the fluid is inviscid then the bottom becomes a surface of the
+fluid in the sense that the fluid particles in contact with the bed move in
+the surface, we more or less mirror the kinematic condition of the surface.
+For many problems the condition is going to vary, in most cases the bottom
+will be rigid and fixed not necessarily horizontal. This condition is simply
+called the \textbf{bottom condition}.
+\subsubsection{Kinematic Condition}
+Obtaining the free surface is the primary objective in the theory of modeling
+water waves, represented by
+\begin{align}
+    z = h(\mathbf{x}_\perp, t),
+\end{align}
+where $\mathbf{x}_\perp = (x, y)$ in Cartesian, or $\mathbf{x}_\perp = (r,
+\theta)$ in cylindrical coordinates. A surfaces that moves with the fluid,
+always contains the same fluid particles, described as
+\begin{align}
+    \frac{D}{Dt}\left(z - h(\mathbf{x}_\perp, t  \right) = 0.
+\end{align}
+Upon expanding the derivative we get
+\begin{align}
+    \frac{Dz}{Dt} - \frac{Dh}{Dt}
+    &= \frac{\partial z}{\partial t}+
+    (\mathbf{u}\nabla)z - \frac{\partial h}{\partial t} -(\mathbf{u}\nabla)\\
+    &= w - \left(h_t - (\mathbf{u}_\perp \nabla_\perp) h\right) = 0,
+\end{align}
+where the subscript $\perp$ describes the components with regard to
+$\mathbf{x}_\perp$. The \textbf{kinematic condition} reads
+\begin{align}
+    w = h_t - (\mathbf{u}_\perp \nabla_\perp) h \qquad \text{on}\;\;
+    z=h(\mathbf{u}_\perp, t).
+\end{align}
+
+\subsubsection{Dynamic Condition}
+As described in the prescript of this section, the case of an inviscid fluid,
+requires that only the pressure $P$ needs to be described on the free surface
+$z = h(\mathbf{x}_\perp, t)$. Assuming incompressible, irrotational,
+unsteady flow and setting $P=P_a$ for atmospheric pressure and $\Omega =
+g\cdot z$ for the force per unit mass potential the equations of motion are
+\begin{align}
+    \frac{\partial \phi}{\partial t} +\frac{1}{2}\mathbf{u}\mathbf{u}
+    + P_\frac{a}{\rho}+gh = f(t) \qquad \text{on}\;\; on z=h.
+\end{align}
+Somewhere $\|\mathbf{x}_\perp\| \rightarrow \infty$ the fluid reaches
+equilibrium and is thereby stationary, thereby has no motion and the pressure
+is $P=P_a$ and the surface is a constant $h = h_0$ $f(t)$ is
+\begin{align}
+    f(t) = \frac{P_a}{\rho}+gh_0.
+\end{align}
+The simplest description for the \textbf{dynamic condition} may be written as
+\begin{align}
+    \frac{\partial \phi}{\partial t}
+    +\frac{1}{2}\mathbf{u}\mathbf{u}+g(h-h_0) = 0 \qquad \text{on}\;\; z=h.
+\end{align}
+
+Regarding the pressure difference on a curved surface, we may expand the
+dynamic condition by introducing the pressure difference known as the
+\textbf{Young-Laplace Equation}
+\begin{align}
+    \Delta P = \frac{\Gamma}{R},
+\end{align}
+where $\Gamma>0$ is the coefficient of surface tension and $\frac{1}{R}$ is
+the curvature representing an implicit function, in our case the implicit
+function is $z - h(\mathbf{x}_\perp, t)$ for fixed time. The curvature in
+Cartesian coordinates takes the form
+\begin{align}
+    \frac{1}{R} = \frac{(1+h_y^2)h_{x x}+(1+h_y^2)h_{yy} -
+    2h_xh_yh_{xy}}{\left( h_x^2+h_y^2+1 \right)^{\frac{3}{2}} },
+\end{align}
+the derivation is precisely described in \ref{appendix:curvature}
+
+
+
+\subsubsection{The Bottom Condition}
+The representation for the bottom is
+\begin{align}
+   z = b(\mathbf{x}_\perp, t),
+\end{align}
+where the fluid surface needs to satisfy
+\begin{align}
+    \frac{D}{Dt} \left(z - b(\mathbf{x}_\perp) \right)  = 0.
+\end{align}
+Hence we arrive at the bottom boundary conditions
+\begin{align}
+    w = b_t + (\mathbf{u}_\perp \nabla_\perp)b \qquad \text{on}\;\; z=b ,
+\end{align}
+where $b(\mathbf{x}_\perp, t)$ is already known for most water wave
+problems. If we consider a stationary bottom then the time derivative
+vanishes, leaving us with the following condition
+\begin{align}
+    w = (\mathbf{u}_\perp \nabla_\perp)b \qquad \text{on}\;\; z=b
+\end{align}
+
+
+\subsubsection{Integrated Mass Condition}
+In this section we want to combine the kinematics of both the free and the
+bottom surface with the mass conservation equation on the perpendicular
+components
+\begin{align}
+    \nabla \mathbf{u} = \nabla_\perp \mathbf{u}_\perp + w_z = 0 .
+\end{align}
+Integrating the above expression from bottom to surface, i.e. from
+$z=b(\mathbf{x}_\perp,t)$ to $z = h (\mathbf{x},t)$ gives
+\begin{align}
+    \int_b^h \nabla_\perp \mathbf{u}_\perp\ dz  w\bigg|_{z=b}^{z=h} = 0,
+\end{align}
+where we insert the conditions on the free surface and on the bottom surface
+\begin{align}
+    w &= h_t + (\mathbf{u}_{\perp \text{s}} \nabla_\perp) h \quad
+    \text{on}\;\; z = h\\
+    w &= b_t + (\mathbf{u}_{\perp \text{b}} \nabla_\perp) h \quad
+    \text{on}\;\; z =b,
+\end{align}
+with the subscript $s$ and $b$ indicating the evaluation of a quantity
+on the free surface and the bottom surface respectively. Inserting the
+boundary conditions we get
+\begin{align}
+    \int_b^h \nabla_\perp \mathbf{u}_\perp
+    + h_t + (\mathbf{u}_{\perp \text{s}} \nabla_\perp) h
+    - b_t - (\mathbf{u}_{\perp \text{b}} \nabla_\perp) b= 0.
+\end{align}
+To simplify the equation we resort again to the Leibniz Rule of Integration
+\begin{align}
+     \int_b^h \nabla_\perp\mathbf{u}_\perp =
+    \nabla_\perp \int_b^h \mathbf{u}_\perp\ dz - (\mathbf{u}_{\perp \text{s}}
+    \nabla_\perp)h - (\mathbf{u}_{\perp \text{b}})b.
+\end{align}
+As a consequence the \textbf{Integrated Mass Condition} is given by
+\begin{align}
+    \nabla_\perp \int_b^h \mathbf{u}_\perp\ dz  + \underbrace{h_t -
+    b_t}_{=d_t} = 0.
+\end{align}
+\subsection{Energy Equation}
+To derive the energy equation we start of with Euler's Equation of Motion
+\begin{align}
+  \mathbf{u} _t + \nabla
+  (\frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}+\Omega) = \mathbf{u}\times
+  \mathbf{w},
+\end{align}
+multiplying the equation with $\mathbf{u}$ we get
+\begin{align}
+  &\mathbf{u}\mathbf{u} _t \label{eq:energy1} \\
+  &+(\mathbf{u}\nabla)(\frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}+\Omega)\label{eq:energy2}\\
+  &= \mathbf{u}(\mathbf{u}\times
+  \mathbf{w})\label{eq:energy3}.
+\end{align}
+The first equation given in \ref{eq:energy1} can we rewritten using inverse
+product rule of differentiation
+\begin{align}
+    \mathbf{u}\frac{\partial \mathbf{u}}{\partial t}
+    &= \frac{\partial
+    }{\partial t} (\mathbf{u}\mathbf{u}) - \frac{\partial \mathbf{u}}{\partial t}
+    \mathbf{u} \\
+    &= \frac{\partial
+    }{\partial t} (\mathbf{u}\mathbf{u}) - \mathbf{u}\frac{\partial
+    \mathbf{u}}{\partial t}\\
+    \Rightarrow\quad & \mathbf{u} \frac{\partial \mathbf{u}}{\partial t}  =
+    \frac{1}{2}\frac{\partial }{\partial t} (\mathbf{u}\mathbf{u}).
+\end{align}
+Then we may add
+\begin{align}
+    \left(\frac{1}{2} \mathbf{u}\mathbf{u}+\frac{P}{\rho} +\Omega  \right)
+    \underbrace{(\nabla u)}_{=0} = 0,
+\end{align}
+to above not changing anything. Thereby getting
+\begin{align}
+    \frac{\partial }{\partial t} (\frac{1}{2}\mathbf{u}\mathbf{u})
+    +(\mathbf{u}\nabla \mathbf{u})\left(
+    \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho} \right)
+    +\left( \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho} + \Omega \right)
+    (\nabla \mathbf{u}) = 0.
+\end{align}
+Applying the product rule we can simplify
+\begin{align}
+    \frac{\partial }{\partial t} \left(\frac{1}{2}\mathbf{u}\mathbf{u}\right)
+    +\nabla \left(\mathbf{u}\left(\mathbf{u}(
+    \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}\right) \right) = 0,
+\end{align}
+additionally adding $\frac{\partial \Omega}{\partial t}  =0$ leads us to
+\begin{align}
+    \underbrace{\frac{\partial }{\partial t} \left(\frac{1}{2}\mathbf{u}\mathbf{u}
+    +\Omega\right)}_{\text{change of total energy density}}
+    +\underbrace{\nabla \left(\mathbf{u}\left(\mathbf{u}(
+    \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}\right)
+\right)}_{\text{energy flow of the velocity field}} = 0.\label{eq:energy}
+\end{align}
+This is called the \textbf{energy equation} and is a general result for a
+inviscid and incompressible fluids, which we can apply to study water waves.
+We start of with replacing $\nabla = \nabla_\perp + \frac{\partial }{\partial
+z} $ and $\Omega = g z$ and multiplying by $\rho$, then our energy equation
+in \ref{eq:energy} becomes
+\begin{align}
+    \frac{\partial }{\partial t}\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho
+    g z\right)  + \nabla_\perp\left( \mathbf{u}_\perp\left(
+    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho gz \right)  \right)
+    \frac{\partial}{\partial z} \left( w\left(
+    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho g z \right)  \right)  = 0.
+\end{align}
+Integrating from bottom to top, i.e. from bed to free surface gets us to
+\begin{align}
+    &\int_b^h\frac{\partial }{\partial t}\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho
+    g z\right)\ dz  \label{eq:e-int1}\\
+    &+ \int_b^h \nabla_\perp\left( \mathbf{u}_\perp\left(
+    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho gz \right)  \right)\
+    dz\label{eq:e-int2}\\
+    &+ \left(\frac{\partial}{\partial z} \left( w\left(
+    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho g z \right)
+\right)\right)\Bigg|_b^h \label{eq:e-int3}
+    = 0.
+\end{align}
+For equation \ref{eq:e-int1} we use Leibniz Rule of Integration, leaving us
+with
+\begin{align}
+    \int_b^h\frac{\partial }{\partial t}\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho
+    g z\right)\ dz
+    &= \frac{\partial }{\partial t} \int_b^h
+    \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho gz \ dz\\
+    &+ \left( \frac{1}{2}\rho \mathbf{u}_s \mathbf{u}_s  + \rho g h \right)
+    h_t\\
+    &- \left( \frac{1}{2}\rho \mathbf{u}_b \mathbf{u}_b  + \rho g b \right)
+    b_t
+\end{align}
+For equation \ref{eq:e-int2} we again take note of the Leibniz Rule of
+Integration, getting
+\begin{align}
+    \int_b^h \nabla_\perp\left( \mathbf{u}_\perp\left(
+    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho gz \right)  \right)\
+    dz
+    &= \nabla_\perp \int_b^h \mathbf{u}_\perp\left(
+    \frac{1}{2}\rho\mathbf{u}\mathbf{u} + P + \rho g z \right) \ dz\\
+    &- \left( \frac{1}{2}\rho \mathbf{u}_s\mathbf{u}_s + P + \rho g h \right)
+    \left( \mathbf{u}_{\perp s} \nabla_\perp \right) h\\
+    &+\left( \frac{1}{2}\rho \mathbf{u}_b\mathbf{u}_b + P + \rho g b \right)
+    \left( \mathbf{u}_{\perp b} \nabla_\perp \right) b
+\end{align}
+Thereby transforming our equation into
+\begin{align}
+    \frac{\partial }{\partial t} \underbrace{\int_b^h \frac{1}{2}\rho
+    \mathbf{u}\mathbf{u}+\rho g z\ dz}_{=:\mathcal{E}}
+    + \nabla_\perp&\underbrace{\int_b^h
+    \mathbf{u}_\perp\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho g z
+\right)\ dz}_{:=\mathcal{F}}
++ \underbrace{P_s h_t - P_b b_t}_{:=\mathcal{P}} = 0\\
+\nonumber\\
+    &\frac{\partial \mathcal{E}}{\partial t}
+    + \nabla_\perp \mathcal{F} + \mathcal{P} = 0,
+\end{align}
+where $\mathcal{E}$ represents the energy in the flow per unit horizontal
+area, since we are integrating from bed to free surface. Where $\mathcal{F}$
+is the horizontal energy flux vector and lastly $\mathcal{P} = P_s h_t -
+P_b b_t$ is the net energy input due to the pressure forces doing work on the
+upper and lower boundaries, i.e. bottom and free surface of the fluid.
+Assuming stationary rigid bottom condition and constant surface pressure, we
+can set $P_s=0$, such that $\mathcal{P} =0$ leaving us with the equation
+\begin{align}
+    \frac{\partial \mathcal{E}}{\partial t}
+    + \nabla_\perp \mathcal{F} = 0.
+\end{align}
+We note that the assumption $P_s=0$ is only possible if the coefficient of
+surface tension is set to 0, which usually is not the case.
+\section{Dimensional Analysis}
 
 
 

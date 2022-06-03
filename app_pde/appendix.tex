@@ -57,4 +57,55 @@ which is
     (\mathbf{u}\nabla)\mathbf{u} = \nabla(\frac{1}{2}\mathbf{u}\mathbf{u}) -
     \left(\mathbf{u}\times (\nabla \times  \mathbf{u})\right)
 \end{align}
-
+\subsection{Middle Curvature of an Implicit Function}
+In our case the implicit function for fixed time reads
+\begin{align}
+    z-h\left(x_1,x_2\right) = 0.
+\end{align}
+The parametric representation is
+\begin{align}
+    \mathbf{\sigma} = \begin{pmatrix} x_1 \\ x_2 \\ h \end{pmatrix} .
+\end{align}
+The middle curvature of the surface parametrized by $\mathbf{\sigma}$ is
+\begin{align}
+    \frac{1}{R} = \text{Tr}(G^{-1}B),
+\end{align}
+where $G$ and $B$ are given by
+\begin{align}
+    G_{ij} = \frac{\partial \mathbf{\sigma}}{\partial x_i} \frac{\partial
+    \mathbf{\sigma}}{\partial x_j}, \\
+    B_{ij} = -\mathbf{N} \frac{\partial^2 \mathbf{\sigma}}{\partial
+    x_i\partial x_j},
+\end{align}
+where $i, j = 1, 2$ and $\mathbf{N}$ is the normal, normalized surface vector given by
+\begin{align}
+    \mathbf{N} &= \frac{\frac{\partial \mathbf{\sigma}}{\partial x_1}\times
+    \frac{\partial \mathbf{\sigma}}{\partial x_2}}{\|\frac{\partial \mathbf{\sigma}}{\partial x_1}\times
+    \frac{\partial \mathbf{\sigma}}{\partial x_2}\|} \\
+               &= \frac{1}{\sqrt{h_x^2 + h_y^2 +1}} \begin{pmatrix}
+               -h_x\\-h_y\\1 \end{pmatrix}.
+\end{align}
+Thereby the matrices $B$ and $G$ are calculated to be
+\begin{align}
+    G = \begin{pmatrix} 1+h_x^2 & h_xh_y\\h_xh_y & 1+h_y^2 \end{pmatrix}
+    \qquad
+    B =\frac{1}{\sqrt{h_x^2 +h_y^2 +1} } \begin{pmatrix}h_{x x} &
+    h_{yx}\\h_{x y} & h_{yy}  \end{pmatrix}.
+\end{align}
+The inverse of $G$ is
+\begin{align}
+    G^{-1}
+    &= \frac{1}{\det(G)} \text{adj}(G)\\
+    &= \frac{1}{h_x^2+h_y^2 +1} \begin{pmatrix}1+h_y^2 & -h_xh_y \\-h_xh_y  &
+    1+h_x^2\end{pmatrix} .
+\end{align}
+Hence the middle curvature is given by the follwing
+\begin{align}
+    \frac{1}{R} &
+    = \text{Tr}(G^{-1}B)\\
+                &= \frac{1}{(h_x^2 + h_y^2+1)^{\frac{3}{2}}}
+    \text{Tr}\begin{pmatrix} (1+h_y)^2 h_{x x} - h_x h_y h_{xy} & *\\
+    * & (1+h_x^2)h_{yy}-h_xh_yh_{xy}\end{pmatrix}\\
+    &=\frac{(1+h_y^2)h_{x x}+(1+h_y^2)h_{yy} -
+    2h_xh_yh_{xy}}{\left( h_x^2+h_y^2+1 \right)^{\frac{3}{2}} }.
+\end{align}
