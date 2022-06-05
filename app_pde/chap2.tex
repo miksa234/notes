@@ -1,0 +1,215 @@
+\section{Dimensional Analysis}
+Our derived model of fluid dynamics yields formal connections between
+physical quantities. These quantities bear units, e.g. the velocity of fluid
+particles $\mathbf{u}$ has the ``SI'' unites of $\frac{m}{s}$, meters per
+second. The idea is the make use of these scales and formulate a model, where
+the quantities are nondimensionalized, i.e. to get rid of physical units by
+scaling each quantity appropriately. The appropriate length scales are that
+of the typical water depth $h_0$ and the typical wavelength $\lambda$ of a
+surface wave.
+
+\subsection{Nondimensionalisation}
+In summary we use these adaptations
+\begin{itemize}
+    \item $h_0$ for the typical water depth
+    \item $\lambda$ for the typical wavelength
+    \item $\frac{\lambda}{\sqrt{g h_0}}$ time scale of wave propagation
+    \item $\sqrt{g h_0}$ velocity scale of waves in $(x, y)$
+    \item $\frac{h_0 \sqrt{g h_0} }{\lambda}$ velocity scale in the $z$
+        direction.
+\end{itemize}
+$(x, z, t)$, then
+\begin{align}
+    u = \psi _z, \qquad w = - \psi_x;
+\end{align}
+and the scale of $\psi$ must be $h_0\sqrt{g h_0}$. Additionally we write the
+boundary condition on the free surface as follows
+\begin{align}
+    h  = h_0 + a \eta (\mathbf{x}_\perp, t) = z,
+\end{align}
+where $a$ is the typical amplitude and $\eta$ nondimensional function. All in
+all we have the following scaling for the physical quantities of our context
+\begin{align}
+    &x \rightarrow\ \lambda x, \quad u \rightarrow \sqrt{gh_0} u, \\
+      &y \rightarrow\ \lambda y, \quad v \rightarrow \sqrt{gh_0} v, \qquad
+      t\rightarrow \frac{\lambda}{\sqrt{gh_0}}t,\\
+      &z \rightarrow\ h_0 z, \quad w \rightarrow
+    \frac{h_0\sqrt{gh_0}}{\lambda} w.
+\end{align}
+with
+\begin{align}
+    h = h_0 + a \eta, \qquad  b \rightarrow h_0 b.
+\end{align}
+The pressure is also rewritten into
+\begin{align}
+    P = P_a + \rho g(h_0 -z) + \rho g h_0 p,
+\end{align}
+where $P_a$ is the atmospheric pressure, the term $h_0-z$ represent the
+hydrostatic pressure distribution, i.e. pressure at depth and the term with the pressure
+variable $p$  measures the deviation from the hydrostatic pressure
+distribution. Indeed $p\neq 0 $ for wave propagation. Now we can perform a
+rescaling of the Euler's Equation of Motion, we introduce the notation
+\begin{align}
+    &t = \frac{\lambda}{\sqrt{gh_0}}\tau,\quad x = \lambda \xi,\quad u =
+    \sqrt{gh_0} \tilde{u}\\
+    &y = \lambda \chi,\quad v = \sqrt{gh_0} \tilde{v}\\
+    &z = h_0 \zeta, \quad w = \frac{h_0\sqrt{gh_0} }{\lambda}\tilde{w}.
+\end{align}
+We start off with the $x$ coordinate, substitute and apply the chain rule
+leading us to
+\begin{align}
+    \frac{Du}{Dt}
+    &= \frac{\partial u}{\partial t} +u \frac{\partial
+    u}{\partial x} \\
+    &= \sqrt{gh_{0}}\frac{\partial \tilde{u}}{\partial \tau} \frac{\partial
+    \tau}{\partial t} +gh_0 \tilde{u} \frac{\partial \tilde{u}}{\partial \xi}
+    \frac{\partial \xi}{\partial x} \\
+    &= \frac{gh_0}{\lambda} \left( \frac{\partial \tilde{u}}{\partial \tau}
+    \tilde{u} \frac{\partial \tilde{u}}{\partial \xi} \right),
+\end{align}
+on the other hand
+\begin{align}
+    \frac{gh_0}{\lambda} \left( \frac{\partial \tilde{u}}{\partial \tau}
+    \tilde{u} \frac{\partial \tilde{u}}{\partial \xi} \right)
+    &=-\frac{1}{\rho}\frac{1}{\lambda}\frac{\partial P}{\partial x} \\
+    &=-\frac{ g h_0 }{\lambda}\rho \frac{\partial p}{\partial \xi}.
+\end{align}
+Thereby the rescaling evolves to
+\begin{align}
+    \frac{D \tilde{u}}{D\tau} = -\frac{\partial p}{\partial \xi}.
+\end{align}
+Because of the same scaling in $y$ we get the same result as in $x$, that is
+\begin{align}
+    \frac{D \tilde{v}}{D\tau} = -\frac{\partial p}{\partial \chi}.
+\end{align}
+In the $z$ coordinate we have
+\begin{align}
+    \frac{Dw}{Dt}
+    &= \frac{\partial w}{\partial t} +w \frac{\partial
+    w}{\partial \zeta} \\
+    &= \frac{h_0\sqrt{gh_0}}{\lambda} \frac{\sqrt{gh_0}}{\lambda}
+    \frac{\partial \tilde{w}}{\partial \tau}  + \frac{1}{h_0}
+    \frac{h_0\sqrt{gh_0} }{\lambda} \frac{h_0\sqrt{gh_0}}{\lambda}
+    \tilde{w}\frac{\partial \tilde{v}}{\partial \zeta}\\
+    &= \frac{h_0^2g}{\lambda}\left( \frac{\partial \tilde{w}}{\partial \tau}
+    + \tilde{w}\frac{\partial \tilde{w}}{\partial \zeta} \right) .
+\end{align}
+On the other side we have
+\begin{align}
+    \frac{h_0^2g}{\lambda}\left( \frac{\partial \tilde{w}}{\partial \tau}
+    + \tilde{w}\frac{\partial \tilde{w}}{\partial \zeta} \right)
+    &=
+    -\frac{1}{h_0\rho} \frac{\partial P}{\partial z} +g \\
+    &=-\frac{1}{h_0\rho}(-\rho gh_0 \frac{\partial \zeta}{\partial \zeta}
+    \rho gh_0
+    \frac{\partial p}{\partial \zeta} ) + g  \\
+    &= -g \frac{\partial p}{\partial z}.
+\end{align}
+In total for the $z$ direction we get
+\begin{align}
+   \underbrace{\left( \frac{h_0}{\lambda} \right)^2}_{=: \delta^2}
+    \frac{Dw}{Dt} = -\frac{\partial p}{\partial z},
+\end{align}
+where $\delta$ is the \textbf{long wavelength} or \textbf{shallowness}
+parameter, a very important constant for developing model hierarchies. For
+clarity we resubstitute for $x, y, z, t, u, v$ and $w$, and for completeness
+the we display the equations again, which are
+\begin{align}\label{eq:nondim-motion}
+    \frac{Du}{Dt} = - \frac{\partial p}{\partial x}&, \quad
+    \frac{Dv}{Dt} = - \frac{\partial p}{\partial y}, \quad
+    \delta^2\frac{Dw}{Dt} = - \frac{\partial p}{\partial z}, \\
+    &\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y}
+    +\frac{\partial w}{\partial z}  = 0.
+\end{align}
+We can now turn our attention to the boundary conditions, on both free
+surface $z=h$ and the bottom $z=b$ we have $z \Rightarrow h_0 z$ and thereby
+\begin{align}
+    z = 1+
+    \underbrace{\frac{a}{h_0}}_{:=\varepsilon}\eta(\mathbf{x}_\perp,t) \quad
+    \text{and}\quad z= b,
+\end{align}
+where we arrive at our second very important parameter $\varepsilon$ called
+the \textbf{amplitude} parameter. As for the kinematic condition, we
+substitute the free surface $z=h = 1+\varepsilon \eta$ and get
+\begin{align}
+    \frac{Dz}{Dt} = \varepsilon\left(\eta_t + (\mathbf{u}_\perp
+        \nabla_\perp)\eta\right) \qquad \text{on}\;\; z= 1+\varepsilon \eta.
+\end{align}
+Respectively the bottom condition is not changed
+\begin{align}
+    w = b_t + (\mathbf{u}_\perp \nabla_\perp) b \quad \text{on}\;\; z= b.
+\end{align}
+The general dynamic condition for $h = h(x, y, t)$ yields a rescaling of the
+curvature in terms of
+\begin{align}
+   \frac{1}{R}
+   &= \frac{(1+h_y^2)h_{x x} + (1+h_x^2)h_yy - 2h_xh_yh_{xy}
+   }{\left(h_x^2+h_y^2 +1  \right)^{\frac{3}{2}} } \\
+   &= -\frac{\varepsilon h_0}{\lambda^2} \frac{(
+   1+\varepsilon^2\delta^2\eta_y^2 )\eta_{x x}+
+    (1+\varepsilon^2\delta^2\eta_x^2)\eta_{yy} -
+    2\varepsilon^2\delta^2\eta_x\eta_y\eta_{xy}}{\left(
+    1+\varepsilon^2\delta^2\eta_x^2+\varepsilon^2\delta^2\eta_y^2
+    \right)^{\frac{3}{2}} },
+\end{align}
+together with the pressure difference
+\begin{align}
+    \Delta P = \rho g h_0(p - \varepsilon \eta) = \frac{\Gamma}{R},
+\end{align}
+leaving us ultimately with the dynamic condition
+\begin{align}
+    p-\varepsilon\eta= \varepsilon\left( \frac{\Gamma}{\rho g\lambda^2}
+    \right) \left(\frac{\lambda^2}{\varepsilon h_0}\frac{1}{R}\right),
+\end{align}
+where $W_e = \frac{\Gamma}{\rho g h_0^2}$ is the \textbf{Weber number}. This
+dimensionless parameter can be considered as a measure of the fluid's inertia
+compered to its surface tension, which satisfies the relation
+\begin{align}
+    \delta^2 W_e = \frac{\Gamma}{\rho g \lambda^2}.
+\end{align}
+\subsection{Scaling of Variables}
+Admits a simple observation of the governing equations in the last chapter we
+notice that $w$ and $p$ on the free surface $z = 1 + \varepsilon\eta$ are
+directly proportional to $\varepsilon$. Hence we want to ''scale this way``
+by introducing the following transformation
+\begin{align}
+    p \rightarrow \varepsilon p, \quad w \rightarrow \varepsilon w, \quad
+    \mathbf{u}_\perp \rightarrow \varepsilon \mathbf{u}_\perp.
+\end{align}
+Because of this scaling our material derivative changes slightly to
+\begin{align}\label{eq:mod-material}
+    \frac{D}{Dt} = \frac{\partial }{\partial t} + \varepsilon\left(u
+    \frac{\partial }{\partial x}  + v \frac{\partial }{\partial y}  + w
+    \frac{\partial }{\partial z} \right)
+\end{align}
+A simple recalculation yields the rescaled, nondimensionalized Euler's
+Equation of motion are the same as in equations \ref{eq:nondim-motion} with
+the modified material derivative from \ref{eq:mod-material}, and the boundary
+conditions are
+\begin{align}
+    p &= \eta - \frac{\delta^2\varepsilon h_0}{\lambda^2} \frac{W_e}{R}\\
+    w &= \frac{1}{\varepsilon}\eta_t + (\mathbf{u}_\perp \nabla_\perp)\eta
+    \quad \text{on}\;\; z = 1+\varepsilon\eta\\
+    w &=\frac{1}{\varepsilon}b_t + (\mathbf{u}_\perp \nabla_\perp)b \quad
+    \text{on}\;\; z=b
+\end{align}
+\subsection{Model Hierarchies}
+As we have derived a model of fluid dynamics, with small parameters
+$\varepsilon$ and $\delta$, we can conduct a series of classifications and
+perform asymptotic analysis on them. The main hierarchies important in this
+review are derived from the following problem classifications
+\begin{itemize}
+    \item $\varepsilon\rightarrow 0$: linearized problem, small amplitude
+    \item $\delta\rightarrow 0$: shallow Water, long-wave
+    \item$\delta \rightarrow 0;\; \varepsilon~1$: shallow Water, large
+        amplitude
+    \item $\delta\ll 1;\; \varepsilon~\delta$: shallow water, medium
+        amplitude
+    \item $\delta\ll 1;\; \varepsilon~\delta^2$: shallow water, small
+        amplitude
+    \item $\delta \gg 1;\; \varepsilon\delta\ll 1$: deep water, small
+        steepness.
+\end{itemize}
+
+
+

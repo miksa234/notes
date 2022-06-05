@@ -1,0 +1,508 @@
+\section{The Solitary Wave and The KdV Equation}
+The solitary wave is a wave of translation, it is stable and can travel long
+distances additionally the speed depends on the size of the wave. An
+interesting feature is that two solitary waves do not merge together to form
+one solitary wave, rather the small wave is overtaken by a larger one. If a
+solitary wave is too big for the depth it splits into two, a big and a small
+one. Solitary waves arise in the region $\varepsilon=O(\delta^2)$.
+
+
+\subsection{Solitary Wave}
+To describe
+a solitary wave we begin with Euler's Equation of Motion, where we assume
+there is no surface tension we set $W_e = 0$ and additionally assume
+irrotational flow $\mathbf{\omega}=\nabla \times  \mathbf{u} = 0$. This means
+that there exists a velocity potential $\phi(\mathbf{x},t)$ given
+by$\mathbf{u} = \nabla \phi$ satisfying the Laplace equation. In regard of a
+solitary wave being a plane wave, we rotate our coordinate system such that
+the propagation is in the $x$-direction and a stationary \& fixed bottom
+$b=0$. Ultimately leaving us with the following model
+\begin{align}\label{eq:soliton}
+\begin{drcases}
+   & \phi_{zz} + \delta \phi_{x x }  = 0,\\
+   &\text{with the boundary conditions}\\
+   &\begin{drcases}
+    &\phi_z = \delta^2 (\eta_t + \varepsilon \phi_x \eta_x) \\
+    &\phi_t + \eta +  \frac{1}{2}\varepsilon\left( \frac{1}{\delta^2}\phi^2_z
+    + \phi_x^2\right)  =0
+  \end{drcases}\quad \text{on}\;\; z = 1+\varepsilon\eta,\\
+   &\text{and}\\
+   & \phi_z =0 \quad \text{on}\;\; z = b = 0.
+\end{drcases}
+\end{align}
+Since the model arises $\varepsilon = O(\delta^2)$, for convince we set
+$\varepsilon=1$. The fact of the matter is we are seeking a traveling wave
+solution, thereby we can go into the coordinate system of the traveling wave,
+one in the variable $\xi = x - ct$ for a from left to right traveling wave,
+where $c$ is the nondimensional speed of the wave. Our goal is to find the
+solution for the velocity potential $\phi(\xi, z)$ and the wave profile
+$\eta(\xi)$. The chain rule gives us
+\begin{align}
+    \frac{\partial }{\partial x} &= \frac{\partial \xi}{\partial x}
+    \frac{\partial }{\partial \xi}  = \frac{\partial }{\partial \xi}, \\
+    \frac{\partial }{\partial t} &= \frac{\partial \xi}{\partial t}
+    \frac{\partial }{\partial \xi}  = -c\frac{\partial }{\partial \xi}.
+\end{align}
+Together with the equations in \ref{eq:soliton} we obtain
+\begin{align}\label{eq:soliton-xi}
+    \begin{drcases}
+   & \phi_{zz} + \delta \phi_{\xi\xi}  = 0,\\
+   &\text{with the boundary conditions}\\
+   &\begin{drcases}
+    &\phi_z = \delta^2 (\phi_\xi -c)\eta_\xi \\
+    &-c\phi_\xi + \eta +  \frac{1}{2}\varepsilon\left( \frac{1}{\delta^2}\phi^2_z
+    + \phi_\xi^2\right)  =0
+  \end{drcases}\quad \text{on}\;\; z = 1+\eta,\\
+   &\text{and}\\
+   & \phi_z =0 \quad \text{on}\;\; z = b = 0.
+    \end{drcases}
+\end{align}
+\subsubsection{Exponential Decay}
+We would like to analyze if the equation in \ref{eq:soliton-xi} gives viable a
+solution that decays exponentially, we make the ansatz
+\begin{align}
+    \eta \simeq a e^{-\alpha |\psi|},\quad \phi \simeq \psi(z)e^{-\alpha
+    |\xi|}, \qquad  \mid \xi \mid \rightarrow \infty,
+\end{align}
+where $\alpha>0$ is the exponent. The equations in \ref{eq:soliton-xi}
+transforms to
+\begin{align}
+    \psi'' + \alpha^2 \delta^2\psi = 0.
+\end{align}
+The above equation is a standard well known ordinary differential equation
+reading
+\begin{align}
+    \psi = A \cos(\alpha\delta z),
+\end{align}
+where $A$ is the integration constant. On the free surface $z\simeq 1$ gives
+\begin{align}
+    &-cA\alpha\sin(\alpha\delta) = ca\alpha,\label{eq:sol1}\\
+    &cA\alpha \cos(\alpha\delta) = -a \label{eq:sol2}.
+\end{align}
+Dividing equation \ref{eq:sol1} with equation \ref{eq:sol2} gives
+\begin{align} \label{eq:soliton-dispersion}
+    c^2 = \frac{\tan\left(\alpha\delta  \right) }{\alpha\delta}.
+\end{align}
+We conclude that the solution for such a wave exists provided that the
+dispersion relation on the wave propagation speed holds, thereby all solitary
+waves exhibit exponential decay in their tail and satisfy the dispersion
+relation in equation \ref{eq:soliton-dispersion}.
+\subsubsection{Asymptotic Analysis}
+The underlining equations in \ref{eq:soliton} extend from $-\infty$ to
+$\infty$, so the length scale is much greater than any finite depth of
+water. Therefore the classification $\delta \rightarrow 0$ is appropriate for
+a solitary wave, this however goes with the assumption
+$\varepsilon\rightarrow 0$ otherwise we cannot make an appropriate expansion.
+Let us look at the main equation
+\begin{align}\label{eq:sol-laplace}
+    \phi_{zz} + \delta \phi_{x x} = 0.
+\end{align}
+For small $\delta$ we conduct the $\delta^2 = O(\varepsilon)$ standard ansatz
+in asymptotic analysis
+\begin{align}
+    \phi_{\delta}(x, t, z) \simeq \sum_{n=0}^{\infty} \delta^{2n}\phi_n(x, t,
+    z).
+\end{align}
+Substituting $\phi_\delta$ into equation \ref{eq:sol-laplace} we get
+\begin{align}
+    \delta^{2\cdot 0}\left( \phi_{0zz} \right)  + \delta^{2\cdot 1}\left(
+    \phi_{1zz}+\phi_{0 x x} \right)  + \delta^{2\cdot 2}\left( \phi_{2zz}+
+    \phi_{1 x x} \right)  + O(\delta^{2\cdot 3}) = 0.
+\end{align}
+We start off with $O(\delta^{2\cdot0}) $, which gives us an arbitrary function
+$\phi_{0} = \theta(x, t)$. Next we may generalize the results for all
+$O(\delta^{2\cdot n})$ in the means of
+\begin{align}
+    \phi_{n+1zz}  = -\phi_{nx x}\qquad \forall n\in \mathbb{N} .
+\end{align}
+Therefore leaving us for $\phi_1$ and $\phi_2$ with
+\begin{align}
+    &\phi_1 = -\frac{1}{2} z^2 \theta_0(x,t) + \theta(x, t),\\
+    \Rightarrow& \phi_2 =
+    \frac{1}{24}z^4\theta_0(x,t)-\frac{1}{2}z^2\theta_1(x,t) + \theta_2(x,t).
+\end{align}
+The boundary condition on the bottom comes around to be
+\begin{align}
+    \phi_{nz} =0 \quad \text{on}\;\; z=0.
+\end{align}
+The free surface boundary condition $z= 1+\varepsilon\eta$ n evolves more calculation, we consider
+only terms up the order of $\delta^2$, initializing with
+\begin{align}
+    &\phi_z = \delta^2(\eta_t + \varepsilon\phi_x \eta_x)\\
+    \Leftrightarrow &\frac{1}{\delta}\phi_z = \eta_t + \varepsilon\phi_x
+    \eta_x,
+\end{align}
+substituting $\phi_\delta$ into the above proceeds to be
+\begin{align}
+    \frac{1}{\delta^2}\underbrace{\phi_{0z}}_{=0} + \phi_{1z}+ \delta^2\phi_{zz}
+    O(\delta^{2\cdot 2})
+    &= -z\theta_{x x} + \delta^2\left( \frac{1}{6}z^3\theta_{0 x x x x} - z
+    \theta_{0x x} \right) + O(\delta^{2\cdot 2})\\
+    &=-(1+\varepsilon\eta)\theta_{0 x x} + \delta^2\left(
+    \frac{1}{6}(1+\varepsilon\eta)^3\theta_{0 x x} -
+(1+\varepsilon\eta)\theta_{0 x x} \right) \label{eq:soliton-scale-boundary1}\\
+    &= \eta_t + \varepsilon\eta_x \left(
+        \theta_{0x}
+    \delta^2(\theta_{1x}-\frac{1}{2}( 1+ \varepsilon\eta)^2 \theta_{0x x
+    x}\label{eq:soliton-scale-boundary2}
+\right).
+\end{align}
+The second condition is
+\begin{align}
+    \phi_t + \eta + \frac{1}{2}\varepsilon \left( \frac{1}{\delta}\phi^2_z
+    \phi_x^2\right)  = 0,
+\end{align}
+becomes after substitution
+\begin{align}
+    &\theta_{0t}+ \delta^2\left( -\frac{1}{2}(1+\varepsilon\eta)^2\theta_{0 x xt}
+    + \theta_{1t}\right) + \eta + O(\delta^{2\cdot 2})
+\label{eq:soliton-scale-boundary3}
+    \\&=-\frac{1}{2}\delta^2\varepsilon(-(1+\varepsilon\eta)\theta_{0 x x
+    })^2\label{eq:soliton-scale-boundary4}
+    -\frac{1}{2}\left( \theta_{0 x} + \delta^2\left( \theta_{1x} -
+    \frac{1}{2}(1+\varepsilon\eta)^2\theta_{0 x x x x}  \right)  \right) ^2
+\end{align}
+In the order of $O(\delta^{0})$ as $\varepsilon \rightarrow 0$ gives us the conditions
+\begin{align}
+    -\theta_{0 x x} &= \eta_t \simeq \text{and}\quad
+    \theta_{0t}\simeq-\eta\label{eq:solitonO0}\\
+    &\Rightarrow \theta_{0 x x} - \theta_{0 t t} \simeq 0.
+\end{align}
+This gives us the wave equation, a simple solution in the frame of the right
+moving wave dependent on $\xi = x -t$ the chain rule gives us
+\begin{align}
+    \frac{\partial \theta_0(\xi(x, t))}{\partial t}
+    &= \frac{\partial
+    \theta_0}{\partial \xi} \underbrace{\frac{\partial \xi}{\partial t}}_{=-1}
+    + \frac{\partial
+    \theta_0}{\partial t} \underbrace{\frac{\partial t}{\partial t}}_{=1}
+        + \frac{\partial \theta_0}{\partial x} \underbrace{\frac{\partial
+        x}{\partial t}}_{=0}\\
+    &=-\theta_{0\xi}+\theta_{0t}.
+\end{align}
+substituting into \label{eq:solitionO0} we get
+\begin{align}
+        &2\theta_{0t\xi}\simeq\theta_{0t t},\\
+    \Rightarrow\;\;&\eta= \theta_{0\xi}+O(\varepsilon).
+\end{align}
+As for the surface boundary condition we see that the derivatives in $t$ are
+''small``. So we can proceed by the scaling $\tau = \varepsilon t$ as
+$\varepsilon\rightarrow 0$, we proceed with equation given in
+\ref{eq:soliton-scale-boundary1} and \ref{eq:soliton-scale-boundary2} in the
+$O(\varepsilon), O(\delta^2)$
+\begin{align}\label{eq:soliton-scale-boundary5}
+    -(1+\varepsilon\eta)\theta_{0\xi\xi}+
+    \delta^2\left(\frac{1}{6}\theta_{0\xi\xi\xi\xi} - \theta_{1\xi\xi}\right)\simeq
+    \varepsilon\eta_\tau -\eta_\xi +\varepsilon\eta\theta_{0\xi}
+\end{align}
+and boundary equations in \ref{eq:soliton-scale-boundary3},
+\ref{eq:soliton-scale-boundary4} produce
+\begin{align}\label{eq:soliton-scale-boundary6}
+   \varepsilon\theta_{0\tau}-\theta_{0\xi}+\delta^2\left(
+   \frac{1}{2}\theta_{0\xi\xi\xi} - \theta_{1\xi} \right) +\eta \simeq
+   -\frac{1}{2}\varepsilon \theta^2_{0\xi}.
+\end{align}
+Doing the following operation to the above equations
+\ref{eq:soliton-scale-boundary5} $-$ $\frac{\partial }{\partial
+\xi}$\ref{eq:soliton-scale-boundary6} turns out to be
+\begin{align}
+    &-\theta_{0\xi\xi}-
+    \varepsilon\eta\theta_{0\xi\xi}+
+    \delta\left(\frac{1}{6}\theta_{0\xi\xi\xi\xi}-\theta_{1\xi\xi}\right)
+    - \varepsilon\theta_{0\xi\tau}+\theta_{0\xi\xi}-\delta^2\left(
+        \frac{1}{2}\theta_{0\xi\xi\xi\xi} -
+    \theta_{1\xi\xi}\right)+\eta_{\xi}\\
+    &\simeq \varepsilon\eta_t - \eta_\xi+
+    \varepsilon\eta\theta_{0\xi}+\varepsilon\theta_{0\xi\xi}\theta_{0\xi}.
+\end{align}
+In the above equation we can simplify, i.e. short some terms out and
+substitute $\eta = \theta_{0\xi} + O(\varepsilon)$ and because of $\delta^2 =
+O(\varepsilon)$ we set $\delta^2 = K\varepsilon$ for constant $K$, leaving us
+with the equation for the surface profile, called the \textbf{Korteweg-de
+Vries}, KdV equation (1895)
+\begin{align}
+    2\eta_\tau + 3\eta\eta_\xi + \frac{K}{3}\eta_{\xi\xi\xi} = 0.
+\end{align}
+The KdV equation describes the balance between linearity and dispersion in
+the change of time of the wave profile. By rewriting $\eta = f(\xi-ct)$ we
+get
+\begin{align}
+    -2cf' + 3ff' + \frac{K}{3}f''' = 0\\
+    \text{with} \quad f, f', f''' \rightarrow 0\quad \text{as}\;\;  |\xi-ct|
+    \Rightarrow \infty.
+\end{align}
+The solution is a $\text{sech}$ function
+\begin{align}
+    f = 2c\ \text{sech}^2\left( \sqrt{\frac{3}{2K}}(\xi-ct)\right)
+\end{align}
+\subsection{KdV Equation}
+In this section we will go over the more general prerequisites and therefore
+a more convincing expedition for the Korteweg-de Vries equation. We still
+want to derive the wave profile of a wave in shallow water, small amplitude
+regime $\delta^2 = O(\varepsilon)$, where the bottom is horizontal \&
+stationary. The propagating wave can be seen as a plane wave, therefore the
+coordinate system is rotated in such a way that the propagating direction is
+the $x$ direction. For irrotational, inviscid flow without surface tension
+$W_e=0$ that is for gravity waves, nondimensional and rescaled Euler's
+Equations of Motion for such a flow are
+\begin{align}
+    \begin{drcases}
+        \frac{Du}{Dt}=-p_x,\quad \quad \delta^2
+        \frac{Dw}{Dt} = -p_z,\\
+    \text{where}\\
+    \frac{D}{Dt} = \frac{\partial }{\partial t}  + \varepsilon
+    \left(
+    u\frac{\partial u}{\partial x}
+    +w\frac{\partial w}{\partial z}\right)
+\\
+    \text{with}\\
+    \frac{\partial u}{\partial x} +\frac{\partial w}{\partial z}  = 0
+    \end{drcases}
+\end{align}
+with free surface boundary conditions
+\begin{align}
+    \begin{drcases}
+        p=\eta\\
+        w=\eta_t+\varepsilon u \eta_x
+    \end{drcases}
+    \text{on}\;\; z= 1+\varepsilon\eta,
+\end{align}
+and bottom boundary condition
+\begin{align}
+    w = 0 \quad \text{on}\;\; z=b =0.
+\end{align}
+We note here thatthe soluition for such a wave is a solitary wave as in
+described in the previous section. In principel we expect to wind such waves
+reather rarely in nature, since $\delta^2 = O(\varepsilon)$ is a very special
+case. Never the less this is not the case. We demonstrate that $\forall\
+\delta$ as $\varepsilon$ goes to $0$ there exists a region in the position
+space $(x, t)$ where the KdV balance in terms of linearity and dispersion
+is observed. Indeed we can ''generate`` KdV solitary waves, provided a small
+enough amplitude in the sence of $\varepsilon$ goes to $0$. First of all we
+introduce a rescaling of the variables adjusted to our problem definition
+\begin{align}
+    x \rightarrow \frac{\delta}{\sqrt{\varepsilon} }\tilde{x}, \quad t
+    \rightarrow \frac{\delta}{\sqrt{\varepsilon} }\tilde{t}\\
+    w \rightarrow \frac{\sqrt{\varepsilon} }{\delta}\tilde{w}.
+\end{align}
+Then the material derivative is transformed to be
+\begin{align}
+    \frac{D}{Dt} = \frac{\sqrt{\varepsilon}}{\delta}(\frac{\partial
+    }{\partial \tilde{t}} +\varepsilon \tilde{\mathbf{u}} \nabla).
+\end{align}
+The initial equations become
+\begin{align}
+    \frac{Du}{Dt} = \frac{\sqrt{\varepsilon}}{\delta} =-
+    \frac{\sqrt{\varepsilon} }{\delta} p_{\tilde{x}}\;\; &\Rightarrow\;\;
+    u_{\tilde{t}} + \varepsilon(u u_{\tilde{x}} + wu_z)= -p_{\tilde{x}}.\\
+    \frac{Dw}{Dt} = \frac{\varepsilon}{\delta^2}
+    \frac{D\tilde{w}}{D\tilde{t}}=-p_z \;\;&\Rightarrow\;\;
+    \varepsilon\left(\tilde{w}_{\tilde{t}} + \varepsilon\left(
+    u\tilde{w}_{\tilde{x}}+ \tilde{w}\tilde{w}_z \right)   \right)  = -p_z,
+\end{align}
+with
+\begin{align}
+    &w
+    = \frac{\varepsilon}{\delta}\tilde{w}
+    = \frac{\sqrt{\varepsilon} }{\delta}
+    \eta_{\tilde{t}}+\varepsilon u\frac{\sqrt{\varepsilon}}{\delta}
+    \eta_{\tilde{x}}\\
+    &\Rightarrow\;\;
+    \begin{drcases}
+    \tilde{w} = \eta_{\tilde{t}}+ \varepsilon u
+    \eta_{\tilde{x}}\\
+    p=\eta
+    \end{drcases}
+    \text{on}\;\; z = 1+\varepsilon\eta
+\end{align}
+and
+\begin{align}
+    w = 0 \quad \text{on}\;\; z= b = 0.
+\end{align}
+Now we replace the region $\delta^2$ with $\varepsilon = \delta^2$, while we
+let $\varepsilon$ go to $0$. We conclude to the following equations
+\begin{align}\label{eq:kdv3}
+    \begin{drcases}
+    u_t = -p_x, \quad p_z = 0\\
+    u_x + w_z = 0,\\
+    \text{with}\\
+    w=\eta_t \quad p=\eta \quad \text{on}\;\; z= 1\\
+    w = 0 \quad \text{on}\;\; z= 0.
+    \end{drcases}
+\end{align}
+Modification to these equations on the boundary condition, i.e. on $z=1$
+leaves us with
+\begin{align}
+    u = -p_x = -\eta_x \quad \Rightarrow \quad u_t + \eta_x = 0
+    \label{eq:kdv1}\\
+    w = -zu_x\Big|_{z=1} = -u_x = \eta_t \quad \Rightarrow \quad u_x + \eta_t
+    =0.\label{eq:kdv2}
+\end{align}
+By doing differentiation \ref{eq:kdv1} with respect to $x$ and subtracting
+the equation \ref{eq:kdv2} differentiated with respect tot $t$ we get the
+standard wave equation for the profile of the wave
+\begin{align}
+    \eta_{x x}  - \eta_{t t} = 0 .
+\end{align}
+We choose a solution for a right going wave and go into the frame of the
+moving wave by a coordinate transformation as in the last section to $\xi =
+x- t$. Additionally we want to introduce a long term variable, since we have
+a uniformity as $t$ (or $x$) goes to infinity. This is usually done by
+rescaling $t = \varepsilon \tau$. In summary we have that $\xi = O(1)$ as
+well as $\tau = O(1)$. This is for  \textbf{far field region} of the wave, and
+therefore the region, where we expect KdV type balance, between dispersion
+and linearity. The fact of this matter can be rigorously proven, it needs to
+be show that any sufficiently fast decaying smooth solution will eventually
+split into a finite superposition of two solitary waves traveling to the
+right and a decaying dispersive part traveling to the left. However will not
+go into this here. To transform the equations in \ref{eq:kdv3}, we look at
+the chain rule w.r.t $\xi ,\tau$ evolving to
+\begin{align}
+    \frac{\partial }{\partial t} &= -\frac{\partial }{\partial \xi}
+    +\varepsilon \frac{\partial }{\partial \tau} \\
+    \frac{\partial }{\partial x} &= \frac{\partial }{\partial \xi}.
+\end{align}
+Then we get
+\begin{align}\label{eq:kdv5}
+    \begin{drcases}
+        -u_\xi + \varepsilon\left(u_\tau + uu_\xi + w u_z  \right)  =
+        -p_\xi\\
+        \varepsilon\left( -w_\xi + \varepsilon\left( w_\tau + u w_\xi + w w_z
+        \right)  \right)  = - p_z\\
+        u_\xi + w_z = 0\\
+        \text{with}\\
+        \begin{drcases}
+        w = -\eta_\xi+\varepsilon(\eta_\tau+u \eta_\xi)\\
+        p=\eta
+        \end{drcases}
+        \text{on} \;\; z=1+\varepsilon\eta\\
+        \text{and}\\
+        w = 0 \quad \;\; z = b =0.
+    \end{drcases}
+\end{align}
+The crucial part now is to consider an asymptotic expansion of in
+$\varepsilon$ for velocity of the fluid particles $u, w$ and also the wave
+profile $\eta$ and for the pressure variable $p$. The general asymptotic
+ansatz is of the form
+\begin{align}
+    q\left( \xi, \tau, z; \varepsilon \right)  = \sum_{n=0}^{\infty}
+    \varepsilon^n q_n\left( \xi, \tau, z \right).
+\end{align}
+The first equation in \ref{eq:kdv5} up to the order of $O(\varepsilon^2)$ is
+of the form
+\begin{align}
+    \varepsilon^0\left( p_{0\xi} - u_{0\xi}\right) + \varepsilon^1\left(
+    p_{1\xi} - u_{1\xi} + u_{0\tau} + u_0 u_{0\xi} + w_0u_{0z} \right)
+    +O(\varepsilon^2) = 0,
+\end{align}
+with the main condition $p_{0\xi} = u_{0\xi}$. For the second equation in
+\ref{eq:kdv5} becomes
+\begin{align}
+    \varepsilon^0\left( p_{0z} \right)
+    +\varepsilon^1\left( p_{1z}-w_{0\xi} + w_{0\tau} + u_0w_{0\xi}+w_0w_{0z} \right)
+    + O(\varepsilon^2) = 0,
+\end{align}
+the main condition $p_{0z} =0 $. The third equation in \ref{eq:kdv5} is the
+following
+\begin{align}
+    \varepsilon^0(u_{0\xi}+w_{0z}) + \varepsilon^1\left( u_{1\xi}+w_{1z}
+    \right)
+    O(\varepsilon^2) =0,
+\end{align}
+where the main condition satisfies $u_{n\xi} = -w_{n\xi}$ for all $n \in
+\mathbb{N}$. Further the surface condition is expanded into
+\begin{align}
+    p_n = \eta_n \qquad \forall\ n \in \mathbb{N},
+\end{align}
+and
+\begin{align}
+    \varepsilon^0\left(w_0 + \eta_{0\xi}\right)+
+    \varepsilon^1\left( w_1 + \eta_{1\xi} + \eta_{0\tau} + \eta_0 \eta_{0\xi}\right)
+    + O(\varepsilon^2) = 0,
+\end{align}
+Do note that the condition for for $\varepsilon^0$ is $z=1$ and for
+$\varepsilon^1$ is $z=\varepsilon\eta$. The main conclusion from the above
+equation is however $w_0 = -\eta_{0\xi}$. And lastly the bottom condition
+remains unchanged for all $n$ as
+\begin{align}
+    w_n = 0 \quad \text{on}\;\; z= b=0
+\end{align}
+In essence $O(\varepsilon^0)$ give us the equations
+\begin{align}
+    u_{0\xi}=p_{0\xi},\quad p_{0z} =0,\quad u_{0\xi} + w_{0z} = 0,
+\end{align}
+with
+\begin{align}
+    p_0 = \eta_0, \quad w_0 = -\eta_{0\xi} \quad \text{on}\;\; z=1\\
+    w_0 = 0 \quad \text{on}\;\; z=b=0.
+\end{align}
+They lead us tot he following solution which satisfies the boundary
+\begin{align}
+    p_0 = \eta_0, \quad u_0 = \eta_0, \quad w_0 = -z\eta_{0\xi} \quad
+    \forall\ z\in[0, 1].
+\end{align}
+Do notice who $w_0 = -z\eta_{0\xi}$ automatically satisfies the boundary
+conditions for both $z=0$ and $z=1$. Before we go on to consider
+$O(\varepsilon)$, we expand $u, w$ and $p$ around $z=1$ via Taylor expansion.
+This makes only since in the case $\varepsilon\rightarrow 0$
+\begin{align}
+    \begin{drcases}
+    p_0 + \varepsilon\eta_0 p_{0z} + \varepsilon p_1 = \eta_0
+    \varepsilon\eta_1 + O(\varepsilon^2)\\
+    w_0 +\varepsilon\eta_0w_{0z} + \varepsilon w_1 = -\eta_{0\xi} -
+    \varepsilon\eta_{1\xi} + \varepsilon\left( \eta_0 + u_0 \eta_{0\xi}
+    \right) +O\left(\varepsilon^2  \right).
+    \end{drcases} \text{on}\;\; z=1
+\end{align}
+Right off the equations of order $O(\varepsilon^1)$ become
+\begin{align}
+    -u_{1\xi} + u_{0\tau} + u_0u_{0\xi} + w_{0}u_{0z} = -p_{1\xi},\\
+    p_{1z} = w_{0\xi} \quad \text{and} \quad u_{1\xi} + w_{1z} = 0,
+\end{align}
+with the boundary conditions
+\begin{align}
+    \begin{drcases}
+        p_1 + \eta_0 p_{0z} = \eta_1\\
+        w_1 + \eta_0 w_{0z} = -\eta_{1\xi} + \eta_{0t} + u
+    \end{drcases}
+    \text{on}\;\; z=1\\
+    w_1 = 0 \quad \text{on}\;\; z =b = 0.
+\end{align}
+Thus
+\begin{align}
+    &p_{1z} = w_{0\xi} = -z\eta_{0\xi}\\
+    \Rightarrow p_1 = -\frac{1}{2}z^2 \eta_{0\xi\xi} +c,
+\end{align}
+where $c$ is the integration constant, together with the boundary condition
+on $z=1$ we get that
+\begin{align}
+    c = \eta_1 + \frac{1}{2} \eta_{0\xi\xi},
+\end{align}
+for $p_1$ leaving is with
+\begin{align}
+    p_1 = \frac{1}{2} \left( 1-z^2 \right)  \eta_{0\xi\xi} +\eta_1
+\end{align}
+As for the condition $w_{1z} = -u_{1\xi}$ we get
+\begin{align}
+    w_{1z} &= -u_{1\xi} = -p_{1\xi} - u_{0\tau} - u_0u_{0\xi} - u_0u_{0z} \\
+    &=\frac{1}{2} (1-z^2)\eta_{0\xi\xi\xi} - \eta_{1\xi} -\eta_{0\tau}
+    -\eta_{0\xi}.
+\end{align}
+By integration and evaluation on $z=1$ of the above equation we get
+\begin{align}\label{eq:kdv6}
+    w_1\Big|_{z=1} = -\frac{1}{3} \eta_{0\xi\xi\xi} - \eta_{1\xi} -
+    \eta_{0\tau} -\eta_0\eta_{0\xi},
+\end{align}
+on the other hand we have the original boundary condition
+\begin{align}\label{eq:kdv7}
+    w_1\Big|_{z=1} = -\eta_{1\xi} + \eta_{0\tau} +2\eta_{0}\eta_{0\xi} .
+\end{align}
+Subtracting equation \ref{eq:kdv6} from \ref{eq:kdv7} we get the KdV equation
+\begin{align}
+    \frac{1}{3} \eta_{0\xi\xi\xi} - 2\eta_{0\tau} - 3\eta_0\eta_{0\xi} = 0.
+\end{align}
+
+
+
+
+
