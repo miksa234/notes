@@ -1,0 +1,160 @@
+\section{Modeling the 2004 Tsunami}
+\subsection{Description}
+On the 26. December 2004, time 7:58 a powerful earthquake generated a tsunami
+killing more than 275000 people and leaving millions homeless. The
+hypocenter f the earthquake was 30 km under the floor of the Indian Ocean,
+100 km away from Sumatra, an island in Indonesia. The earthquake displaced
+an enormous amount of water, sending tsunami waves westwards across the
+Indian Ocean to Sri Lanka and India and eastwards across the Andaman Basin.
+to Thailand and Indonesia. The Earthquake occurred over 10 minutes along a
+1000km long roughly straight line. Thereby we can model the corresponding
+fluid dynamics as 2 dimensional where in Cartesian coordinates the
+propagation of the tsunami wave is in $x$ direction and the $z$ direction
+pointing upwards perpendicular to the flat ocean surface. However the
+modeling assumption for two dimensions for the region outside the Bay of
+Bengal is not valid, since the diffraction around islands and reflection from
+steep shores pays a major role in the influence of the wave dynamics. Coming
+back to the $2004$ tsunami, which raised the ocean floor a few meters to the
+west and lowering it a few meters to the east, displacing the tectonic pates.
+The tsunami waves featured westwards a wave of elevation, meaning a wave of
+high amplitude, followed by a wave of depression, a wave of long wavelength
+hitting the coastal areas of Sri Lanka and India in roughly three hours,
+propagating a distance of approximately $1600\ \text{km}$. On the other hand
+eastwards featuring a first a wave of depression following a wave of
+elevation, propagating $700\ \text{km}$ in roughly two hours with a maximal
+amplitude of $10\ \text{m}$. Observations tell us that as the tsunami waves
+reached the shore the shape of the initial disturbance was not altered, which
+is supported by measurements by a radar altimeter two hours after the
+earthquake showing first an wave of elevation and then a wave of depression
+westwards and respectively vice versa eastwards. A conclusion is made that t
+he shape of the tsunami remained approximately constant. Additionally it
+should be mentioned that the tsunami waves reach very high amplitudes due to
+the diminishing depth effect as they approach the shore, yet at open sea are
+barely noticeable. A boat on open sea positioned at high depth in the region
+of the tsunami during the which the tsunami waves passed, captured the raise
+from $\pm 0.8\ \text{m}$ of the boat over a period of $10\ \text{min}$.
+This means that the wavelength of the tsunami wave was about $100\
+\text{km}$.
+\subsection{Long Wave, Shallow Water}
+At weakly nonlinear levels dispersion balances linearity/nonlinearity in
+certain regimes, such balance is found in the KdV equation. Among the KdV
+equation, the Carissa-Holm equation (CH) also features such balance since it
+arises as a high order approximation to KdV. Further there is also the
+regularized long wave equation usually called Benjamin–Bona–Mahony equation, or simply
+BBM. It should be noted that KdV is a solitary wave while BBM is not.
+Localized disturbances of flat water surfaces propagating without change of
+form need to be two dimension waves of elevation symmetric about the crest.
+The linear theory does not provide any approximation to solitary waves, only
+nonlinear or weakly linear approximations. These are KdV, BBM. The KdV
+equation is orbitaly stable, meaning the shape and form of the profile is
+stable under small perturbations (also CH \& BBM). Each solitary wave retains
+is local identity, where large waves are faster than small ones. Further the
+solution of the KdV equation evolves into a set of solitary waves, with
+tallest in from front followed by an oscillatory tail. The KdV is the
+proper equation, for our modeling purposes of tsunami waves. The main
+question arises if KdV enters the regime of validity, in our case for the
+$2004$ tsunami in the Andaman Basin. Or in other words are the involved
+geophysical scales leading to time and space scales that are compatible with
+the KdV weak nonlinearity balance.
+\subsection{Governing equations}
+The last two section show the derivation of the modeling equation for fluid
+dynamics, following with nondimensionalisation and rescaling. The scaling
+takes the same form as in section \ref{sec:nondim}, we only introduce the
+parameter $\alpha = h_0\sqrt{gh_0} $ and get the following equations
+\begin{align}
+    \begin{drcases}
+    u_x + w_z = 0\\
+    u_t + \varepsilon(uu_x + wu_z) = -p_x\\
+    \delta^2\left(w_t + \varepsilon(w w_x + w w_z)\right) = -p_y\\
+    u_z - \delta^2 w_x = 0
+    \end{drcases}
+\end{align}
+on $(x, z) \in \mathbb{R}\times [0, 1+\varepsilon \eta(x, t)]$, with boundary
+conditions
+\begin{align}
+    \begin{drcases}
+        p = \eta \\
+        w = h_t + \varepsilon u h_x
+    \end{drcases}
+    \text{on}\;\; z = 1+\varepsilon \eta(x, t)\\
+    w = 0 \quad \text{on}\;\; z = 0.
+\end{align}
+The KdV validity arises in the region $\varepsilon = O(\delta^2)$, we are
+going to thereby rescale $\delta$ in favour of $\varepsilon = \beta
+\delta^2$, where $\beta = O(1)$ as in equation \ref{eq:epsdelta}:
+\begin{align}\label{eq:epsdelta}
+    x \rightarrow \frac{\delta}{\sqrt{\varepsilon} }x, \quad t
+    \rightarrow \frac{\delta}{\sqrt{\varepsilon} }t\quad,
+    w \rightarrow \frac{\sqrt{\varepsilon} }{\delta}w.
+\end{align}
+This opens up the possibility to prove that provided a suitable length- \&
+time-scales for some $\delta$ the KdV will arise as a valid approximation for
+the evolution of the free surface waves. Given some $\varepsilon>0$ there
+exists a time in the such that the KdV balance holds, where we introduce the
+variables $\xi = x- t$ and $\tau = \varepsilon t$ with equation for the wave profile
+\begin{align}
+    \eta_\tau - \frac{3}{2} \eta_{\xi\xi\xi} + \frac{1}{6} \eta \eta_\xi = 0,
+\end{align}
+for $\xi \in \mathbb{R}$ and $\tau > 0 $ and the boundary condition $\eta(\xi
+,0)$ of the initial profile at $\tau = t = 0$. On the basis of satellite
+measurements for the Bay of Bengal we have
+\begin{align}
+    a = 1\ \text{km}, \quad \lambda = 100\ \text{km},\quad h_0 = 4\
+    \text{km}.
+\end{align}
+giving us
+\begin{align}
+    \varepsilon = \frac{a}{h_0} = 25 \cdot 10^{-5}\\
+    \delta = \frac{h_0}{\lambda} \simeq 4*10^{-2}
+\end{align}
+giving us a $\beta \simeq 6,4 = O(1)$ for $\varepsilon = \beta \delta^2$.
+The main issue is if the KdV balance can occur within the geophysical scales
+.Thee conditions $x-t = O(1)$ and $\tau = O(1)$ give
+\begin{align}
+    \frac{x - t \sqrt{gh_0} }{\lambda} = 0(1),\quad \frac{\varepsilon t
+    \sqrt{gh_0} }{\lambda} = 0(1).
+\end{align}
+Combining the above equations, we have
+\begin{align}
+   & \frac{x}{\lambda} = O(\varepsilon^{-1})\\
+    &x  = O(\varepsilon^{-1}\lambda)
+\end{align}
+For the tsunami wave in the Bay of Bengal westwards towards India and Sri
+Lanka we have
+\begin{align}
+    \lambda = 10\ \text{km}, \quad \varepsilon = 25 \cdot 10^{-5},
+\end{align}
+therefore a propagation distance of $x \simeq 4 \cdot 10^{5}$ is needed for
+the KdV to enter the range of validity. This is however not the case since
+the tsunami waves propagated $1600\ \text{km}$ westwards.
+
+For the wave in the Andaman Basin towards Indonesia and Thailand we have
+\begin{align}
+    h_0 = 1\ \text{km}, \quad a = 1\ \text{m}, \quad \lambda = 100\
+    \text{km}.
+\end{align}
+Giving us the parameters
+\begin{align}
+    \varepsilon  = 10^{-3}, \quad \delta = 10^{-2}.
+\end{align}
+this satisfys the range of validity  $\varepsilon = O(\delta^2)$, with the
+requiring length scale $x = 10^{5}$.
+
+Setting $h_0 = 4\ \text{km}$ for the Bay of Bengal and $h_0 = 1\ \text{km}$
+for the Andaman Basin we have that the westwards tsunami propagated at speed
+$\sqrt{gh_0}  = 712 \frac{\text{km}}{\text{h}}$ hitting the shore in about
+$2h\ 10min$, while the tsunami waves eastwards propagated at speed $356
+\frac{\text{km}}{\text{h}}$ hitting the coast in $1h\ 57min$. These
+predictions align with the observations. As the waves approach the shore, the
+tsunami dynamics enter the region of long waves over variable depth. In this
+case dispersion and their front steepness play an important role, where
+faster wave fronts catch up to slower ones and result in large amplitudes
+with devastating effects.
+
+
+
+
+
+
+
+

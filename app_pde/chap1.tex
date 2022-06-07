@@ -74,23 +74,36 @@ The figure bellow \ref{fig:volume}, expresses the above described picture.
 \end{figure}
 
 Since we want to figure out the fluid's dynamics, we can consider the rate
-of change in the completely arbitrary $V$. The rate of change of mass needs to
-disappear, i.e. it is equal to zero since we cannot lose mass. Matter (mass) is
-neither created nor destroyed anywhere in the fluid, leading us to
+of change in the completely arbitrary $V$
 \begin{align}
-    \frac{d}{dt}\left( \int_V \rho(\mathbf{x}, t)\ dV \right) = 0.
+    \frac{d}{dt}\left( \int_V \rho(\mathbf{x}, t)\ dV \right) = \int_V
+    \frac{\partial \rho(\mathbf{x}, t)}{\partial t} \ dV
 \end{align}
-\textbf{NOT SURE HERE YET!!!!!!!!!!!, CHECK LEIBINZ FORMULA}
-To get more information we simply ''differentiate under the integral
-sign``, also known as the Leibniz Rule of Integration, see appendix
-\ref{appendix:leibniz}, the integral equation representing the rate of change
-of mass reads
+On the other hand we have that density is mass over volume or
+\begin{align}
+    dm = \rho \cdot dV.
+\end{align}
+The infinitesimal volume has the base area $dS$ with hight $h$, which is the
+distance in the direction perpendicular to to the base area, leaving us with
+$dV = h dS$. By definition $\mathbf{n}$ is perpendicular to $dS$, we have
+that $h = l \mathbf{n}$. Where $l$ is the unit of length, or velocity times
+time $l = \mathbf{u} dt$, since mass is flowing out of the surface we
+change the sign of the flow leading us to
+\begin{align}
+   dm  = -\rho dV = -\rho \mathbf{u} \cdot \mathbf{n} dt dS,
+\end{align}
+All together we have
+\begin{align}
+    \frac{dm}{dt} = -\int_{\partial V} \rho(\mathbf{x},t) dS
+    \mathbf{u}\cdot\mathbf{n}.
+\end{align}
+Putting both equations on one side leaves us with a variation of the mass
+conservation equation
 \begin{align}\label{eq:mass balance}
-    \frac{dm}{dt} = \int_V \frac{\partial \rho(\mathbf{x}, t)}{\partial t}\ dV
+     \int_V \frac{\partial \rho(\mathbf{x}, t)}{\partial t}\ dV
     +\int_{\partial V} \rho(\mathbf{x}, t) \mathbf{u}\cdot\mathbf{n}\ dS
     = 0.
 \end{align}
-\textbf{----------------------}
 The above equation in \ref{eq:mass balance} is an underlying equation, describing that the rate of
 change of mass in V is brought about, only by the rate of mass flowing into
 V across S, and thus the mass does not change.

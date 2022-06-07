@@ -235,7 +235,7 @@ The solution is a $\text{sech}$ function
 \begin{align}
     f = 2c\ \text{sech}^2\left( \sqrt{\frac{3}{2K}}(\xi-ct)\right)
 \end{align}
-\subsection{KdV Equation}
+\subsection{KdV Equation\label{sec:kdv}}
 In this section we will go over the more general prerequisites and therefore
 a more convincing expedition for the Korteweg-de Vries equation. We still
 want to derive the wave profile of a wave in shallow water, small amplitude
@@ -271,18 +271,18 @@ and bottom boundary condition
 \begin{align}
     w = 0 \quad \text{on}\;\; z=b =0.
 \end{align}
-We note here thatthe soluition for such a wave is a solitary wave as in
-described in the previous section. In principel we expect to wind such waves
-reather rarely in nature, since $\delta^2 = O(\varepsilon)$ is a very special
+We note here that the solution for such a wave is a solitary wave as in
+described in the previous section. In principle we expect to wind such waves
+rather rarely in nature, since $\delta^2 = O(\varepsilon)$ is a very special
 case. Never the less this is not the case. We demonstrate that $\forall\
 \delta$ as $\varepsilon$ goes to $0$ there exists a region in the position
 space $(x, t)$ where the KdV balance in terms of linearity and dispersion
 is observed. Indeed we can ''generate`` KdV solitary waves, provided a small
-enough amplitude in the sence of $\varepsilon$ goes to $0$. First of all we
+enough amplitude in the sense of $\varepsilon$ goes to $0$. First of all we
 introduce a rescaling of the variables adjusted to our problem definition
-\begin{align}
+\begin{align}\label{eq:epsdelta}
     x \rightarrow \frac{\delta}{\sqrt{\varepsilon} }\tilde{x}, \quad t
-    \rightarrow \frac{\delta}{\sqrt{\varepsilon} }\tilde{t}\\
+    \rightarrow \frac{\delta}{\sqrt{\varepsilon} }\tilde{t}\quad
     w \rightarrow \frac{\sqrt{\varepsilon} }{\delta}\tilde{w}.
 \end{align}
 Then the material derivative is transformed to be
