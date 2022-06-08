@@ -1,8 +1,8 @@
 \section{The Solitary Wave and The KdV Equation}
 The solitary wave is a wave of translation, it is stable and can travel long
-distances additionally the speed depends on the size of the wave. An
+distances. Additionally the speed depends on the size of the wave. An
 interesting feature is that two solitary waves do not merge together to form
-one solitary wave, rather the small wave is overtaken by a larger one. If a
+one solitary wave, but the small wave is overtaken by a larger one. If a
 solitary wave is too big for the depth it splits into two, a big and a small
 one. Solitary waves arise in the region $\varepsilon=O(\delta^2)$.
 
@@ -13,7 +13,7 @@ a solitary wave we begin with Euler's Equation of Motion, where we assume
 there is no surface tension we set $W_e = 0$ and additionally assume
 irrotational flow $\mathbf{\omega}=\nabla \times  \mathbf{u} = 0$. This means
 that there exists a velocity potential $\phi(\mathbf{x},t)$ given
-by$\mathbf{u} = \nabla \phi$ satisfying the Laplace equation. In regard of a
+by $\mathbf{u} = \nabla \phi$ satisfying the Laplace equation. In regard of a
 solitary wave being a plane wave, we rotate our coordinate system such that
 the propagation is in the $x$-direction and a stationary \& fixed bottom
 $b=0$. Ultimately leaving us with the following model
@@ -30,10 +30,10 @@ $b=0$. Ultimately leaving us with the following model
    & \phi_z =0 \quad \text{on}\;\; z = b = 0.
 \end{drcases}
 \end{align}
-Since the model arises $\varepsilon = O(\delta^2)$, for convince we set
+Since the model arises in $\varepsilon = O(\delta^2)$, for convince we set
 $\varepsilon=1$. The fact of the matter is we are seeking a traveling wave
 solution, thereby we can go into the coordinate system of the traveling wave,
-one in the variable $\xi = x - ct$ for a from left to right traveling wave,
+one in the variable $\xi = x - ct$ for a, from left to right traveling wave,
 where $c$ is the nondimensional speed of the wave. Our goal is to find the
 solution for the velocity potential $\phi(\xi, z)$ and the wave profile
 $\eta(\xi)$. The chain rule gives us
@@ -84,7 +84,7 @@ Dividing equation \ref{eq:sol1} with equation \ref{eq:sol2} gives
     c^2 = \frac{\tan\left(\alpha\delta  \right) }{\alpha\delta}.
 \end{align}
 We conclude that the solution for such a wave exists provided that the
-dispersion relation on the wave propagation speed holds, thereby all solitary
+dispersion relation on the wave propagation speed holds, thereby solitary
 waves exhibit exponential decay in their tail and satisfy the dispersion
 relation in equation \ref{eq:soliton-dispersion}.
 \subsubsection{Asymptotic Analysis}
@@ -125,7 +125,7 @@ The boundary condition on the bottom comes around to be
 \begin{align}
     \phi_{nz} =0 \quad \text{on}\;\; z=0.
 \end{align}
-The free surface boundary condition $z= 1+\varepsilon\eta$ n evolves more calculation, we consider
+The free surface boundary condition $z= 1+\varepsilon\eta$ involves more calculation, we consider
 only terms up the order of $\delta^2$, initializing with
 \begin{align}
     &\phi_z = \delta^2(\eta_t + \varepsilon\phi_x \eta_x)\\
@@ -150,7 +150,7 @@ substituting $\phi_\delta$ into the above proceeds to be
 The second condition is
 \begin{align}
     \phi_t + \eta + \frac{1}{2}\varepsilon \left( \frac{1}{\delta}\phi^2_z
-    \phi_x^2\right)  = 0,
+    +\phi_x^2\right)  = 0,
 \end{align}
 becomes after substitution
 \begin{align}
@@ -272,7 +272,7 @@ and bottom boundary condition
     w = 0 \quad \text{on}\;\; z=b =0.
 \end{align}
 We note here that the solution for such a wave is a solitary wave as in
-described in the previous section. In principle we expect to wind such waves
+described in the previous section. In principle we expect to find such waves
 rather rarely in nature, since $\delta^2 = O(\varepsilon)$ is a very special
 case. Never the less this is not the case. We demonstrate that $\forall\
 \delta$ as $\varepsilon$ goes to $0$ there exists a region in the position
@@ -320,7 +320,8 @@ and
     w = 0 \quad \text{on}\;\; z= b = 0.
 \end{align}
 Now we replace the region $\delta^2$ with $\varepsilon = \delta^2$, while we
-let $\varepsilon$ go to $0$. We conclude to the following equations
+let $\varepsilon$ go to $0$. We conclude to the following equations, after
+replacing to $x, t$ and $w$
 \begin{align}\label{eq:kdv3}
     \begin{drcases}
     u_t = -p_x, \quad p_z = 0\\
@@ -339,7 +340,7 @@ leaves us with
     =0.\label{eq:kdv2}
 \end{align}
 By doing differentiation \ref{eq:kdv1} with respect to $x$ and subtracting
-the equation \ref{eq:kdv2} differentiated with respect tot $t$ we get the
+the equation \ref{eq:kdv2} differentiated with respect to $t$ we get the
 standard wave equation for the profile of the wave
 \begin{align}
     \eta_{x x}  - \eta_{t t} = 0 .
@@ -471,7 +472,7 @@ with the boundary conditions
 Thus
 \begin{align}
     &p_{1z} = w_{0\xi} = -z\eta_{0\xi}\\
-    \Rightarrow p_1 = -\frac{1}{2}z^2 \eta_{0\xi\xi} +c,
+    \Rightarrow &p_1 = -\frac{1}{2}z^2 \eta_{0\xi\xi} +c,
 \end{align}
 where $c$ is the integration constant, together with the boundary condition
 on $z=1$ we get that

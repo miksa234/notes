@@ -1,5 +1,5 @@
 \section{Governing Equations of Fluid Dynamics}
-We first start of with a fluid with a density
+We first start off with a fluid with a density given by
 \begin{align}
     \rho(\mathbf{x}, t),
 \end{align}
@@ -16,7 +16,7 @@ Additionally it is also described by its pressure
 \end{align}
 generally depending on time and position. When thinking of e.g. water the
 pressure increases the deeper we go, that is with decreasing or increasing $z$
-direction (depending how we set up our system $z$ pointing up or down
+direction (depending on how we set up our system $z$ pointing up or down
 respectively).
 
 The general assumption in fluid dynamics is the \textbf{Continuum
@@ -24,7 +24,7 @@ Hypothesis}, which assumes continuity of $\textbf{u}, \rho$ and $P$ in
 $\mathbf{x}$ and $t$. In other words, we premise that the velocity field,
 density and pressure are ''nice enough`` functions of position and time, such
 that we can do all the differential operations we desire in the framework of
-differential analysis.
+fluid dynamics.
 \subsection{Mass Conservation}
 Our aim is to derive a model of the fluid and its dynamics, with respect to
 time and position, in the most general way. This is usually done thinking
@@ -32,7 +32,7 @@ of the density of a given fluid, which is a unit mass per unit volume,
 intrinsically  an integral representation to derive these equations suggests
 by itself.
 
-Let us now thing of an arbitrary fluid. Within this fluid we define a fixed
+Let us now think of an arbitrary fluid. Within this fluid we define a fixed
 volume $V$ relative to a chosen inertial frame and bound it by a surface $S$
 within the fluid, such that the fluid motion $\mathbf{u}(\mathbf{x}, t)$ may
 cross the surface $S$. The fluid density is given by $\rho(\mathbf{x}, t)$,
@@ -74,31 +74,30 @@ The figure bellow \ref{fig:volume}, expresses the above described picture.
 \end{figure}
 
 Since we want to figure out the fluid's dynamics, we can consider the rate
-of change in the completely arbitrary $V$
+of change in the completely arbitrary volume $V$, by
 \begin{align}
     \frac{d}{dt}\left( \int_V \rho(\mathbf{x}, t)\ dV \right) = \int_V
     \frac{\partial \rho(\mathbf{x}, t)}{\partial t} \ dV
 \end{align}
-On the other hand we have that density is mass over volume or
+On the other hand we have that density is mass over volume, meaning
 \begin{align}
     dm = \rho \cdot dV.
 \end{align}
 The infinitesimal volume has the base area $dS$ with hight $h$, which is the
 distance in the direction perpendicular to to the base area, leaving us with
-$dV = h dS$. By definition $\mathbf{n}$ is perpendicular to $dS$, we have
+$dV = h\ dS$. By definition $\mathbf{n}$ is perpendicular to $dS$, we have
 that $h = l \mathbf{n}$. Where $l$ is the unit of length, or velocity times
-time $l = \mathbf{u} dt$, since mass is flowing out of the surface we
+time $l = \mathbf{u}\ dt$, since mass is flowing out of the surface we
 change the sign of the flow leading us to
 \begin{align}
-   dm  = -\rho dV = -\rho \mathbf{u} \cdot \mathbf{n} dt dS,
+   dm  = -\rho dV = -\rho \mathbf{u} \cdot \mathbf{n}\ dt\ dS,
 \end{align}
 All together we have
 \begin{align}
-    \frac{dm}{dt} = -\int_{\partial V} \rho(\mathbf{x},t) dS
-    \mathbf{u}\cdot\mathbf{n}.
+    \frac{dm}{dt} = -\int_{\partial V} \rho(\mathbf{x},t)
+    \mathbf{u}\cdot\mathbf{n}\ dS.
 \end{align}
-Putting both equations on one side leaves us with a variation of the mass
-conservation equation
+Putting both equations on one side leaves us with the equation
 \begin{align}\label{eq:mass balance}
      \int_V \frac{\partial \rho(\mathbf{x}, t)}{\partial t}\ dV
     +\int_{\partial V} \rho(\mathbf{x}, t) \mathbf{u}\cdot\mathbf{n}\ dS
@@ -116,7 +115,7 @@ integration law to acquire an integral over the volume
 \end{align}
 Thereby we can put everything inside the volume integral
 \begin{align}
-    \frac{d m}{dt} = \int_V \left(\partial_t \rho + \nabla(\rho \mathbf{u}) \right) \ dV = 0.
+    \int_V \left(\partial_t \rho + \nabla(\rho \mathbf{u}) \right) \ dV = 0.
 \end{align}
 Everything under the integral sign needs to be zero, thus we obtain
 the \textbf{Equation of Mass Conservation} or in the general sense also
@@ -126,14 +125,14 @@ called the \textbf{Continuity Equation}
 \end{align}
 
 In light of the results of the equation of mass conservation
-in \ref{eq:continuity}, an product rule gives
+in \ref{eq:continuity}, the product rule gives
 \begin{align}
     \partial_t \rho + (\nabla \rho)\mathbf{u} + \rho(\nabla \mathbf{u}),
 \end{align}
 for notational purposes, we define the \textbf{material/convective derivative}
 as follows
 \begin{align}
-    \frac{D}{Dt} = \partial_t + \mathbf{u}\nabla.
+    \frac{D}{Dt} = \frac{\partial }{\partial t}  + \mathbf{u}\nabla.
 \end{align}
 With the material derivative the equation of mass conservation reads
 \begin{align}
@@ -156,9 +155,10 @@ fluid in terms of infinitesimal pieces $\delta V$ of the fluid. The
 acceleration divides into two terms, a \textbf{body force} given by gravity
 of earth in the $z$ coordinate $\mathbf{F} = (0, 0, -g)$ and a
 \textbf{local/short-rage force} described by the stress tensor in the fluid.
-In the inviscid case we the local force retains the pressure $P$, producing a
-normal force, with respect to the surface, acting onto any infinitesimal
-element in the fluid. The integral formulation of the force would be
+In the inviscid case, the local force retains the pressure $P$, producing a
+normal force, with respect to the surface, acting onto the infinitesimal
+element in the fluid. Summing over all infinitesimal pieces of the fluid,
+gives us an integral formulation of the force
 \begin{align}
     \int_V \rho \mathbf{F}\ dV - \int_S P\mathbf{n}\ dV.
 \end{align}
@@ -173,14 +173,14 @@ and thus the total force per unit volume on the other hand is
     \int_V \rho \frac{D\mathbf{u}}{Dt}\ dV =
     \int_V \left(\rho \mathbf{F} - \nabla P\right)\ dV.
 \end{align}
-Newton's Second Law for a fluid in an Volume is essentially saying that the
+Newton's Second Law for a fluid in a Volume is essentially saying that the
 rate of change of momentum of the fluid in the fixed volume $V$, which is the particle
 acceleration is the resulting force acting on V together with the rate of
 flow of momentum across the surface $S$ into the volume $V$. Hence we arrive
 at the \textbf{Euler's Equation(s) of Motion}
 \begin{align}
     \frac{D\mathbf{u}}{Dt} = \left(\frac{\partial \mathbf{u}}{\partial t}
-    (\mathbf{u}\nabla)\mathbf{u}\right)  =
+    +(\mathbf{u}\nabla)\mathbf{u}\right)  =
     -\frac{1}{\rho}\nabla P + \mathbf{F}.
 \end{align}
 As a side note we have mentioned that there is another contribution if the
@@ -205,19 +205,19 @@ For now we have separated two simplifications, that define an
 \end{enumerate}
 \subsection{Vorticity and irrotational Flow}
 The curl of the velocity field $\mathbf{\omega} = \nabla \times \mathbf{u}$
-of a fluid (i.e. the vorticity), describes a spinning motion of the fluid
+of a fluid (i.e. the vorticity), describes a ``spinning'' motion of the fluid
 near a position $\mathbf{x}$ at time $t$. The vorticity is an important
-property of a fluid, flows or regions of flows where $\mathbf{\omega}=0$ are
+property of a fluid. Flows or regions of flows where $\mathbf{\omega}=0$ are
 \textbf{irrotational}, and thus can be modeled and analyzed following well
 known routine methods. Even though real flows are rarely irrotational
 anywhere (!), in water wave theory wave problems, from the classical aspect
-of vorticity have a minor contribution. Hence we can assume irrotational flow
+of vorticity has only minor contributions. Hence we can assume irrotational flow
 modeling water waves. To arrive at the vorticity in the equations of motions
 derived in the last section we resort to a differential identity derived in appendix
-\ref{appendix:diff identity}, which gives for the material derivative
+\ref{appendix:diff identity}, rewriting the motion derivative in terms of
 \begin{align}
     \frac{D\mathbf{u}}{Dt} = \frac{\partial \mathbf{u}}{\partial t}
-    \nabla(\frac{1}{2}\mathbf{u}\mathbf{u)}
+    +\nabla(\frac{1}{2}\mathbf{u}\mathbf{u)}
     - \left( \mathbf{u}\times (\nabla \times  \mathbf{u} \right).
 \end{align}
 Thus the equations of motion become
@@ -229,7 +229,7 @@ Thus the equations of motion become
 where $\Omega$ is the force potential per
 unite mass given by $\mathbf{F} = -\nabla \Omega$.
 
-At this point we may differentiate between \textbf{stead and unsteady flow}.
+At this point we may differentiate between \textbf{steady and unsteady flow}.
 For \textbf{Steady Flow} we assume that $\mathbf{u}, P$ and $\Omega$ are time
 independent, thus we get
 \begin{align}
@@ -258,8 +258,7 @@ where $\phi$ needs to satisfy the Laplace equation
     \Delta \phi = 0.
 \end{align}
 According to the Theorem of Schwartz we may exchange $\frac{\partial
-}{\partial t}$ and $\nabla$, giving us an expression for the material
-derivative
+}{\partial t}$ and $\nabla$, giving us the expression
 \begin{align}
     \nabla\left( \frac{\partial \phi}{\partial t} +\frac{1}{2}
     \mathbf{u}\mathbf{u} + \frac{P}{\rho}  + \Omega \right) = 0
@@ -271,15 +270,14 @@ function $f(\mathbf{x}, t)$, writing
     \mathbf{u}\mathbf{u} + \frac{P}{\rho}  + \Omega = f(\mathbf{x}, t).
 \end{align}
 The function $f(\mathbf{x}, t)$ can be removed by gauge transformation of
-$\phi \rightarrow \phi + \int f(\mathbf{x}, t)\ dt$, never the less this is
-not further discussed and left to the reader in the reference.
+$\phi \rightarrow \phi + \int f(\mathbf{x}, t)\ dt$.
 \subsection{Boundary Conditions for water waves}
 The boundary conditions for water-wave problems vary, generally on the
 simplification we undertake. At the surface, called the free surface as in
 free from the velocity conditions, we have the atmospheric stress on the
 fluid. The stress component would again have a viscid component, this however
 is only relevant when modeling surface wind, in this review we model the
-fluid as unaffectedly and within reason as inviscid. The atmosphere employs
+fluid within reason as inviscid. The atmosphere employs
 only a pressure on the surface, this pressure is taken to be the atmospheric
 pressure, dependent on time and point in space. Thereby  any surface tension
 effects can also include a scenario at a curved surface (e.g. wave), giving
@@ -293,8 +291,8 @@ An additional condition revolves around the fluid particles on the moving
 surface, called the \textbf{kinematic condition}. This condition bounds
 the vertical velocity component on the surface.
 
-The logical step now is to define boundary conditions on the bod of the
-fluid, i.e. the bottom. If the viscid case bottom is impermeable, we a no
+The logical step now is to define boundary conditions on the bed of the
+fluid. In the viscid case bottom is impermeable, we a no
 slip condition to all fluid particles $\mathbf{u}_\text{bottom}= 0$. If we
 assume that the fluid is inviscid then the bottom becomes a surface of the
 fluid in the sense that the fluid particles in contact with the bed move in
@@ -312,7 +310,7 @@ where $\mathbf{x}_\perp = (x, y)$ in Cartesian, or $\mathbf{x}_\perp = (r,
 \theta)$ in cylindrical coordinates. A surfaces that moves with the fluid,
 always contains the same fluid particles, described as
 \begin{align}
-    \frac{D}{Dt}\left(z - h(\mathbf{x}_\perp, t  \right) = 0.
+    \frac{D}{Dt}\left(z - h(\mathbf{x}_\perp, t ) \right) = 0.
 \end{align}
 Upon expanding the derivative we get
 \begin{align}
@@ -336,15 +334,15 @@ unsteady flow and setting $P=P_a$ for atmospheric pressure and $\Omega =
 g\cdot z$ for the force per unit mass potential the equations of motion are
 \begin{align}
     \frac{\partial \phi}{\partial t} +\frac{1}{2}\mathbf{u}\mathbf{u}
-    + P_\frac{a}{\rho}+gh = f(t) \qquad \text{on}\;\; on z=h.
+    + \frac{P_a}{\rho}+gh = f(t) \qquad \text{on}\;\; z=h.
 \end{align}
 Somewhere $\|\mathbf{x}_\perp\| \rightarrow \infty$ the fluid reaches
-equilibrium and is thereby stationary, thereby has no motion and the pressure
-is $P=P_a$ and the surface is a constant $h = h_0$ $f(t)$ is
+equilibrium and is thereby stationary, meaning it has no motion and the
+pressure is $P=P_a$, the surface is a constant $h = h_0$ and therefore
 \begin{align}
     f(t) = \frac{P_a}{\rho}+gh_0.
 \end{align}
-The simplest description for the \textbf{dynamic condition} may be written as
+The \textbf{dynamic condition} may be written as
 \begin{align}
     \frac{\partial \phi}{\partial t}
     +\frac{1}{2}\mathbf{u}\mathbf{u}+g(h-h_0) = 0 \qquad \text{on}\;\; z=h.
@@ -358,7 +356,7 @@ dynamic condition by introducing the pressure difference known as the
 \end{align}
 where $\Gamma>0$ is the coefficient of surface tension and $\frac{1}{R}$ is
 the curvature representing an implicit function, in our case the implicit
-function is $z - h(\mathbf{x}_\perp, t)$ for fixed time. The curvature in
+function is $z - h(\mathbf{x}_\perp, t)=0$ for fixed time. The curvature in
 Cartesian coordinates takes the form
 \begin{align}
     \frac{1}{R} = \frac{(1+h_y^2)h_{x x}+(1+h_y^2)h_{yy} -
@@ -413,10 +411,11 @@ on the free surface and the bottom surface respectively. Inserting the
 boundary conditions we get
 \begin{align}
     \int_b^h \nabla_\perp \mathbf{u}_\perp
-    + h_t + (\mathbf{u}_{\perp \text{s}} \nabla_\perp) h
+    + h_t + (\mathbf{u}_{\perp \text{s}} \nabla_\perp) h,
     - b_t - (\mathbf{u}_{\perp \text{b}} \nabla_\perp) b= 0.
 \end{align}
-To simplify the equation we resort again to the Leibniz Rule of Integration
+To simplify the equation we resort to the Leibniz Rule of Integration
+\ref{appendix:leigniz},
 \begin{align}
      \int_b^h \nabla_\perp\mathbf{u}_\perp =
     \nabla_\perp \int_b^h \mathbf{u}_\perp\ dz - (\mathbf{u}_{\perp \text{s}}
@@ -461,7 +460,7 @@ Then we may add
 \end{align}
 to above not changing anything. Thereby getting
 \begin{align}
-    \frac{\partial }{\partial t} (\frac{1}{2}\mathbf{u}\mathbf{u})
+    \frac{\partial }{\partial t} \left(\frac{1}{2}\mathbf{u}\mathbf{u}\right)
     +(\mathbf{u}\nabla \mathbf{u})\left(
     \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho} \right)
     +\left( \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho} + \Omega \right)
