@@ -13,8 +13,8 @@ $b(t)$ respectively, by
 \begin{align}
     \frac{d\mathcal{I}}{dt} =
     \frac{\partial \mathcal{I}}{\partial t}+
-    \frac{\partial \mathcal{I}}{\partial a}\frac{\partial a}{\partial t}+
-    \frac{\partial \mathcal{I}}{\partial b}\frac{\partial b}{\partial t}.
+    \frac{\partial \mathcal{I}}{\partial b}\frac{\partial b}{\partial t}+
+    \frac{\partial \mathcal{I}}{\partial a}\frac{\partial a}{\partial t}.
 \end{align}
 Which in integral representation reads
 \begin{align}
@@ -30,11 +30,11 @@ We start off with the standard material derivative
     \frac{D\mathbf{u}}{Dt} = \frac{\partial \mathbf{u}}{\partial t}
     +(\mathbf{u}\nabla)\mathbf{u}.
 \end{align}
-We will use Einstein's Summation Convention, where we sum over indices that
-both appear at as the bottom as the top index, to rewrite the second part of
-the material derivative $(\mathbf{u}\nabla)\mathbf{u}$ into
+We will use Einstein's Summation Convention, where we sum over indices
+appearing at the bottom and the top. To rewrite the second part of the
+material derivative $(\mathbf{u}\nabla)\mathbf{u}$ into
 \begin{align}
-    (\mathbf{u}\times (\nabla \times \mathbf{u}))_k
+    (\mathbf{u}\times (\nabla \times \mathbf{u}))_i
     &= \varepsilon^{ijk}u_j(\nabla \times  \mathbf{u})_k \\
     &= \varepsilon^{ijk}u_j\varepsilon_{klm}\partial^l u^m\\
     &=(\delta^i_l\delta^j_m-\delta^i_m\delta^j_l)u_j\partial^l u^m\\
@@ -62,24 +62,24 @@ In our case the implicit function for fixed time reads
 \end{align}
 The parametric representation is
 \begin{align}
-    \mathbf{\sigma} = \begin{pmatrix} x_1 \\ x_2 \\ h \end{pmatrix} .
+    \vec{\sigma} = \begin{pmatrix} x_1 \\ x_2 \\ h \end{pmatrix} .
 \end{align}
-The middle curvature of the surface parametrized by $\mathbf{\sigma}$ is
+The middle curvature of the surface parametrized by $\vec{\sigma}$ is
 \begin{align}
     \frac{1}{R} = \text{Tr}(G^{-1}B),
 \end{align}
 where $G$ and $B$ are given by
 \begin{align}
-    G_{ij} = \frac{\partial \mathbf{\sigma}}{\partial x_i} \frac{\partial
-    \mathbf{\sigma}}{\partial x_j}, \\
-    B_{ij} = -\mathbf{N} \frac{\partial^2 \mathbf{\sigma}}{\partial
+    G_{ij} = \frac{\partial \vec{\sigma}}{\partial x_i} \frac{\partial
+    \vec{\sigma}}{\partial x_j}, \\
+    B_{ij} = -\mathbf{N} \frac{\partial^2 \vec{\sigma}}{\partial
     x_i\partial x_j},
 \end{align}
 where $i, j = 1, 2$ and $\mathbf{N}$ is the normal, normalized surface vector given by
 \begin{align}
-    \mathbf{N} &= \frac{\frac{\partial \mathbf{\sigma}}{\partial x_1}\times
-    \frac{\partial \mathbf{\sigma}}{\partial x_2}}{\|\frac{\partial \mathbf{\sigma}}{\partial x_1}\times
-    \frac{\partial \mathbf{\sigma}}{\partial x_2}\|} \\
+    \mathbf{N} &= \frac{\frac{\partial \vec{\sigma}}{\partial x_1}\times
+    \frac{\partial \vec{\sigma}}{\partial x_2}}{\|\frac{\partial \vec{\sigma}}{\partial x_1}\times
+    \frac{\partial \vec{\sigma}}{\partial x_2}\|} \\
                &= \frac{1}{\sqrt{h_x^2 + h_y^2 +1}} \begin{pmatrix}
                -h_x\\-h_y\\1 \end{pmatrix}.
 \end{align}

@@ -426,131 +426,131 @@ As a consequence the \textbf{Integrated Mass Condition} is given by
     \nabla_\perp \int_b^h \mathbf{u}_\perp\ dz  + \underbrace{h_t -
     b_t}_{=d_t} = 0.
 \end{align}
-\subsection{Energy Equation}
-To derive the energy equation we start off with Euler's Equation of Motion
-\begin{align}
-  \mathbf{u} _t + \nabla
-  (\frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}+\Omega) = \mathbf{u}\times
-  \mathbf{w},
-\end{align}
-multiplying the equation with $\mathbf{u}$ we get
-\begin{align}
-  &\mathbf{u}\mathbf{u} _t \label{eq:energy1} \\
-  &+(\mathbf{u}\nabla)(\frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}+\Omega)\label{eq:energy2}\\
-  &= \mathbf{u}(\mathbf{u}\times
-  \mathbf{w})\label{eq:energy3}.
-\end{align}
-The first equation given in \ref{eq:energy1} can we rewritten using inverse
-product rule of differentiation
-\begin{align}
-    \mathbf{u}\frac{\partial \mathbf{u}}{\partial t}
-    &= \frac{\partial
-    }{\partial t} (\mathbf{u}\mathbf{u}) - \frac{\partial \mathbf{u}}{\partial t}
-    \mathbf{u} \\
-    &= \frac{\partial
-    }{\partial t} (\mathbf{u}\mathbf{u}) - \mathbf{u}\frac{\partial
-    \mathbf{u}}{\partial t}\\
-    \Rightarrow\quad & \mathbf{u} \frac{\partial \mathbf{u}}{\partial t}  =
-    \frac{1}{2}\frac{\partial }{\partial t} (\mathbf{u}\mathbf{u}).
-\end{align}
-Then we may add
-\begin{align}
-    \left(\frac{1}{2} \mathbf{u}\mathbf{u}+\frac{P}{\rho} +\Omega  \right)
-    \underbrace{(\nabla u)}_{=0} = 0,
-\end{align}
-to above not changing anything. Thereby getting
-\begin{align}
-    \frac{\partial }{\partial t} \left(\frac{1}{2}\mathbf{u}\mathbf{u}\right)
-    +(\mathbf{u}\nabla \mathbf{u})\left(
-    \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho} \right)
-    +\left( \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho} + \Omega \right)
-    (\nabla \mathbf{u}) = 0.
-\end{align}
-Applying the product rule we can simplify
-\begin{align}
-    \frac{\partial }{\partial t} \left(\frac{1}{2}\mathbf{u}\mathbf{u}\right)
-    +\nabla \left(\mathbf{u}\left(\mathbf{u}(
-    \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}\right) \right) = 0,
-\end{align}
-additionally adding $\frac{\partial \Omega}{\partial t}  =0$ leads us to
-\begin{align}
-    \underbrace{\frac{\partial }{\partial t} \left(\frac{1}{2}\mathbf{u}\mathbf{u}
-    +\Omega\right)}_{\text{change of total energy density}}
-    +\underbrace{\nabla \left(\mathbf{u}\left(\mathbf{u}(
-    \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}\right)
-\right)}_{\text{energy flow of the velocity field}} = 0.\label{eq:energy}
-\end{align}
-This is called the \textbf{energy equation} and is a general result for a
-inviscid and incompressible fluids, which we can apply to study water waves.
-We start off with replacing $\nabla = \nabla_\perp + \frac{\partial }{\partial
-z} $ and $\Omega = g z$ and multiplying by $\rho$, then our energy equation
-in \ref{eq:energy} becomes
-\begin{align}
-    \frac{\partial }{\partial t}\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho
-    g z\right)  + \nabla_\perp\left( \mathbf{u}_\perp\left(
-    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho gz \right)  \right)
-    \frac{\partial}{\partial z} \left( w\left(
-    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho g z \right)  \right)  = 0.
-\end{align}
-Integrating from bottom to top, i.e. from bed to free surface gets us to
-\begin{align}
-    &\int_b^h\frac{\partial }{\partial t}\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho
-    g z\right)\ dz  \label{eq:e-int1}\\
-    &+ \int_b^h \nabla_\perp\left( \mathbf{u}_\perp\left(
-    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho gz \right)  \right)\
-    dz\label{eq:e-int2}\\
-    &+ \left(\frac{\partial}{\partial z} \left( w\left(
-    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho g z \right)
-\right)\right)\Bigg|_b^h \label{eq:e-int3}
-    = 0.
-\end{align}
-For equation \ref{eq:e-int1} we use Leibniz Rule of Integration, leaving us
-with
-\begin{align}
-    \int_b^h\frac{\partial }{\partial t}\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho
-    g z\right)\ dz
-    &= \frac{\partial }{\partial t} \int_b^h
-    \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho gz \ dz\\
-    &+ \left( \frac{1}{2}\rho \mathbf{u}_s \mathbf{u}_s  + \rho g h \right)
-    h_t\\
-    &- \left( \frac{1}{2}\rho \mathbf{u}_b \mathbf{u}_b  + \rho g b \right)
-    b_t
-\end{align}
-For equation \ref{eq:e-int2} we again take note of the Leibniz Rule of
-Integration, getting
-\begin{align}
-    \int_b^h \nabla_\perp\left( \mathbf{u}_\perp\left(
-    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho gz \right)  \right)\
-    dz
-    &= \nabla_\perp \int_b^h \mathbf{u}_\perp\left(
-    \frac{1}{2}\rho\mathbf{u}\mathbf{u} + P + \rho g z \right) \ dz\\
-    &- \left( \frac{1}{2}\rho \mathbf{u}_s\mathbf{u}_s + P + \rho g h \right)
-    \left( \mathbf{u}_{\perp s} \nabla_\perp \right) h\\
-    &+\left( \frac{1}{2}\rho \mathbf{u}_b\mathbf{u}_b + P + \rho g b \right)
-    \left( \mathbf{u}_{\perp b} \nabla_\perp \right) b
-\end{align}
-Thereby transforming our equation into
-\begin{align}
-    \frac{\partial }{\partial t} \underbrace{\int_b^h \frac{1}{2}\rho
-    \mathbf{u}\mathbf{u}+\rho g z\ dz}_{=:\mathcal{E}}
-    + \nabla_\perp&\underbrace{\int_b^h
-    \mathbf{u}_\perp\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho g z
-\right)\ dz}_{:=\mathcal{F}}
-+ \underbrace{P_s h_t - P_b b_t}_{:=\mathcal{P}} = 0\\
-\nonumber\\
-    &\frac{\partial \mathcal{E}}{\partial t}
-    + \nabla_\perp \mathcal{F} + \mathcal{P} = 0,
-\end{align}
-where $\mathcal{E}$ represents the energy in the flow per unit horizontal
-area, since we are integrating from bed to free surface. Where $\mathcal{F}$
-is the horizontal energy flux vector and lastly $\mathcal{P} = P_s h_t -
-P_b b_t$ is the net energy input due to the pressure forces doing work on the
-upper and lower boundaries, i.e. bottom and free surface of the fluid.
-Assuming stationary rigid bottom condition and constant surface pressure, we
-can set $P_s=0$, such that $\mathcal{P} =0$ leaving us with the equation
-\begin{align}
-    \frac{\partial \mathcal{E}}{\partial t}
-    + \nabla_\perp \mathcal{F} = 0.
-\end{align}
-We note that the assumption $P_s=0$ is only possible if the coefficient of
-surface tension is set to 0, which usually is not the case.
+%\subsection{Energy Equation}
+%To derive the energy equation we start off with Euler's Equation of Motion
+%\begin{align}
+%  \mathbf{u} _t + \nabla
+%  (\frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}+\Omega) = \mathbf{u}\times
+%  \mathbf{w},
+%\end{align}
+%multiplying the equation with $\mathbf{u}$ we get
+%\begin{align}
+%  &\mathbf{u}\mathbf{u} _t \label{eq:energy1} \\
+%  &+(\mathbf{u}\nabla)(\frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}+\Omega)\label{eq:energy2}\\
+%  &= \mathbf{u}(\mathbf{u}\times
+%  \mathbf{w})\label{eq:energy3}.
+%\end{align}
+%The first equation given in \ref{eq:energy1} can we rewritten using inverse
+%product rule of differentiation
+%\begin{align}
+%    \mathbf{u}\frac{\partial \mathbf{u}}{\partial t}
+%    &= \frac{\partial
+%    }{\partial t} (\mathbf{u}\mathbf{u}) - \frac{\partial \mathbf{u}}{\partial t}
+%    \mathbf{u} \\
+%    &= \frac{\partial
+%    }{\partial t} (\mathbf{u}\mathbf{u}) - \mathbf{u}\frac{\partial
+%    \mathbf{u}}{\partial t}\\
+%    \Rightarrow\quad & \mathbf{u} \frac{\partial \mathbf{u}}{\partial t}  =
+%    \frac{1}{2}\frac{\partial }{\partial t} (\mathbf{u}\mathbf{u}).
+%\end{align}
+%Then we may add
+%\begin{align}
+%    \left(\frac{1}{2} \mathbf{u}\mathbf{u}+\frac{P}{\rho} +\Omega  \right)
+%    \underbrace{(\nabla u)}_{=0} = 0,
+%\end{align}
+%to above not changing anything. Thereby getting
+%\begin{align}
+%    \frac{\partial }{\partial t} \left(\frac{1}{2}\mathbf{u}\mathbf{u}\right)
+%    +(\mathbf{u}\nabla \mathbf{u})\left(
+%    \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho} \right)
+%    +\left( \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho} + \Omega \right)
+%    (\nabla \mathbf{u}) = 0.
+%\end{align}
+%Applying the product rule we can simplify
+%\begin{align}
+%    \frac{\partial }{\partial t} \left(\frac{1}{2}\mathbf{u}\mathbf{u}\right)
+%    +\nabla \left(\mathbf{u}\left(\mathbf{u}(
+%    \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}\right) \right) = 0,
+%\end{align}
+%additionally adding $\frac{\partial \Omega}{\partial t}  =0$ leads us to
+%\begin{align}
+%    \underbrace{\frac{\partial }{\partial t} \left(\frac{1}{2}\mathbf{u}\mathbf{u}
+%    +\Omega\right)}_{\text{change of total energy density}}
+%    +\underbrace{\nabla \left(\mathbf{u}\left(\mathbf{u}(
+%    \frac{1}{2}\mathbf{u}\mathbf{u}+\frac{P}{\rho}\right)
+%\right)}_{\text{energy flow of the velocity field}} = 0.\label{eq:energy}
+%\end{align}
+%This is called the \textbf{energy equation} and is a general result for a
+%inviscid and incompressible fluids, which we can apply to study water waves.
+%We start off with replacing $\nabla = \nabla_\perp + \frac{\partial }{\partial
+%z} $ and $\Omega = g z$ and multiplying by $\rho$, then our energy equation
+%in \ref{eq:energy} becomes
+%\begin{align}
+%    \frac{\partial }{\partial t}\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho
+%    g z\right)  + \nabla_\perp\left( \mathbf{u}_\perp\left(
+%    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho gz \right)  \right)
+%    \frac{\partial}{\partial z} \left( w\left(
+%    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho g z \right)  \right)  = 0.
+%\end{align}
+%Integrating from bottom to top, i.e. from bed to free surface gets us to
+%\begin{align}
+%    &\int_b^h\frac{\partial }{\partial t}\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho
+%    g z\right)\ dz  \label{eq:e-int1}\\
+%    &+ \int_b^h \nabla_\perp\left( \mathbf{u}_\perp\left(
+%    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho gz \right)  \right)\
+%    dz\label{eq:e-int2}\\
+%    &+ \left(\frac{\partial}{\partial z} \left( w\left(
+%    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho g z \right)
+%\right)\right)\Bigg|_b^h \label{eq:e-int3}
+%    = 0.
+%\end{align}
+%For equation \ref{eq:e-int1} we use Leibniz Rule of Integration, leaving us
+%with
+%\begin{align}
+%    \int_b^h\frac{\partial }{\partial t}\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho
+%    g z\right)\ dz
+%    &= \frac{\partial }{\partial t} \int_b^h
+%    \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho gz \ dz\\
+%    &+ \left( \frac{1}{2}\rho \mathbf{u}_s \mathbf{u}_s  + \rho g h \right)
+%    h_t\\
+%    &- \left( \frac{1}{2}\rho \mathbf{u}_b \mathbf{u}_b  + \rho g b \right)
+%    b_t
+%\end{align}
+%For equation \ref{eq:e-int2} we again take note of the Leibniz Rule of
+%Integration, getting
+%\begin{align}
+%    \int_b^h \nabla_\perp\left( \mathbf{u}_\perp\left(
+%    \frac{1}{2}\rho\mathbf{u}\mathbf{u}+P+\rho gz \right)  \right)\
+%    dz
+%    &= \nabla_\perp \int_b^h \mathbf{u}_\perp\left(
+%    \frac{1}{2}\rho\mathbf{u}\mathbf{u} + P + \rho g z \right) \ dz\\
+%    &- \left( \frac{1}{2}\rho \mathbf{u}_s\mathbf{u}_s + P + \rho g h \right)
+%    \left( \mathbf{u}_{\perp s} \nabla_\perp \right) h\\
+%    &+\left( \frac{1}{2}\rho \mathbf{u}_b\mathbf{u}_b + P + \rho g b \right)
+%    \left( \mathbf{u}_{\perp b} \nabla_\perp \right) b
+%\end{align}
+%Thereby transforming our equation into
+%\begin{align}
+%    \frac{\partial }{\partial t} \underbrace{\int_b^h \frac{1}{2}\rho
+%    \mathbf{u}\mathbf{u}+\rho g z\ dz}_{=:\mathcal{E}}
+%    + \nabla_\perp&\underbrace{\int_b^h
+%    \mathbf{u}_\perp\left( \frac{1}{2}\rho\mathbf{u}\mathbf{u} + \rho g z
+%\right)\ dz}_{:=\mathcal{F}}
+%+ \underbrace{P_s h_t - P_b b_t}_{:=\mathcal{P}} = 0\\
+%\nonumber\\
+%    &\frac{\partial \mathcal{E}}{\partial t}
+%    + \nabla_\perp \mathcal{F} + \mathcal{P} = 0,
+%\end{align}
+%where $\mathcal{E}$ represents the energy in the flow per unit horizontal
+%area, since we are integrating from bed to free surface. Where $\mathcal{F}$
+%is the horizontal energy flux vector and lastly $\mathcal{P} = P_s h_t -
+%P_b b_t$ is the net energy input due to the pressure forces doing work on the
+%upper and lower boundaries, i.e. bottom and free surface of the fluid.
+%Assuming stationary rigid bottom condition and constant surface pressure, we
+%can set $P_s=0$, such that $\mathcal{P} =0$ leaving us with the equation
+%\begin{align}
+%    \frac{\partial \mathcal{E}}{\partial t}
+%    + \nabla_\perp \mathcal{F} = 0.
+%\end{align}
+%We note that the assumption $P_s=0$ is only possible if the coefficient of
+%surface tension is set to 0, which usually is not the case.
