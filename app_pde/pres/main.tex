@@ -25,12 +25,7 @@
 \setbeamertemplate{endpage}{%
     \begin{frame}
         \centering
-        \Large \emph{To be continued\ldots}
-
-        \vspace{1cm}
-
-        \centering
-        \Large \emph{Thank You!}
+        \Large \emph{Thank you for listening!}
     \end{frame}
 }
 
@@ -208,7 +203,7 @@
         \tabitem (\textbf{Integrated Mass Condition}): Combination
         \end{tabular}
         \end{center}
-    \end{frame}
+   \end{frame}
 
     \begin{frame}
         \frametitle{Nondimensionalisation}
@@ -226,6 +221,7 @@
         \centering
         $\rightarrow$ \textbf{Shallowness parameter} $\delta =
         \frac{h_0}{\lambda}$
+        \\
         \centering
         $\rightarrow$ \textbf{Amplitude Parameter}
         $\varepsilon=\frac{a}{h_0}$
@@ -340,24 +336,107 @@
                 Euler's Equations of motion
             \item[$3$)] going into the frame of the moving wave $(\xi = x- t, \tau = \varepsilon t)$
             \item[$4$)] conducting an Asymptotic expansion of $u , w, p$ and $\eta$.
-            \item[$5$)] KdV arises in the $O(\varepsilon)$ term
+            \item[$5$)] KdV equation is present in the $\varepsilon^1$ term
         \end{itemize}
     \end{frame}
 
     \begin{frame}
         \frametitle{2004 Tsunami: Description}
+
+        \begin{figure}[htpb]
+            \centering
+            \includegraphics[width=0.35\textwidth]{./pics/water-surface.png}
+            \caption{Earthquake generating a tsunami with $\lambda = 100\
+            \text{km},\;\; a = 1\ \text{m}$}
+        \end{figure}
+        \begin{ceqn}
+        \begin{align}
+        \end{align}
+        \end{ceqn}
+
     \end{frame}
 
     \begin{frame}
         \frametitle{2004 Tsunami: $\varepsilon=O\left(\delta^2\right)$}
-    \end{frame}
 
-    \begin{frame}
-        \frametitle{2004 Tsunami: KdV Equation}
+        \begin{itemize}
+            \item[$\circ$] $\varepsilon = \frac{a}{h_0}$ and $\delta =
+                \frac{h_0}{\lambda}$ need to ender the regime
+                $\varepsilon=O(\delta^2)$ for the KdV equation to become
+                relevant
+            \item[$\circ$] But also the geophysical scales need to be $\xi = O(1)$ and $\tau =
+                O(1)$ for the KdV-balance to become relevant, that is
+                \begin{ceqn}
+                \begin{align}
+                    x = O\left(\varepsilon^{-1} \lambda \right)
+                \end{align}
+                \end{ceqn}
+            \item[$\circ$] KdV balance is when the waves are ordered with the
+                highest in front following an oscillatory tale
+            \item[$\circ$] This happens because wave amplitude is proportional to
+                wave speed
+        \end{itemize}
+
     \end{frame}
 
     \begin{frame}
         \frametitle{2004 Tsunami: Regime of Validity}
+        \begin{ceqn}
+        \begin{align}
+            \lambda = 10\ \text{km}\qquad a = 1\ \text{m}\nonumber
+        \end{align}
+        \end{ceqn}
+        \begin{columns}
+            \column{0.45\textwidth}
+            Waves propagating westwards to India/Sri Lanka
+            \begin{align}
+            h_0 = 4\ \text{km} \Rightarrow
+            \begin{cases}
+                \varepsilon \simeq 25 \cdot 10^{-5}\\
+                \delta \simeq 4\cdot 10^{-2}
+            \end{cases}\nonumber
+            \end{align}
+
+            \column{0.45\textwidth}
+            Waves propagating eastwards to Thailand
+            \begin{align}
+            h_0 = 1\ \text{km} \Rightarrow
+            \begin{cases}
+                \varepsilon \simeq 10^{-3}\\
+                \delta \simeq 10^{-2}
+            \end{cases}\nonumber
+            \end{align}
+        \end{columns}
+        \vspace{0.5cm}
+        \centering
+        $\Rightarrow$ Both enter the regime $\varepsilon = O(\delta^2)$
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{2004 Tsunami: Regime of Validity}
+        \begin{columns}
+            \column{0.45\textwidth}
+            Waves propagating westwards to India/Sri Lanka ($\simeq 1600\ \text{km}$)
+            \begin{align}
+                \begin{drcases}
+                    \varepsilon \simeq 25\cdot 10^{-5}\\
+                    \lambda = 100\text{km}
+                \end{drcases}\Rightarrow\; x \simeq 4\cdot 10^{5}\ \text{km}\nonumber
+            \end{align}
+
+            \column{0.45\textwidth}
+            Waves propagating eastwards to Thailand ($\simeq 700\ \text{km}$)
+            \begin{align}
+                \begin{drcases}
+                    \varepsilon \simeq 10^{-3}\\
+                    \lambda = 100\text{km}
+                \end{drcases}\Rightarrow\; x \simeq 10^{5}\ \text{km}\nonumber
+            \end{align}
+        \end{columns}
+        \vspace{0.5cm}
+        \centering
+        $\Rightarrow$ The propagation distance of the tsunami waves in both
+        directions is not enough for KdV dynamics to take place.
     \end{frame}
 
     \begin{frame}{Bibliography}
