@@ -1,0 +1,372 @@
+\documentclass[fleqn]{beamer}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath,amssymb}
+\usepackage{nccmath}
+\usepackage{graphicx}
+\usepackage{mathptmx}
+\usepackage{mathtools}
+\usepackage{subcaption}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{enumitem}
+%\usepackage[colorlinks=true,naturalnames=true,plainpages=false,pdfpagelabels=true]{hyperref}
+\usetikzlibrary{patterns,decorations.pathmorphing,positioning, arrows, chains}
+
+\newcommand{\tabitem}{%
+  \usebeamertemplate{itemize item}\hspace*{\labelsep}}
+
+\usepackage[backend=biber, sorting=none]{biblatex}
+\addbibresource{uni.bib}
+
+\setbeamertemplate{endpage}{%
+    \begin{frame}
+        \centering
+        \Large \emph{To be continued\ldots}
+
+        \vspace{1cm}
+
+        \centering
+        \Large \emph{Thank You!}
+    \end{frame}
+}
+
+\AtEndDocument{\usebeamertemplate{endpage}}
+
+% vertical separator macro
+\newcommand{\vsep}{
+  \column{0.0\textwidth}
+    \begin{tikzpicture}
+      \draw[very thick,black!10] (0,0) -- (0,7.3);
+    \end{tikzpicture}
+}
+\setlength{\mathindent}{0pt}
+
+% Beamer theme
+\usetheme{UniVienna}
+\usefonttheme[onlysmall]{structurebold}
+\mode<presentation>
+\setbeamercovered{transparent=10}
+
+\title
+{Mathematical Modeling of Water-Wave Problems}
+\subtitle{Applied PDE Seminar}
+\author[Popović Milutin]
+{Popović Milutin}
+\date{17. March 2021}
+
+\begin{document}
+    \begin{frame}
+        \titlepage
+    \end{frame}
+
+
+    \begin{frame}
+        \frametitle{Fluid Description}
+        \begin{columns}[T]
+            \column{0.34\textwidth}
+            \hspace{50cm}
+
+            The fluid is described by
+            \begin{itemize}
+                \item[$\circ$] Fluid density\\ $\rho(\vec{x}, t)$
+                \item[$\circ$] Velocity Field\\ $\vec{u}(\vec{x}, t) = (u, v,
+                    w)$
+                \item[$\circ$] Pressure \\$P(\vec{x}, t)$
+            \end{itemize}
+            \column{0.57\textwidth}
+
+            \begin{figure}[H]
+                \centering
+                \caption{Control volume of the fluid}
+              \begin{tikzpicture}[>=latex,scale=1, xscale=1, opacity=.8]
+            % second sphere
+                \begin{scope}[rotate=10, xscale=3, yscale=2, shift={(2.3,-0.2)}]
+                  \coordinate (O) at (0,0);
+                  \shade[ball color=gray!10!] (0,0) coordinate(Hp) circle (1) ;
+
+                  \draw[thick] (O) circle (1);
+                  \draw[rotate=5] (O) ellipse (1cm and 0.66cm);
+                  \draw[rotate=90] (O) ellipse (1cm and 0.33cm);
+            \node[circle, fill=black, inner sep=1pt] at (0.15, 0.25) {} ;
+            \draw[-latex, thick] (0.15, 0.25) -- (1, 1) ;
+                  \node[right] at (1, 1) {$\vec{u}(\vec{x}, t)$};
+
+                  \node[] at (O) {$V$};
+                  \node[] at (0.55, -0.25) {$\rho(\vec{x}, t)$};
+
+                  \draw[-] (0.76, -0.66) -- (1.2, -0.7);
+                  \node[right] at (1.2, -0.7) {$S$};
+
+                  \draw[-latex, thick] (-0.25, -0.65) -- (-1, -1);
+                  \node[left] at (-1, -1) {$\vec{n}$};
+                \end{scope}
+              \end{tikzpicture}
+            \end{figure}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Mass Conservation}
+        \begin{itemize}
+            \item[$\circ$] Mass:
+            \begin{align}
+                \hspace{0.3\linewidth}
+                m(t) = \int_V \rho(\vec{x}, t)\ dV \nonumber
+            \end{align}
+        \item[$\circ$] Rate of change:
+            \begin{align}
+                \hspace{0.15\linewidth}
+                \int_V \frac{\partial \rho(\vec{x}, t)}{\partial t}\ dV = \frac{dm}{dt} =
+                -\int_{S} \rho(\vec{x}, t) \vec{u}\cdot\vec{n}\ dS\nonumber
+            \end{align}
+        \item[$\circ$] Use Gauss's law to get the \textbf{Equation of Mass
+            conservation}
+            \begin{align}
+                \hspace{0.3\linewidth} \frac{\partial \rho}{\partial t}
+                \nabla \cdot (\rho \vec{u}) =
+                0 \nonumber
+            \end{align}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Euler's Equation of Motion}
+        \centering
+        $\rightarrow$ Apply Newton's second law to the Fluid
+        \begin{columns}
+            \column{0.4\textwidth}
+            \begin{block}{\centering\textbf{Body Force}}
+                \centering
+                $\vec{F} = (0, 0, -g)$
+            \end{block}
+            \column{0.4\textwidth}
+            \begin{block}{\centering\textbf{Local/Short-range Force}}
+                \centering
+                Stress tensor\\
+                For inviscid fluid: $P(\vec{x},t)$
+            \end{block}
+        \end{columns}
+        \begin{align}
+            \hspace{0.3\linewidth}\Rightarrow\int_V \rho \frac{D\vec{u}}{Dt}\ dV =
+            \int_V \left( \rho \vec{F} - \nabla P \right)\ dV\nonumber
+        \end{align}
+        \centering
+        $\rightarrow$ Leads us to \textbf{Euler's Equation of Motion}
+        \begin{align}
+            \hspace{0.4\linewidth} \frac{D\vec{u}}{Dt} =-
+            \frac{1}{\rho}\nabla P + \vec{F}  \nonumber
+        \end{align}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Vorticity}
+        \begin{columns}
+            \column{0.4\textwidth}
+            \begin{block}{\centering\textbf{Vorticity}}
+                \centering
+                $\vec{\omega} = \nabla \times \vec{u}$
+            \end{block}
+            \column{0.4\textwidth}
+            \begin{block}{\centering\textbf{Irrotational Flow}}
+                \centering
+                $\vec{\omega} = 0$
+            \end{block}
+        \end{columns}
+        \vspace{0.5cm}
+
+        \centering $\rightarrow$ Vorticity pops up in the acceleration of
+        the fluid particles
+        \begin{align}
+            \hspace{0.25\linewidth}
+            \frac{D\vec{u}}{Dt} = \frac{\partial \vec{u}}{\partial t}+
+            \nabla \left( \frac{1}{2} \vec{u} \cdot \vec{u}\right)  - \left(
+            \vec{u}\times \vec{\omega}  \right)\nonumber
+        \end{align}
+
+        \centering $\rightarrow$ We can incorporate vorticity into Euler's
+        Equation of Motion
+        \begin{align}
+            \hspace{0.25\linewidth}\frac{\partial \vec{u}}{\partial t} + \nabla\left(
+            \frac{1}{2}\vec{u}\cdot\vec{u} + \frac{P}{\rho} + \Omega \right)
+            = \vec{u} \times \vec{\omega} \nonumber
+        \end{align}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Boundary Conditions for Water Waves}
+        \begin{center}
+        \begin{tabular}{@{}l@{}}
+        \tabitem \textbf{Kinematic Condition}: Fluid particles at the
+            surface\\
+        \tabitem \textbf{Dynamic Condition}: Atmospheric Pressure on
+            the surface\\
+        \tabitem \textbf{Bottom Condition}: Rigid and fixed bottom\\
+        \tabitem (\textbf{Integrated Mass Condition}): Combination
+        \end{tabular}
+        \end{center}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Nondimensionalisation}
+        \begin{center}
+        \begin{tabular}{@{}l@{}}
+                \tabitem $h_0$ for the typical water depth\\
+                \tabitem $\lambda$ for the typical wavelength\\
+                \tabitem $\frac{\lambda}{\sqrt{g h_0}}$ time scale
+                of wave propagation\\
+                \tabitem $\sqrt{g h_0}$ velocity scale of waves in
+                $(x, y)$\\
+                \tabitem $\frac{h_0 \sqrt{g h_0} }{\lambda}$ velocity scale in $z$
+        \end{tabular}
+        \end{center}
+        \centering
+        $\rightarrow$ \textbf{Shallowness parameter} $\delta =
+        \frac{h_0}{\lambda}$
+        \centering
+        $\rightarrow$ \textbf{Amplitude Parameter}
+        $\varepsilon=\frac{a}{h_0}$
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Nondimensionalisation}
+        $\rightarrow$ Nondimensionalisation
+        \begin{ceqn}
+        \begin{align}
+            &x \rightarrow\ \lambda x, \quad u \rightarrow \sqrt{gh_0} u,
+            \nonumber \\
+              &y \rightarrow\ \lambda y, \quad v \rightarrow \sqrt{gh_0} v, \qquad
+              t\rightarrow \frac{\lambda}{\sqrt{gh_0}}t,\nonumber\\
+              &z \rightarrow\ h_0 z, \quad w \rightarrow
+            \frac{h_0\sqrt{gh_0}}{\lambda} w.\nonumber
+        \end{align}
+        \end{ceqn}
+        \centering
+        $\rightarrow$ Top and Bottom conditions
+        \begin{ceqn}
+        \begin{align}
+        h = h_0 + a \eta(\vec{x}_\perp,t), \qquad  b \rightarrow h_0
+        b(\vec{x}_\perp, t)\nonumber
+        \end{align}
+        \end{ceqn}
+        \centering
+        $\rightarrow$ Rewrite Pressure
+        \begin{ceqn}
+        \begin{align}
+            P = P_a + \rho g(h_0 -z) + \rho g h_0 p(\vec{x})  \nonumber
+        \end{align}
+        \end{ceqn}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Scaling}
+        \centering
+        $\rightarrow$ $w$, $p$ and the free surface $z$ are $\propto$
+        $\varepsilon$, leading to the scaling
+        \begin{ceqn}
+            \begin{align}
+                p \rightarrow \varepsilon p, \quad w \rightarrow \varepsilon w, \quad
+                \vec{u}_\perp \rightarrow \varepsilon
+                \vec{u}_\perp\nonumber
+            \end{align}
+        \end{ceqn}
+        \end{frame}
+
+    \begin{frame}
+        \frametitle{Results}
+        \centering
+        $\rightarrow$ Nondimensionalized Euler's Equation of motion
+        \begin{ceqn}
+        \begin{align}
+            \frac{Du}{Dt} = - p_x \quad
+            &\frac{Dv}{Dt} = - p_y \quad
+            \delta^2\frac{Dw}{Dt} = - p_z \nonumber\\
+            \nonumber\\
+            &\nabla \cdot \vec{u}  = 0\nonumber
+        \end{align}
+        \end{ceqn}
+        \centering
+        $\rightarrow$ With boundary conditions
+        \begin{ceqn}
+        \begin{align}
+            \begin{drcases}
+            p = \eta - \frac{\delta^2\varepsilon h_0}{\lambda^2} \frac{W_e}{R}\\
+            w = \frac{1}{\varepsilon}\eta_t + (\mathbf{u}_\perp \nabla_\perp)\eta
+            \end{drcases} \quad
+            \text{on}\;\; z = 1+\varepsilon\eta\\
+            w =\frac{1}{\varepsilon}b_t + (\mathbf{u}_\perp \nabla_\perp)b \quad
+            \text{on}\;\; z=b
+        \end{align}
+        \end{ceqn}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{History of the Soliton}
+        \begin{itemize}
+        \item[$\circ$] a \textbf{soliton} is a solitary wave that resists
+            dispersion, maintaining its shape while it propagates at constant
+            velocity\\
+        \item[$\circ$] John Scott Russell discovered the solitary wave in 1834,
+            firstly calling it the \textbf{wave of translation}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Korteweg-de Vries equation (KdV)}
+        Korteweg-de Vries equation: nonlinear, dispersive PDE
+        \begin{ceqn}
+        \begin{align}
+            2\eta_t + 3 \eta \eta_\xi + \frac{K}{3} \eta_{\xi\xi\xi} =
+            0\qquad \left(\xi = x-ct, \tau = \varepsilon t\right)\nonumber
+        \end{align}
+        \end{ceqn}
+        With Solution
+        \begin{ceqn}
+        \begin{align}
+            \eta(\xi, \tau) = 2c^2 \text{sech}^2\left( \sqrt{\frac{3}{2K}}
+            \left(\xi- \tau\right)  \right)\nonumber
+        \end{align}
+        \end{ceqn}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{KdV Regime}
+        \begin{itemize}
+            \item[$1$)]  The KdV equation arises in the $\varepsilon = O(\delta^2)$
+            \item[$2$)] by rescaling $\delta$ in favor of $\varepsilon$ in
+                Euler's Equations of motion
+            \item[$3$)] going into the frame of the moving wave $(\xi = x- t, \tau = \varepsilon t)$
+            \item[$4$)] conducting an Asymptotic expansion of $u , w, p$ and $\eta$.
+            \item[$5$)] KdV arises in the $O(\varepsilon)$ term
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{2004 Tsunami: Description}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{2004 Tsunami: $\varepsilon=O\left(\delta^2\right)$}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{2004 Tsunami: KdV Equation}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{2004 Tsunami: Regime of Validity}
+    \end{frame}
+
+    \begin{frame}{Bibliography}
+        \nocite{johnson_1997}
+        \nocite{vallis_2017}
+        \nocite{constantin_tsunami}
+        \nocite{rupert_2009}
+        \nocite{mathe-physik}
+        \printbibliography
+    \end{frame}
+\end{document}
+

@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'build/main.blg'
+[82] biber:340> INFO - === Sat Jun 25, 2022, 16:14:17
+[97] Biber.pm:418> INFO - Reading 'build/main.bcf'
+[166] Biber.pm:972> INFO - Found 5 citekeys in bib section 0
+[181] Biber.pm:4383> INFO - Processing section 0
+[191] Biber.pm:4574> INFO - Looking for bibtex file 'uni.bib' for section 0
+[192] bibtex.pm:1713> INFO - LaTeX decoding ...
+[198] bibtex.pm:1518> INFO - Found BibTeX data source 'uni.bib'
+[253] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[253] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[253] Biber.pm:4203> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[253] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[256] bbl.pm:654> INFO - Writing 'build/main.bbl' with encoding 'UTF-8'
+[258] bbl.pm:757> INFO - Output to build/main.bbl

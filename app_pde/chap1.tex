@@ -1,4 +1,4 @@
-\section{Governing Equations of Fluid Dynamics}
+\section{Governing Equations of Fluid Mechanics}
 We first start off with a fluid with a density given by
 \begin{align}
     \rho(\mathbf{x}, t),
@@ -19,14 +19,14 @@ pressure increases the deeper we go, that is with decreasing or increasing $z$
 direction (depending on how we set up our system $z$ pointing up or down
 respectively).
 
-The general assumption in fluid dynamics is the \textbf{Continuum
+The general assumption in fluid mechanics is the \textbf{Continuum
 Hypothesis}, which assumes continuity of $\textbf{u}, \rho$ and $P$ in
 $\mathbf{x}$ and $t$. In other words, we premise that the velocity field,
 density and pressure are ''nice enough`` functions of position and time, such
 that we can do all the differential operations we desire in the framework of
-fluid dynamics.
+fluid mechanics.
 \subsection{Mass Conservation}
-Our aim is to derive a model of the fluid and its dynamics, with respect to
+Our aim is to derive a model of the fluid and its mechanics, with respect to
 time and position, in the most general way. This is usually done thinking
 of the density of a given fluid, which is a unit mass per unit volume,
 intrinsically  an integral representation to derive these equations suggests
@@ -73,7 +73,7 @@ The figure bellow \ref{fig:volume}, expresses the above described picture.
   with a surface normal vector $\mathbf{n}$ \label{fig:volume}}
 \end{figure}
 
-Since we want to figure out the fluid's dynamics, we can consider the rate
+Since we want to figure out the fluid's mechanics, we can consider the rate
 of change in the completely arbitrary volume $V$, by
 \begin{align}
     \frac{d}{dt}\left( \int_V \rho(\mathbf{x}, t)\ dV \right) = \int_V
@@ -282,7 +282,7 @@ only a pressure on the surface, this pressure is taken to be the atmospheric
 pressure, dependent on time and point in space. Thereby  any surface tension
 effects can also include a scenario at a curved surface (e.g. wave), giving
 rise to the pressure difference across the surface. A more precise
-description would use Thermodynamics to derive boundary conditions coupling
+description would use Thermomechanics to derive boundary conditions coupling
 water surface and the air above it, yet the density component of air
 compared to that of water makes our ansatz viable. The described conditions
 are called the \textbf{dynamic conditions}
@@ -415,11 +415,11 @@ boundary conditions we get
     - b_t - (\mathbf{u}_{\perp \text{b}} \nabla_\perp) b= 0.
 \end{align}
 To simplify the equation we resort to the Leibniz Rule of Integration
-\ref{appendix:leigniz},
+\ref{appendix:leibniz},
 \begin{align}
      \int_b^h \nabla_\perp\mathbf{u}_\perp =
     \nabla_\perp \int_b^h \mathbf{u}_\perp\ dz - (\mathbf{u}_{\perp \text{s}}
-    \nabla_\perp)h - (\mathbf{u}_{\perp \text{b}})b.
+    \nabla_\perp)h + (\mathbf{u}_{\perp \text{b}})b.
 \end{align}
 As a consequence the \textbf{Integrated Mass Condition} is given by
 \begin{align}

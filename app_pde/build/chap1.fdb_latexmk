@@ -1,0 +1,9 @@
+# Fdb version 3
+["pdflatex"] 1656166452 "chap1.tex" "build/chap1.pdf" "chap1" 1656166452
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1650183167 39911 2da6c67557ec033436fe5418a70a8a61 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1651438073 2927654 3f7af88e1ee3d51ccbadf8c78ab72cd0 ""
+  "build/chap1.aux" 1656166439 32 3985256e7290058c681f74d7a3565a19 ""
+  "chap1.tex" 1656166452 25268 14d503b5876f24f66912a1c029a08378 ""
+  (generated)
+  "build/chap1.log"
+  "build/chap1.pdf"

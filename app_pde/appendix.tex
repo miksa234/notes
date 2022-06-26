@@ -1,5 +1,5 @@
 \appendix
-\section{Appendix: Mathematical Preliminaries}
+\section{Appendix}
 \subsection{Leibniz Rule of Integration}
 \label{appendix:leibniz}
 The Leibniz integral rule for differentiation under the integral sign
@@ -34,7 +34,7 @@ We will use Einstein's Summation Convention, where we sum over indices
 appearing at the bottom and the top. To rewrite the second part of the
 material derivative $(\mathbf{u}\nabla)\mathbf{u}$ into
 \begin{align}
-    (\mathbf{u}\times (\nabla \times \mathbf{u}))_i
+    (\mathbf{u}\times (\nabla \times \mathbf{u}))^i
     &= \varepsilon^{ijk}u_j(\nabla \times  \mathbf{u})_k \\
     &= \varepsilon^{ijk}u_j\varepsilon_{klm}\partial^l u^m\\
     &=(\delta^i_l\delta^j_m-\delta^i_m\delta^j_l)u_j\partial^l u^m\\
@@ -46,7 +46,7 @@ Now the first part in equation \ref{eq:identity split} can be rewritten into
 \end{align}
 Thus we get
 \begin{align}
-    (\mathbf{u}\times (\nabla \times \mathbf{u}))_k
+    (\mathbf{u}\times (\nabla \times \mathbf{u}))^i
     = \frac{1}{2}\partial^i(u_m u^m) + u_l \partial^l u^i,
 \end{align}
 which is
