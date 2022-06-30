@@ -49,13 +49,20 @@
 \title
 {Mathematical Modeling of Water-Wave Problems}
 \subtitle{Applied PDE Seminar}
-\author[Popović Milutin]
-{Popović Milutin}
-\date{17. March 2021}
+%\author[Popović Milutin]
+%{Popović Milutin \inst{1}\\[1ex] {\small supervisor\inst{1,2}}
+
+\author[Popović Milutin]{Popović Milutin\\[10mm]{\small Supervisor: Sabine Hittmeir}}
+\date{29. June 2022}
 
 \begin{document}
     \begin{frame}
         \titlepage
+        \nocite{johnson_1997}
+        \nocite{vallis_2017}
+        \nocite{constantin_tsunami}
+        \nocite{rupert_2009}
+        \nocite{mathe-physik}
     \end{frame}
 
 
@@ -70,7 +77,6 @@
                 \item[$\circ$] Fluid density\\ $\rho(\vec{x}, t)$
                 \item[$\circ$] Velocity Field\\ $\vec{u}(\vec{x}, t) = (u, v,
                     w)$
-                \item[$\circ$] Pressure \\$P(\vec{x}, t)$
             \end{itemize}
             \column{0.57\textwidth}
 
@@ -122,7 +128,7 @@
             conservation}
             \begin{align}
                 \hspace{0.3\linewidth} \frac{\partial \rho}{\partial t}
-                \nabla \cdot (\rho \vec{u}) =
+                +\nabla \cdot (\rho \vec{u}) =
                 0 \nonumber
             \end{align}
         \end{itemize}
@@ -192,6 +198,16 @@
     \end{frame}
 
     \begin{frame}
+        \frametitle{Perfect Fluid}
+        \begin{itemize}
+            \item \textbf{inviscid} $\mu = 0$
+            \item \textbf{incompressible} $\rho = \text{const}.$, then
+                $\nabla \vec{u} = 0$
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}
         \frametitle{Boundary Conditions for Water Waves}
         \begin{center}
         \begin{tabular}{@{}l@{}}
@@ -211,10 +227,10 @@
         \begin{tabular}{@{}l@{}}
                 \tabitem $h_0$ for the typical water depth\\
                 \tabitem $\lambda$ for the typical wavelength\\
-                \tabitem $\frac{\lambda}{\sqrt{g h_0}}$ time scale
-                of wave propagation\\
                 \tabitem $\sqrt{g h_0}$ velocity scale of waves in
                 $(x, y)$\\
+                \tabitem $\frac{\lambda}{\sqrt{g h_0}}$ time scale
+                of wave propagation\\
                 \tabitem $\frac{h_0 \sqrt{g h_0} }{\lambda}$ velocity scale in $z$
         \end{tabular}
         \end{center}
@@ -223,7 +239,7 @@
         \frac{h_0}{\lambda}$
         \\
         \centering
-        $\rightarrow$ \textbf{Amplitude Parameter}
+        $\rightarrow$ \textbf{Amplitude parameter}
         $\varepsilon=\frac{a}{h_0}$
     \end{frame}
 
@@ -302,28 +318,27 @@
     \begin{frame}
         \frametitle{History of the Soliton}
         \begin{itemize}
+        \item[$\circ$] John Scott Russell discovered the solitary wave in 1834,
+            firstly calling it the \textbf{wave of translation}
         \item[$\circ$] a \textbf{soliton} is a solitary wave that resists
             dispersion, maintaining its shape while it propagates at constant
             velocity\\
-        \item[$\circ$] John Scott Russell discovered the solitary wave in 1834,
-            firstly calling it the \textbf{wave of translation}
         \end{itemize}
     \end{frame}
 
     \begin{frame}
         \frametitle{Korteweg-de Vries equation (KdV)}
-        Korteweg-de Vries equation: nonlinear, dispersive PDE
+        Korteweg-de Vries equation: nonlinear PDE
         \begin{ceqn}
         \begin{align}
-            2\eta_t + 3 \eta \eta_\xi + \frac{K}{3} \eta_{\xi\xi\xi} =
-            0\qquad \left(\xi = x-ct, \tau = \varepsilon t\right)\nonumber
+            \eta_t + 6K \eta \eta_{x} + \eta_{x x x} = 0\nonumber
         \end{align}
         \end{ceqn}
         With Solution
         \begin{ceqn}
         \begin{align}
-            \eta(\xi, \tau) = 2c^2 \text{sech}^2\left( \sqrt{\frac{3}{2K}}
-            \left(\xi- \tau\right)  \right)\nonumber
+            \eta(x, t) = 2c^2 \text{sech}^2\Big( c
+            \left(x - 4c^2t\right)  \Big)\nonumber
         \end{align}
         \end{ceqn}
     \end{frame}
@@ -347,13 +362,8 @@
             \centering
             \includegraphics[width=0.35\textwidth]{./pics/water-surface.png}
             \caption{Earthquake generating a tsunami with $\lambda = 100\
-            \text{km},\;\; a = 1\ \text{m}$}
+            \text{km},\;\; a = 1\ \text{m}$ (found in \cite{graph_meter})}
         \end{figure}
-        \begin{ceqn}
-        \begin{align}
-        \end{align}
-        \end{ceqn}
-
     \end{frame}
 
     \begin{frame}
@@ -361,17 +371,17 @@
 
         \begin{itemize}
             \item[$\circ$] $\varepsilon = \frac{a}{h_0}$ and $\delta =
-                \frac{h_0}{\lambda}$ need to ender the regime
+                \frac{h_0}{\lambda}$ need to enter the regime
                 $\varepsilon=O(\delta^2)$ for the KdV equation to become
                 relevant
             \item[$\circ$] But also the geophysical scales need to be $\xi = O(1)$ and $\tau =
-                O(1)$ for the KdV-balance to become relevant, that is
+                O(1)$ for the KdV dynamics to become relevant, that is
                 \begin{ceqn}
                 \begin{align}
                     x = O\left(\varepsilon^{-1} \lambda \right)
                 \end{align}
                 \end{ceqn}
-            \item[$\circ$] KdV balance is when the waves are ordered with the
+            \item[$\circ$] KdV dynamics is when the waves are ordered with the
                 highest in front following an oscillatory tale
             \item[$\circ$] This happens because wave amplitude is proportional to
                 wave speed
@@ -383,7 +393,7 @@
         \frametitle{2004 Tsunami: Regime of Validity}
         \begin{ceqn}
         \begin{align}
-            \lambda = 10\ \text{km}\qquad a = 1\ \text{m}\nonumber
+            \lambda = 100\ \text{km}\qquad a = 1\ \text{m}\nonumber
         \end{align}
         \end{ceqn}
         \begin{columns}
@@ -440,11 +450,6 @@
     \end{frame}
 
     \begin{frame}{Bibliography}
-        \nocite{johnson_1997}
-        \nocite{vallis_2017}
-        \nocite{constantin_tsunami}
-        \nocite{rupert_2009}
-        \nocite{mathe-physik}
         \printbibliography
     \end{frame}
 \end{document}
