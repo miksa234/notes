@@ -1,0 +1,453 @@
+\include{./preamble.tex}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Sheet 2}
+\subsection{Exercise 7}
+For the functions $g:\mathbb{R}^{2}\to \mathbb{R}^{2}$, find $X =
+\{(x,y)\in\mathbb{R}^{2}: g(x, y)\leqq 0\} $, the tangent cone and the
+linearized tangent cone at $x_0 \in X$ and find out if $x_0$ fulfills
+(ADABIDE-CQ), i.e. $T_\text{lin}(x_0) = T_X(x_0)$.
+\begin{enumerate}
+    \item $g(x,y) = (y-x^{3}, -y)^{T},\quad x_0=(0,0)^{T}$
+    \item $g(x,y) = (y^{2}-x+1, 1-x-y)^{T},\quad x_0=(1,0)^{T}$
+\end{enumerate}
+For 1. we have that $g(x,y)\leqq 0$ means that
+\begin{align}
+    y-x^{3}\le_0\\
+    -y \le 0\\
+    \Rightarrow 0\le y\le x^{3}.
+\end{align}
+So is defined as $X = \{\left( x,y \right) \in \mathbb{R}^{2}: 0\le y, y\le
+x^{3}\}$. Graphically represented $X$ looks like the following
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[yscale=1, xscale=1]
+        \begin{axis}[
+            xmin=-1, xmax=2,
+            ymin=-1, ymax=2,
+            axis lines = middle,
+        ]
+            \addplot[domain=0:2, samples=100, color=gray, name path=A]{x^3};
+            \addplot[domain=0:2, samples=100, name path=B]{0};
+            \addplot[fill=gray,fill opacity=0.5] fill between[of=A and B,soft
+                clip={domain=0:2},];
+            \node[] at (axis cs:2,2) [below left] {X};
+            \node[draw, circle, inner sep=1pt, fill=red, label=above right:{$x_0$}] at
+                (axis cs:0, 0) {};
+        \end{axis}
+    \end{tikzpicture}
+    \label{fig: ex7.1}
+\end{figure}
+Then the tangent cone is
+\begin{align}
+    T_X(x_0) = \left\{\begin{pmatrix} \lambda\\ 0 \end{pmatrix} : \lambda
+\ge 0\right\}.
+\end{align}
+Now for the linearized tangent cone we calculate, $g_1(x_0) = 0$ and
+$g_2(x_0) = 0$ meaning that $\mathcal{A}(x_0)=\{1, 2\}$ thereby
+\begin{align}
+    T_\text{lin}(x_0)
+    &= \{d\in \mathbb{R}^{2}: \nabla g_1(x_0)^{T}d\le 0,\; \nabla g_2(x_0)^{T}d
+    \le 0\}\\
+    &= \left\{d\in \mathbb{R}^{2}: \begin{pmatrix}0\\1\end{pmatrix}^{T}d\le 0,\;
+        \begin{pmatrix}0\\-1\end{pmatrix}^{T}d
+    \le 0\right\}\\
+    &= \left\{\begin{pmatrix} \lambda \\ 0 \end{pmatrix}, \begin{pmatrix} -\lambda
+\\ 0 \end{pmatrix}:\; \lambda \ge 0 \right\}.
+\end{align}
+We conclude that $x_0 = (0, 0)^{T}$ does not satisfy the ADABIE-CQ
+condition for this optimization problem.
+\newline
+For number 2. first the domain $X$, $g(x, y) \le 0$
+\begin{align}
+    y^{2}-x +1 \le 0 \quad &\text{and} \quad 1-x-y\le 0\\
+    y^2 - 1 \le x \quad &\text{and} \quad y-1\le x
+\end{align}
+so $X$ has the following form
+\begin{align}
+    X = \left\{ \left( x,y \right) \in \mathbb{R}^{2}:
+        \begin{cases}
+            -\sqrt{x+1}\le y\le x+1
+            \quad  \text{for}\; x\in(-1, 0]\\
+            -\sqrt{x+1}\le y \le\sqrt{x+1}\quad \text{for}\; x > 0
+        \end{cases}
+    \right\}
+\end{align}
+and graphically
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[yscale=1, xscale=1]
+        \begin{axis}[
+            xmin=-1.5, xmax=2,
+            ymin=-1.5, ymax=1.5,
+            axis lines = middle,
+        ]
+            \addplot[domain=-1:0, samples=100, color=gray, name path=A]{x+1};
+            \addplot[domain=-1:2, samples=100, color=gray, name
+                path=B]{-sqrt(x+1)};
+            \addplot[domain=0:2, samples=100, color=gray, name
+                path=C]{sqrt(x+1)};
+            \addplot[domain=-1:0, samples=100, color=gray, name
+                path=L]{0};
+            \addplot[fill=gray,fill opacity=0.5] fill between[of=A and B,soft
+                clip={domain=-1:0},];
+            \addplot[fill=gray,fill opacity=0.5] fill between[of=C and B,soft
+                clip={domain=0:2},];
+            \node[] at (axis cs:2,1.5) [below left] {X};
+            \node[draw, circle, inner sep=1pt, fill=red, label={$x_0$}] at (axis cs:1, 0) {};
+        \end{axis}
+    \end{tikzpicture}
+    \label{fig: ex7.2}
+\end{figure}
+Then the tangent cone is obviously
+\begin{align}
+    T_X(x_0) = \left\{ d: d \in \mathbb{R}^{2} \right\}
+\end{align}
+For the linearized tangent cone we calculate  $g_1(x_0) = 0$ and $g_2(x_0)=0$,
+thereby $\mathcal{A}(x_0)=\{1, 2\}$ and
+\begin{align}
+    T_\text{lin}(x_0)&=
+    \left\{ d\in\mathbb{R}^{2}: \begin{pmatrix} -1\\0 \end{pmatrix}^{T}d\le 0,\;
+    \begin{pmatrix} -1 \\ -1 \end{pmatrix}^{T}d\le 0 \right\} \\
+         &= \left\{ \begin{pmatrix} \lambda \\ \lambda \end{pmatrix},
+         \begin{pmatrix} \lambda \\ -\lambda \end{pmatrix}:\; \lambda \ge
+     0\right\}.
+\end{align}
+In this case $x_0$ also does not satisfy the ABADIE-CQ.
+\subsection{Exercise 8}
+Let $(x^{*}, \lambda^{*}, \mu^{*})$ be a KKT point of the optimization
+problem
+\begin{align}
+    \text{min}\quad & f(x),\\
+    \text{s.t.}\quad & g_i(x) \le 0, i=1,\ldots,m\nonumber\\
+    &h_j(x) = 0, j=1,\ldots,p\nonumber\\
+    & x \in \mathbb{R}^{n}\nonumber
+\end{align}
+for $f, g_i, h_i:\mathbb{R}^{n}\to \mathbb{R}$ continuously differentiable
+functions. Prove that $x^{*}$ is a critical point of the optimization point,
+namely that it holds
+\begin{align}
+    \nabla f(x^{*})^{T}\ge 0 \;\; \forall d\in T_X(x^{*}),
+\end{align}
+where $X = \left\{ x \in R^{n}: g_i(x) \le 0, i=1,\ldots,m, h_j(x) = 0,
+j=1,\ldots,p\right\}$. Given a critical point $x^{*}$ when do Lagrange
+multipliers $\lambda^{*}, \mu^{*}$ exist such that $(x^{*}, \lambda^{*},
+\mu^{*})$ is a KKT point?
+\newline
+Firs of all if $(x^{*}, \lambda^{*}, \mu^{*}) $ is a KKT point then
+\begin{align}
+    &\nabla_x L(x^{*},\lambda^{*}, \mu^{*}) = 0\\
+    &\nabla f(x^{*}) + \sum_{i=1}^{m} \lambda_i^{*} \nabla g_i(x^{*})
+    + \sum_{j=1}^{p} \mu_j^{*} \nabla h_j(x^{*}) = 0
+\end{align}
+is satisfied for the Lagrangian. Then we can take the scalar product with $d
+\in T_X(x^{*})$. We know that $\nabla g_i(x^{*})^{T} d \le 0$ and $\nabla h_j
+(x^{*})^{T}d =0$ for all $i = 1,\ldots,m$ and $j=1,\ldots,p$ and
+$\lambda_i^{*}\ge 0$ which means
+\begin{align}
+    0 &= \nabla f(x^{*})^{T}d + \sum_{i=1}^{m} \lambda_i^{*} \nabla g_i(x^{*})^{T}d
+    + \sum_{j=1}^{p} \mu^{*}_j \nabla h_j(x^{*})^{T}d \\
+    &= \nabla f(x^{*})^{T}d + \sum_{i=1}^{m} \lambda_i^{*} \nabla
+    g_i(x^{*})^{T}d\\
+    &\le \nabla f(x^{*})^{T}d.
+\end{align}
+This concludes
+\begin{align}
+    \nabla f(x^{*})^{T}d \ge 0.
+\end{align}
+Now if $x^{*}$ is a critical point then it is a local minimum. If it
+fulfills the ABADIE-CQ condition then there exist $\lambda^{*} \in
+\mathbb{R}^{m}$ and $\mu^{*}\in\mathbb{R}^{p}$ such that $(x^{*},
+\lambda^{*}, \mu^{*})$ is a KKT point. We know that $X$ is convex and $x^{*}$
+fulfills the ABADIE-CQ then $\nabla f(x^{*}) \in \left( T_X(x^{*})^{*}
+\right)$ and $\left( T_X(x^{(*)} \right)^{*} = (T_\text{lin}(x^{*}))^{*}$.
+This means that $\nabla f(x^{*}) \in \left( T_\text{lin}(x^{*} \right)^{*}$.
+By Farkas Lemma there exist $\lambda_i^{*} \ge 0$ and $\mu_j^{*}$,
+$i=1,\ldots,m$, $j=1,\ldots,p$ such that $\nabla_x L(x^{*}, \lambda^{*},
+\mu^{*}) = 0$, then $(x^{*}, \lambda^{*}, \mu^{*})$ is a KKT point.
+\subsection{Exercise 9}
+Consider the optimization problem
+\begin{align}
+    \text{min}\quad & x_1^{2}\left( x_2 + 1 \right)^{2} ,\\
+    \text{s.t.}\quad &x_1^{3} - x_2 \le 0\\
+    & x_2 \le 0.
+\end{align}
+Show that $x^{*} = (0, 0)^{T}$ fulfills ABADIE-CQ but not MFCQ.
+\newline
+The domain $X$ is defined by $x_1^2 \ge x^2$ and $x_2 \ge 0$,
+\begin{align}
+    X = \left\{ (x_1, x_2) \in \mathbb{R}^{2}: x_1^{2}\ge x_2 \ge 0 \right\},
+\end{align}
+graphically
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[yscale=1, xscale=1]
+        \begin{axis}[
+            xmin=-2, xmax=2,
+            ymin=-0.5, ymax=2,
+            axis lines = middle,
+            xlabel=$x_1$,
+            ylabel=$x_2$,
+        ]
+            \addplot[domain=-2:2, samples=100, color=gray, name path=A]{x^2};
+            \addplot[domain=-2:2, samples=100, name path=B]{0};
+            \addplot[fill=gray,fill opacity=0.5] fill between[of=A and B,soft
+                clip={domain=-2:2},];
+            \node[] at (axis cs:2,2) [below left] {X};
+            \node[draw, circle, inner sep=1pt, fill=red, label=above
+                right:{$x^{*}$}] at
+                (axis cs:0, 0) {};
+        \end{axis}
+    \end{tikzpicture}
+    \label{fig: ex9}
+\end{figure}
+meaning that
+\begin{align}
+    T_X(x^{*}) = \left\{\begin{pmatrix} -\lambda \\ 0 \end{pmatrix},
+    \begin{pmatrix} \lambda \\ 0 \end{pmatrix}:\; \lambda \ge 0   \right\},
+\end{align}
+Then
+\begin{align}
+    T_\text{lin}(x^{*})
+    &= \left\{d\in\mathbb{R}^{2}: \begin{pmatrix} 0\\1
+    \end{pmatrix}^{T}d \le 0,\; \begin{pmatrix} 0 \\ -1
+\end{pmatrix}^{T}d\le 0  \right\} \\
+    &= \left\{ \begin{pmatrix} -\lambda \\ 0 \end{pmatrix}, \begin{pmatrix}
+\lambda , 0 \end{pmatrix}:\; \lambda \ge 0   \right\}.
+\end{align}
+This means that $x^{*}$ fulfills the ABADIE-CQ condition. On the other hand
+MFCQ is fulfilled only if there exists $d\in\mathbb{R}^{2}$ such that $\nabla
+g_i(x^{*})^{T}d < 0$, for all $i\in \mathcal{A}(x^{*})$ but the problem is the
+strict constraint
+\begin{align}
+    \nabla g_1 (x^{*}) = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \quad
+    \nabla g_2 (x^{*}) = \begin{pmatrix} 0 \\ -1 \end{pmatrix}.
+\end{align}
+Any feasible solutions are of the form $(\pm \lambda , 0)^{T}$, $\lambda \ge
+0$. Both cases always equal to $0$.
+\subsection{Exercise 10}
+Consider the optimization problem
+\begin{align}
+    \text{min}\quad & x_1^{2}\left( x_2 + 1 \right)^{2} ,\\
+    \text{s.t.}\quad &-x_1^{3} - x_2 \le 0\\
+    & -x_2 \le 0.
+\end{align}
+Show that $x^{*} = (0, 0)^{T}$ fulfills MFCQ but not LICQ.
+\newline
+The domain $X$ is defined by $x_1^2 \ge -x^2$ and $x_2 \ge 0$,
+\begin{align}
+    X = \left\{ (x_1, x_2) \in \mathbb{R}^{2}: x_2 \ge 0 \right\},
+\end{align}
+and $g_1(x^{*}) = 0$ and $g_2(x^{*}) = 0$ so $\mathcal{A}(x^{*}) = \{1,2\}$.
+\begin{align}
+    \nabla g_1(x^{*}) = \begin{pmatrix} 0\\-1 \end{pmatrix},\quad \nabla
+    g_2(x^{*}) = \begin{pmatrix} 0 \\ -1 \end{pmatrix}
+\end{align}
+For strict inequality $\nabla g_i(x^{*})^{T}d < =$ for all $i \in
+\mathcal{A}(x^{*})$ we have that $d = (0, \lambda)$ with $\lambda > 0$. This
+means $x_0$ fulfills MFCQ. On the other hand LICQ is fulfilled if
+\begin{align}
+    \{\nabla g_i(x^{*})\}_{i\in\mathcal{A}(x^{*})}
+\end{align}
+are linearly independent. But in our case $\nabla g_1(x^{*}) = \nabla
+g_2(x^{*})$, meaning that $x_0$ does not fulfill LICQ.
+\subsection{Exercise 11}
+Let $U \subseteq \mathbb{R}^{n}$ be a nonempty, open convex set and $f \in U
+\to \mathbb{R}$ a differentiable function on $U$. Prove that the following
+statements are equivalent.
+\begin{enumerate}
+    \item $f$ is convex on $U$
+    \item $\langle\nabla f(x),y-x\rangle \le f(y) - f(x) \quad \forall x, y \in U$
+    \item $\langle\nabla f(x)-\nabla f(y),y-x\rangle \le 0 \quad \forall x, y \in U$
+    \item if f is twice differentiable on $U$, then $\nabla^{2}f(x)$ is
+        positively semi definite for every $x \in U$.
+\end{enumerate}
+We start with (1) $\Leftrightarrow$ (2).\newline
+Ad $\Rightarrow$: $f$ is convex, then for all $x, y \in U$, $\lambda \in [0,
+1]$ we have
+\begin{align}
+    f\left( (1-\lambda)x + \lambda y \right)
+    &\le (1-\lambda)f(x) + \lambda(y)\\
+    &=f(x) + \lambda\left( f(y) - f(x) \right)\\
+    \frac{f\left( (1-\lambda)x + \lambda y \right)  -f(x)}{\lambda}
+    &\le f(y) - f(x).
+\end{align}
+Letting $\lambda \downarrow 0 $ we get
+\begin{align}
+    \nabla f(x)^{T}(y-x) \le f(x) - f(y)
+\end{align}
+Ad $\Leftarrow$: we have that $\forall x, y \in U$:
+\begin{align}
+    \nabla f(x)^{T}(y-x) \le f(x) - f(y).
+\end{align}
+Since $U$ is convex then the above also holds for $z \in U$ where $z =
+(1-\lambda)x + \lambda y$, then
+\begin{align}
+    &f(x) \ge f(z) + \nabla f(z)^{T}(x-z) \quad | \cdot (1-\lambda)\\
+    &f(y) \ge f(z) + \nabla f(z)^{T}(y-z) \quad | \cdot \lambda
+\end{align}
+adding both of them together we get
+\begin{align}
+    (1-\lambda)f(x) + \lambda f(y)
+    &\ge f(z) + \nabla f(z)^{T}((1-\lambda) x + \lambda y - z) \\
+    &= f(z)\\
+    &= f((1-\lambda)x + \lambda y).
+\end{align}
+This shows that $f$ is convex on $U$.
+\newline
+Next we show (2) $\Leftrightarrow$ (3).\newline
+Ad $\Rightarrow$:  We start with
+\begin{align}
+    &f(y) \ge f(x) + \nabla f(x)^{T}(y-x)\\
+    &f(x) \ge f(y) + \nabla f(y)^{T}(x-y).
+\end{align}
+Adding them together we get
+\begin{align}
+    \nabla f(y)^{T}(y-x) - \nabla f(x)^{T}(y-x) \ge 0\\
+    \left( \nabla f(y)^{T} - \nabla f(x)^{T} \right) (y-x) \ge 0.
+\end{align}
+Ad $\Leftarrow$: We can just do the same operations as in $\Rightarrow$ in
+reverse.
+\newline
+Now we prove (2) $\Leftrightarrow$ (4).First we consider in one dimension and
+then generalize
+\newline
+Ad $\Rightarrow$: . In
+$U \subseteq \mathbb{R}$ we have that $\forall x ,y \in U$
+\begin{align}
+    &f(y) \ge f(x) + f(x)'(y-x)\\
+    &f(x) \ge f(y) + f(y)'(x-y).
+\end{align}
+Let $x < y$, then
+\begin{align}
+   &f'(x)(y-x) \le f(y) - f(x) \le f'(y) (y- x) \quad | \frac{1}{(y-x)^{2}}\\
+   &\frac{f'(y) - f'(x)}{y-x} \ge 0 \quad | y\to x\\
+   &f''(x) \ge 0 \quad \forall x \in U.
+\end{align}
+Ad $\Leftarrow$: We use Taylors expansion formula for $f(y)$ in $x \in U$
+\begin{align}
+    f(y) = f(x) + f'(x)(y-x) + \frac{1}{2}f''(\xi) (y-x)\quad \xi \in [x,y]\\
+    f(y) \ge f(x) + f'(x)(y-x).
+\end{align}
+In general dimensions convexivity means convexivity along all directions,
+i.e. $f : U\subseteq \mathbb{R}^{n} \to \mathbb{R}$ is convex if
+\begin{align}
+    g(\alpha) = f(x + \alpha d)
+\end{align}
+is convex $\forall x \in U$ and $\forall d \in \mathbb{R}^{n}$. This is
+exactly the case if
+\begin{align}
+    g''(\alpha) = d^{T}\nabla^{2}f(x+\alpha d) d \ge 0 \quad \forall x \in
+    U\; \forall d \in \mathbb{R}^{n} \; \forall \alpha \in \mathbb{R}
+\end{align}
+such that $x + \alpha d \in U$ so $f$ is convex if and only if
+\begin{align}
+    \nabla f(x) \ge 0 \quad \forall x \in U \qed
+\end{align}
+\subsection{Exercise 12}
+Let $c: \mathbb{R}\to \mathbb{R}$ be defined as
+\begin{align}
+    c(y) =
+    \begin{cases}
+        (y+1)^{2} \qquad &y < -1\\
+        0 \qquad &-1 \le y \le 1\\
+        (y-1)^{2} \qquad &y > 1
+    \end{cases}
+\end{align}
+Let $g_1, g_2: \mathbb{R}^{2}\to \mathbb{R}$
+\begin{align}
+    g_1(x_1, x_2) = c(x_1) - x_2\\
+    g_2(x_1, x_2) = c(x_1) + x_2\\
+\end{align}
+Let $f: \mathbb{R}^{2} \to \mathbb{R}$ be a convex function and continuously
+differentiable. Show that for the convex optimization problem
+\begin{align}
+    \text{min}\quad & f(x),\\
+    \text{s.t.}\quad & g_i(x) \le 0, i=1,2\nonumber\\
+    & x \in \mathbb{R}^{2}\nonumber
+\end{align}
+ABADIE-CQ holds at $x^{*}= (0, 0)^{T}$ SLATER-CQ is not satisfied.
+\newline
+Bellow is a graphical representation of, $c(x_1)$, $g_1(x) \le 0$ and
+$g_2(x)$
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[yscale=1, xscale=1]
+        \begin{axis}[
+            xmin=-5, xmax=5,
+            ymin=-1, ymax=5,
+            axis lines = middle,
+            xlabel=$x_1$,
+            ylabel=$x_2$,
+        ]
+            \addplot[domain=1:5, samples=100, color=red, name
+                path=A]{(x-1)^2};
+            \addplot[domain=-1:-5, samples=100, name path=B, color=red]{(x+1)^2};
+
+            \addplot[domain=-5:5, samples=100, name path=D,, color=gray,
+                opacity=0]{0};
+            \addplot[domain=-5:5, samples=100, name path=E,, color=gray,
+                opacity=0]{-1};
+
+            \addplot[domain=-5:5, samples=100, name path=F,, color=blue,
+                opacity=0]{5};
+
+            \addplot[fill=gray,fill opacity=0.3] fill between[of=D and E,soft
+                clip={domain=-5:5},];
+            \addplot[fill=gray,fill opacity=0.3] fill between[of=B and D,soft
+                clip={domain=-5:-1},];
+            \addplot[fill=gray,fill opacity=0.3] fill between[of=A and D,soft
+                clip={domain=1:5},];
+
+            \addplot[fill=blue,fill opacity=0.3] fill between[of=A and F,soft
+                clip={domain=1:5},];
+            \addplot[fill=blue,fill opacity=0.3] fill between[of=B and F,soft
+                clip={domain=-1:-5},];
+            \addplot[fill=blue,fill opacity=0.3] fill between[of=D and F,soft
+                clip={domain=-1:1},];
+
+            \addplot[domain=-1:1, samples=100, name path=C, color=red]{0};
+
+            \node[color=red] at (axis cs:3.5,4) [above right] {$c(x_1)$};
+            \node[color=gray] at (axis cs:2.5,2) [below right] {$g_2(x) \le 0$};
+            \node[color=blue] at (axis cs:-1.3,3.5) [] {$g_1(x) \le 0$};
+            \node[draw, circle, inner sep=1pt, fill=red, label=above
+                right:{$x^{*}$}] at
+                (axis cs:0, 0) {};
+        \end{axis}
+    \end{tikzpicture}
+    \label{fig: ex12}
+\end{figure}
+So $X$ has only elements on the curve $c(x)$, i.e. $X = \{x \in
+\mathbb{R}^{2}: g_1(x) \le 0, g_2(x) \le 0\}  = \{(x_1, c(x_1))^{T} : x_1 \in
+\mathbb{R}\}$ and thereby the tangent cone of $X$ at $x^{*}$ consists of
+tangent vectors of $c(x)$ at $x^{*}$
+\begin{align}
+    T_X(x^{*}) = \left\{\begin{pmatrix} \lambda\\ 0 \end{pmatrix}, \begin{pmatrix}
+-\lambda\\ 0\end{pmatrix}   : \lambda \ge 0 \right\}.
+\end{align}
+For the linearized tangent cone we have that $g_1(x^{*}) = c(0) = 0 $ and
+$g_2(x^{*})= c(0) = 0$, then the gradients at $x^{*}$ are
+\begin{align}
+    \nabla g_1(x^{*}) = \begin{pmatrix} 0\\1 \end{pmatrix}, \qquad
+    \nabla g_2(x^{*}) = \begin{pmatrix} 0\\-1 \end{pmatrix}.
+\end{align}
+Thereby
+\begin{align}
+    T_\text{lin}(x^{*})
+    &= \left\{ d \in \mathbb{R}^{2}: \nabla g_1(x)^{T}d \le 0, \nabla
+    g_2(x)^{T}d\le 0 \right\} \\
+    &= \left\{ \begin{pmatrix} \lambda\\0 \end{pmatrix}, \begin{pmatrix}
+-\lambda \\ 0 \end{pmatrix} : \lambda \ge 0  \right\}.
+\end{align}
+We have that $x^{*}$ satisfies ABADIE-CQ.
+\newline
+In our case SLATER-CQ is fulfilled if there exists an $x' \in \mathbb{R}^{2}$
+such that $g_i(x') < 0$ for all $i = 1,2$. The problem arises because in case
+of strict inequality the domains defined by $g_1(x) < 0$ and $g_2(x) < 0$ do
+not match for any $x$ as seen the figure above. In the relaxed case they
+match exactly at the line $c(x_1)$. But $c(x_1) \ge 0$. Meaning that there
+exists no $x'$ such that SLATER-CQ is satisfied (in our case).
+\end{document}

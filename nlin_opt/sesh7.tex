@@ -1,0 +1,369 @@
+\include{./preamble.tex}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Sheet 7}
+\subsection{Exercise 43}
+Consider the optimization problem
+\begin{align}
+    \text{min}\quad &f(x) := (x_1+1)^{2}+(x_2+2)^2,\\
+    \text{s.t.}\quad & g_1(x) := -x_1 \le 0 \nonumber\\
+    & g_2(x) := -x_2 \le 0 \nonumber
+\end{align}
+with $x = (x_1,x_2)^{T}$. For $\alpha >0$, find the minimum $x^{*}(\alpha)$
+of the penalty function
+\begin{align}
+    P(x;\alpha) := f(x) + \frac{\alpha}{2} \|g_+(x)\|^2
+\end{align}
+and the limit points $x^{*}=\lim_{\alpha \to +\infty} x^{*}(\alpha)$ and
+$\lambda^{*} = \lim_{\alpha \to +\infty}\alpha g_+ (x^{*}(\alpha))$. Find out
+if $(x^{*}, \lambda^{*})$ is a KKT point of the constrained optimization
+problem.
+\newline
+First we find the minimum of $P(x;\alpha)$.
+\begin{align}
+    \nabla P(x;\alpha)
+    = \nabla f(x) + \frac{\alpha}{2}\left(\nabla\left(\max(0,-x_1)\right)^{2}
+    +\nabla \left( \max\left(0,-x_2\right) \right)^{2} \right)
+\end{align}
+since $\frac{\partial }{\partial x_i} \max(0, -x_i)^2$ is $2x_i$ for $x_i < 0$
+and $0$ otherwise for all $i=1,2$, so we have the equations
+\begin{align}
+    \nabla P(x;\alpha) =
+    \begin{pmatrix}
+        2(x_1+1)\\
+        2(x_2+2)
+    \end{pmatrix}
+    + \alpha
+    \begin{pmatrix}
+        x_1\\
+        x_2
+    \end{pmatrix}= 0
+\end{align}
+which gives
+\begin{align}
+    x^{*}(\alpha) =
+    \begin{pmatrix}
+        -2(2+\alpha)^{-1}\\
+        -4(2+\alpha)^{-1}
+    \end{pmatrix}\\
+    x^{*} = \lim_{\alpha \to +\infty}x^{*}(\alpha)=
+    \begin{pmatrix} 0\\0 \end{pmatrix}
+\end{align}
+and
+\begin{align}
+    \lambda^{*}
+    &= \lim_{\alpha \to +\infty}\alpha g_+(x^{*}(\alpha))\\
+    &= \lim_{\alpha \to +\infty}
+    \begin{pmatrix}
+        \max(0, \frac{2\alpha}{\left(2+\alpha\right) }\\
+        \max(0, \frac{4\alpha}{\left(2+\alpha\right) }
+    \end{pmatrix}\\
+    &=
+    \begin{pmatrix}2 \\ 4 \end{pmatrix}.
+\end{align}
+All that is left is to show that $(x^{*}, \lambda^{*})$ is a KKT point by
+$\nabla_x L(x^{*},\lambda^{*}) =0$
+\begin{align}
+    &\nabla f(x^{*}) + \lambda_1^{*} \nabla g_1(x^{*}) + \lambda_2^{*}\nabla
+    g_2(x^{*}) = \\
+    &=
+    \begin{pmatrix} 2\\ 4 \end{pmatrix}
+    + \begin{pmatrix} -2 \\ -4 \end{pmatrix}\\
+    &=\begin{pmatrix} 0\\0 \end{pmatrix},
+\end{align}
+we conclude that $\left(x^{*}=(0,0)^{T}, \lambda^{*} = (2, 4)^{T}\right)$ is a
+KKT point.
+\subsection{Exercise 44}
+Consider the optimization problem
+\begin{align}
+    \text{min}\quad &f(x) := x^{2},\\
+    \text{s.t.}\quad & g(x) := 1-\ln(x)\le 0 \nonumber
+\end{align}
+and the penalized optimization problem
+\begin{align}
+    \min_{x\in\mathbb{R}} P(x;\alpha) = f(x) + \alpha \phi\left(
+    \frac{g(x)}{\alpha} \right).
+\end{align}
+with $\phi(t) = e^{t} -1$ (\textit{exponential penalty function}). For
+$\alpha >0$ find the optimal solution $x^{*}\left( \alpha \right)$ of the
+penalized optimization problem and prove $ x^{*}$, the limit of
+$x^{*}(\alpha)$ as $\alpha \downarrow 0$ is an optimal solution of the
+constrained optimization problem.
+\newline
+To find the minimum we differentiate $P(x;\alpha)$ w.r.t $x$
+\begin{align}
+    \frac{d}{dx}P(x;\alpha) = \frac{d}{dx}\left( x^{2} + \alpha\left(
+    \exp\left( \frac{1-\ln(x)}{\alpha} \right)  -1 \right)  \right) =\\
+    &= 2x - e^{\frac{1}{\alpha}}x^{-\frac{\alpha+1}{\alpha}}
+\end{align}
+setting to $0$ give the equation
+\begin{align}
+    &x^{-\frac{\alpha+1}{\alpha}} = 2e^{-\frac{1}{\alpha}}x\\
+    &x^{*}(\alpha) = \left( \frac{1}{2}e^{\frac{1}{\alpha}}
+    \right)^{\frac{\alpha}{2\alpha+1} }.
+\end{align}
+Then
+\begin{align}
+    x^{*} = \lim_{\alpha \downarrow 0}x^{*}(\alpha) = e.
+\end{align}
+First of all $f(x) = x^{2}$ is strictly convex and the condition $1-\ln(x)\le
+0$ is equivalent the condition $x \ge e$. So there is no $y \in \{x\in
+\mathbb{R}: x > e\}$ such that $f(y) = y^2 < e^2$. We conclude that $x^{*}=e$
+is the optimal solution for the constrained optimization problem.
+\subsection{Exercise 45}
+Consider the optimization problem
+\begin{align}
+    \text{min}\quad &f(x) := x^{2},\\
+    \text{s.t.}\quad & h(x) := x-1= 0 \nonumber
+\end{align}
+and its optimal solution $x^{*}=1$. For $\overline{\alpha}>0$ such that
+$x^{*}$ is a minimum of the $\ell_1$-penalty function $P_1(\cdot, \alpha)$
+for all $\alpha \ge \overline{\alpha}$.
+We have that for $\overline{\alpha}$ and $x^{*}$ and some $x \in \mathbb{R}$ that
+\begin{align}
+   &P_1(x;\overline{\alpha}) < P_1(x^{*},\overline{\alpha})\\
+   &x^{2} + \overline{\alpha} |x-1| < 1  \qquad \big|\frac{d}{dx}\cdot\\
+   &2x + \overline{\alpha} \frac{x-1}{|x-1|} < 0\\
+   &\alpha < -\frac{2x|x-1|}{x-1} \longrightarrow 2 \quad \text{as
+   $x\downarrow 1$ }
+\end{align}
+so $\alpha \ge 2$.
+\subsection{Exercise 46}
+Consider the optimization problem in Exercise 40
+\begin{align}
+    \min \quad &f(x):=\gamma + c^{T}x + \frac{1}{2}x^{T}Qx, \label{eq: opp}\\
+    \text{s.t}\quad &h(x) := b^{T}x = 0, \nonumber
+\end{align}
+The penalized optimization problem
+\begin{align}
+    P(x;\alpha) := f(x) + \frac{\alpha}{2}\left( h(x) \right)^{2}
+\end{align}
+with solution
+\begin{align}
+    x^{*}(\alpha) = \left( \frac{\alpha}{1+\alpha b^{T}Q^{-1}b}Q^{-1} bb^{T}
+    -I\right) Q^{-1} c
+\end{align}
+and solution to the constrained optimization problem
+\begin{align}
+    x^{*} &= \lim_{\alpha \to \infty}x^{*}(\alpha)\\
+          &= \left(\frac{Q^{-1}bb^{T}}{b^{T}Q^{-1}b} -I \right) Q^{-1} c.
+\end{align}
+\subsubsection{Part a}
+Prove that
+\begin{align}
+    \mu^{*} := \lim_{\alpha \to +\infty}\alpha h(x^{*}(\alpha))
+\end{align}
+is a Lagrange multiplier corresponding to the optimal solution $x^{*}$.
+\begin{align}
+    \alpha h(x^{*}(\alpha))
+    &= \alpha b^{T}x^{*}(\alpha)\\
+    &= \alpha \left( \frac{\alpha}{1+\alpha b^{T}Q^{-1}b}b^{T}Q^{-1}b\ b^{T}
+    -b^{T}\right) Q^{-1}c\\
+    &= \left( \frac{\alpha^{2}}{1+\alpha b^{T}Q^{-1}b}b^{T}Q^{-1}b
+     - \alpha\right) b^{T}Q^{-1}c\\
+    &= \left( \frac{\alpha^{2} b^{T}Q^{-1}b - \alpha -
+    \alpha^{2}b^{T}Q^{-1}b}{1+\alpha b^{T}Q^{-1}b} \right) b^{T}Q^{-1}c\\
+    &= \left(\frac{-\alpha}{1+\alpha b^{T}Q^{-1}b} \right) b^{T}Q^{-1}c\\
+\end{align}
+then we let the $\alpha \to +\infty$ and we get
+\begin{align}
+    \mu^{*} = -\frac{b^{T}Q^{-1}c}{b^TQ^{-1}b}.
+\end{align}
+Now we check if $\mu^{*}$ is the Lagrange multiplier w.r.t $x^{*}$.
+\begin{align}
+    L(x, \mu)
+    &= f(x) + \mu h(x)\\
+    &= \gamma + c^{T}x + \frac{1}{2}x^{T}Qx + \mu b^{T}x,
+\end{align}
+we need the condition $\nabla L(x^{*},\mu^{*}) = 0$, which is satisfied if
+\begin{align}
+    &\nabla L(x^{*}, \mu^{*}) = c + Qx^{*} + \mu^{*}b = 0 \qquad \Big|
+    b^{T}Q^{-1}\\
+    &-\mu^{*}b^{T}Q^{-1}b = b^{T}Q^{-1}c + b^{T}x^{*}.\\
+\end{align}
+we know that $b^{T}x^{*}=0$ is satisfied then
+\begin{align}
+    \mu^{*} = -\frac{b^{T}Q^{-1}c}{b^TQ^{-1}b}.
+\end{align}
+which is the same as taking the limit.
+\subsubsection{Part b}
+A bit confused here.
+\subsection{Exercise 47}
+Prove that the following functions are NCP-functions.
+\begin{enumerate}
+    \item minimum function
+        \begin{align}
+            \varphi(a,b) = \min \{a, b\}
+        \end{align}
+    \item Fischer-Burgmeister function
+        \begin{align}
+            \varphi(a,b) = \sqrt{a^{2}+b^{2}} - a - b
+        \end{align}
+    \item penalized minimum function
+        \begin{align}
+            \varphi(a,b) = 2\lambda \min \{a, b\}  + (1-\lambda) a_+ b_+
+        \end{align}
+        where $a_+ = \max \{0, a\}$, $b_+ = \max \{0, b\} $ and $\lambda \in
+        (0, 1)$
+\end{enumerate}
+For 1. we have that $\min \{a, b\}  =0$ if
+\begin{align}
+    &\Leftrightarrow a=0 \quad \text{for}\quad b\ge 0\quad \text{then}\quad
+    ab =0\\
+    &\Leftrightarrow b=0 \quad \text{for}\quad a\ge 0\quad \text{then}\quad
+    ab =0.
+\end{align}
+The minimum function is an NCP-function
+\newline
+For 2. we have
+\begin{align}
+    \varphi(a,b) = \sqrt{a^{2}+b^{2}} - a -b =0
+\end{align}
+then
+\begin{align}
+    a^{2} + b^{2} = (a+b)^{2},
+\end{align}
+here we need $a\ge 0$ and $b\ge 0$ to preserve the root. Solving the above we
+get $2ab =0$ or simply $ab =0$, which means $\varphi$ is an NCP-function
+\newline
+For 3. we have that
+\begin{align}
+    &\varphi(a,b) = -2\lambda \min (a,b) + (1-\lambda) \max(0, a) \max(0,b) = 0\\
+    &-2\lambda \min (a,b) = (1-\lambda) \max(0, a) \max(0, b) = 0.
+\end{align}
+The solution is either $a = 0$ with $b \ge 0$ or $b=0$ with $a\ge 0$ in the
+first case we get that $a\cdot b=0$, which means this is an NCP function.
+\subsection{Exercise 48}
+Let $(x^{*}, \lambda^{*}, \mu^{*}) \in \mathbb{R}^{n + m + p}$ be a
+KKT point of the optimization problem.
+\begin{align}
+    \text{min}\quad &f(x),\\
+    \text{s.t.}\quad & g_i(x) \le 0, i=1,\ldots,m \nonumber
+                     &h_j(x) =0, j=1,\ldots,p \nonumber
+\end{align}
+all functions are considered to be twice continuously differentiable.
+Additionally we have that
+\begin{itemize}
+    \item $g_i(x^{*}) + \lambda^{*}_i \neq 0$ for all $i=1,\ldots,p$
+    \item $\{\nabla g_i(x^{*})\}_{i\in \mathcal{A}(x^{*})}$ and $\{\nabla
+        h_j(x^{*})\}_{j=1,\ldots,p}$ are linearly independent (LICQ)
+    \item second order sufficient optimality condition is satisfied
+\end{itemize}
+Let $\Phi: \mathbb{R}^{n+m+p}\to \mathbb{R}^{n+m+p}$ be defined as
+\begin{align}
+   \Phi  :=
+   \begin{pmatrix}
+       \nabla_x L(x,\lambda ,\mu)\\
+       h(x)\\
+       \phi(-g(x), \lambda)
+   \end{pmatrix}
+\end{align}
+where
+\begin{align}
+    \phi(-g(x), \lambda) :=
+    \begin{pmatrix}
+        \varphi(-g_1(x), \lambda_1)\\
+        \vdots\\
+        \varphi(-g_m(x), \lambda_1)\\
+    \end{pmatrix} \in \mathbb{R}^{m}
+\end{align}
+and $\varphi:\mathbb{R}^{2} \to \mathbb{R}$ with $\varphi(a,b) = \min \{a,
+b\}$. Show that the matrix $\nabla \Phi$ is well defined and regular.
+\newline
+The matrix is well defined because first of all, the functions $f, g_i, h_j$
+are $C^{2}$ and $\min \{-g_i(x), \lambda_i\}$ is differentiable because of
+the strict complementarity condition, meaning that
+\begin{align}
+    \nabla \varphi(-g_i(x^{*}, \lambda^{*}_i) =
+    \begin{cases}
+        -\nabla g_i(x^{*}) \quad & i \in \mathcal{A}(x^{*})\\
+        0 \quad & i \not\in \mathcal{A}(x^{*})
+    \end{cases}
+\end{align}
+Then we need to show that he matrix $\nabla \Phi(x^{*}, \lambda^{*},
+\mu^{*})$ is regular, first of all the matrix has the following form
+\begin{align}
+    \nabla \Phi =
+    \begin{pmatrix}
+        \nabla_x^{2}L(x,\lambda, \mu) & \nabla h(x)^{T} & \nabla
+        \phi(x)^{T}\\
+        \nabla h(x) & 0 & 0\\
+        \nabla \phi(x) & 0 & 0\\
+    \end{pmatrix} \in \mathbb{R}^{(n+m+p) \times  (n+m+p)}.
+\end{align}
+To show that $\nabla \Phi(x^{*}, \lambda^{*},
+\mu^{*})$ is regular we show that $\text{ker}\left(\nabla \Phi(x^{*}, \lambda^{*},
+\mu^{*})  \right) = \emptyset$.
+\newline
+Let $ q = (q^{(1)}, q^{(2)}, q^{(3)})^{T} \in
+\mathbb{R}^{n+m+p}$ then we need to find the solution of
+\begin{align}
+        \nabla \Phi(x^{*}, \lambda^{*}, \mu^{*}) \begin{pmatrix}
+        q^{(1)}\\q^{(2)}\\q^{(3)} \end{pmatrix} =0.
+\end{align}
+These are three equations
+\begin{align}
+    &\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)} + \nabla h(x^{*})^{T} q^{(2)}
+    + \nabla \phi(x^{*})^{T}q^{(3)} = 0 \label{eq: ex49.1}\\
+    &\nabla h(x^{*}) q^{(1)} = 0 \label{eq: ex49.2}\\
+    &\nabla \phi(x^{*}) q^{(1)} = 0 \label{eq: ex49.3}.
+\end{align}
+By multiplying \ref{eq: ex49.1} with $(q^{(1)})^{T}$ we get that
+\begin{align}
+    &(q^{(1)})^{T}\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)} +(q^{1})^{T} \nabla h(x^{*})^{T} q^{(2)}
+    + (q^{1})^{T}\nabla \phi(x^{*})^{T}q^{(3)}=\\
+    =&(q^{(1)})^{T}\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)}
+    + \sum_{j=1}^{p} q_j^{(2)}\underbrace{(q^{(1)})^{T}\nabla h_j(x^{*})}_{=0
+    \;\; (\ref{eq: ex49.2})}
+    + \sum_{i=1}^{m} q_i^{(3)}\underbrace{(q^{(1)})^{T}\nabla \phi(-g_i(x^{*}),
+\lambda_i^{*})}_{=0 \;\; (\ref{eq: ex49.3})} \\
+     &= 0,
+\end{align}
+in summary
+\begin{align}
+    (q^{(1)})^{T}\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)} =0.
+\end{align}
+Since second order sufficient optimality condition is satisfied then $q^{(1)}
+\in T_2(x^{*})$, and the only solution is $q^{(1)} = 0$. Equation \ref{eq:
+ex49.1} is left with
+\begin{align}
+    &\nabla h(x^{*})^{T}q^{(2)}+\nabla \phi(x^{*})q^{(3)} =\\
+    =& \sum_{j=1}^{p} q_j^{(2)}\nabla h_j(x^{*}) + \sum_{i \in
+    \mathcal{A}(x^{*})} q_i^{(3)}(-\nabla g_i(x^{*})) = 0
+\end{align}
+since LICQ is fulfilled these vectors are linearly independent and by
+definition of linear independence the only $q^{(2)}, q^{(3)}$ fulfilling the
+above condition are $q^{(2)} = 0$ and $q^{(3)} = 0$. Thereby $q = 0$ and
+$\text{ker}(\nabla\Phi(x^{*},\lambda^{*},\mu^{*})) = \emptyset$, so the matrix
+is regular.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,471 @@
+\include{./preamble.tex}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Sheet 3}
+\subsection{Exercise 13}
+\subsubsection{Part a}
+Solve
+\begin{align}
+    \text{min}\quad & -x_1 - 2x_2,\\
+    \text{s.t.}\quad & x_1^{2} + x_2^{2} \le 4 \nonumber\\
+    &x_1\ge 0, x_2 \ge 0 \nonumber
+\end{align}
+rewriting it in to reduced notation
+\begin{align}
+    \text{min}\quad & -x_1 - 2x_2,\\
+    \text{s.t.}\quad & g_1(x_1, x_2) = x_1^{2} + x_2^{2} -4 \le 0 \nonumber\\
+    &g_2(x_1,x_2) = - x_1 \le 0\nonumber\\
+    &g_3(x_1,x_2) = - x_2 \le 0\nonumber
+\end{align}
+We know that for a KKT point $(x, \lambda)$ we have that the
+Lagrangian of the problem satisfies
+\begin{align}
+    \nabla_x L(x, \lambda) = 0\\
+    \lambda\geqq 0,\quad \lambda^Tg(x) = 0.
+\end{align}
+Then for $-\lambda_2 x_1 =0$ and $-\lambda_3 x_2 =0$ the only solution is for
+$\lambda_2, \lambda_2 = 0$. Now we have a system of three equations with
+three unknowns $x_1, x_2, \lambda_1$ that we can solve
+\begin{align}
+    &\nabla f(x) + \nabla(\lambda^{T}g(x)) =0\\
+    &\begin{pmatrix}
+        -1 + 2x_1\lambda_1\\
+        -2 + 2x_2\lambda_1\\
+        -\lambda_1(x_1^{2}+x_2^{2}-4)
+    \end{pmatrix}
+    =\begin{pmatrix} 0\\0\\0 \end{pmatrix}.
+\end{align}
+Solving the first and second equation we get
+\begin{align}
+    x_1 = \frac{1}{2\lambda_1},\quad x_2 = \frac{1}{\lambda_1}\\
+    x_2 = \frac{1}{2}x_1.
+\end{align}
+Plugging this into equation 3 and considering $x_1 \ge 0$, $x_2 \ge 0$
+which tells us what root to take we get
+\begin{align}
+    x_1^{2}+\frac{1}{4}x_1^{2} -4 = 0\\
+    \Rightarrow x_1 = \frac{4}{\sqrt{5}}, \quad x_2 = \frac{2}{\sqrt{5} }
+\end{align}
+The solution the optimization problem is $x^{*}=(\frac{4}{\sqrt{5}},
+\frac{2}{\sqrt{5}})^{T}$.
+\subsubsection{Part b}
+Verify if $x=(2,4)^{T}$ is an optimal solution of the optimization problem
+and determine a KKT point.
+\begin{align}
+    \text{min}\quad & (x_1-4)^{2} + (x_2-3)^{2},\\
+    \text{s.t.}\quad & x_1^{2}\le x_2 \nonumber\\
+    &x_2 \le 4 \nonumber
+\end{align}
+i.e.
+\begin{align}
+    \text{min}\quad & (x_1-4)^{2} + (x_2-3)^{2},\\
+    \text{s.t.}\quad &g_1(x) = x_1^{2} - x_2\le 0  \nonumber\\
+    &g_2(x) = x_2 -4 \le 0 \nonumber
+\end{align}
+We again use the KKT optimality conditions
+\begin{align}
+    \nabla f(x^{*})  + \nabla (\lambda^{T}g(x)) = 0\\
+    \begin{pmatrix}
+        2(x_1-4) + 2\lambda_1x_1\\
+        2(x_2-3) - \lambda_1 + \lambda_2
+    \end{pmatrix} =
+    \begin{pmatrix} 0\\0 \end{pmatrix}
+\end{align}
+substituting for $x=(2,4)^{T}$ gives \begin{align} \begin{pmatrix}
+        -4 + 4\lambda_1\\
+        2 -\lambda_1 + \lambda_{2}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0\\0
+    \end{pmatrix}.
+\end{align}
+Which gives $\lambda_1 = 1, \lambda_2 = -1$ and tells us that $x=(2,4)^{T}$
+is an optimal solution, and $\left( x^{*}=(2,4)^{T}, \lambda^{*}= (1,
+-1)^{T}\right)$ is a KKT point.
+\subsection{Exercise  14}
+Solve the following optimization problem
+\begin{align}
+    \text{min}\quad & \Sigma_{i=1}^{n} \left( x_i - a_i \right)^{2},\\
+    \text{s.t.}\quad & \Sigma_{i=1}^{n} x_i^{2} \le 1 \nonumber\\
+    & \Sigma_{i=1}^{n} x_i = 0 \nonumber
+\end{align}
+To solve this we use the KKT optimality conditions for $g(x) =
+\Sigma_{i=1}^{n}x_i^{2}$ and $h(x) = \Sigma_{i=1}^{n}x_i=0$.
+\begin{align}
+    &\nabla f(x) + \lambda \nabla g(x)
+    +\mu \nabla h(x)= 0\\
+    &\lambda \ge 0,\; g(x) \le 0,\; \lambda g(x) = 0, \;h(x) = 0.
+\end{align}
+From the first equation we get
+\begin{align}
+    &2x_i - 2a_i + 2  \lambda x_i + \mu = 0 \\
+    &2\left( 1+\lambda \right) x_i +\mu -2a_i = 0\\
+    &x_i=  \frac{2a_i - \mu}{2(1+\lambda)}
+    \qquad \forall i \in
+    \{1,\ldots,n\}.
+\end{align}
+By substituting the derived expression for $x_i$ into $h(x) =0$ we get
+\begin{align}
+    &\sum\frac{2a_i - \mu}{2(1+\lambda)} = 0\\
+    \Rightarrow & \mu = \frac{2}{n}\sum a_i
+\end{align}
+plugging this into $\lambda g(x) = 0$ we get
+\begin{align}
+    &\sum \left( \frac{2a_i-\mu}{2\left( 1+\lambda \right)} \right)
+    ^{2}-1=0\\
+    &\sum \left( 2a_i -\mu \right)^{2} = 4(1+\lambda)^{2}\\
+    &=4 \sum a_i^{2}-2\mu \sum a_i - n \mu^{2}= 4\left( 1+\lambda
+    \right)^{2}\\
+    &\sum a_i^{2} = (1+\lambda)^{2}.
+\end{align}
+Since $\lambda \ge 0 $ then $(1+\lambda) \ge 1$ and the root is positive
+\begin{align}
+    \lambda = 1 - \sqrt{\sum a_i}
+\end{align}
+Then $x_i$ becomes
+\begin{align}
+    x_i &= \frac{2a_i - \mu}{2(1-\lambda)} \\
+        &= \frac{2a_i - \frac{2}{n}\sum_j a_j}{2\sum_j a_j}\\
+        &= \frac{a_i}{\sum_j a_j} - \frac{1}{n}\\
+        &= \frac{1}{n}\left( \frac{a_i}{\left\langle a \right\rangle } -1 \right)
+\end{align}
+where $\left\langle a \right\rangle$ denotes the standard mean of
+$a=(a_1,\ldots,a_n)^{T}$.
+\subsection{Exercise 15}
+Consider the function
+\begin{align}
+    f : \;\;\mathbb{R}^{2}&\to \mathbb{R}\\
+    (x_1, x_2) &\mapsto 3x_1^{4}-4x_1^{2}x_2 + x_2^{2}
+\end{align}
+Prove that the following statements for $x^{*}=(0,0)^{T}$ are true
+\begin{enumerate}
+    \item $x^{*}$ is a critical point of f
+    \item $x^{*}$ is a strict local minimum of f along any line going through
+        the origin
+    \item $x^{*}$ is not a local minimum of $f$
+\end{enumerate}
+For 1. we check if $\nabla f(x^{*}) = 0$ then $x^{*}$ is a critical point
+\begin{align}
+&    \nabla f(x) =
+    \begin{pmatrix}
+        12x_1 + 8 x_1 x_2\\
+        4x_1^{2} + 2x_2
+    \end{pmatrix} \\
+&    \nabla f(x^{*}) =
+    \begin{pmatrix}
+        0\\
+        0
+    \end{pmatrix}.
+\end{align}
+For 2. we need minimize $f(x)$ subjected to all lines through the origin. We
+start with lines $x_2 = m x_1$ for $m \neq 0$.
+\begin{align}
+    f(x_1, x_2=mx_1) = 3x_1^{4} - 4mx_1^{3} + m^{2}x_1^{2},
+\end{align}
+set $g(x) = f(x, mx)$. We need to check that $x=0$ is local minimum of $g(x)$
+\begin{align}
+    &g'(x) = 12x^{3}-12mx^{2} + 2m^{2}x\\
+    &g''(x) = 36x^{2} - 24m x + 2m^{2} .\\
+    &g'(0) = 0 \qquad  g''(0) = 2m^{2}>0.
+\end{align}
+So $f$ is a strict local min along lines $x_2 = mx_1$. Next we check along
+$x_1 = mx_2$
+\begin{align}
+   f(x_1=mx_2, x_{2}) = 3m^{4}x_2^{4}-tm^{2}x_2^{3} + x_2^{2}
+\end{align}
+set $g(x) = f(x_1=mx_2, x_2)$
+\begin{align}
+ &   g'(x) = 12m^{4}x^{3}-12m^{2}x^{2}+2x\\
+ &   g''(x) = 36m^{4}x^{2} - 24m^{2}x + 2\\
+ & g'(0) =0 \qquad g''(0) =  2 > 0.
+\end{align}
+For 3. we need to show that $x^{*}=(0,0)^{T}$ is not a local minimum of $f$.
+Consider $x_2 = 2x_1^{2}$
+\begin{align}
+    f(x_1, 2x_1^{2}) &= 3x_1^{4} - 8x_1^{4} + 4x_1^{4}\\
+                     &= -x_1^{4} < f(x^{*}) = 0\qquad \forall x_1 \in \mathbb{R}\setminus \{0\}
+\end{align}
+We have found function values smaller than that of $f(x^{*}) = 0$.
+\subsection{Exercise 16}
+\subsubsection{Part a}
+Formulate a statement concerning the solutions of the optimization problem
+\begin{align}
+    \text{max}\quad & x_1,\\
+    \text{s.t.}\quad & x_1^{2} + x_2^{2} \le 1 \nonumber\\
+    &(x_1 - 1)^{2} + x_2^{2} \ge 1 \nonumber\\
+    &x_1 + x_2 \ge 1\nonumber.
+\end{align}
+using geometric arguments and verify this statement by means of arguments.
+\newline
+Let $X$ be the optimization domain
+\begin{align}
+    X = \left\{ \left( x_1, x_2 \right) \in \mathbb{R}^{2}: x_1^{2}+x_2^{2}
+    \le 1, (x_1 -1)^{2} + x_2^{2} \ge 0 , x_1 +x_2 \ge 0  \right\}
+\end{align}
+Then $X$ has the following graphical representation in the red domain of the
+plot below.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[yscale=1, xscale=1]
+        \begin{axis}[
+            xmin=-2.3, xmax=2.3,
+            ymin=-2.3, ymax=2.3,
+            xlabel=$x_1$, ylabel=$x_2$,
+            axis lines = middle,
+        ]
+            \addplot[domain=-1:2, samples=100, color=black, name path=A]{-x+1};
+            \addplot[domain=-1:1, samples=100, color=black, name
+                path=B1]{sqrt(1-x^2)};
+            \addplot[domain=-1:1, samples=100, color=black, name
+                path=B2]{-sqrt(1-x^2)};
+            \addplot[domain=0:2, samples=100, color=black, name
+                path=C1]{sqrt(1-(x-1)^2)};
+            \addplot[domain=0:2, samples=100, color=black, name
+                path=C2]{-sqrt(1-(x-1)^2)};
+
+            \addplot[domain=-2:2, samples=100, color=orange, name
+                path=D, opacity=0]{2};
+
+            \addplot[domain=-2:2, samples=100, color=orange, name
+                path=E, opacity=0]{-2};
+
+            \addplot[domain=-2:2, samples=100, color=orange, name
+                path=F, opacity=0]{0};
+
+            \addplot[domain=-2:2, samples=100, color=black, name
+                path=G, opacity=1]{x};
+
+            \addplot[domain=-2:2, samples=100, color=black, name
+                path=G, opacity=1]{x};
+            \draw[red] (axis cs:0.5, 2) -- (axis cs:0.5, -2);
+
+           \addplot[fill=orange,fill opacity=0.3] fill between[of=A and D,soft
+                clip={domain=-1:2},];
+           \addplot[fill=blue,fill opacity=0.3] fill between[of=B1 and F,soft
+                clip={domain=-1:1},];
+
+           \addplot[fill=blue,fill opacity=0.3] fill between[of=B2 and F,soft
+                clip={domain=-1:1},];
+
+           \addplot[fill=green,fill opacity=0.1] fill between[of=D and E,soft
+                clip={domain=-2:0},];
+
+           \addplot[fill=green,fill opacity=0.1] fill between[of=C2 and E,soft
+                clip={domain=0:2},];
+
+           \addplot[fill=green,fill opacity=0.1] fill between[of=C1 and D,soft
+                clip={domain=0:2},];
+
+           \addplot[fill=red,fill opacity=1] fill between[of=A and B1,soft
+                clip={domain=0:0.2928},];
+
+           \addplot[fill=red,fill opacity=1] fill between[of=C1 and B1,soft
+                clip={domain=0.2928:1/2},];
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Area: Red: $X$, Blue: $x_1^{2}+ x_2^{2} \le 1$, Green:
+    $(x_1-1)^{2} +x_2^{2} \ge 1$ and Orange: $x_1 + x_2 \ge 1$}
+    \label{fig: ex16a}
+\end{figure}
+Solutions are in the red area. But since $f(x_1, x_2) = x_1$ actually only depends
+on $x_1$ we can choose any $x_2$ then the maximum in the area is at $x_1=
+\frac{1}{2}$. The analytical argumentation on the other hand follows KKT
+optimality condition, for this we transform the maximization problem into a
+minimization problem by multiplying the objective function $f$ by $-1$.
+\begin{align}
+    \text{min}\quad & -x_1,\\
+    \text{s.t.}\quad & g_1\left(x  \right) = x_1^{2} + x_2^{2} -1 \le 0 \nonumber\\
+    &g_2(x) = 1- (x_1 - 1)^{2} - x_2^{2} \le 0 \nonumber\\
+    &g_3(x) = 1- x_1 - x_2 \le 0\nonumber.
+\end{align}
+then $\nabla L(x, \lambda) =0$, $\lambda^{T}g(x) = 0$ and $\lambda^{T} \geqq
+0 $ will give us the
+optimal solution for the optimization problem
+\begin{align}
+    \begin{pmatrix}
+        -1 + 2\lambda_1x_1 - 2\lambda_2(x_1 -1) - \lambda_3\\
+        \lambda_1 x_2 - 2\lambda_2 x_2 - \lambda_3
+    \end{pmatrix}
+    =
+    \begin{pmatrix} 0\\0 \end{pmatrix}
+\end{align}
+we set $x_2 = 0$ since $x_2$ is not dependent on objective then we get that
+$\lambda_3 = 0$ and
+\begin{align}
+    \lambda_1 = -\lambda_2 \frac{1-(x_1 - 1)^{2}}{x_2^{2}-1}.
+\end{align}
+we are left with
+\begin{align}
+    -1 + 2\lambda_1x_1 - 2\lambda_2(x_1 -1) - \lambda_3.\label{eq: 16a lag}
+\end{align}
+Then $\lambda^{T}g(x)$ gives us
+\begin{align}
+    \lambda_1 = -\lambda_2 \frac{1-(x_1-1)^2}{x_1^{2} - 1}
+\end{align}
+substituting into \ref{eq: 16a lag} back and calculating we arrive at the equation
+\begin{align}
+    x_1^{2} - x_1 +1 = 0
+\end{align}
+which gives $x_1=\frac{1}{2}$.
+\subsubsection{Part b}
+Verify if $x^{*} = (1, 1)^{T}$ fulfills the constraint qualifications of
+LICQ, MFCQ, ABADIE-CQ.
+\begin{align}
+    \text{min}\quad & x_1,\\
+    \text{s.t.}\quad & g_1\left(x  \right) = x_1 + x_2 -2 \le 0 \nonumber\\
+    &g_2(x) = 1-x_1x_2 \le 0 \nonumber\\
+    &g_3(x) = -x_1 \le 0\nonumber.
+    &g_4(x) = -x_2 \le 0\nonumber.
+\end{align}
+Tangent cone are all tangent vectors $x_2 = \frac{1}{x_1} = 1$
+\begin{align}
+    T_X(x^{*}) = \left\{
+        \begin{pmatrix} \lambda\\-\lambda \end{pmatrix} ,
+        \begin{pmatrix} -\lambda\\\lambda \end{pmatrix}
+        : \lambda \ge 0
+    \right\}
+\end{align}
+The linearized tangent cone is at
+\begin{align}
+    T_\text{lin} (x^{*}) &=
+    \left\{ d \in \mathbb{R}^{2}:
+        \begin{pmatrix}1\\1  \end{pmatrix}^{T}d \le 0,
+        \begin{pmatrix}-1\\-1  \end{pmatrix}^{T}d \le 0,
+    \right\} \\
+    &=
+    \left\{
+        \begin{pmatrix} \lambda\\-\lambda \end{pmatrix} ,
+        \begin{pmatrix} -\lambda\\\lambda \end{pmatrix}
+        : \lambda \ge 0
+    \right\}.
+\end{align}
+Which means $x^{*}$ fulfills ABADIE-CQ. For MFCQ we need strict inequality
+$\nabla g_i (x^{*})^{T}d < 0$ for $i \in \{1, 2\}$, which is not fulfilled for any $d \in
+T_\text{lin}(x)$. For LICQ we need that $\{\nabla g_i (x^{*})\}_{i\in \{1,
+2\} }$ are linearly independent. But
+\begin{align}
+    \begin{pmatrix} 1\\1  \end{pmatrix} ,
+    \begin{pmatrix} -1, -1 \end{pmatrix}
+\end{align}
+are not linearly independent.
+\subsection{Exercise 17}
+Find out by using second order optimality conditions if $x^{*} = (0, 0)^{T}$
+is a local minimum of
+\begin{align}
+    \text{min}\quad & -x_1^{2} + x_2,\\
+    \text{s.t.}\quad & g_1\left(x  \right) = x_1^{3} - x_2 \le 0 \nonumber\\
+    &g_2(x) = -mx_1+x_2 \le 0 \nonumber\\
+\end{align}
+where $m\ge0$.
+We need to check that
+\begin{align}
+    d^{T}\nabla^{2}_x L(x^{*}, \lambda^{*})d >0 \qquad \forall d \in
+    T_2(x^{*}),
+\end{align}
+    where
+\begin{align}
+    T_2(x^{*}) = \{d\in \mathbb{R}^{2}: &\nabla g_i(x^{*})d =0\;\; i \in
+    \mathcal{A}_\ge (x^{*}), \\
+    &\nabla g_i(x^{*})d \le 0\;\; i \in
+    \mathcal{A}_0 (x^{*}) \}\\
+\end{align}
+and
+\begin{align}
+    \mathcal{A}_0(x^{*}) = \{i \in \mathcal{A}(x^{*}): \lambda_i^{*} = 0\} \\
+    \mathcal{A}_>(x^{*}) = \{i \in \mathcal{A}(x^{*}): \lambda_i^{*} > 0\} \\
+\end{align}
+The gradients are
+\begin{align}
+    \nabla g_1 (x)|_{x^{*}} = (0, -1)^{T}\\
+    \nabla g_2 (x)|_{x^{*}} = (-m, 1)^{T}.\\
+\end{align}
+Note that the KKT conditions $\lambda^{T}g(x)=0$ and $\lambda \geqq 0$ are
+satisfied only if
+\begin{align}
+    \lambda^{T}g(x) = \lambda_1(-x_2 + x_1^{3}) + \lambda_2(-mx_1 + x_2) =
+    0\\
+    \lambda_1 = \lambda_2 \frac{mx_1 - x_2}{x_1^{3} -x_2},
+\end{align}
+since $x_1^{3} - x_2 \le 0$ then the $\lambda^{T} \geqq 0$ is satisfied only
+if $\lambda 2 = 0$ which means $\lambda_1 =0$. Which gives us
+$\mathcal{A}_> = \emptyset$ and $\mathcal{A}_0 = \{1, 2\}$ which means
+$T_2(x^{*}) = T_\text{lin}(x^{*})$ and
+\begin{align}
+    T_\text{lin}(x^{*}) &=
+    \left\{
+        d \in \mathbb{R}^{2}:
+        \begin{pmatrix}
+            0\\
+            -1
+        \end{pmatrix}^{T}
+        d \le 0,
+        \begin{pmatrix}
+            -m\\
+            -1
+        \end{pmatrix}^{T}
+        d \le 0,
+    \right\} \\
+    &=
+    \left\{
+        \begin{pmatrix}
+            \lambda\\
+            \lambda m
+        \end{pmatrix}
+        :\lambda \ge 0
+    \right\}
+\end{align}
+Now we calculate the hessian of the Lagrangian
+\begin{align}
+    L(x, \lambda) &= f(x) + \lambda_1 g_1(x) + \lambda_2 g_2(x)\\
+            &= f(x)\\
+    \nabla^2 L(x, \lambda) &= \nabla^2 f(x)\\
+                           &=
+    \begin{pmatrix}
+        -2 & 0\\
+        0 & 0
+    \end{pmatrix}
+\end{align}
+Then
+\begin{align}
+    \begin{pmatrix}
+        \lambda\\
+        \lambda m
+    \end{pmatrix}^{T}
+    \begin{pmatrix}
+        -2 & 0\\
+        0 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        \lambda\\
+        \lambda m
+    \end{pmatrix} = -2\lambda^{2} \not> 0.
+\end{align}
+We conclude that $x^{*}=(0,0)^{T}$ is not a local minimum of the optimization
+problem.
+\subsection{Exercise 18}
+Let $(t_k)_{k\ge 0} \subseteq \mathbb{R}$ be a monotonically decreasing
+sequence and $t^{*}$ an accumulation point of it. Show that the sequence
+$(t_k)_{k\ge 0}$ converges to $t^{*}$.
+\newline
+We know that $t ^{*}$ is an accumulation point of $(t_k)_{k\ge 0}$ so
+\begin{align}
+    &\forall U_\varepsilon(t^{*}) = [t^{*}-\varepsilon, t^{*}+\varepsilon],
+    \varepsilon>0 \;\; \forall N\in \mathbb{N} \;\; \exists n \ge N: t_n \in
+    U_\varepsilon(t^{*})\\
+    &\text{i.e.}\quad |t_n - t^{*}| < \varepsilon \qquad \forall n\ge N \in \mathbb{N}
+\end{align}
+since $(t_k)_{k\ge 0}$ monotonically decreasing, $t_0 > t_1 > \ldots>
+t_k > \ldots $ we have that $\forall n \in N$
+\begin{align}
+    \varepsilon_n  > |t_n - t^{*} | > |t_{n+1} - t^{*}|
+\end{align}
+so there exists a positive, strictly monotonically decreasing subsequence $\left(
+\varepsilon_k \right)_{k\ge 0}$  of $(t_k)_{k\ge 0}$ defined by $\varepsilon_n >
+|t_n - t^{*}|$ and $\varepsilon_n > \varepsilon_{n+1}$ that converges to $0$
+so $(t_k)_{k\ge 0}$ converges to $t^{*}$.
+\end{document}
