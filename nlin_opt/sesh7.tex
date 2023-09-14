@@ -256,7 +256,7 @@ Let $\Phi: \mathbb{R}^{n+m+p}\to \mathbb{R}^{n+m+p}$ be defined as
 \begin{align}
    \Phi  :=
    \begin{pmatrix}
-       \nabla_x L(x,\lambda ,\mu)\\
+       \nabla_{x x} L(x,\lambda ,\mu)\\
        h(x)\\
        \phi(-g(x), \lambda)
    \end{pmatrix}
@@ -277,22 +277,53 @@ The matrix is well defined because first of all, the functions $f, g_i, h_j$
 are $C^{2}$ and $\min \{-g_i(x), \lambda_i\}$ is differentiable because of
 the strict complementarity condition, meaning that
 \begin{align}
-    \nabla \varphi(-g_i(x^{*}, \lambda^{*}_i) =
+    \nabla \varphi(a, b) =
     \begin{cases}
-        -\nabla g_i(x^{*}) \quad & i \in \mathcal{A}(x^{*})\\
-        0 \quad & i \not\in \mathcal{A}(x^{*})
+        (1, 0)^{T}\quad a<b\\
+        (0, 1)^{T}\quad a>b
     \end{cases}
 \end{align}
+and not differentiable for $a=b$ which is never the case since, per condition
+$g_i(x^{*}) + \lambda_i^{*} \neq 0$ for all $i$.
+
 Then we need to show that he matrix $\nabla \Phi(x^{*}, \lambda^{*},
 \mu^{*})$ is regular, first of all the matrix has the following form
 \begin{align}
     \nabla \Phi =
     \begin{pmatrix}
-        \nabla_x^{2}L(x,\lambda, \mu) & \nabla h(x)^{T} & \nabla
-        \phi(x)^{T}\\
-        \nabla h(x) & 0 & 0\\
-        \nabla \phi(x) & 0 & 0\\
+        \nabla_{x x}^{2}L(x^{*},\lambda^{*}, \mu^{*}) & \nabla g(x^{*})^{T} & \nabla
+        h(x^{*})^{T}\\
+        \nabla h(x^{*}) & 0 & 0\\
+          \nabla \phi_1(-g(x^{*}), \lambda^{*}) &\nabla \phi_2(-g(x^{*}), \lambda^{*})  & 0\\
     \end{pmatrix} \in \mathbb{R}^{(n+m+p) \times  (n+m+p)}.
+\end{align}
+For convinience the matrix $\phi(-g(x^{*}), \lambda^{*})$ was split into two
+parts because of the chain rule the that matrix has the following form
+\begin{align}
+    \phi_1(-g(x^{*}),\lambda^{*}) =
+    \begin{pmatrix}
+        \partial_{g_1}\varphi(-g_1(x^{*}),
+        \lambda_1)(\partial_{x_1}g_1(x^{*})) & \dots &
+        \partial_{g_1}\varphi(-g_1(x^{*}),
+        \lambda_1)(\partial_{x_n}g_1(x^{*}))\\
+        \vdots & \vdots & \vdots \\
+        \partial_{g_m}\varphi(-g_m(x^{*}),
+        \lambda_m)(\partial_{x_1}g_m(x^{*})) & \dots &
+        \partial_{g_m}\varphi(-g_m(x^{*}),
+        \lambda_m)(\partial_{x_n}g_1(x^{*}))
+    \end{pmatrix} \quad \in \mathbb{R}^{n \times m}
+\end{align}
+and
+\begin{align}
+    \phi_2(-g(x^{*}),-\lambda^{*}) =
+    \begin{pmatrix}
+        \partial_{\lambda_1}\varphi(-g_1(x^{*}),
+        \lambda_1^{*})&0&\ldots\\
+        & \ddots& \\
+        \ldots &0&
+        \partial_{\lambda_m}\varphi(-g_m(x^{*}),
+        \lambda_m^{*})
+    \end{pmatrix} \quad \in \mathbb{R}^{m \times m}
 \end{align}
 To show that $\nabla \Phi(x^{*}, \lambda^{*},
 \mu^{*})$ is regular we show that $\text{ker}\left(\nabla \Phi(x^{*}, \lambda^{*},
@@ -306,23 +337,50 @@ Let $ q = (q^{(1)}, q^{(2)}, q^{(3)})^{T} \in
 \end{align}
 These are three equations
 \begin{align}
-    &\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)} + \nabla h(x^{*})^{T} q^{(2)}
-    + \nabla \phi(x^{*})^{T}q^{(3)} = 0 \label{eq: ex49.1}\\
+    &\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)} + \nabla g(x^{*})^{T} q^{(2)}
+    + \nabla h(x^{*})^{T}q^{(3)} = 0 \label{eq: ex49.1}\\
     &\nabla h(x^{*}) q^{(1)} = 0 \label{eq: ex49.2}\\
-    &\nabla \phi(x^{*}) q^{(1)} = 0 \label{eq: ex49.3}.
+    &\nabla \phi_1(-g(x^{*}), \lambda^{*}) q^{(1)} + \nabla
+    \phi_2(-g(^{*}),\lambda^{*}) q^{(2)} = 0 \label{eq: ex49.3}.
 \end{align}
 By multiplying \ref{eq: ex49.1} with $(q^{(1)})^{T}$ we get that
 \begin{align}
-    &(q^{(1)})^{T}\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)} +(q^{1})^{T} \nabla h(x^{*})^{T} q^{(2)}
-    + (q^{1})^{T}\nabla \phi(x^{*})^{T}q^{(3)}=\\
-    =&(q^{(1)})^{T}\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)}
-    + \sum_{j=1}^{p} q_j^{(2)}\underbrace{(q^{(1)})^{T}\nabla h_j(x^{*})}_{=0
-    \;\; (\ref{eq: ex49.2})}
-    + \sum_{i=1}^{m} q_i^{(3)}\underbrace{(q^{(1)})^{T}\nabla \phi(-g_i(x^{*}),
-\lambda_i^{*})}_{=0 \;\; (\ref{eq: ex49.3})} \\
-     &= 0,
+    &(q^{(1)})^{T}\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)}\\
+    &+ \sum_{i=1}^{m} q_i^{(3)}\underbrace{(q^{(1)})^{T}\nabla
+    g_i(x^{*})}_{=0 \;\; (\ref{eq: ex49.3})} \label{eq: ex49.4} \\
+    &+ \sum_{j=1}^{p} q_j^{(2)}\underbrace{(q^{(1)})^{T}\nabla h_j(x^{*})}_{=0
+    \;\; (\ref{eq: ex49.2})}\\
+     &= 0. \nonumber
 \end{align}
-in summary
+It is not directly obvious why the term \ref{eq: ex49.4} in the above
+equation is directly zero. To see this we have to separate two cases, the first
+addresses what happens in \ref{eq: ex49.3} in the case $i \in
+\mathcal{A}(x^{*})$. In this case $\nabla_{g_i}\varphi(-g_i(x^{*}),
+\lambda_i^{*}) = 1$ since $g_i(x^{*}) =0$ with $\lambda_i^{*}>0$ and thereby
+$-g_i(^{*}) - \lambda_i^{*} < 0$, so we have that the this specific entry is
+\begin{align}
+    &\left(\nabla \phi_1(-g(x^{*}),\lambda^{*})\right)_i = -\nabla g_i(x^{*})\\
+    &\left( \nabla \phi_2(-g(x^{*}),\lambda^{*})\right)_i = 0,
+\end{align}
+evaluating the equation in \ref{eq: ex49.3} we get
+\begin{align}
+    -\nabla g_i(x^{*})^{T}q^{(1)} = 0 \qquad \forall i\in\mathcal{A}(x^{*}).
+\end{align}
+In the other case $i \not\in \mathcal{A}(x^{*})$, $g_i(x^{*}) < 0$ with
+$\lambda^{*} = 0$ and thereby $-g_i(^{*}) - \lambda_i^{*} >0$ so
+$\varphi(-g_i(x^{*}),\lambda^{*}) = \lambda_i^{*}$. The entries of the matrix
+are
+\begin{align}
+    &\left(\nabla \phi_1(-g(x^{*}),\lambda^{*})\right)_i = 0\\
+    &\left( \nabla \phi_2(-g(x^{*}),\lambda^{*})\right)_i =
+    (0,\ldots,0,\underbrace{1}_{i},0,\ldots,0)^{T},
+\end{align}
+evaluating the equation in \ref{eq: ex49.3} we get
+\begin{align}
+    q_i^{(2)} = 0 \qquad \forall i \not\in \mathcal{A}(x^{*}).
+\end{align}
+Both cases contribute to the fact that the sum evaluates to 0 in term
+\ref{eq: ex49.4}. In summary we are left with
 \begin{align}
     (q^{(1)})^{T}\nabla_x^{2}L(x^{*},\lambda^{*},\mu^{*})q^{(1)} =0.
 \end{align}
@@ -330,15 +388,19 @@ Since second order sufficient optimality condition is satisfied then $q^{(1)}
 \in T_2(x^{*})$, and the only solution is $q^{(1)} = 0$. Equation \ref{eq:
 ex49.1} is left with
 \begin{align}
-    &\nabla h(x^{*})^{T}q^{(2)}+\nabla \phi(x^{*})q^{(3)} =\\
-    =& \sum_{j=1}^{p} q_j^{(2)}\nabla h_j(x^{*}) + \sum_{i \in
-    \mathcal{A}(x^{*})} q_i^{(3)}(-\nabla g_i(x^{*})) = 0
+    &\nabla g(x^{*})^{T}q^{(2)}+\nabla h(x^{*})q^{(3)} =\\
+    =& \sum_{i=1}^{m} q_i^{(2)}\nabla g_i(x^{*})
+    + \sum_{j=1}^{p} q_j^{(3)}  \nabla h_j(x^{*}) =\\
+=& \sum_{i \in \mathcal{A}(x^{*})} q_i^{(2)}\nabla g_i(x^{*})
+    + \sum_{j=1}^{p} q_j^{(3)}  \nabla h_j(x^{*}) = 0
 \end{align}
-since LICQ is fulfilled these vectors are linearly independent and by
-definition of linear independence the only $q^{(2)}, q^{(3)}$ fulfilling the
-above condition are $q^{(2)} = 0$ and $q^{(3)} = 0$. Thereby $q = 0$ and
-$\text{ker}(\nabla\Phi(x^{*},\lambda^{*},\mu^{*})) = \emptyset$, so the matrix
-is regular.
+in the last equation we remove all $q^{(2)}_i = 0$ which are exactly all $i
+\not\in \mathcal{A}(x^{*})$. Since LICQ is fulfilled these vectors are
+linearly independent and by definition of linear independence the only
+$q^{(2)}, q^{(3)}$ fulfilling the above condition are $q^{(2)} = 0$ and
+$q^{(3)} = 0$. Thereby $q = 0$ and
+$\text{ker}(\nabla\Phi(x^{*},\lambda^{*},\mu^{*})) = \emptyset$, so the
+matrix is regular.
 
 
 
