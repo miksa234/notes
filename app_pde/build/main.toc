@@ -1,0 +1,26 @@
+\contentsline {section}{\numberline {1}Governing Equations of Fluid Mechanics}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Mass Conservation}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Euler's Equation of Motion}{6}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Vorticity and irrotational Flow}{6}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Boundary Conditions for water waves}{7}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Kinematic Condition}{8}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}Dynamic Condition}{8}{subsubsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.3}The Bottom Condition}{9}{subsubsection.1.4.3}%
+\contentsline {subsubsection}{\numberline {1.4.4}Integrated Mass Condition}{9}{subsubsection.1.4.4}%
+\contentsline {section}{\numberline {2}Dimensional Analysis}{10}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Nondimensionalisation}{10}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Scaling of Variables}{12}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Model Hierarchies}{12}{subsection.2.3}%
+\contentsline {section}{\numberline {3}The Solitary Wave and The KdV Equation}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Solitary Wave}{13}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Exponential Decay}{13}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Asymptotic Analysis}{14}{subsubsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.2}KdV Equation}{16}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Modeling the 2004 Tsunami}{20}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Description}{20}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Long Wave, Shallow Water}{20}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Governing equations}{20}{subsection.4.3}%
+\contentsline {section}{\numberline {A}Appendix}{23}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Leibniz Rule of Integration}{23}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Identity for Vorticity}{23}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Middle Curvature of an Implicit Function}{23}{subsection.A.3}%

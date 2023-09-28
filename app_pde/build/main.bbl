@@ -97,6 +97,7 @@
       \field{edition}{2}
       \field{title}{Atmospheric and Oceanic Fluid Dynamics: Fundamentals and Large-Scale Circulation}
       \field{year}{2017}
+      \true{nocite}
       \verb{doi}
       \verb 10.1017/9781107588417
       \endverb
@@ -124,6 +125,7 @@
       \field{title}{Scale-Dependent Models for Atmospheric Flows}
       \field{volume}{42}
       \field{year}{2009}
+      \true{nocite}
       \field{pages}{249\bibrangedash 274}
       \range{pages}{26}
       \verb{doi}
@@ -154,6 +156,7 @@
       \field{edition}{3}
       \field{title}{Mathemaik für Physiker}
       \field{year}{2013}
+      \true{nocite}
       \verb{doi}
       \verb 10.1007/978-3-642-37654-2
       \endverb
