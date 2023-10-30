@@ -1,0 +1,66 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{andriushchenko2023sgd}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=37eab590a70071733a7207c69c1de93b}{%
+           family={Andriushchenko},
+           familyi={A\bibinitperiod},
+           given={Maksym},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9fc1f76e3c692d87158c46b83e5d28af}{%
+           family={Varre},
+           familyi={V\bibinitperiod},
+           given={Aditya},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e7abbaf3659900c715981a63c38087a0}{%
+           family={Pillaud-Vivien},
+           familyi={P\bibinithyphendelim V\bibinitperiod},
+           given={Loucas},
+           giveni={L\bibinitperiod}}}%
+        {{hash=e2d7053f85144a452931150e4ba9f19c}{%
+           family={Flammarion},
+           familyi={F\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{938351616ba63b95aed77418d24ba110}
+      \strng{fullhash}{0d250031ed13f608dcd2666e771c5674}
+      \strng{bibnamehash}{938351616ba63b95aed77418d24ba110}
+      \strng{authorbibnamehash}{938351616ba63b95aed77418d24ba110}
+      \strng{authornamehash}{938351616ba63b95aed77418d24ba110}
+      \strng{authorfullhash}{0d250031ed13f608dcd2666e771c5674}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{SGD with Large Step Sizes Learns Sparse Features}
+      \field{year}{2023}
+      \verb{eprint}
+      \verb 2210.05337
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
