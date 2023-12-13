@@ -1,0 +1,56 @@
+\include{./preamble.tex}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Intro}
+The following questions are anwsered:
+\begin{itemize}
+    \item iterative regularization with NN functions
+    \item application of NNs on inverse problems
+    \item What generalized NNs are best suited for IPs?
+\end{itemize}
+
+\subsection{Posing the problem}
+Consider linear operator equation between Hilbertspaces $\mathbf{X}$ and
+$\mathbf{Y}$
+\begin{align}
+    F\mathbf{x} = \mathbf{y}.
+\end{align}
+For the problem modeling we introduce a function, called \textbf{Coding}
+$\Psi: \vec{P} \to \mathbf{X}$ which maps NN parameters to images functions.
+Our problem can be written as follows
+\begin{align}
+    N(\vec{p}) = F\Psi(\vec{p}) = \mathbf{y},
+\end{align}
+where $X$ is the image space, $Y$ the data space and $\vec{P}$ the parameter
+space. In the case the operator in question $F$ is nonlinear then we would of
+course have a nonlinear equation, which we are not considering right now.
+
+\subsection{Shallow neural network coders}
+Shallow neural network coders are of the following form
+\begin{align}
+    \Psi:
+    \mathcal{D}(\Psi) := \mathbb{R}^{n_*} =
+    \mathbb{R}^{N}\times \mathbb{R}^{n \times N}
+    \times \mathbb{R}^{N}
+    &\to \mathbf{X} :=
+    L^{2}\left([0, 1]^{n}\right),\\
+    \vec{p} = (\vec{\alpha}, \mathbf{w}, \vec{\theta}) &\mapsto
+    \left(\vec{x} \to \sum_{j=1}^{N} \alpha_j\sigma\left(
+    \vec{\mathbf{w}}_j^{T}\vec{x} + \omega_j \right)  \right),
+\end{align}
+where $\sigma$ is an activation function, such as tanh or sigmoid.
+
+\section{Solution}
+The solution ivolves either recostructing the function or the coefficient use
+Tikhonov regularization( TODO: Tikhonov regularization introduction! ) or use
+newton type methods.
+
+%\printbibliography
+
+\end{document}
