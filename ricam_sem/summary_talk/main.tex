@@ -8,7 +8,7 @@
 \tableofcontents
 
 \section{Intro}
-The following questions are anwsered:
+The following questions are answered:
 \begin{itemize}
     \item iterative regularization with NN functions
     \item application of NNs on inverse problems
@@ -16,7 +16,7 @@ The following questions are anwsered:
 \end{itemize}
 
 \subsection{Posing the problem}
-Consider linear operator equation between Hilbertspaces $\mathbf{X}$ and
+Consider linear operator equation between Hilbert spaces $\mathbf{X}$ and
 $\mathbf{Y}$
 \begin{align}
     F\mathbf{x} = \mathbf{y}.
@@ -47,9 +47,108 @@ Shallow neural network coders are of the following form
 where $\sigma$ is an activation function, such as tanh or sigmoid.
 
 \section{Solution}
-The solution ivolves either recostructing the function or the coefficient use
+The solution involves either reconstructing the function or the coefficient use
 Tikhonov regularization( TODO: Tikhonov regularization introduction! ) or use
 newton type methods.
+
+Using variational methods, Tikhonov regularization (some background on this
+here)
+\begin{align}
+    \|N(\vec{p}) - \mathbf{y}\|^{2} + \alpha \|\vec{p}\|^{2} \to \min,
+\end{align}
+or alternatively state space regularization (some background on this)
+\begin{align}
+    \|N(\vec{p}) - \mathbf{y}\|^{2}
+    + \alpha \|\mathbf{x} - \mathbf{x}_0\|^{2}
+    \to \min \quad \text{s.t} \quad \Psi(\vec{p}) = \mathbf{x}.
+\end{align}
+Alternatively use iterative methods, Newton's iteration would look like the
+following
+\begin{align}
+    \vec{p}^{k+1} = \vec{p} - N'\left(p^{-k}\right)^{-1}\left(N(\vec{p}) -
+    \mathbf{y}  \right),
+\end{align}
+where $N'$ is the Jacobian.
+\subsection{Decomposition cases (review)}
+The \textit{1st decomposition case}
+\begin{align}
+    N(\vec{p}) = \Psi(F\vec{p}).
+\end{align}
+The \textit{2nd decomposition case}
+\begin{align}
+    N(\vec{p}) = F\Psi(\vec{p}).
+\end{align}
+Usually it is assumed that the nonlinear operator $\Psi$ is well-posed.
+Here we need to see B. Hofmann On the degree of ill-posedness of nonlinear
+problems.
+\subsection{Gauss-Newton type method for 2nd decomposition case}
+We are dealing with the operator $\Psi:\mathcal{D} \subseteq \vec{P} :=
+\mathbb{R}^{n_*} \to \mathbf{X}$. The derivative of $\Psi$ \textbf{cannot be
+invertible}!. So how do we decompose the 2nd case
+\begin{align}
+    N(\vec{p}) = F\Psi(\vec{p}).
+\end{align}
+To answer this we introduce the Lipschitz-differentiable immersion
+definition.
+\begin{mydef}
+    Let there be $n_* = N*(n+2)$ neural nets depending on the parameters
+    $(\vec{\alpha}, \mathbf{w}, \vec{\theta})$. Let $\Psi'$ be
+    Lipschitz-continuous and
+    \begin{align}
+        \text{span}\{\partial_{p_i}\Psi(\vec{p})\;:\;i=1,\ldots,n_*\},
+    \end{align}
+    has $\text{rank}(n_*)$.
+    And let $\Psi'(\vec{p})^{\dagger}$ denote a generalized inverse,
+    which replaces the standard $\Psi^{-1}$ in the standard Newton's method.
+\end{mydef}
+\subsection{Local convergence of Ga.uss-Newton's method}
+We can prove under condition that we can attain the data, i.e. reconstruct
+the coefficients.
+\begin{theorem}
+    Let $F: \mathbf{X} \to \mathbf{Y}$ be linear with trivial nullspace and
+    dense range, $\Psi:\mathcal{D} \subseteq P \to \mathbf{X}$ be
+    Lipschitz-differentiable immersion and $N = F\circ \Psi$ and
+    $N(\vec{p}^{\dagger}) = \mathbf{y}$.
+    Also let $\vec{p}^{0} \in \mathcal{D}(\Psi)$ be sufficiently close to
+    $\vec{p}^{\dagger}$. Then the Gauss-Newton's iteration
+    \begin{align}
+        \vec{p}^{k+1} = \vec{p}^{k} - N'(\vec{p})^{\dagger}
+        \left( N\left( \vec{p}^{k} \right) - \mathbf{y} \right)
+    \end{align}
+    is well-defined and converges to $\vec{p}^{\dagger}$
+\end{theorem}
+\begin{proof}
+    Verification of a sort of Newton-Mysovskii conditions using that
+    \begin{align}
+        N'(\vec{p})^{\dagger}N'(\vec{p}) =
+        \Psi(\vec{p})^{\dagger}\Psi(\vec{p}),
+    \end{align}
+    Here we need this Otmar mentions "Barbaras book find this out 86"
+    probably Barbara Kaltenbacher has some book. Its most likely this book
+    B.Kaltenbacher, A.Neubauer, and O.Scherzer.
+    Iterative Regularization Methods for Nonlinear Problems.
+    de Gruyter, Berlin, New York, 2008.
+    Also P.Deuflhard, H.W. Engl and O. Scherzer "A convergence analysis of
+    iterative methods for the solution of nonlinear ill-posed problems under
+    affinely invariant conditions.
+\end{proof}
+Then the Gauss-Newton is quadratically convergent.
+\subsection{Newton's method with the neural network operator}
+Convergence is based on the immersion property of the network functions
+\begin{align}
+    \text{span}\{\partial_{p_i}\Psi(\vec{p})\;:\;i=1,\ldots,n_*\}, \qquad
+    \text{has rank}(n_*).
+\end{align}
+For $\alpha_i \neq 0$, this, in particular, requires that the functions
+\begin{align}
+    &p = \sum_{i=1}^{n}w_s^{i}x_i + \theta_s \\
+    & \frac{\partial \Psi}{\partial \alpha_s} =\sigma(p),\quad
+     \frac{\partial \Psi}{\partial w_s^{t}} =\sigma'(p)x_t,\quad
+     \frac{\partial \Psi}{\partial \theta_s} =\sigma'(p)
+\end{align}
+are \textbf{linearly independent} and that $\alpha_s \neq 0$ -
+\textbf{sparse} coefficients cannot be recovered.
+
 
 %\printbibliography
 
