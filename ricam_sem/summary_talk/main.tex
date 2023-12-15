@@ -43,8 +43,27 @@ Shallow neural network coders are of the following form
     \vec{p} = (\vec{\alpha}, \mathbf{w}, \vec{\theta}) &\mapsto
     \left(\vec{x} \to \sum_{j=1}^{N} \alpha_j\sigma\left(
     \vec{\mathbf{w}}_j^{T}\vec{x} + \omega_j \right)  \right),
-\end{align}
+\end{align}q
 where $\sigma$ is an activation function, such as tanh or sigmoid.
+
+\subsection{Deep neural networks}
+A standard DNN with $L$ layers is a function depending on $\vec{x} \in
+\mathbb{R}^{n}$ with parameters $\vec{p}:=\left( \vec{\alpha}_l,
+\mathbf{w}_l, \vec{\theta}_l  \right)_{l=1}^{L}$
+\begin{align}
+    \vec{x}\to\Psi(\vec{x}) := \sum_{j_L=1}^{N_L} \alpha_{j_L,L}\sigma_L\
+    \left( p_{j_L, L} \left( \sum_{j_{L-1}=1}^{N_{L-1}}\cdots
+    \left( \sum_{j_1=1}^{N_1}\alpha_{j_1,1}\sigma_1\left(p_{j_1,1}(\vec{x})
+    \right)  \right)  \right)  \right),
+\end{align}
+where
+\begin{align}
+    p_{j_l}(\vec{x}) = \mathbf{w}_{j, l}^{T}\vec{x} + \theta_{j,l},
+\end{align}
+with $\alpha_{j,l}, \theta_{j,l} \in \mathbb{R}$ and $\vec{x},
+\mathbf{w}_{j,l} \in \mathbb{R}^{n} \;\; \forall l=1,\ldots,L$. And is
+probably not a Lipschitz-continuous immersion!
+
 
 \section{Solution}
 The solution involves either reconstructing the function or the coefficient use
@@ -65,7 +84,7 @@ or alternatively state space regularization (some background on this)
 Alternatively use iterative methods, Newton's iteration would look like the
 following
 \begin{align}
-    \vec{p}^{k+1} = \vec{p} - N'\left(p^{-k}\right)^{-1}\left(N(\vec{p}) -
+    \vec{p}\;^{k+1} = \vec{p} - N'\left(p^{-k}\right)^{-1}\left(N(\vec{p}) -
     \mathbf{y}  \right),
 \end{align}
 where $N'$ is the Jacobian.
@@ -108,14 +127,14 @@ the coefficients.
     Let $F: \mathbf{X} \to \mathbf{Y}$ be linear with trivial nullspace and
     dense range, $\Psi:\mathcal{D} \subseteq P \to \mathbf{X}$ be
     Lipschitz-differentiable immersion and $N = F\circ \Psi$ and
-    $N(\vec{p}^{\dagger}) = \mathbf{y}$.
-    Also let $\vec{p}^{0} \in \mathcal{D}(\Psi)$ be sufficiently close to
-    $\vec{p}^{\dagger}$. Then the Gauss-Newton's iteration
+    $N(\vec{p}\;^{\dagger}) = \mathbf{y}$.
+    Also let $\vec{p}\;^{0} \in \mathcal{D}(\Psi)$ be sufficiently close to
+    $\vec{p}\;^{\dagger}$. Then the Gauss-Newton's iteration
     \begin{align}
-        \vec{p}^{k+1} = \vec{p}^{k} - N'(\vec{p})^{\dagger}
-        \left( N\left( \vec{p}^{k} \right) - \mathbf{y} \right)
+        \vec{p}\;^{k+1} = \vec{p}\;^{k} - N'(\vec{p})^{\dagger}
+        \left( N\left( \vec{p}\;^{k} \right) - \mathbf{y} \right)
     \end{align}
-    is well-defined and converges to $\vec{p}^{\dagger}$
+    is well-defined and converges to $\vec{p}\;^{\dagger}$
 \end{theorem}
 \begin{proof}
     Verification of a sort of Newton-Mysovskii conditions using that
@@ -141,13 +160,130 @@ Convergence is based on the immersion property of the network functions
 \end{align}
 For $\alpha_i \neq 0$, this, in particular, requires that the functions
 \begin{align}
-    &p = \sum_{i=1}^{n}w_s^{i}x_i + \theta_s \\
-    & \frac{\partial \Psi}{\partial \alpha_s} =\sigma(p),\quad
-     \frac{\partial \Psi}{\partial w_s^{t}} =\sigma'(p)x_t,\quad
-     \frac{\partial \Psi}{\partial \theta_s} =\sigma'(p)
+    &\rho = \sum_{i=1}^{n}w_s^{i}x_i + \theta_s \\
+    & \frac{\partial \Psi}{\partial \alpha_s} =\sigma(\rho),\quad
+     \frac{\partial \Psi}{\partial w_s^{t}} =\sigma'(\rho)x_t,\quad
+     \frac{\partial \Psi}{\partial \theta_s} =\sigma'(\rho)
 \end{align}
 are \textbf{linearly independent} and that $\alpha_s \neq 0$ -
 \textbf{sparse} coefficients cannot be recovered.
+\subsection{Linear independence problem}
+The question is if
+\begin{align}
+    \frac{\partial \Psi}{\partial \alpha_s} ,
+    \frac{\partial \Psi}{\partial w_s^{\dagger}} ,
+    \frac{\partial \Psi}{\partial \theta_s}
+\end{align}
+Partial answer for $\frac{\partial \Psi}{\partial \alpha_s} (\vec{x}) =
+\sigma\left( \sum_{i=1}^{n} w_s^{i}x_i + \theta_s \right)$ in the
+Lamperski (2022) theorem:
+\begin{theorem}
+    For all activation functions \textit{HardShrink, HardSigmoid, HardTanh,
+    HardSwish, LeakyReLU, PReLU, ReLU, ReLU6, RReLU, SoftShring, Threshold,
+    LogSigmoid, Sigmoid, SoftPlus, Tanh and TanhShring and the PyTorch
+    functions CELU, ELU, SELU} the shallow neural network functions formed by
+    \textbf{randomly generated vectors} $(\mathbf{w}, \vec{\theta})$ are
+    \textbf{linearly independent}.
+\end{theorem}
+Proof in A. Lamperski 2022 "Neural Network Independence Properties with
+Applications to Adaptive Control". But here we need more that the first
+derivative of the sigmoid functions and the first moment of the first
+derivative together with the above result are linearly independent.
+But the answer is not satisfactory because its not known. More or less with a
+probability $1$ we can prove that the functions above are linearly
+independent
+
+\subsection{Symmetries}
+For the sigmoid function we have some odious symmetries because
+\begin{align}
+    \sigma'(\mathbf{w}^{T}_j \vec{x} + \theta_j)
+    = \sigma'\left(-\mathbf{w}_j^{T}\vec{x} - \theta_j  \right)
+\end{align}
+or in another formulation
+\begin{align}
+    \Psi'(\vec{\alpha}, \mathbf{w}, \vec{\theta}) = \Psi'(\vec{\alpha},
+        -\mathbf{w}, -\vec{\theta})
+\end{align}
+Conjecture: ovoious symmetries = "random set" from Lamperski 2022. The
+summery of the theorem
+\begin{theorem}
+    Assume that the activation functions are locally linearly independent.
+    Then the Gauss-Newton method is converging.
+\end{theorem}
+\section{Results}
+\subsection{Numerical results(simplified)}
+The simplification is
+\begin{align}
+    &N = F \circ \Psi \\
+    &\mathbf{y}^{\dagger} = F\Psi(\vec{p}\;^{\dagger}) \qquad \text{is
+    attainable}
+\end{align}
+Then the Gauss-Newton method is
+\begin{align}
+    \vec{p}\;^{k+1} = \vec{p}\;^{k} - \Psi'\left(\vec{p})\;^{k}  \right)^{\dagger}
+    \left( \Psi(\vec{p}\;^{k} - \Psi^{\dagger} \right) \qquad k \in
+    \mathbb{N}_0.
+\end{align}
+Do some numerical  results or explain the ones in the talk.
+\subsection{Landweber iteration}
+Instead of the Gauss-Newton iteration we consider the Landweber iteration
+\begin{align}
+    \vec{p}\;^{k+1} = \vec{p}\;^{k} - \lambda \Psi'\left(\vec{p}\;^{k})  \right)^{\dagger}
+    \left( \Psi(\vec{p}\;^{k} - \Psi^{\dagger} \right) \qquad k \in
+    \mathbb{N}_0.
+\end{align}
+Needs about 500 iterations
+\subsection{The catch}
+If the observed convergence rate of the Gauss-New ton change completely if the
+solution is not attainable. Then the conjecture is that the non-convergence
+because of multiple solutions.
+Also the implementation of the simplified Gauss-Newton requires inversion of
+$F$ , which is not done in practice, this is for Landweber.
+
+\subsection{Alternative to DNNs}
+Instead of using Deep Neural Networks where we do not know the result if the
+the immersion is invertible, we consider Quadratic neural network functions
+defined as follows
+\begin{align}
+    \Psi(\vec{x}) := \sum_{j=1}^{N} \alpha_j\sigma\left(\vec{x}^{T}A_j\vec{x}
+        + \mathbf{w}_j^{T}\vec{x} + \theta_j \right),
+\end{align}
+with $\alpha_j, \theta_j \in \mathbb{R}, \mathbf{w}_j \in \mathbb{R}^{n}$
+and $A_j \in \mathbb{R}^{n \times n}$. We can also constrain the class of
+$A_j$ and $\mathbf{w}_j$ which leads us to circular networks, circular
+affine, elliptic, parabolic...
+\begin{theorem}
+    Quadratic neural network functions satisfy the universal approximation
+    property.
+\end{theorem}
+The immersion property of circular network functions
+\begin{align}
+    \Psi(\vec{x}) := \sum_{j=1}^{N} \alpha_j\sigma\left(r_j\vec{x}^{T}\vec{x}
+        + \mathbf{w}_j^{T}\vec{x} + \theta_j \right),
+\end{align}
+and
+\begin{align}
+    \text{span}\{\partial_{p_i}\Psi(\vec{p})\;:\;i=1,\ldots,n_*\}, \qquad
+    \text{has rank}(n_*).
+\end{align}
+For $\alpha_i \neq 0$, this in particular requires that the functions
+\begin{align}
+    \frac{\partial \Psi}{\partial r_s}  = \sigma\left( \rho \right)
+    \vec{x}^{T}\vec{x}, \quad
+    \frac{\partial \Psi}{\partial \alpha_s}  = \sigma\left( \rho \right)
+    , \quad
+    \frac{\partial \Psi}{\partial w_s^{t}}  = \sigma'\left( \rho \right)
+    x_t,\quad
+    \frac{\partial \Psi}{\partial \theta_s}  = \sigma'\left( \rho \right)
+\end{align}
+are \textbf{linearly independent}.
+\newline
+
+Results of these types of networks is that the Shepp-Logan can be represented
+with \textbf{10 nodes} with elliptic neurons and \textbf{one layer}. Where as
+for affine networks, both shallow and deep we need infinity neurons. Here
+figure tensorflow approximations of a circle 15 neurons linear.
+
 
 
 %\printbibliography
