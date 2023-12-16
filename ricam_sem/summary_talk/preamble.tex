@@ -48,9 +48,9 @@
 
 \colorlet{colexam}{black}
 \newcounter{definition}
-\newtcolorbox[use counter=definition]{mydef}{
+\newtcolorbox[use counter=definition]{mydef}[1]{
     empty,
-    title={Definition~\thetcbcounter},
+    title={\textbf{Definition~\thetcbcounter}~~(\textit{#1})},
     attach boxed title to top left,
     fontupper=\sl,
     boxed title style={
@@ -63,7 +63,7 @@
             {\draw[colexam,line width=1pt]([yshift=-0.4cm]frame.north
         west)--([yshift=-0.4cm]frame.north east);}},
             coltitle=colexam,
-            fonttitle=\bfseries,
+            fonttitle=\normalfont,
             before=\par\medskip\noindent,
             parbox=false,
             boxsep=-1pt,

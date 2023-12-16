@@ -35,3 +35,12 @@ We need
     * (reproduction or more in depth explanations)
 
 
+Proving convergence:
+    * prove Lipschitz-Differentiable immersion of shallow NNs
+    * Linear independence of the activation function, first derivative and first
+        moment of the first derrivaive
+    * Newton Minkowski conditions for shallow NNs
+    * Moore Penrose inverse
+
+
+

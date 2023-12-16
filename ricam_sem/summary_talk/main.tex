@@ -22,14 +22,109 @@ $\mathbf{Y}$
     F\mathbf{x} = \mathbf{y}.
 \end{align}
 For the problem modeling we introduce a function, called \textbf{Coding}
-$\Psi: \vec{P} \to \mathbf{X}$ which maps NN parameters to images functions.
-Our problem can be written as follows
+$\Psi: \vec{P} \to \mathbf{X}$ which maps NN parameters to images functions,
+a nonlinear operator. Our problem can be written as follows
 \begin{align}
     N(\vec{p}) = F\Psi(\vec{p}) = \mathbf{y},
 \end{align}
-where $X$ is the image space, $Y$ the data space and $\vec{P}$ the parameter
+where $\mathbf{X}$ is the image space, $\mathbf{Y}$ the data space and $\vec{P}$ the parameter
 space. In the case the operator in question $F$ is nonlinear then we would of
-course have a nonlinear equation, which we are not considering right now.
+course have a nonlinear equation, which we are not considering right now. The
+talk aims to explain the link between the general regularization of the
+degree of ill-posedness and nonlinearity and investigates generalized
+Gauss-Newton solvers, by the outer inverse or by approximations.
+\subsection{Decomposition cases (review)}
+An operator $N$ satisfies the \textit{1st decomposition case} in an open empty
+neighborhood $\mathcal{B}\left(\vec{p}\;^{\dagger}; \rho \right) \subseteq
+\vec{P} $ (an open ball at point $\vec{p}\;^{\dagger}$ with radius $\rho$), if
+there exists a linear operator $F:\vec{P}\to \mathbf{X}$ and a nonlinear
+operator $\Psi:\mathbf{X} \to \mathbf{Y}$ such that.
+\begin{align}
+    N(\vec{p}) = \Psi(F\vec{p}).
+\end{align}
+The \textit{2nd decomposition case} for operator $N$ in the same setting is
+satisfied, if there exists a linear operator $F: \mathbf{X} \to \mathbf{Y}$
+and a nonlinear operator $\Psi: \vec{P} \to \mathbf{X}$ such that
+\begin{align}
+    N(\vec{p}) = F\Psi(\vec{p}).
+\end{align}
+\section{Background}
+\subsection{Moore-Penrose Inverse}
+We study the case where $\mathbf{Y}$ is an infinite dimensional Hilbert
+space. In this regard it is necessary to replace the inverse in the classical
+Newton method because the liberalizations of the operator $N$ cannot be be
+invertible. This is done by introducing the so called Moore-Penrose inverse
+or more general the outer inverse and we refer to the Gauss-Newton method to
+distinguish between the classical version.
+\begin{mydef}{Inner, outer and Moore Penrose inverse}
+    $L: \vec{P} \to \mathbf{Y}$ be a linear and bounded operator between
+    vector spaces $\vec{P}$ and $\mathbf{X}$. Then
+    \begin{enumerate}
+        \item $B: \mathbf{Y} \to \vec{P}$ is called \textbf{left-inverse} to
+            $L$ if
+            \begin{align}
+                BL = I
+            \end{align}
+        \item $B: \mathbf{Y} \to \vec{P}$ is called \textbf{right-inverse} to
+            $L$ if
+            \begin{align}
+                LB = I
+            \end{align}
+        \item $B: \vec{P} \to \vec{P}$ is called an \textbf{inverse} to
+            $L$ if it is both a left and a right inverse to $L$.
+        \item $B: \vec{P} \to \vec{P}$ is called an \textbf{outer inverse} to
+            $L$ if
+            \begin{align}
+                BLB = B
+            \end{align}
+        \item Let $\vec{P}$ and $\mathbf{Y}$ be Hilbert spaces, $L: \vec{P}
+            \to \mathbf{Y}$ be linear bounded operator. Denote the
+            orthogonal projections $P$ and $Q$ onto the nullspace of $L$,
+            $\mathcal{N}(L)$ closed and the closure of the range of $L$,
+            $\overline{\mathcal{R}\left(L  \right)} $. This means that for all $\vec{p}
+            \in \vec{P}$ and $\mathbf{y} \in \mathbf{Y}$ we have
+            \begin{align}
+                &P\vec{p} = \text{argmin}
+                \left\{
+                    \|\vec{p}_1-\vec{p}\|_{\vec{P}} : \vec{p}_1 \in
+                \mathcal{N}(L) \right\},\\
+                &Q\mathbf{y} = \text{argmin}
+                \left\{
+                    \|\mathbf{y}_1 - \mathbf{y}\|_\mathbf{Y}: \mathbf{y} \in
+                    \overline{\mathcal{R}(L)} \right\}
+            \end{align}
+            Then the operator $B: \mathcal{D}(B) \subseteq \mathcal{Y} \to
+            \vec{P}$ with $\mathcal{B}(B):= \mathcal{R} \dotplus
+            \mathcal{R}^{\perp}$ is called \textbf{Moore-Penrose inverse} of
+            $L$ if the following conditions(identities) hold
+            \begin{align}
+                &LBL = L, \nonumber\\
+                &BLB = B, \nonumber\\
+                &BL= I-P, \\
+                &LB = Q|_{\mathcal{D}(B)} \nonumber.
+            \end{align}
+
+    \end{enumerate}
+    The left and right inverses are used in a different context. For a left
+    inverse the nullspace of $L$ has to be trivial, in contrast to $B$.
+    On the other hand for the right inverse the nullspace of $B$ needs to be
+    trivial.
+
+
+\end{mydef}
+
+\subsection{Lipschitz-differentiable immersion}
+\begin{mydef}{Lipschitz-differentiable immersion}
+    Let there be $n_* = N*(n+2)$ neural nets depending on the parameters
+    $(\vec{\alpha}, \mathbf{w}, \vec{\theta})$. Let $\Psi'$ be
+    Lipschitz-continuous and
+    \begin{align}
+        \text{span}\{\partial_{p_i}\Psi(\vec{p})\;:\;i=1,\ldots,n_*\},
+    \end{align}
+    has $\text{rank}(n_*)$.
+    And let $\Psi'(\vec{p})^{\dagger}$ denote a generalized inverse,
+    which replaces the standard $\Psi^{-1}$ in the standard Newton's method.
+\end{mydef}
 
 \subsection{Shallow neural network coders}
 Shallow neural network coders are of the following form
@@ -65,10 +160,10 @@ with $\alpha_{j,l}, \theta_{j,l} \in \mathbb{R}$ and $\vec{x},
 probably not a Lipschitz-continuous immersion!
 
 
-\section{Solution}
 The solution involves either reconstructing the function or the coefficient use
-Tikhonov regularization( TODO: Tikhonov regularization introduction! ) or use
-newton type methods.
+Tikhonov regularization or use newton type methods, the talk explains the
+solution for decoposable operators wrt. the 2nd decomposition case for
+Gauss-Newton type methods.
 
 Using variational methods, Tikhonov regularization (some background on this
 here)
@@ -88,18 +183,11 @@ following
     \mathbf{y}  \right),
 \end{align}
 where $N'$ is the Jacobian.
-\subsection{Decomposition cases (review)}
-The \textit{1st decomposition case}
-\begin{align}
-    N(\vec{p}) = \Psi(F\vec{p}).
-\end{align}
-The \textit{2nd decomposition case}
-\begin{align}
-    N(\vec{p}) = F\Psi(\vec{p}).
-\end{align}
+
 Usually it is assumed that the nonlinear operator $\Psi$ is well-posed.
 Here we need to see B. Hofmann On the degree of ill-posedness of nonlinear
-problems.
+problems. Where we assume that the nonlinear operator $\Psi$ is well-posed.
+
 \subsection{Gauss-Newton type method for 2nd decomposition case}
 We are dealing with the operator $\Psi:\mathcal{D} \subseteq \vec{P} :=
 \mathbb{R}^{n_*} \to \mathbf{X}$. The derivative of $\Psi$ \textbf{cannot be
@@ -107,19 +195,9 @@ invertible}!. So how do we decompose the 2nd case
 \begin{align}
     N(\vec{p}) = F\Psi(\vec{p}).
 \end{align}
-To answer this we introduce the Lipschitz-differentiable immersion
-definition.
-\begin{mydef}
-    Let there be $n_* = N*(n+2)$ neural nets depending on the parameters
-    $(\vec{\alpha}, \mathbf{w}, \vec{\theta})$. Let $\Psi'$ be
-    Lipschitz-continuous and
-    \begin{align}
-        \text{span}\{\partial_{p_i}\Psi(\vec{p})\;:\;i=1,\ldots,n_*\},
-    \end{align}
-    has $\text{rank}(n_*)$.
-    And let $\Psi'(\vec{p})^{\dagger}$ denote a generalized inverse,
-    which replaces the standard $\Psi^{-1}$ in the standard Newton's method.
-\end{mydef}
+To prove convergence we introduce the Lipschitz-differentiable immersion.
+
+\section{Solution}
 \subsection{Local convergence of Ga.uss-Newton's method}
 We can prove under condition that we can attain the data, i.e. reconstruct
 the coefficients.
