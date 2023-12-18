@@ -25,7 +25,7 @@ For the problem modeling we introduce a function, called \textbf{Coding}
 $\Psi: \vec{P} \to \mathbf{X}$ which maps NN parameters to images functions,
 a nonlinear operator. Our problem can be written as follows
 \begin{align}
-    N(\vec{p}) = F\Psi(\vec{p}) = \mathbf{y},
+    N(\vec{p}) = F\Psi(\vec{p}) = \mathbf{y}, \label{eq: main}
 \end{align}
 where $\mathbf{X}$ is the image space, $\mathbf{Y}$ the data space and $\vec{P}$ the parameter
 space. In the case the operator in question $F$ is nonlinear then we would of
@@ -48,7 +48,62 @@ and a nonlinear operator $\Psi: \vec{P} \to \mathbf{X}$ such that
 \begin{align}
     N(\vec{p}) = F\Psi(\vec{p}).
 \end{align}
+\subsection{Gauss-Newton type method for 2nd decomposition case}
+We are dealing with the operator $\Psi:\mathcal{D} \subseteq \vec{P} :=
+\mathbb{R}^{n_*} \to \mathbf{X}$. The derivative of $\Psi$ \textbf{cannot be
+invertible}!. So how do we decompose the 2nd case
+\begin{align}
+    N(\vec{p}) = F\Psi(\vec{p}).
+\end{align}
+To prove convergence we need introduce the Lipschitz-differentiable immersion.
 \section{Background}
+\subsection{Newton-Mysovskii}
+The local convergence of the Newton method is guaranteed under the so called Newton-Mysovskii
+ conditions. In this section the results are shown for the simple case in the
+ finite dimensional space, when the nonlinear operator has derivative which
+ are invertible. This result is going to be extended as aim of the summary.
+
+ \begin{theorem}
+     Let $N: \mathcal{D}(N) \subseteq \mathbb{R}^{n}\to \mathbb{R}^{n}$ be
+     continuously Fr\'echet differentiable on a non-empty, open and convex
+     set $\mathcal{D}\left( N \right) $. Let $\vec{p}\;^{\dagger} \in
+     \mathcal{D}(N)$ be the solution of $N(\vec{p}\;) = \mathbf{y}$, where
+     $\mathbf{y} \in \mathbb{R}^{n}$. Also assume that
+     \begin{enumerate}
+         \item $N'(\vec{p}\;)$ is invertible $\forall \vec{p} \in
+             \mathcal{D}(n)$ and
+         \item The Newton-Mysovskii condition hold, i.e. $\exists C_N > 0:$
+            \begin{align}
+                &\big\| N'(\vec{p}\;)^{-1}\left( N'(\vec{q} + s(\vec{p} -
+                \vec{q}\;) - N'(\vec{q}\;)\right) (\vec{p} - \vec{q})
+                \big\|_{\vec{P}}
+                \leq s C_N \|\vec{p} - \vec{q} \;\|^{2}_{\vec{P}}\\
+                & \forall \vec{p}, \vec{q} \in \mathcal{D}(N), \; s \in[0,
+                1],
+            \end{align}
+     \end{enumerate}
+     Now let $\vec{p}\;^{0} \in \mathcal{D}(N)$ the starting point of the
+     Newton iteration, which should be sufficiently close to the solution,
+     i.e. satisfying
+     \begin{align}
+         &\overline{\mathcal{B}\left(\vec{p}\;^{0}, \rho \right)}\subseteq
+         \mathcal{D}(N) \qquad \text{with}\\
+         &\rho := \|\vec{p}\;^{\dagger} - \vec{p}^{0}\|_{\vec{P}} \quad
+         \text{and} \quad h:= \frac{\rho C_l C_L}{2} <1. \label{eq: locality}
+     \end{align}
+     Then the Newton iteration with starting point $\vec{p}\;^{0}$ and
+     iterates $\left\{\vec{p}\;^{k}  \right\}_{k \in \mathbb{N}_0} \subseteq
+     \overline{\mathcal{B}(\vec{p}\;^{0}, \rho)} $ of the
+     form
+     \begin{align}
+         \vec{p}\;^{k+1} = \vec{p}\;^{k} - N'(\vec{p}\;^{k})^{-1}\left(
+         N\left(\vec{p}\;^{k}  \right) - \mathbf{y} \right)  \qquad k \in
+         \mathbb{N}_0,
+     \end{align}
+     converge to $\vec{p}\;^{\dagger} \in \overline{\mathcal{B}(\vec{p}\;^{0},
+     \rho)}$, \textbf{quadratically}.
+ \end{theorem}
+
 \subsection{Moore-Penrose Inverse}
 We study the case where $\mathbf{Y}$ is an infinite dimensional Hilbert
 space. In this regard it is necessary to replace the inverse in the classical
@@ -56,7 +111,8 @@ Newton method because the liberalizations of the operator $N$ cannot be be
 invertible. This is done by introducing the so called Moore-Penrose inverse
 or more general the outer inverse and we refer to the Gauss-Newton method to
 distinguish between the classical version.
-\begin{mydef}{Inner, outer and Moore Penrose inverse}
+\begin{mydef}{Inner, outer and Moore Penrose inverse \label{def:
+    moore-penrose}}
     $L: \vec{P} \to \mathbf{Y}$ be a linear and bounded operator between
     vector spaces $\vec{P}$ and $\mathbf{X}$. Then
     \begin{enumerate}
@@ -100,7 +156,7 @@ distinguish between the classical version.
             \begin{align}
                 &LBL = L, \nonumber\\
                 &BLB = B, \nonumber\\
-                &BL= I-P, \\
+                &BL= I-P, \label{eq: moore-penrose}\\
                 &LB = Q|_{\mathcal{D}(B)} \nonumber.
             \end{align}
 
@@ -119,14 +175,114 @@ distinguish between the classical version.
     $(\vec{\alpha}, \mathbf{w}, \vec{\theta})$. Let $\Psi'$ be
     Lipschitz-continuous and
     \begin{align}
+        \mathbf{X}_{\vec{p}} =
         \text{span}\{\partial_{p_i}\Psi(\vec{p})\;:\;i=1,\ldots,n_*\},
+        \label{eq: lpdi-property}
     \end{align}
     has $\text{rank}(n_*)$.
     And let $\Psi'(\vec{p})^{\dagger}$ denote a generalized inverse,
     which replaces the standard $\Psi^{-1}$ in the standard Newton's method.
+    TODO: more in detail definition.
 \end{mydef}
+We link the inverse of the Lipschitz Lipschitz-differentiable immersion with
+the Moore-Penrose inverse together with the necessary boundary constraints
+for the Gauss-Newton method
+\begin{theorem}
+    \begin{enumerate}
+        \item The function $\Psi'(\vec{p})^{\dagger}: \mathbf{X} \to \vec{P}$
+            is the Moore-Penrose inverse of $\Psi'(\vec{p})$.
+        \item For all $\vec{p} \in \mathcal{D}(\Psi) \subseteq \vec{P}$
+            there is a non-empty closed neighborhood where
+            $\Psi'(\vec{p})^{\dagger}$ is uniformly bounded and it is
+            Lipschitz-continuous, i.e.
+            \begin{align}
+                &\|\Psi'(\vec{p}\;)^{\dagger} -
+                \Psi'(\vec{q}\;)^{\dagger}\|_{\mathbf{X}\to\vec{P}}
+                \leq C_L \|\vec{p} - \vec{q}\;\|_{\vec{P}}&\\
+                &\|\Psi'(\vec{p}\;)^{\dagger}
+                \|_{\mathbf{X}\to\vec{P}} \leq C_l\qquad &\text{for}\;\;
+                \vec{p}, \vec{q}\in \mathcal{D}(\Psi).
+            \end{align}
+    \item The operator $P_{\vec{p}}: \mathbf{X} \to \mathbf{X}_{\vec{p}}$ is
+            bounded
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    TODO: here proof
+\end{proof}
 
-\subsection{Shallow neural network coders}
+We can now wrap the results back to the original problem of the Gauss-Newton
+iteration of \ref{eq: main}
+\begin{lemma}
+    Let $F$ be as in \ref{eq: main} linear, bounded with trivial nullspace
+    and dense range (for the Moore-Penrose inverse). Let $\Psi:
+    \mathcal{D}(\Psi)\subseteq \mathbb{R}^{n_*} \to \mathbf{X}$ be a
+    Lipschitz-differentiable immersion. And $N = F\circ \Psi$ \ref{eq: main}.
+    Here it is important to see the immanent result that for $N$,
+    $\mathcal{D}(N) = \mathcal{D}(\Psi)$, therefore $\forall \vec{p} \in
+    \mathcal{D}$ the derivative of the operator $N$ has a Moore-Penrose
+    inverse $N'(\vec{p}\;)^{\dagger}$, satisfying
+    \begin{enumerate}
+        \item Decomposition property of the Moore-Penrose inverse
+            \begin{align}
+                N'(\vec{p}\;)^{\dagger}\mathbf{z} =
+                \Psi'(\vec{p}\;)^{\dagger}F^{-1}\mathbf{z} \qquad \forall
+                \vec{p} \in \mathcal{D}(N),\; \mathbf{z} \in \mathcal{R}(F)
+                \subseteq \mathbf{Y}
+            \end{align}
+            which means that
+            \begin{align}
+                &N'(\vec{p}\;)^{\dagger}N'(\vec{p}\;) = I \quad \text{on} \;\;
+                \mathbb{R}^{n_*} \qquad \text{and}\\
+                &N(\vec{p}\;)N'(\vec{p}\;)^{\dagger} =
+                \mathcal{Q}|_{\mathcal{R}(FP_{\vec{p}})},
+            \end{align}
+            where $\mathcal{Q} : \mathbf{Y} \to
+            \overline{\mathcal{R}(FP_{\vec{p}})}\dotplus\mathcal{R}(FP_{\vec{p}})^{\perp}$.
+            So in the definition of the Moore-Penrose \ref{def:
+            moore-penrose}, $P$ in \ref{eq: moore-penrose} is $P \equiv 0$.
+        \item The generalized Newton-Mysovskii conditions are also satisfied
+            \begin{align}
+                &\big\| N'(\vec{p}\;)^{\dagger}\left( N'(\vec{q} + s(\vec{p} -
+                \vec{q}\;) - N'(\vec{q}\;)\right) (\vec{p} - \vec{q})
+                \big\|_{\vec{P}}
+                \leq s C_l C_L \|\vec{p} - \vec{q} \;\|^{2}_{\vec{P}}\\
+                & \forall \vec{p}, \vec{q} \in \mathcal{D}(N), \; s \in[0,
+                1],
+            \end{align}
+            where $C_l, C_L$ are the Lipschitz-constants.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    TODO: add proof here.
+\end{proof}
+Bringing it all together to show the local convergence of the Gauss-Newton
+method, where $N = F\circ \Psi$ is a composition of a linear bounded operator
+and a Lipschitz-differentiable immersion.
+\begin{theorem}
+    Assume there exists a $\vec{p}\;^{\dagger} \in \mathcal{D}(\Psi)$ which
+    satisfies
+    \begin{align}
+        N(\vec{p}\;^{\dagger}) = \mathbf{y},
+    \end{align}
+    and assume there exists a $\vec{p}\;^{0} \in \mathcal{D}(\Psi)$ as in
+    \ref{eq: locality}, satisfying locality, Then the iterates
+    $\{\vec{p}\;^{k}\}_{k\in \mathbb{N}_0}$  of the Gauss-Newton method of
+    the form
+     \begin{align}
+         \vec{p}\;^{k+1} = \vec{p}\;^{k} - N'(\vec{p}\;^{k})^{\dagger}\left(
+         N\left(\vec{p}\;^{k}  \right) - \mathbf{y} \right)  \qquad k \in
+         \mathbb{N}_0,
+     \end{align}
+     are well-defined in $\overline{\mathcal{B}\left(\vec{p}\;^{0}, \rho
+     \right) }$ and converge quadratically to $\vec{p}\;^{\dagger}$.
+\end{theorem}
+\begin{proof}
+    TODO: proof here
+\end{proof}
+
+
+\subsection{Neural networks}
 Shallow neural network coders are of the following form
 \begin{align}
     \Psi:
@@ -141,8 +297,7 @@ Shallow neural network coders are of the following form
 \end{align}q
 where $\sigma$ is an activation function, such as tanh or sigmoid.
 
-\subsection{Deep neural networks}
-A standard DNN with $L$ layers is a function depending on $\vec{x} \in
+A standard deep neural network (DNN) with $L$ layers is a function depending on $\vec{x} \in
 \mathbb{R}^{n}$ with parameters $\vec{p}:=\left( \vec{\alpha}_l,
 \mathbf{w}_l, \vec{\theta}_l  \right)_{l=1}^{L}$
 \begin{align}
@@ -188,48 +343,51 @@ Usually it is assumed that the nonlinear operator $\Psi$ is well-posed.
 Here we need to see B. Hofmann On the degree of ill-posedness of nonlinear
 problems. Where we assume that the nonlinear operator $\Psi$ is well-posed.
 
-\subsection{Gauss-Newton type method for 2nd decomposition case}
-We are dealing with the operator $\Psi:\mathcal{D} \subseteq \vec{P} :=
-\mathbb{R}^{n_*} \to \mathbf{X}$. The derivative of $\Psi$ \textbf{cannot be
-invertible}!. So how do we decompose the 2nd case
-\begin{align}
-    N(\vec{p}) = F\Psi(\vec{p}).
-\end{align}
-To prove convergence we introduce the Lipschitz-differentiable immersion.
 
 \section{Solution}
-\subsection{Local convergence of Ga.uss-Newton's method}
-We can prove under condition that we can attain the data, i.e. reconstruct
-the coefficients.
-\begin{theorem}
-    Let $F: \mathbf{X} \to \mathbf{Y}$ be linear with trivial nullspace and
-    dense range, $\Psi:\mathcal{D} \subseteq P \to \mathbf{X}$ be
-    Lipschitz-differentiable immersion and $N = F\circ \Psi$ and
-    $N(\vec{p}\;^{\dagger}) = \mathbf{y}$.
-    Also let $\vec{p}\;^{0} \in \mathcal{D}(\Psi)$ be sufficiently close to
-    $\vec{p}\;^{\dagger}$. Then the Gauss-Newton's iteration
-    \begin{align}
-        \vec{p}\;^{k+1} = \vec{p}\;^{k} - N'(\vec{p})^{\dagger}
-        \left( N\left( \vec{p}\;^{k} \right) - \mathbf{y} \right)
-    \end{align}
-    is well-defined and converges to $\vec{p}\;^{\dagger}$
-\end{theorem}
-\begin{proof}
-    Verification of a sort of Newton-Mysovskii conditions using that
-    \begin{align}
-        N'(\vec{p})^{\dagger}N'(\vec{p}) =
-        \Psi(\vec{p})^{\dagger}\Psi(\vec{p}),
-    \end{align}
-    Here we need this Otmar mentions "Barbaras book find this out 86"
-    probably Barbara Kaltenbacher has some book. Its most likely this book
-    B.Kaltenbacher, A.Neubauer, and O.Scherzer.
-    Iterative Regularization Methods for Nonlinear Problems.
-    de Gruyter, Berlin, New York, 2008.
-    Also P.Deuflhard, H.W. Engl and O. Scherzer "A convergence analysis of
-    iterative methods for the solution of nonlinear ill-posed problems under
-    affinely invariant conditions.
-\end{proof}
-Then the Gauss-Newton is quadratically convergent.
+In this section the main results of the talk are explained. The aim is to use
+the universal approximation properties of neural networks, the fact that they
+can approximate continuous functions arbitrarily well, to the inverse problem
+in \ref{eq: main} using the Gauss-Newton method. To ensure convergence it is
+necessary to show that the considered neural network structure is a
+Lipschitz-differentiable immersion. As it will be shown, a direct implication
+of this is to show that the among other the activation function, its
+derivative and its first moment of the derivative are linearly independent.
+For this, results from \cite{lamperski_2022} are used and it is conjectured
+that the statement from \ref{eq: lpdi-property} is fulfilled, meaning that
+the function from $\mathbf{X}_{\vec{p}}$ are linearly independent.
+%\subsection{Local convergence of Gauss-Newton's method}
+%We can prove under condition that we can attain the data, i.e. reconstruct
+%the coefficients.
+%\begin{theorem}
+%    Let $F: \mathbf{X} \to \mathbf{Y}$ be linear with trivial nullspace and
+%    dense range, $\Psi:\mathcal{D} \subseteq P \to \mathbf{X}$ be
+%    Lipschitz-differentiable immersion and $N = F\circ \Psi$ and
+%    $N(\vec{p}\;^{\dagger}) = \mathbf{y}$.
+%    Also let $\vec{p}\;^{0} \in \mathcal{D}(\Psi)$ be sufficiently close to
+%    $\vec{p}\;^{\dagger}$. Then the Gauss-Newton's iteration
+%    \begin{align}
+%        \vec{p}\;^{k+1} = \vec{p}\;^{k} - N'(\vec{p})^{\dagger}
+%        \left( N\left( \vec{p}\;^{k} \right) - \mathbf{y} \right)
+%    \end{align}
+%    is well-defined and converges to $\vec{p}\;^{\dagger}$
+%\end{theorem}
+%\begin{proof}
+%    Verification of a sort of Newton-Mysovskii conditions using that
+%    \begin{align}
+%        N'(\vec{p})^{\dagger}N'(\vec{p}) =
+%        \Psi(\vec{p})^{\dagger}\Psi(\vec{p}),
+%    \end{align}
+%    Here we need this Otmar mentions "Barbaras book find this out 86"
+%    probably Barbara Kaltenbacher has some book. Its most likely this book
+%    B.Kaltenbacher, A.Neubauer, and O.Scherzer.
+%    Iterative Regularization Methods for Nonlinear Problems.
+%    de Gruyter, Berlin, New York, 2008.
+%    Also P.Deuflhard, H.W. Engl and O. Scherzer "A convergence analysis of
+%    iterative methods for the solution of nonlinear ill-posed problems under
+%    affinely invariant conditions.
+%\end{proof}
+%Then the Gauss-Newton is quadratically convergent.
 \subsection{Newton's method with the neural network operator}
 Convergence is based on the immersion property of the network functions
 \begin{align}
@@ -238,10 +396,11 @@ Convergence is based on the immersion property of the network functions
 \end{align}
 For $\alpha_i \neq 0$, this, in particular, requires that the functions
 \begin{align}
-    &\rho = \sum_{i=1}^{n}w_s^{i}x_i + \theta_s \\
     & \frac{\partial \Psi}{\partial \alpha_s} =\sigma(\rho),\quad
      \frac{\partial \Psi}{\partial w_s^{t}} =\sigma'(\rho)x_t,\quad
-     \frac{\partial \Psi}{\partial \theta_s} =\sigma'(\rho)
+     \frac{\partial \Psi}{\partial \theta_s} =\sigma'(\rho),\\
+    & \text{where} \qquad
+    \rho = \sum_{i=1}^{n}w_s^{i}x_i + \theta_s \\
 \end{align}
 are \textbf{linearly independent} and that $\alpha_s \neq 0$ -
 \textbf{sparse} coefficients cannot be recovered.
@@ -254,7 +413,7 @@ The question is if
 \end{align}
 Partial answer for $\frac{\partial \Psi}{\partial \alpha_s} (\vec{x}) =
 \sigma\left( \sum_{i=1}^{n} w_s^{i}x_i + \theta_s \right)$ in the
-Lamperski (2022) theorem:
+\cite{lamperski_2022} theorem:
 \begin{theorem}
     For all activation functions \textit{HardShrink, HardSigmoid, HardTanh,
     HardSwish, LeakyReLU, PReLU, ReLU, ReLU6, RReLU, SoftShring, Threshold,
@@ -269,7 +428,7 @@ derivative of the sigmoid functions and the first moment of the first
 derivative together with the above result are linearly independent.
 But the answer is not satisfactory because its not known. More or less with a
 probability $1$ we can prove that the functions above are linearly
-independent
+independent.
 
 \subsection{Symmetries}
 For the sigmoid function we have some odious symmetries because
