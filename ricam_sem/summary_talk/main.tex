@@ -8,12 +8,19 @@
 \tableofcontents
 
 \section{Intro}
-The following questions are answered:
-\begin{itemize}
-    \item iterative regularization with NN functions
-    \item application of NNs on inverse problems
-    \item What generalized NNs are best suited for IPs?
-\end{itemize}
+The talk is about the paper \cite{scherzer2023newton}, in which the authors
+consider using a modified version of the Newton algorithm to reconstruct the
+coefficients of neural network coders in inverse problems. Instead of using
+the inverse of the Jacobian in the iteration, the authors use a more general
+Moore-Penrose inverse. It can be proven that under conditions this modified
+form of the Newton iteration, calling it the Gauss-Newton iteration converges
+locally, quadratically. The aim is to use these results on specifically
+shallow neural networks, because they satisfy an immersion property, i.e. are
+Lipschitz-differentiable immersions, which is the requisite of the
+convergence of the Gauss-Newton method. Additionally, presented results clearly show a
+quicker and reliable solution with its comparison, the Landweber method.
+These results were also checked by me, in terms of writing the code and using
+the same initial setup to come to the same conclusions \cite{code}.
 
 \subsection{Posing the problem}
 Consider linear operator equation between Hilbert spaces $\mathbf{X}$ and
@@ -21,18 +28,16 @@ $\mathbf{Y}$
 \begin{align}
     F\mathbf{x} = \mathbf{y}.
 \end{align}
-For the problem modeling we introduce a function, called \textbf{Coding}
+For the problem modeling a function is introduced, called \textbf{Coding}
 $\Psi: \vec{P} \to \mathbf{X}$ which maps NN parameters to images functions,
-a nonlinear operator. Our problem can be written as follows
+a nonlinear operator. The problem equation can be written as follows
 \begin{align}
     N(\vec{p}) = F\Psi(\vec{p}) = \mathbf{y}, \label{eq: main}
 \end{align}
 where $\mathbf{X}$ is the image space, $\mathbf{Y}$ the data space and $\vec{P}$ the parameter
-space. In the case the operator in question $F$ is nonlinear then we would of
-course have a nonlinear equation, which we are not considering right now. The
-talk aims to explain the link between the general regularization of the
-degree of ill-posedness and nonlinearity and investigates generalized
-Gauss-Newton solvers, by the outer inverse or by approximations.
+space. In the case the operator in question, $F$ is nonlinear, then we would of
+course have a nonlinear equation, which we are not considering right now.
+
 \subsection{Decomposition cases (review)}
 An operator $N$ satisfies the \textit{1st decomposition case} in an open empty
 neighborhood $\mathcal{B}\left(\vec{p}\;^{\dagger}; \rho \right) \subseteq
@@ -48,21 +53,24 @@ and a nonlinear operator $\Psi: \vec{P} \to \mathbf{X}$ such that
 \begin{align}
     N(\vec{p}) = F\Psi(\vec{p}).
 \end{align}
+
 \subsection{Gauss-Newton type method for 2nd decomposition case}
-We are dealing with the operator $\Psi:\mathcal{D} \subseteq \vec{P} :=
-\mathbb{R}^{n_*} \to \mathbf{X}$. The derivative of $\Psi$ \textbf{cannot be
-invertible}!. So how do we decompose the 2nd case
+The main object is the operator $\Psi:\mathcal{D} \subseteq \vec{P} :=
+\mathbb{R}^{n_*} \to \mathbf{X}$. The derivative of $\Psi$ is generally not
+invertible.
 \begin{align}
     N(\vec{p}) = F\Psi(\vec{p}).
 \end{align}
-To prove convergence we need introduce the Lipschitz-differentiable immersion.
+The aim is to use the modified version of the Newton method to reconstruct
+the parameters $\vec{p}$. The prerequisite for this is some background on the
+general local convergence of the Newton Method, conditions called
+Newton-Mysovskii and the definition of the Moore-Penrose inverse.
 \section{Background}
 \subsection{Newton-Mysovskii}
 The local convergence of the Newton method is guaranteed under the so called Newton-Mysovskii
- conditions. In this section the results are shown for the simple case in the
+ conditions. In this section the results are summarized for the simple case in the
  finite dimensional space, when the nonlinear operator has derivative which
  are invertible. This result is going to be extended as aim of the summary.
-
  \begin{theorem}
      Let $N: \mathcal{D}(N) \subseteq \mathbb{R}^{n}\to \mathbb{R}^{n}$ be
      continuously Fr\'echet differentiable on a non-empty, open and convex
@@ -105,12 +113,12 @@ The local convergence of the Newton method is guaranteed under the so called New
  \end{theorem}
 
 \subsection{Moore-Penrose Inverse}
-We study the case where $\mathbf{Y}$ is an infinite dimensional Hilbert
-space. In this regard it is necessary to replace the inverse in the classical
-Newton method because the liberalizations of the operator $N$ cannot be be
-invertible. This is done by introducing the so called Moore-Penrose inverse
-or more general the outer inverse and we refer to the Gauss-Newton method to
-distinguish between the classical version.
+Now, the case where $\mathbf{Y}$  is an infinite dimensional Hilbert
+space, is introduced. It is necessary to replace the inverse in the classical
+Newton method because the liberalizations of the operator $N$, which
+generally cannot be invertible. This is done by introducing the so called
+Moore-Penrose inverse or more general the outer inverse and we refer to the
+Gauss-Newton method to distinguish between the classical version.
 \begin{mydef}{Inner, outer and Moore Penrose inverse
         \label{def: moore-penrose}}
     $L: \vec{P} \to \mathbf{Y}$ be a linear and bounded operator between
@@ -184,9 +192,9 @@ distinguish between the classical version.
     which replaces the standard $\Psi^{-1}$ in the standard Newton's method.
     TODO: more in detail definition.
 \end{mydef}
-We link the inverse of the Lipschitz Lipschitz-differentiable immersion with
-the Moore-Penrose inverse together with the necessary boundary constraints
-for the Gauss-Newton method
+Linking the inverse of the Lipschitz Lipschitz-differentiable immersion with
+the Moore-Penrose inverse together with the following results delivers the
+Gauss-Newton method
 \begin{theorem}
     \label{thm: moore-penrose}
     \begin{enumerate}
@@ -213,7 +221,7 @@ for the Gauss-Newton method
 \end{proof}
 
 We can now wrap the results back to the original problem of the Gauss-Newton
-iteration of \ref{eq: main}
+method \ref{eq: main}
 \begin{lemma}
     \label{lem: moore-penrose}
     Let $F$ be as in \ref{eq: main} linear, bounded with trivial nullspace
@@ -290,6 +298,7 @@ and a Lipschitz-differentiable immersion.
 \subsection{Neural networks}
 Shallow neural network coders are of the following form
 \begin{align}
+    \label{eq: shallow-nn}
     \Psi:
     \mathcal{D}(\Psi) := \mathbb{R}^{n_*} =
     \mathbb{R}^{N}\times \mathbb{R}^{n \times N}
@@ -298,7 +307,7 @@ Shallow neural network coders are of the following form
     L^{2}\left([0, 1]^{n}\right),\\
     \vec{p} = (\vec{\alpha}, \mathbf{w}, \vec{\theta}) &\mapsto
     \left(\vec{x} \to \sum_{j=1}^{N} \alpha_j\sigma\left(
-    \vec{\mathbf{w}}_j^{T}\vec{x} + \omega_j \right)  \right),
+    \vec{\mathbf{w}}_j^{T}\vec{x} + \theta_j \right)  \right),
 \end{align}q
 where $\sigma$ is an activation function, such as tanh or sigmoid.
 
@@ -308,45 +317,39 @@ A standard deep neural network (DNN) with $L$ layers is a function depending on 
 \begin{align}
     \vec{x}\to\Psi(\vec{x}) := \sum_{j_L=1}^{N_L} \alpha_{j_L,L}\sigma_L\
     \left( p_{j_L, L} \left( \sum_{j_{L-1}=1}^{N_{L-1}}\cdots
-    \left( \sum_{j_1=1}^{N_1}\alpha_{j_1,1}\sigma_1\left(p_{j_1,1}(\vec{x})
+    \left( \sum_{j_1=1}^{N_1}\alpha_{j_1,1}\sigma_1\left(\rho_{j_1,1}(\vec{x})
     \right)  \right)  \right)  \right),
 \end{align}
 where
 \begin{align}
-    p_{j_l}(\vec{x}) = \mathbf{w}_{j, l}^{T}\vec{x} + \theta_{j,l},
+    \rho_{j_l}(\vec{x}) = \mathbf{w}_{j, l}^{T}\vec{x} + \theta_{j,l},
 \end{align}
 with $\alpha_{j,l}, \theta_{j,l} \in \mathbb{R}$ and $\vec{x},
 \mathbf{w}_{j,l} \in \mathbb{R}^{n} \;\; \forall l=1,\ldots,L$. And is
 probably not a Lipschitz-continuous immersion!
 
-
-The solution involves either reconstructing the function or the coefficient use
-Tikhonov regularization or use newton type methods, the talk explains the
-solution for decomposable operators wrt. the 2nd decomposition case for
-Gauss-Newton type methods.
-
-Using variational methods, Tikhonov regularization (some background on this
-here)
+Then the inverse problem
+\begin{align}
+    N(\vec{p}\;) = F\Psi(\vec{p}\;) = \mathbf{y},
+\end{align}
+can be solved using variational methods, e.g. Tikhonov regularization
 \begin{align}
     \|N(\vec{p}) - \mathbf{y}\|^{2} + \alpha \|\vec{p}\|^{2} \to \min,
 \end{align}
-or alternatively state space regularization (some background on this)
+or alternatively state space regularization
 \begin{align}
     \|N(\vec{p}) - \mathbf{y}\|^{2}
     + \alpha \|\mathbf{x} - \mathbf{x}_0\|^{2}
     \to \min \quad \text{s.t} \quad \Psi(\vec{p}) = \mathbf{x}.
 \end{align}
-Alternatively use iterative methods, Newton's iteration would look like the
-following
+Here the analysis the iterative method, the Gauss-Newton method is
+considered.
 \begin{align}
-    \vec{p}\;^{k+1} = \vec{p} - N'\left(p^{-k}\right)^{-1}\left(N(\vec{p}) -
-    \mathbf{y}  \right),
+    \vec{p}\;^{k+1} = \vec{p}\;^{k} -
+    N'( \vec{p}\;^{k})^{-1} (N(\vec{p}\;^{k}) -
+    \mathbf{y}  ),
 \end{align}
-where $N'$ is the Jacobian.
-
-Usually it is assumed that the nonlinear operator $\Psi$ is well-posed.
-Here we need to see B. Hofmann On the degree of ill-posedness of nonlinear
-problems. Where we assume that the nonlinear operator $\Psi$ is well-posed.
+where $N'$ is the Jacobian. And we assume that the nonlinear operator $\Psi$ is well-posed.
 
 
 \section{Newton's method with the neural network operator}
@@ -355,20 +358,20 @@ the universal approximation properties of neural networks, the fact that they
 can approximate continuous functions arbitrarily well, to the inverse problem
 in \ref{eq: main} using the Gauss-Newton method. To ensure convergence it is
 necessary to show that the considered neural network structure is a
-Lipschitz-differentiable immersion. As it will be shown, a direct implication
-of this is to show that the among other the activation function, its
+Lipschitz-differentiable immersion. As it will be summarized, a direct implication
+of this is to show that the activation function, its
 derivative and its first moment of the derivative are linearly independent.
 For this, results from \cite{lamperski_2022} are used and it is conjectured
 that the statement from \ref{eq: lpdi-property} is fulfilled, meaning that
-the function from $\mathbf{X}_{\vec{p}}$ are linearly independent.
+the functions forming $\mathbf{X}_{\vec{p}}$ are linearly independent.
 \newline
 Convergence is based on the immersion property of the network functions
 \begin{align}
     \text{span}\{\partial_{p_i}\Psi(\vec{p})\;:\;i=1,\ldots,n_*\}, \qquad
     \text{has rank}(n_*).
 \end{align}
-To show the Newton-Mysovskii conditions for neural network functions the
-notation.
+To show the Newton-Mysovskii conditions for neural network functions
+following notation is adapted
 \begin{align}
     \vec{p} := (\vec{\alpha}, \mathbf{w}, \vec{\theta}) \in
     \mathbb{R}^{N}\times \mathbb{R}^{n\cdot N} \times \mathbb{R}^{N} =
@@ -430,7 +433,7 @@ linearly independent and the results are build from here on out.
     Assume that the functions from \ref{eq: linear_indep} are locally
     linearly independent.
 \end{conjecture}
-From this it follows that the shallow network coders are a
+From the above Conjecture it follows that the shallow network coders are a
 Lipschitz-differentiable immersion (for a suitable choice of an activation
 function), so Gauss-Newton method converges locally.
 \subsection{Gauss-Newton iteration with coding networks}
@@ -469,6 +472,9 @@ for shallow network coders.
     \mathcal{D}(\Psi)$ the solution of equation \ref{eq: main}. Then the
     Gauss-Newton method converges quadratically if
     $\vec{p}\;^{0}$ is sufficiently close to $\vec{p}\;^{\dagger}$.
+    \begin{align}
+        \vec{p}\;^{k+1} = \vec{p}
+    \end{align}
 \end{theorem}
 \begin{proof}
 
@@ -480,6 +486,8 @@ for shallow network coders.
 
 
 \section{Results}
+In the following section the results presented in the paper
+\cite{scherzer2023newton} are rerun.
 \subsection{Numerical results(simplified)}
 The simplification is
 \begin{align}
@@ -487,32 +495,77 @@ The simplification is
     &\mathbf{y}^{\dagger} = F\Psi(\vec{p}\;^{\dagger}) \qquad \text{is
     attainable}
 \end{align}
-Then the Gauss-Newton method is
+The aim is to recostruct the coefficients of a 2d neural network function
+\ref{eq: shallow-nn} with
 \begin{align}
-    \vec{p}\;^{k+1} = \vec{p}\;^{k} - \Psi'\left(\vec{p})\;^{k}  \right)^{\dagger}
-    \left( \Psi(\vec{p}\;^{k} - \Psi^{\dagger} \right) \qquad k \in
-    \mathbb{N}_0.
+    \vec{p}\;^{\dagger} = \left(
+        \begin{pmatrix} 1.0\\1.0\\0.1\\0.1 \end{pmatrix};
+        \begin{pmatrix} 0.3\\0.1\\1.0\\0.8 \end{pmatrix} \right).
 \end{align}
-Do some numerical  results or explain the ones in the talk.
-\subsection{Landweber iteration}
-Instead of the Gauss-Newton iteration we consider the Landweber iteration
+Meaning that it is aimed to reconstruct the following function
 \begin{align}
-    \vec{p}\;^{k+1} = \vec{p}\;^{k} - \lambda \Psi'\left(\vec{p}\;^{k})  \right)^{\dagger}
-    \left( \Psi(\vec{p}\;^{k} - \Psi^{\dagger} \right) \qquad k \in
-    \mathbb{N}_0.
+    \Psi^{\dagger}(\vec{x})
+    &= \Psi(\vec{p}\;^{\dagger})(\vec{x})\\
+    &=1.0\sigma\left( (1.0,0.1)^{T}\vec{x} + 0.1 \right)
+    +0.3 \sigma\left( (0.1, 1.0)^{T}\vec{x} + 0.8 \right).
 \end{align}
-Needs about 500 iterations
-\subsection{The catch}
-If the observed convergence rate of the Gauss-New ton change completely if the
-solution is not attainable. Then the conjecture is that the non-convergence
-because of multiple solutions.
-Also the implementation of the simplified Gauss-Newton requires inversion of
-$F$ , which is not done in practice, this is for Landweber.
+The stopping criterion is $\|\Psi(\vec{p}\;^{k_s+1}) - \Psi^{\dagger})\| \le
+\delta = 0.001$
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./pics/gn_coeff.png}
+    \caption{Coefficients, left truth, middle starting point, right
+    iteration stop}
+    \label{fig: gn_coeff}
+\end{figure}
+The below figure shows the standard loss used for the breaking criterion and
+the residual loss
+\begin{align}
+    \log \left( \frac{\|\Psi(\vec{p}\;^{k+1}) -
+    \Psi^{\dagger}\|}{\|\Psi(\vec{p}\;^{k}) - \Psi^{\dagger}\|} \right)
+\end{align}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./pics/gn_loss.png}
+    \caption{Gauss-Newton loss, left standard norm loss, right residual loss}
+    \label{fig: gn_loss}
+\end{figure}
+
+
+For comparison with the Gauss-Newton iteration, consider the Landweber iteration
+\begin{align}
+    \vec{p}\;^{k+1} = \vec{p}\;^{k} - \lambda \Psi'\left(\vec{p}\;^{k}  \right)^{\dagger}
+    \left( \Psi(\vec{p}\;^{k}) - \Psi^{\dagger} \right) \qquad k \in
+    \mathbb{N}_0.
+\end{align}
+Around $8000$ iteration are needed to reach the same accuracy that the
+Gauss-Newton method reaches in $5$, with $\lambda = 0.02$ (e.g. $\lambda=0.2$
+diverges).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./pics/lw_coeff.png}
+    \caption{Coefficients, left truth, middle starting point, right
+    iteration stop}
+    \label{fig: lw_coeff}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./pics/lw_loss.png}
+    \caption{Landweber loss, left standard norm loss, right residual loss}
+    \label{fig: lw_loss}
+\end{figure}
+
+If the observed convergence rate of the Gauss-Newton can change completely if the
+solution is not attainable. Then the conjecture is that the non-convergence
+because of multiple solutions, which can be observed when not using enough
+reconstruction data.
+Also the implementation of the simplified Gauss-Newton requires inversion of
+$F$ , which is not done in practice, this is not true for Landweber.
 \subsection{Alternative to DNNs}
-Instead of using Deep Neural Networks where we do not know the result if the
-the immersion is invertible, we consider Quadratic neural network functions
-defined as follows
+Instead of using Deep Neural Networks where it is unknown if
+the immersion is invertible, another considerable option is to use
+Quadratic neural network functions defined as follows
 \begin{align}
     \Psi(\vec{x}) := \sum_{j=1}^{N} \alpha_j\sigma\left(\vec{x}^{T}A_j\vec{x}
         + \mathbf{w}_j^{T}\vec{x} + \theta_j \right),
@@ -550,8 +603,7 @@ are \textbf{linearly independent}.
 
 Results of these types of networks is that the Shepp-Logan can be represented
 with \textbf{10 nodes} with elliptic neurons and \textbf{one layer}. Where as
-for affine networks, both shallow and deep we need infinity neurons. Here
-figure tensorflow approximations of a circle 15 neurons linear.
+for affine networks, both shallow and deep we need infinity neurons.
 
 \appendix
 \section{Proofs}
