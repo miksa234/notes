@@ -119,6 +119,7 @@ $\{\nabla_{\theta}h_{\theta}(x_1),\ldots,\nabla_{\theta}h_{\theta}(x_n)\}$
 and has constant intensity corresponding to the loss stabilization at $\delta
 >0$. The following SDE model is proposed
 \begin{align}
+    \label{eq: sde-sgd-dynamics}
     d\theta_t = -\nabla_{\theta} \mathcal{L}(\theta_t)dt + \sqrt{\eta\delta}
     \phi_{\theta_t}(X)^{T}dB_t,
 \end{align}
@@ -127,7 +128,7 @@ $\phi_{\theta}(X) := [\nabla_{\theta}h_{\theta}(x_i)^{T}]_{i=1}^{n} \in
 \mathbb{R}^{n\times p}$ referred to as the Jacobian. This SDE can be
 interpreted as the effective slow dynamics that dives the iterates while they
 bounce rapidly in some directions at the level set $\delta$.
-\subsection{Sparse Feature Learning}
+\section{Sparse Feature Learning}
 It is begun with a simple example on diagonal linear networks to show a
 sparsity inducing dynamics and then further disclosed to a general message
 about the implicit bias prompted by the effective dynamics.
@@ -140,7 +141,7 @@ linear predictor $\beta:=u\odot v \in \mathbb{R}^{d}$ is not in $(u, v)$.
 Hence we can see from this example a rich non-convex dynamics. Then $\nabla_u
 h_{u, v}(x) = v \odot x$  and the SDE model is
 \begin{align}
-    du_t = -\nabla_u \mathcal{L}(u_t, v_t) dt + \sqrt{\eta\delta} v_t \odot
+    du_t = -\nabla_u \mathcal{L}(u_t, v_t) dt + \sqrt{\eta\delta}\; v_t \odot
     [X^{T}dB_t],
 \end{align}
 where $(B_t)_{t\ge 0}$ is the standard Brownian motion in $\mathbb{R}^{n}$
@@ -162,16 +163,145 @@ coordinates outside of the support of the sparsest signal and oscillates in
 the parameter space at level $\mathcal{O}(\sqrt{\eta\delta})$ on its support.
 Thereby decreasing the step size later leads to perfect recovery of the
 sparsest predictor. TODO: Experiments.
+\newline
+The diagonal linear nets show noisy dynamics which induce a sparcity bias,
+which is by HaoChen et al. (2021) due to the term $v_t \odot [X^{T}dB_t]$,
+which has a shrinking effect on the coordinates (due to the element wise
+multiplication). In general from Equation \ref{eq: sde-sgd-dynamics} the same
+multiplicative structure happends w.r.t. the Jacobian $\phi_\theta(X)$. This
+suggests that the implicit bias of the noise can lead to a shrinking age
+effect applied to $\phi_\theta(X)$, which depends on the noise intensity
+$\delta$ and step size of the SGD. Also note the property of the Browninan
+motions: $v \in \mathbb{R}^{p}$ then $\langle v, B_t\rangle = \|v\|_2 W_t$,
+where $(W_t)_{t\ge 0}$ is a one dimensional Brownian motion. Thereby the
+process in Equation \ref{eq: sde-sgd-dynamics} is equivalent to the process
+whose $i$-th coordinate is driven by a noise proportional to
+$\|\phi_i\|dW_{t}^{i}$. This SDE structure, similar to the geometric
+Brownian motion, is expected to induce the shrinking age of each
+multiplicative factor $(\|\nabla_\theta h(x_i)\|)_{i=1}^{n}$, hence the
+authors conjecture: \textit{The noise part of Equation
+\ref{eq: sde-sgd-dynamics} seeks to minimize the $l_2$-norm of the columns
+of $\phi_\theta(X)$.}
+\newline
+Also note that the fitting part of the dynamics prevents the Jacobian to
+collapse totally to zero, but as soon as they are not needed to fit the
+signal, the columns can be reduced to zero. Now the specification of the
+implicit bias for different architectures is provided
+\begin{itemize}
+    \item \textbf{Diagonal linear networks:} $h_{u, v}(x) = \langle u \odot v,
+        x\rangle$ and the gradient $\nabla_{u, v}h_{u,v}= [v\odot x, u \odot
+        x]$. For a generic data matrix $X$, minimizing the norm of each
+        column of $\phi_{u, v}(X)$ amounts to put the maximal number of zero
+        coordinates and hence to minimize $\|u \odot v\|_0$.
 
+    \item \textbf{ReLU networks:} Let $h_{a, W}(x) = \langle a,
+        \sigma(Wx)\rangle$, then $\nabla_{a}h_{a, W}(x) = \sigma(Wx)$ and
+        $\nabla_{w_j}h_{a, W}(x) = a_j x \mathbf{1}_{\langle w_j, x\rangle >
+        0}$. The implicit bias enables the learning of sparse data-active
+        features. Activated neurons align to fit reducing the rank of
+        $\phi_\theta(X)$.
+\end{itemize}
+
+The main insight is that the Jacobian can be significantly simplified during
+the loss stabilization phase. While the gradient part tries to fit the data
+and align neurons the noise part intends to minimize the $l_2$-norm of the
+columns of $\phi(X)$. Thus the combination suggests to count the average
+number of \textbf{distinct} (counting the group of aligned neurons as one),
+\textbf{non-zero} activations over the training set. This will be referred to
+as the \textbf{feature sparsity coefficient}. In the next section the authors
+show that the conjectured sparsity is observed empirically for a variety of
+models. Where both the feature sparsity coefficient and the rank of
+$\phi_\theta (X)$ can be used as a good proxy to track the hidden progress
+during the loss stabilization phase.
+
+\section{Empirical Evidence}
+In the follwing section the results for diagonal nets, deep nets, deep dense
+nets on CIFAR-10, CIFAR-100 and TinyImageNet are made. The common
+observations are
+\begin{enumerate}
+    \item \textbf{Loss Stabilization:} Training loss stabilizes around a high
+        level set untill step size is decayed,
+    \item \textbf{Generalization benefit:} Longer loss stabilization leads
+        to better generalization,
+    \item \textbf{Sparese feature learning:} Longer loss stabilization
+        leads to sparse features.
+\end{enumerate}
+In some cases a large steps size that would lead to loss stabilization could
+not be found, hence a \textit{warmup} step size is used which is explicitly
+mentioned. The \textit{warmup} step size schedule utilizes an increasing step
+size, according to some schedule, to make sure the loss stabilization occurs.
 \newline
 
+To measure the sparse feature learning feature both the rank of the Jacobian
+$\phi_{\theta}(X)$ and the feature sparsity is measured. Specifically the
+rank over iterations of each model is computed, except for deep networks
+because it this is computationally expensive. This is done by using a
+threshold on the singular values of $\phi_\theta(X)$ normalized by the
+largest singular eigenvalue. The reason for this is to ensure the difference
+in rank is not due to different scales of $\phi_\theta(X)$ at other
+iterations. The Jacobian $\phi_\theta(X)$ is computed on the fresh samples
+equal to the number of parameters $ |\theta |$, to make sure the rank
+deficiency is not coming from $n \ll \theta $.
+\newline
 
+As for the measurement of the feature sparsity coefficient, the average
+fraction of \textbf{distinct} and non-zero \textbf{activations} at some layer
+over the training set is being counted. Where a value of $100\%$ means a
+completely dense feature vector and a value of $0\%$ is a feature vector with
+all zeros. A pair of activations is counted as highly correlated if their
+Pearson's correlation coefficient is at lease $0.95$.
 
+\subsection{Diagonal Linear Networks}
+The setup for testing diagonal linear networks is the following. The inputs
+$(x_i)_{i=1}^{n}$ with $n=80$ are sampled from $\mathcal{N}(0,
+\mathbf{I}_d)$, where $\mathbf{I}_d$ is the identity matrix with $d=200$. The
+outputs are generated with $y_i = \langle \beta_* , x_i\rangle$ where
+$\beta_* \in \mathbb{R}^{d}$ is $r=20$ sparse. Four different SGD runs are
+considered one with a small step size and three with initial large step size
+decayed after  $10\%, 30\%$ and $50\%$ of iterations, respectively.
 
+TODO: results and description of results
 
-\section{Sparse Feature Learning}
+\subsection{Simple ReLU Networks}
+\textbf{Two Layer ReLU networks in 1D.}
+Considered is a one dimensional regression task with $12$ points. A ReLU
+network with 100 neurons with SGD with a long linear warmup followed by a
+step size decay at $2\%$ and $50\%$ of iterations respectively. Loss
+stabilization is observed at around $10^{-5}$, the predictor becomes simpler
+and is expected to generalize better and both the rank and the feature
+sparsity coefficient decrease during loss stabilization. Because of the
+low dimensionality of the example it can be directly observed that the final
+predictor is sparse in terms of the number of distinct ReLU kinks.
 
-\section{Empirical Results}
+TODO: results and description of results
+
+\textbf{Three Layer ReLU networks in 1D.}
+For deeper ReLU networks a teacher-student setup with a random three layer
+teacher ReLU network with 2 neurons at each hidden layer is used. The student
+network has 10 neurons on each layer and is trained on $50$ samples. This
+kind of setup is useful because it is known that the student network can
+implement the ground truth predictor but might not find it due to the small
+sample size. The model is trained using SGD with a medium constant step size
+and on contrast with a large step size with warmup decayed after $10\%, 30\%$
+an $50\%$ of iterations, respectively.
+
+TODO: results and description of results
+
+\subsection{Deep ReLU Networks}
+In this section a state of the art example is considered to show the sparse
+feature learning. Specifically considered is an image classification task,
+where the DenseNet-100-12 is trained on CIFAR-10, CIFAR-100 and TinyImageNet
+using SGD with batch size $256$ and different step size schedules. An
+exponentially increasing step size schedule is used, with exponent $1.05$ to
+establish loss stabilization. The rank of the Jacobian cannot be measured
+because of too large matrix dimensions, hence only the feature sparsity
+coefficient is taken at two layers: end of super block 3 (middle of network)
+and super block-block 4 (before average polling at the end of the network) of
+DenseNets. Two cases are tested one basic setting and a state of the art
+setting with momentum and standard augmentation.
+
+TODO: Results and observations
+
 
 \section{Comparison of the Results}
 
