@@ -189,7 +189,7 @@
             \end{align*}
             \end{minipage}
             \end{center}
-        where $\varepsilon := \min
+        where $\varepsilon_0 := \min
         \{\frac{\eta(\theta_*x_\text{min})^{2}-1}{3},\; 0.02\}$.
         \newline
         And \textbf{almost surely} there exists $t, k >0$ s.t.
@@ -241,7 +241,7 @@
                     \item For $\theta_t \in I_3$, then $\theta_{t+1} \in I_1
                         \cup I_2$.
                     \item For $\theta_t \in I_2$, then there is a $k>0$:
-                        $\forall k' < k$, it holds that $\theta{t+2k'} \in
+                    $\forall k' < k$, it holds that $\theta_{t+2k'} \in
                         I_2$ and $\theta_{t+2k} \in I_1$
                     \item For $\theta_t \in I_1$, then $\forall k \ge 0$, it
                         holds that
@@ -317,7 +317,7 @@
         \begin{itemize}[<+->]
             \item Heuristics: rewrite SGD iteration, where $V_t(\theta_t, i_t) =
                 \sqrt{\eta}\left(\nabla_\theta f(\theta_k) - \nabla
-                f_{i_t}(\theta_t)  \right)  $ is $d$-dimensional r.v.
+                f_{i_t}(\theta_t)  \right)  $ is $p$-dimensional r.v.
             \begin{center}
             \begin{minipage}{0.5\textwidth}
                 \begin{align*}
@@ -347,23 +347,23 @@
             \begin{center}
             \begin{minipage}{0.5\textwidth}
                 \begin{align*}
-                    d\theta\tau = b(\theta_\tau)d\tau
+                    d\theta_\tau = b(\theta_\tau)d\tau
                     +\sqrt{\eta}\sigma(\theta_\tau)dB_\tau,
                 \end{align*}
             \end{minipage}
             \end{center}
-            where $\theta_\tau \in \mathbb{R}^{n}$, $B_\tau$ standard p-dim.
+            where $\theta_\tau \in \mathbb{R}^{p}$, $B_\tau$ standard p-dim.
             Brownian
-            motion, $b:\mathbb{R}^{n} \to \mathbb{R}^{n}$ the drift and
+            motion, $b:\mathbb{R}^{p} \to \mathbb{R}^{p}$ the drift and
             $\sigma: \mathbb{R}^{p}\to \mathbb{R}^{p\times p}$ the diffusion
             matrix
 
         \item Apply Euler discretization with step size $\eta$ and
-            approximate $X_{\tau \eta}$ simply with $\hat{X}_{\tau}$
+            approximate $\theta_{\tau \eta}$ simply with $\hat{\theta}_{\tau}$
             \begin{center}
             \begin{minipage}{0.5\textwidth}
                 \begin{align*}
-                    d\hat{\theta}_t= \hat{\theta}_t + \eta b(\theta_t)
+                    \hat{\theta}_t= \hat{\theta}_t + \eta b(\theta_t)
                     +\eta \sigma(\hat{\theta}_t)Z_t,
                 \end{align*}
             \end{minipage}
