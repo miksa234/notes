@@ -8,10 +8,12 @@
 \tableofcontents
 
 \section{Introduction}
-Large step sizes may lead the loss to stabilize by making SGD bounce above a
-valley. Showcase is done with mean square error. Consider a family of
+Large step sizes may lead the loss to stabilize by making Stochastic Gradient
+Descent (SGD) bounce above a valley.
+
+The showcase is done with mean square error. Considering a family of
 prediction functions $\mathcal{H} := \{x \to h_\theta(x), \theta \in
-\mathbb{R}^{p}\}$. The training loss wrt. input/output samples $(x_i,
+\mathbb{R}^{p}\}$, The training loss wrt. input/output samples $(x_i,
 y_i)_{i=1}^{n} \in \mathbb{R}^{d}\times\mathbb{R}$ is
 \begin{align}
     \mathcal{L}(\theta) := \frac{1}{2n} \sum_{i=1}^{n} \left( h_\theta(x_i) -
@@ -28,7 +30,18 @@ consider a SGD recursion with step size $\eta > 0$, with initial $\theta_0
     \nabla_{\theta} h_{\theta_t}(x_{i_t}), \label{eq: sgd_it}
 \end{align}
 where $i_t \sim U(\{1,\ldots,n\})$, is a random variable following the
-discrete uniform distribution over a sample of indices.
+discrete uniform distribution over a sample of indices. The main focus of
+this summary is about the parameter $\eta$ in literature called \textit{step
+size} or \textit{learning rate}. Authors of the paper
+\cite{andriushchenko2023sgd} conjecture that larger step sizes lead to a so
+called \textit{loss stabilization}, where the loss will almost surely stay
+around a level set. They argue that this so called loss stabilization also
+causes sparse feature learning, i.e. that the learned prediction function has
+a better \textit{prediction performance} considering sparse (mostly zero)
+entry input data. First they prove their conjecture on simplified model
+rigorously and then they give empirical evidence for more complex cases.
+This summary tries to give an overview and background required to understand
+what the paper is trying to achieve.
 \subsection{GD and SGD Relation}
 The authors highlight the importance of gradient and noise, by explaining the
 connection between the SGD dynamics and full batch GD plus a specific label
